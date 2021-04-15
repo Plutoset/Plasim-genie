@@ -1,0 +1,22 @@
+      real albedo_fix,
+     :        snolook,szlook,salook,
+     :        shsstar,snowalbfix
+      character outputdir_name_igcmlandsurf*200
+      character fname_restart_igcmlandsurf*200
+      integer dt_restart_igcmlandsurf
+      character outputdir_name_igcmoceansurf*200
+      character fname_restart_igcmoceansurf*200
+      integer dt_restart_igcmoceansurf
+      logical flag_checkwater_land
+      logical coldstart_lsurf
+
+
+      COMMON/igcm_lsurf/albedo_fix,
+     :        snolook(24),szlook(24),salook(24),
+     :        shsstar,snowalbfix,
+     :        outputdir_name_igcmlandsurf,dt_restart_igcmlandsurf,
+     :        fname_restart_igcmlandsurf,
+     :        outputdir_name_igcmoceansurf,dt_restart_igcmoceansurf,
+     :        fname_restart_igcmoceansurf,
+     :        flag_checkwater_land,
+     :        coldstart_lsurf

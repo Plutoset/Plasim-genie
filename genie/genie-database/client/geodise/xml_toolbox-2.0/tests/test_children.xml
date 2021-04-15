@@ -1,0 +1,11 @@
+<root>
+	<a>aaa</a>
+	<b>bbbb</b>
+	<c>ccccc</c>
+	<d>dddd</d>
+	<e>eee</e>
+	<f>3.141592</f>
+	<g>
+		<h>alpha_beta_gamma</h>
+	</g>
+</root>

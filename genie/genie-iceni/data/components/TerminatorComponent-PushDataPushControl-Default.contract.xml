@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<publicDomainContainer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.iceni.ic.ac.uk/xmlSchema/domainManager"
+  xmlns:basic="http://www.iceni.ic.ac.uk/xmlSchema/basic"
+  xmlns:policy="http://www.iceni.ic.ac.uk/xmlSchema/policy"
+  xsi:schemaLocation="http://www.iceni.ic.ac.uk/xmlSchema/domainManager http://www.lesc.ic.ac.uk/iceni/xml/runtime/DOMAIN.xsd"
+ >
+    <publicDomain name="public1">
+        <policy:accessPolicy>
+            <policy:allow startDay="monday" startHour="00" startMn="00" stopDay="sunday" stopHour="23" stopMn="59">
+                <policy:entity type="organisation" name="eScience"/>
+            </policy:allow>
+        </policy:accessPolicy>
+    </publicDomain>
+</publicDomainContainer>

@@ -1,0 +1,180 @@
+      SUBROUTINE XHATCX(Z,X,Y,MD,M,N,CL1,CL2)
+C
+      INTEGER MD
+      REAL CL1
+      REAL CL2
+      INTEGER MM
+      INTEGER M
+      INTEGER NM
+      INTEGER N
+      REAL XSIGN
+      REAL DXP
+      REAL DH
+      REAL DX
+      REAL XFACTR
+      REAL XS
+      INTEGER IS
+      REAL HS
+      REAL YPP
+      INTEGER MODEP
+      INTEGER IP
+      INTEGER J
+      REAL X1
+      REAL Y1
+      REAL H1
+      REAL X4
+      REAL Y4
+      REAL H4
+      REAL X2
+      REAL Y2
+      REAL H2
+      REAL X3
+      REAL Y3
+      REAL H3
+      REAL CV
+      INTEGER NP
+      INTEGER IK
+      INTEGER IDUB
+      REAL XA
+      REAL YA
+      REAL XB
+      REAL YB
+      REAL XC
+      REAL XD
+      INTEGER NPL
+      INTEGER MODP
+      REAL YFACTR
+C
+      REAL X(MD,*),Y(MD,*), Z(MD,*) ,XP(10),YP(10)
+      COMMON /XFTR06/ XFACTR,YFACTR
+      COMMON /XHCH35/ DH
+      REAL DZGCNR
+      IF( CL1.EQ.CL2)RETURN
+C
+      MM=M-1
+      NM=N-1
+      XSIGN=SIGN( 1.0, X(M,1)-X(1,1) )
+      DXP = DH*XSIGN
+      DX=DXP/XFACTR
+      XS= X(1,1)
+      IS=1
+  1   CONTINUE
+      XS=XS+DX
+      IF((XS-X(M,1))*XSIGN. GT. 0.0) RETURN
+  2   IF((XS-X(IS+1,1))*XSIGN.GT.0.0) THEN
+      IS=IS+1
+      IF(IS.GT.M-1)RETURN
+      GOTO 2
+      ENDIF
+      HS=Z(IS,1)+(Z(IS+1,1)-Z(IS,1))/(X(IS+1,1)-X(IS,1))*(XS-X(IS,1))
+      IF( HS.GE.CL1.AND.HS.LE.CL2) THEN
+       YPP= Y(IS,1)+(Y(IS+1,1)-Y(IS,1))
+     :   /(X(IS+1,1)-X(IS,1))*(XS-X(IS,1))
+       CALL XPENUP(XS,YPP)
+       MODEP =1
+      ELSE
+       MODEP =0
+      ENDIF
+      IP=IS
+      DO 540 J=1,NM
+      X1=X(IP,J)
+      Y1=Y(IP,J)
+      H1=Z(IP,J)
+      X4=X(IP+1,J)
+      Y4=Y(IP+1,J)
+      H4=Z(IP+1,J)
+      X2=X(IP,J+1)
+      Y2=Y(IP,J+1)
+      H2=Z(IP,J+1)
+      X3=X(IP+1,J+1)
+      Y3=Y(IP+1,J+1)
+      H3=Z(IP+1,J+1)
+      CV=CL1
+      NP=0
+      DO 300 IK=1,2
+      IDUB=0
+ 10   IF(H1-CV)11,20,20
+ 11   IF(H2-CV)12,14,14
+ 12   IF(H3-CV)13,15,15
+ 13   IF(H4-CV)250,250,30
+ 14   IF(H3-CV)16,17,17
+ 15   IF(H4-CV)31,32,32
+ 16   IF(H4-CV)33,39,39
+ 17   IF(H4-CV)35,36,36
+ 20   IF(H2-CV)21,23,23
+ 21   IF(H3-CV)22,24,24
+ 22   IF(H4-CV)36,35,35
+ 23   IF(H3-CV)25,26,26
+ 24   IF(H4-CV)38,33,33
+ 25   IF(H4-CV)32,31,31
+ 26   IF(H4-CV)30,250,250
+ 38   IF((H1+H2+H3+H4)*0.25-CV) 34,34,37
+ 39   IF((H1+H2+H3+H4)*0.25-CV) 37,37,34
+  30  XA=DZGCNR(H1,H4,X1,X4,CV)
+      YA=DZGCNR(H1,H4,Y1,Y4,CV)
+      XB=DZGCNR(H4,H3,X4,X3,CV)
+      YB=DZGCNR(H4,H3,Y4,Y3,CV)
+      GOTO 40
+  31  XA=DZGCNR(H2,H3,X2,X3,CV)
+      YA=DZGCNR(H2,H3,Y2,Y3,CV)
+      XB=DZGCNR(H4,H3,X4,X3,CV)
+      YB=DZGCNR(H4,H3,Y4,Y3,CV)
+      GOTO 40
+  32  XA=DZGCNR(H1,H4,X1,X4,CV)
+      YA=DZGCNR(H1,H4,Y1,Y4,CV)
+      XB=DZGCNR(H2,H3,X2,X3,CV)
+      YB=DZGCNR(H2,H3,Y2,Y3,CV)
+      GOTO 40
+  33  XA=DZGCNR(H1,H2,X1,X2,CV)
+      YA=DZGCNR(H1,H2,Y1,Y2,CV)
+      XB=DZGCNR(H2,H3,X2,X3,CV)
+      YB=DZGCNR(H2,H3,Y2,Y3,CV)
+      IDUB=0
+      GOTO 40
+  34  IDUB=1
+      GOTO 31
+  35  XA=DZGCNR(H1,H2,X1,X2,CV)
+      YA=DZGCNR(H1,H2,Y1,Y2,CV)
+      XB=DZGCNR(H4,H3,X4,X3,CV)
+      YB=DZGCNR(H4,H3,Y4,Y3,CV)
+      GOTO 40
+  36  XA=DZGCNR(H1,H2,X1,X2,CV)
+      YA=DZGCNR(H1,H2,Y1,Y2,CV)
+      XB=DZGCNR(H1,H4,X1,X4,CV)
+      YB=DZGCNR(H1,H4,Y1,Y4,CV)
+      IDUB=0
+      GOTO 40
+  37  IDUB=-1
+      GOTO 30
+  40  CONTINUE
+ 50   IF(XA.EQ.XB) GOTO 245
+      XC=MIN(XA,XB)
+      XD=MAX(XA,XB)
+      IF( XS.GT.XC.AND.XS.LE.XD) THEN
+      NP=NP+1
+      XP(NP)=XS
+      YP(NP)=YA+(YB-YA)/(XB-XA)*(XS-XA)
+      ENDIF
+ 245  IF(IDUB)33,250,36
+ 250  CV=CL2
+ 300  CONTINUE
+
+      IF( NP.GT.2) CALL XHAT01(YP,XP,NP)
+      DO 350 NPL=1,NP
+      IF( MODEP.EQ.0) THEN
+        CALL XPENUP(XP(NPL),YP(NPL))
+        MODEP=1
+      ELSE
+        CALL XPENDN(XP(NPL),YP(NPL))
+        MODEP=0
+      ENDIF
+ 350  CONTINUE
+ 540  CONTINUE
+      IF( MODEP.EQ.1) THEN
+      YPP=Y(IS,N)+(Y(IS+1,N)-Y(IS,N))/(X(IS+1,N)-X(IS,N))*(XS-X(IS,N))
+      CALL XPENDN(XS,YPP)
+      MODP=0
+      ENDIF
+      IF( IS.LE.M-1)GOTO 1
+      RETURN
+      END

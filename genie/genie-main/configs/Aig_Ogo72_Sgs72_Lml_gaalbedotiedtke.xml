@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job author="config2xml.py - automatic conversion of ASCII text config file">
+	<vars>
+		<var name="EXPID">genie_Aig_Ogo72_Sgs72_Lml_gaalbedotiedtke</var>
+	</vars>
+	<config>
+		<model name="fixedchem"/>
+		<model name="fixedicesheet"/>
+		<model name="goldstein"/>
+		<model name="igcm"/>
+		<model name="goldsteinseaice"/>
+		<model name="mosestriffid"/>
+	</config>
+	<parameters>
+		<control>
+			<param name="ksic_loop">24</param>
+			<param name="koverall_total">17280000</param>
+			<param name="kocn_loop">24</param>
+			<param name="dt_write">86400</param>
+		</control>
+		<model name="fixedchem">
+			<param name="co2_fix">279.0e-6</param>
+			<param name="dt_restart_fixedchem">360</param>
+		</model>
+		<model name="fixedicesheet">
+			<param name="albedo_icesheet">0.75</param>
+			<param name="dt_restart_fixedicesheet">360</param>
+		</model>
+		<model name="goldstein">
+			<param name="tdatafile">tempann.silo.72x72x16</param>
+			<param name="sdatafile">saliann.silo.72x72x16</param>
+			<param name="ianav">90000</param>
+			<param name="iwstp">1800</param>
+			<param name="ene_tune">1.0</param>
+			<param name="itstp">900</param>
+			<param name="npstp">90000</param>
+			<param name="gust">0.0</param>
+			<param name="nyear">360</param>
+			<param name="yearlen">360</param>
+			<param name="scf">2.00</param>
+			<param name="world">dan_72</param>
+			<param name="albocn">0.07422161102295</param>
+			<param name="adrag">2.5</param>
+			<paramArray name="diff">
+				<param index="2">1e-5</param>
+				<param index="1">2000.</param>
+			</paramArray>
+		</model>
+		<model name="igcm">
+			<param name="cloudconvbase">0.80181926488876</param>
+			<param name="rhil">0.7</param>
+			<param name="dt_restart_igcmoceansurf">86400</param>
+			<param name="segrad">0.1</param>
+			<param name="entmax">0.5</param>
+			<param name="supersatconv">0.01273122709244</param>
+			<param name="zradef">3.09180402755737</param>
+			<param name="lvar_albedo">.true.</param>
+			<param name="dt_restart_igcmlandsurf">86400</param>
+			<param name="rhgrad">0.5</param>
+			<param name="itslo">1</param>
+			<param name="trshc">6.</param>
+			<param name="humcloudmax">0.90848290920258</param>
+			<param name="increaseq">0.88879120349884</param>
+			<param name="trvdi">24.</param>
+			<param name="humcloudmin">0.72626066207886</param>
+			<param name="trvds">6.</param>
+			<param name="supersatlarg">0.03298763558269</param>
+			<param name="akqv">1.12771677970886</param>
+			<param name="increaseu">7.33241748809814</param>
+			<param name="increaset">0.66781133413315</param>
+			<param name="lcr_tiedtke">.true.</param>
+			<param name="trcnv">6.0</param>
+			<param name="rhbl">0.9</param>
+			<param name="cloudconvnorm">0.44094017148018</param>
+			<param name="cloudhfact">1.0</param>
+			<param name="itsll">1</param>
+			<param name="powercloud">1.00158727169037</param>
+			<param name="lcr">.false.</param>
+			<param name="redshc">0.5</param>
+			<param name="cloudmfact">1.0</param>
+			<param name="cloudlfact">1.0</param>
+			<param name="KOUNTR">86400</param>
+			<param name="emissconstb">1.278144073486328e+02</param>
+			<param name="emissconsta">1.15192306041718</param>
+			<param name="smf">0.8</param>
+		</model>
+		<model name="goldsteinseaice">
+			<param name="npstp">90000</param>
+			<param name="ianav">90000</param>
+			<param name="iwstp">1800</param>
+			<param name="nyear">360</param>
+			<param name="yearlen">360</param>
+			<param name="world">dan_72</param>
+			<param name="diffsic">2000.0</param>
+			<param name="itstp">900</param>
+		</model>
+		<model name="mosestriffid">
+			<param name="str_tune">1.0</param>
+			<param name="ene_tune">1.0</param>
+			<param name="irest_land">86400</param>
+			<param name="snow_thresh">271.15</param>
+			<param name="hcap_veg">3.3E6</param>
+			<paramArray name="albsnf_nvg">
+				<param index="1">0.35</param>
+				<param index="2">0.75</param>
+			</paramArray>
+			<paramArray name="albsnf_max">
+				<param index="5">0.20</param>
+				<param index="4">0.20</param>
+				<param index="3">0.20</param>
+				<param index="2">0.10</param>
+				<param index="1">0.10</param>
+			</paramArray>
+			<paramArray name="hcon_nvg">
+				<param index="1">1.00</param>
+				<param index="2">0.27</param>
+			</paramArray>
+			<paramArray name="hcap_nvg">
+				<param index="1">3.3E5</param>
+				<param index="2">6.3E5</param>
+			</paramArray>
+		</model>
+	</parameters>
+	<build>
+		<macro handle="GOLDSTEINNLONSOPTS" status="defined">
+			<identifier>GOLDSTEINNLONS</identifier>
+			<replacement>72</replacement>
+		</macro>
+		<macro handle="GOLDSTEINNLATSOPTS" status="defined">
+			<identifier>GOLDSTEINNLATS</identifier>
+			<replacement>72</replacement>
+		</macro>
+		<macro handle="GOLDSTEINNLEVSOPTS" status="defined">
+			<identifier>GOLDSTEINNLEVS</identifier>
+			<replacement>16</replacement>
+		</macro>
+                <make-arg name="FLAG_MOSESTRIFFID">ON</make-arg>
+	</build>
+	<testing>
+	</testing>
+</job>

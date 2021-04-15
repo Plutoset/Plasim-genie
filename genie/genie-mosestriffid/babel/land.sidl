@@ -1,0 +1,26 @@
+
+package land version 0.1.1 {
+  interface landembm_interface {
+
+    int run_land_embm_combine(
+         inout array<double, 2> surf_sensible_atm_bbl,
+         inout array<double, 2> evap_atm_bbl,
+         inout array<double, 2> runoff_ocn_bbl,
+         in  array<double, 2> land_sensibleinst_atm_bbl,
+         in  array<double, 2> land_evap_atm_bbl,
+         in  array<double, 2> land_runoff_atm_bbl
+    );
+  }
+  
+  class landembm implements landembm_interface{
+
+    int run_land_embm_combine(
+         inout array<double, 2> surf_sensible_atm_bbl,
+         inout array<double, 2> evap_atm_bbl,
+         inout array<double, 2> runoff_ocn_bbl,
+         in  array<double, 2> land_sensibleinst_atm_bbl,
+         in  array<double, 2> land_evap_atm_bbl,
+         in  array<double, 2> land_runoff_atm_bbl
+    );
+  }
+}

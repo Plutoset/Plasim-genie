@@ -1,0 +1,195 @@
+Testing Currencies...
+Pass: 1.1 Currencies
+Testing Poetry...
+Pass: 2.1 Runes
+Pass: 2.2 Middle English
+Pass: 2.3 Middle High German
+Pass: 2.4 Greek.1
+Pass: 2.5 Greek.2
+Pass: 2.6 Russion
+Pass: 2.7 Georgian
+Pass: 2.8 Tamil.1
+Pass: 2.9 Tamil.2
+Testing Phrases Set 1...
+Pass: 3.1 Sanskrit
+Pass: 3.2 Sanskrit/(standard transcription)
+	3.3: length mismatch: in=83 norm=81
+	3.3: [28] data=|e1| normal=|cf|
+Pass: 3.3 Classical Greek
+Pass: 3.4 Greek (monotonic)
+Pass: 3.5 Greek (polytonic)
+Pass: 3.6 Latin
+Pass: 3.7 Old French
+Pass: 3.8 French
+Pass: 3.9 Provençal / Occitan
+Pass: 3.10 Québécois
+Pass: 3.11 Walloon
+Pass: 3.12 Picard
+Pass: 3.13 Kreyòl Ayisyen (Haitï)
+Pass: 3.14 Basque
+Pass: 3.15 Catalan / Català
+Pass: 3.16 Spanish
+Pass: 3.17 Aragonés
+Pass: 3.18 Galician
+Pass: 3.19 European Portuguese
+Pass: 3.20 Brazilian Portuguese (8 <#notes>)
+Pass: 3.21 Caboverdiano/Kabuverdianu (Cape Verde)
+Pass: 3.22 Papiamentu
+Pass: 3.23 Italian
+Pass: 3.24 Milanese
+Pass: 3.25 Roman
+Pass: 3.26 Napoletano
+Pass: 3.27 Venetian
+Pass: 3.28 Zeneise /(Genovese)
+Pass: 3.29 Sicilian
+Pass: 3.30 Romansch (Grischun)
+Pass: 3.31 Romanian
+Pass: 3.32 Esperanto
+Pass: 3.33 Cornish
+Pass: 3.34 Welsh
+Pass: 3.35 Manx Gaelic
+Pass: 3.36 Old Irish /(Ogham)
+Pass: 3.37 Old Irish /(Latin)
+Pass: 3.38 Irish
+Pass: 3.39 Ulster Gaelic
+Pass: 3.40 Scottish Gaelic
+Pass: 3.41 Anglo-Saxon /(Runes)
+Pass: 3.42 Anglo-Saxon /(Latin)
+Pass: 3.43 Middle English
+Pass: 3.44 English
+Pass: 3.45 English /(IPA)
+Pass: 3.46 English /(Braille)
+Pass: 3.47 Jamaican
+Pass: 3.48 Lalland Scots / Doric
+Pass: 3.49 Gothic (4)
+Pass: 3.50 Old Norse /(Runes)
+Pass: 3.51 Old Norse /(Latin)
+Pass: 3.52 Norsk / Norwegian (Nynorsk)
+Pass: 3.53 Norsk / Norwegian (Bokmål)
+Pass: 3.54 Føroyskt / Faroese
+Pass: 3.55 Íslenska / Icelandic
+Pass: 3.56 Svenska / Swedish
+Pass: 3.57 Dansk / Danish
+Pass: 3.58 Sønderjysk
+Pass: 3.59 Frysk / Frisian
+Pass: 3.60 Nederlands / Dutch
+Pass: 3.61 Kirchröadsj/Bôchesserplat
+Pass: 3.62 Afrikaans
+Pass: 3.63 Lëtzebuergescht / Luxemburgish
+Pass: 3.64 Deutsch / German
+Pass: 3.65 Ruhrdeutsch
+Pass: 3.66 Langenfelder Platt
+Pass: 3.67 Lausitzer Mundart (Lusatian)
+Pass: 3.68 Odenwälderisch
+Pass: 3.69 Sächsisch / Saxon
+Pass: 3.70 Pfälzisch
+Pass: 3.71 Schwäbisch / Swabian
+Pass: 3.72 Deutsch (Voralberg)
+Pass: 3.73 Bayrisch / Bavarian
+Pass: 3.74 Allemannisch
+Pass: 3.75 Schwyzerdütsch (Zürich)
+Pass: 3.76 Schwyzerdütsch (Luzern)
+Pass: 3.77 Hungarian
+Pass: 3.78 Suomi / Finnish
+Pass: 3.79 Sami (Northern)
+Pass: 3.80 Erzian
+Pass: 3.81 Northern Karelian
+Pass: 3.82 Southern Karelian
+Pass: 3.83 Estonian
+Pass: 3.84 Latvian
+Pass: 3.85 Lithuanian
+Pass: 3.86 Czech
+Pass: 3.87 Slovak
+Pass: 3.88 Polska / Polish
+Pass: 3.89 Slovenian
+Pass: 3.90 Bosnian, Croatian, Montenegrin and Serbian /(Latin)/
+Pass: 3.91 Bosnian, Montenegrin and Serbian /(Cyrillic)/
+Pass: 3.92 Macedonian
+Pass: 3.93 Russian
+Pass: 3.94 Belarusian /(Cyrillic)
+Pass: 3.95 Belarusian /(Lacinka)
+Pass: 3.96 Ukrainian
+Pass: 3.97 Bulgarian
+Pass: 3.98 Georgian
+Pass: 3.99 Armenian
+Pass: 3.100 Albanian
+Pass: 3.101 Turkish
+Pass: 3.102 Turkish /(Ottoman)
+Pass: 3.103 Uzbek / O’zbekcha /(Roman)
+Pass: 3.104 Uzbek / Ўзбекча /(Cyrillic)/
+	3.105: length mismatch: in=121 norm=124
+	3.105: [109] data=|a7| normal=|a6|
+Pass: 3.105 Bangla / Bengali
+Pass: 3.106 Marathi
+Pass: 3.107 Kannada
+Pass: 3.108 Hindi
+Pass: 3.109 Malayalam
+Pass: 3.110 Tamil
+Pass: 3.111 Telugu
+Pass: 3.112 Sinhalese
+Pass: 3.113 Urdu(3)
+Pass: 3.114 Pashto(3)
+Pass: 3.115 Farsi / Persian(3)
+Pass: 3.116 Arabic(3)
+Pass: 3.117 Maltese
+Pass: 3.118 Hebrew(3)
+Pass: 3.119 Yiddish(3)
+Pass: 3.120 Twi
+	3.121: length mismatch: in=53 norm=48
+	3.121: [2] data=|61| normal=|c4|
+Pass: 3.121 Hausa (/Latin/)
+Pass: 3.122 Hausa (/Ajami/) (2)
+Pass: 3.123 Yoruba(4)
+	3.124: length mismatch: in=72 norm=65
+	3.124: [5] data=|69| normal=|c3|
+Pass: 3.124 Lingala
+Pass: 3.125 (Ki)Swahili
+Pass: 3.126 Malay
+Pass: 3.127 Tagalog
+Pass: 3.128 Chamorro
+Pass: 3.129 Fijian
+Pass: 3.130 Javanese
+Pass: 3.131 Burmese (Unicode 4.0)
+	3.132: [125] data=|ba| normal=|b7|
+Pass: 3.132 Burmese (Unicode 5.0)
+Pass: 3.133 Vietnamese (quốc ngữ)
+Pass: 3.134 Vietnamese (nôm) (4)
+Pass: 3.135 Khmer
+Pass: 3.136 Lao
+Pass: 3.137 Thai
+Pass: 3.138 Mongolian /(Cyrillic)
+Pass: 3.139 Mongolian /(Classic)/ (5)
+Pass: 3.140 Nepali
+Pass: 3.141 Tibetan
+Pass: 3.142 Chinese
+Pass: 3.143 Chinese (Traditional)
+Pass: 3.144 Taiwanese(6)
+Pass: 3.145 Japanese
+Pass: 3.146 Korean
+Pass: 3.147 Bislama
+Pass: 3.148 Hawaiian
+Pass: 3.149 Marquesan
+Pass: 3.150 Inuktitut (10)
+Pass: 3.151 Chinook Jargon
+Pass: 3.152 Navajo
+Pass: 3.153 Lojban
+Pass: 3.154 Nórdicg
+Testing Phrases Set 2...
+Pass: 4.1 Euro Symbol
+Pass: 4.2 Greek
+Pass: 4.3 Íslenska / Icelandic
+Pass: 4.4 Polish
+Pass: 4.5 Romanian
+Pass: 4.6 Ukrainian
+Pass: 4.7 Armenian
+Pass: 4.8 Georgian
+Pass: 4.9 Hindi
+Pass: 4.10 Hebrew
+Pass: 4.11 Yiddish
+Pass: 4.12 Arabic
+Pass: 4.13 Japanese
+Pass: 4.14 Thai
+No. of failures = 0
+
+ Testing UTF-8 sequences.
+PASS tst_utf8_phrases (exit status: 0)

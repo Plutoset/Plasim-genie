@@ -1,0 +1,37 @@
+
+* Testing nc_inq_type with netcdf-3
+	* Testing Type NC_BYTE:	success.
+	* Testing Type NC_CHAR:	success.
+	* Testing Type NC_SHORT:	success.
+	* Testing Type NC_INT:	success.
+	* Testing Type NC_LONG:	success.
+	* Testing Type NC_FLOAT:	success.
+	* Testing Type NC_DOUBLE:	success.
+	* Testing Type NC_UBYTE:	success.
+	* Testing Type NC_USHORT:	success.
+	* Testing Type NC_UINT:	success.
+	* Testing Type NC_INT64:	success.
+	* Testing Type NC_UINT64:	success.
+	* Testing Type NC_STRING:	success.
+	* Testing Type (Should Fail) NC_GARBAGE:	expected failure.
+	* Testing Type (Should Fail) NC_GARBAGE_NEGATIVE:	expected failure.
+ok.
+
+* Testing nc_inq_type with CDF5
+	* Testing Type NC_BYTE:	success.
+	* Testing Type NC_CHAR:	success.
+	* Testing Type NC_SHORT:	success.
+	* Testing Type NC_INT:	success.
+	* Testing Type NC_LONG:	success.
+	* Testing Type NC_FLOAT:	success.
+	* Testing Type NC_DOUBLE:	success.
+	* Testing Type NC_UBYTE:	success.
+	* Testing Type NC_USHORT:	success.
+	* Testing Type NC_UINT:	success.
+	* Testing Type NC_INT64:	success.
+	* Testing Type NC_UINT64:	success.
+	* Testing Type NC_STRING:	success.
+ok.
+* Finished.
+*** Tests successful!
+PASS tst_inq_type (exit status: 0)

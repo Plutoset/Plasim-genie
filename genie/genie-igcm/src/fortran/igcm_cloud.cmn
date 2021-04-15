@@ -1,0 +1,8 @@
+      real pcloudfact,pcloudmin,
+     :      cloudshallow,
+     :      humcloudmin,humcloudmax,powercloud,
+     :      cloudhfact,cloudmfact,cloudlfact
+      COMMON/igcm_cloud/pcloudfact,pcloudmin,
+     :      cloudshallow,
+     :      humcloudmin,humcloudmax,powercloud,
+     :      cloudhfact,cloudmfact,cloudlfact

@@ -1,0 +1,13 @@
+      SUBROUTINE ZCONTM(MODES)
+      INTEGER MODE
+      INTEGER MODES
+      INTEGER MODET
+      SAVE MODE
+      DATA MODE/0/
+      MODE=MODES
+      RETURN
+C***************
+      ENTRY      ZQCONM(MODET)
+      MODET=MODE
+      RETURN
+      END

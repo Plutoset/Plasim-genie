@@ -1,0 +1,7 @@
+      SUBROUTINE XCHARC(XO,YO,STRING)
+      REAL XO
+      REAL YO
+      CHARACTER*(*) STRING
+      CALL XLETER(XO,YO,STRING,  0)
+      RETURN
+      END

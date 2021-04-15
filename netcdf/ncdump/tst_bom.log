@@ -1,0 +1,8 @@
+
+*** Generate a cdl file with leading UTF-8 BOM.
+*** Verify .nc file
+*** Generate a cdl file with leading UTF-16 BOM.
+*** Verify UTF-16 file fails
+Input file contains a BOM indicating a non-UTF8 encoding
+***XFAIL : BOM Big Endian 16
+PASS tst_bom.sh (exit status: 0)

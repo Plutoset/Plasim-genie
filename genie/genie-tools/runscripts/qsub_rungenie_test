@@ -1,0 +1,13 @@
+#!/bin/bash
+#$ -q short.q
+#$ -cwd
+#$ -j y
+#$ -o ../../../genie_runlog/
+#
+/bin/bash qsub_rungenie_2.sh genie_eb_go_gs_ac_bg_sg_rg rokgem_test 5 2 0
+sleep 3
+#/bin/bash qsub_rungenie_2.sh genie_eb_go_gs_ac_bg_sg_rg rokgem_test3 5 2 0
+#sleep 3
+#/bin/bash qsub_rungenie_2.sh genie_eb_go_gs_ac_bg_sg_rg worbe2_preindustrial_fullCC_spin2 50000 8000 0 /esdata/env/pvp06gzu/genie_dev/genie_output/rg.worbe2_preindustrial_fullCC_spin1
+#sleep 3
+# etc, etc...

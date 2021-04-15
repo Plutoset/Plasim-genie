@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job author="config2xml.py - automatic conversion of ASCII text config file">
+	<vars>
+		<var name="EXPID">genie_ig_fi_fi_ml_restartread</var>
+		<var name="RESTARTREAD">"TRUE"</var>
+	</vars>
+	<config>
+		<model name="fixedchem"/>
+		<model name="fixedseaice"/>
+		<model name="fixedicesheet"/>
+		<model name="fixedocean"/>
+		<model name="igcm"/>
+		<model name="mosestriffid"/>
+	</config>
+	<parameters>
+		<control>
+			<param name="koverall_total">24</param>
+		</control>
+		<model name="fixedchem">
+		</model>
+		<model name="fixedseaice">
+			<param name="dt_restart_fixedseaice">120</param>
+			<param name="fname_restart_fixedseaice"><varref>OUTROOT</varref>/<varref>ASSUMEDGOOD_NAME</varref>/fixedseaice/fixedseaice_restart_2000_01_30.nc</param>
+		</model>
+		<model name="fixedicesheet">
+		</model>
+		<model name="fixedocean">
+			<param name="dt_restart_fixedocean">15</param>
+			<param name="fname_restart_fixedocean"><varref>OUTROOT</varref>/<varref>ASSUMEDGOOD_NAME</varref>/fixedocean/fixedocean_restart_2000_01_30.nc</param>
+		</model>
+		<model name="igcm">
+			<param name="dt_restart_igcmlandsurf">720</param>
+			<param name="LSHORT">.FALSE.</param>
+			<param name="fname_restart_igcmlandsurf"><varref>OUTROOT</varref>/<varref>ASSUMEDGOOD_NAME</varref>/igcm/igcmlandsurf_restart_2000_01_30.nc</param>
+			<param name="itsll">1</param>
+			<param name="dt_restart_igcmoceansurf">720</param>
+			<param name="fname_spectral"><varref>OUTROOT</varref>/<varref>ASSUMEDGOOD_NAME</varref>/igcm/igcm_rs_2000_01.nc</param>
+			<param name="ldaily">.true.</param>
+			<param name="fname_gridpt"><varref>OUTROOT</varref>/<varref>ASSUMEDGOOD_NAME</varref>/igcm/igcm_rg_2000_01.nc</param>
+			<param name="KOUNTR">720</param>
+			<param name="coldstart">.FALSE.</param>
+			<param name="fname_restart_igcmoceansurf"><varref>OUTROOT</varref>/<varref>ASSUMEDGOOD_NAME</varref>/igcm/igcmoceansurf_restart_2000_01_30.nc</param>
+		</model>
+		<model name="mosestriffid">
+			<param name="c_restart"><varref>OUTROOT</varref>/<varref>ASSUMEDGOOD_NAME</varref>/mosestriffid/land_rs_00000720.nc</param>
+			<param name="irest_land">24</param>
+			<param name="idiag_land">720</param>
+		</model>
+	</parameters>
+	<build>
+                <make-arg name="IGCMATMOSDP">TRUE</make-arg>
+                <make-arg name="GENIEDP">TRUE</make-arg>
+                <make-arg name="FLAG_MOSESTRIFFID">ON</make-arg>
+	</build>
+	<testing>
+		<var name="ASSUMEDGOOD_NAME">genie_ig_fi_fi_ml_restartmake</var>
+		<var name="TESTFILE">igcm/igcm_da_2000_02.nc</var>
+	</testing>
+</job>

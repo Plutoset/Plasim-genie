@@ -1,0 +1,180 @@
+README for runscripts to chop genie runs into manageable pieces (useful for very long runs) and to generate ensembles and visualise their output using Mathematica
+
+by Greg Colbourn
+g.colbourn@uea.ac.uk
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+  pre-requesites
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+- the bash shell
+
+- grid engine software (i.e. be on a cluster)
+
+- the following directories in your root directory (the directory where the genie directory resides).: 
+
+"genie_output" [you should already have this]
+"genie_configpatches" (where the config files with the user options to append to the base config are stored - AJR calls this genie_userconfigs now I think)
+"genie_runlog" (to store the terminal output from script runs)
+"genie_archive" (to store zipped archives of results) containing directories called "fresh", "to_resub" and "to_clearout"
+["results" (to store collated results from Mathematica output in - see below)]
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+  running the scripts
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. Edit the script qsub_rungenie_test:
+You can execute multiple runs on separate lines.
+For each run, type 
+
+/bin/bash qsub_rungenie_2.sh $1 $2 $3 $4 $5 [$6]
+
+where
+
+$1 = your config name, e.g genie_eb_go_gs_ac_bg_sg_rg (corresponding to genie/genie-main/configs/genie_eb_go_gs_ac_bg_sg_rg.config)
+$2 = you user config patch name - e.g. worbe2_preindustrial_fullCC_spin1 (corresponding to genie_configpatches/worbe2_preindustrial_fullCC_spin1)
+$3 = your runlength in years, e.g. 50000
+$4 = your individual job length in years, e.g. 8000; means the job is broken into chunks of 8000 years each (this takes ~5 hours on the UEA ESCluster)
+$5 = your start year, usually 0, unless restarting a run. (the resub_genie_myr.sh can automate restarts of ensembles - see below)
+$6 [optional] = if starting from a restart, your restart directory path, e.g. /esdata/env/pvp06gzu/genie_dev/genie_output/rg.worbe2_preindustrial_fullCC_spin1
+
+Our example looks like this:
+
+/bin/bash qsub_rungenie_2.sh genie_eb_go_gs_ac_bg_sg_rg worbe2_preindustrial_fullCC_spin2 50000 8000 0 /esdata/env/pvp06gzu/genie_dev/genie_output/rg.worbe2_preindustrial_fullCC_spin1
+
+For a more simple test, you might want to try something like:
+
+/bin/bash qsub_rungenie_2.sh genie_eb_go_gs_ac_bg_sg_rg rokgem_test 5 2 0
+
+which will be quick to run. (Note that you will need to have the file rokgem_test in the genie_configpatches directory - there is an example file in the genie-tools/runscripts directory that you can use for this purpose).
+
+For your biogem output not to be overwritten each time the model is restarted you need to set bg_opt_append_data=.TRUE. in your config file (as is set in rokgem_test)
+
+Note that in qsub_rungenie_test there are pauses ("sleep 3") inbetween job submits. These are just as a precaution so as not to overload the cluster.
+I put them in because I was finding that files weren't getting written in time and things were getting lost.
+
+2. Run the script qsub_rungenie_test (i.e. type ./qsub_rungenie_test in the terminal)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+  restarting runs
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Place the archive directories of the runs you want restarted (which will be in genie_archive) in genie_archive/to_resub.
+In resub_genie_myr.sh, edit the lines
+
+MODELID=genie_eb_go_gs_ac_bg_sg_rg (the config name - same as $1 above)
+RUNLENGTH=100000 (the new end year of the run; start years are worked out automatically by the script by looking at the names of the .tar.gz files and picking the latest one)
+MAXYEARS=8000 (same as $4 above)
+
+then execute the script.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+  name shortening
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+The names for genie runs can get a bit unwieldy with all the eb_go_gs_ac_bg_sg_rg_el etc combined with the userconfigs. This can especially be a problem when extracting from zip files. I've found that Mathematica won't do it if the path length to the .tar.gz file, including the name of the file, is more than 100 characters. Thus I try to reduce the names of the archive files, whilst preserving enough information to both decribe and differentiate them. In the above scripts, the script nameshortening.sh is called, which contains a number of abbreviations implemented via sed. Add to these as you see fit.
+
+NOTE: this is not working properly at the moment, so is done individually in each of the scripts: genie_myr.sh and rungenie.sh. 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+  clearing archived data
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+The script clear_archive.sh clears any archive folders placed in genie_archive/to_clearout of all tarballs but the latest one (i.e. the end of the run). This is designed for using with the append data feature of biogem and rokgem saving; when data is appended to output files on restart, clearing the archive results in no data loss. What is lost is the ability to restart the run in the middle.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+  ensemble generation and data visualistation (using Mathematica)
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+[Note: if you don't have access to Mathematica, you can get a free trial at http://www.wolfram.com/products/mathematica/experience/request.cgi . If you've not used mathematica before, execute cells by having the cursor witin them (or highlighting the cell on the right) and pressing Enter or Shift-Return; double click the cells at the side to expand and contract them. Code generally consists of nested functions (Capitalised) using [ ] brackets, (* *) denote comments, { } lists, ( ) arithmetic brackets, and [[ ]] array parts. There is comprehensive documentation at http://reference.wolfram.com/mathematica/guide/Mathematica.html . Ideally, I'd like to re-do this in something open source, like SAGE, but probably won't get round to it. Plus, the genie front end research tool is on its way, which will superceed all of this!]
+
+1. To automatically generate an ensemble (of non-xml config files), start by editing your base config .csv file (which should also be in genie_configpatches) - an example is given with ensemble_09test.csv. Put commas between different values of parameters that you want to loop over in the ensemble (there should be no other commas!), and &s inbetween parameters that you want to group together for the purposes of the ensemble (see note * below).
+
+2. Edit the file ensemble_09test.nb, which should be placed in the genie_configpatches folder. Below is an explanation of the parameters:
+
+KEY: >>> parameter that would not normally be changed unless the genie (or mathematica) code is altered
+     !>> parameter that would be edited when making a first ensemble
+     !!> parameter that would be edited when making an ensemble similar to a previous one
+
+Parameters:
+
+runtimeroot = "/esdata/env/pvp06gzu/genie_dev/";                                  !>> the directory where you're genie folder is located                  
+config = "genie_eb_go_gs_ac_bg_sg_rg"; configshort = "rg";                        !>> as #1 above
+ensemblename = "ensemble_09test"; ensemshort = "test";                            !!> the name of the .csv config file (should start with ensemble_09 unless nameshortening.sh is edited (see above), and a short name for the ensemble (should be the bit after ensemble_09)
+ensembledatafile = ensemblename ~~ ".csv";                                        >>> created the filename with extension
+nyears = 10;                                                                      !!> runlength; as #3 above
+saveblock = 4;                                                                    !>> as #4 above
+startyear = 0;                                                                    !>> as #5 above
+plotstartyear = 0;                                                                !>> the year to start time-series plots at
+restart = runtimeroot ~~ "genie_output/rg_fCaSi_spin2.spin2";                     !!> as #6 above
+comment = "#";                                                                    >>> the symbol used as a comment in the .csv config file
+grouper = "&";                                                                    >>> the symbol used to group together parameters to loop over for an ensemble*
+dropvar = -1;                                                                     >>> should be left unless restarting from an ensemble of runs**
+ensemoutput = 1;                                                                  >>> whether to output the configfiles (0=no, 1=yes)
+
+info = "8 level ocean, 5000GtC, globavg and 2D (corrected) - 5 year test";        !!> information on the ensemble (a title)
+
+vartitles = {"emissions", "scheme"};                                              !!> names of the ensemble variables***
+vartitlesshort = {"emis.", "scheme"};                                             !!> short names of the ensemble variables
+varvalues = {{"none", "5000GtC"}, {"Global_avg", "Gibbs_1999"}};                  !!>>values of the ensemble variables (the sub-lists correspond to the above variables)
+
+system = "Linux";                                                                 >>> system run on (can be Linux or Windows; use "Linux" for Mac) - for purposes of path formatting
+archivefoldersuffix = "genie_archive";                                            >>> names of folders (see pre-requesites above)
+outputfoldersuffix = "genie_output";
+resultsfoldersuffix = "results/";
+modules = {"biogem", "rokgem"};                                                   !>> modules to collate time-series output for
+columntitledividers = {"/ ", "/ "};                                               >>> dividers for titles in genie time-series output files - should be left unless changed in genie
+filenamenos = {{2, 4, 5, 6, 7, 27, 28, 29, 30, 36, 37, 39, 42, 43, 45, 46, 47,
+     49, 52, 57, 59, 60, 61, 63, 64, 70, 72, 73, 75}, {3, 6, 7, 10, 15, 18, 
+    21, 24, 25, 26, 27, 28}};                                              
+(*filenamenos={{2,4,5,6,7,27,28,29,30,36,37,39,42,43,45,46,47,49,52,57,59,60,\
+61,63,64,70,72,73,75},{3,6,7,10,15,18,21,24,25,26,27,28}};
+filenamenos={{2,4,27,28,29},{18,21,24,25,26}};*)                                  !>> filename numbers for output (the sub-lists correspond to the above modules). To work out what files the numbers correspond to execute section 2. in ensemble.nb  
+
+readinalldata = 0;                                                                !!> whether to read in all netcdf data into RAM so netcdf output generation runs quicker (for a 48 member ensemble, I'm findin 4GB ain't enough!)
+netcdfmodules = {"biogem", "sedgem", "rokgem"};                                   !>> modules to collate netcdf output for (the below lists with {} need to be edited to reflect this if changed)
+landmaskfile = runtimeroot ~~ "/genie/genie-rokgem/data/input/worbe2.k1";         !>> path of a landmask file used
+dimensions = {{2, 3}, {2}, {2}};                                                  !>> dimensions of netcdf data for each module
+nlevels = 8;                                                                      !>> no. of ocean levels for 3D data
+nhousekeepingdata = {22, 13, 17};                                                 !>> amount of housekeeping data in each netcdf file, by module (to be skipped)
+bignumber = 10^30;                                                                >> a number lower then the default value given to NaNs in the netcdf data
+genielat = 36;                                                                    !>> latitudinal resolution of genie (in gridcells) 
+genielon = 36;                                                                    !>> longitudinal resolution of genie (in gridcells)
+
+control = 2;                                                                      !!>  number of ensemble members that are control runs (for subtracting from in plots - "correct for drift" in GUI)
+
+collatedoutputfolder = "0905151604";                                              !>> folder in runtimeroot/results containing generated results spreadsheets (for executing section 4. in ensemble.sh if 3. had been previously executed.
+
+first values are for legend, second for graphs:
+
+linethicknesses = {0.125, 0.00125};                                               >>> thicknesses of lines in legends and graphs                                          
+dashingwidths = {2, 0.05};                                                        >>> spacing of dashing for lines in legends and graphs
+
+varstyles = {{1}, {2}};                                                           !>> styles for graph and legend lines****
+
+
+* e.g. with the line 
+
+rg_opt_weather_T_Ca=.TRUE.&rg_opt_weather_R_Ca=.TRUE.&rg_opt_weather_P_Ca=.TRUE.,rg_opt_weather_T_Ca=.FALSE.&rg_opt_weather_R_Ca=.FALSE.&rg_opt_weather_P_Ca=.FALSE.
+
+{rg_opt_weather_T_Ca,rg_opt_weather_R_Ca,rg_opt_weather_P_Ca} are treated as one parameter when generating the ensemble so that only 2 combinations are created rather than 8.
+
+
+** when resarting from an ensemble of runs, if dropvar=1, then the first variable is dropped from being appended to the name of the restart given, etc.
+
+*** Note that if there are more (or less) than 2 ensemble variables, then the code in section "7 Net CDF" needs to be altered where the grey commented out bits are. For example:
+{{v1, 1, vartitles[[vs[[1]]]]},Table[i -> varvalues[[vs[[1]], i]], {i, nvars[[vs[[1]]]]}]},
+(*{{v2,1,vartitles[[vs[[2]]]]},Table[i->varvalues[[vs[[2]],i]],{i,nvars[[vs[[2]]]]}]},
+{{v3,1,vartitles[[vs[[3]]]]},Table[i->varvalues[[vs[[3]],i]],{i,nvars[[vs[[3]]]]}]},*)
+would be adjusted to 
+{{v1, 1, vartitles[[vs[[1]]]]},Table[i -> varvalues[[vs[[1]], i]], {i, nvars[[vs[[1]]]]}]},
+{{v2,1,vartitles[[vs[[2]]]]},Table[i->varvalues[[vs[[2]],i]],{i,nvars[[vs[[2]]]]}]},
+(*{{v3,1,vartitles[[vs[[3]]]]},Table[i->varvalues[[vs[[3]],i]],{i,nvars[[vs[[3]]]]}]},*)
+in the case of there being 3 variables. This should really be automated, but I haven't quite managed to get it to work :(
+
+**** The first list is colour; the second line thickness, and the third dashing. The numbers correspond to the variable numbers - so in the above example variable 1 ("emissions") is represented by colour, and variable 2 ("scheme") by line-thickness. If you were to have varstyles = {{1}, {2},{3,4}}, it would be the same, but with the addition of variables 3 and 4 being combinedly represented by different dashing.
+
+
+3. Execute the contents of the above .nb file and then section "1. Set-up ensemble" in ensemble.nb. A file qsub_rungenie_expt_XXXXXXXXXX (where the Xs represent a date string) should now be in the folder genie_runlog. This is basically the same as qsub_rungenie_test as described in the "running the scripts" section above. Execute this file to set the ensemble going.
+
+4. Execute "2. Set-up results" to get filenames of timeseries output, and then "3. Import data, then export to .xls files" to do just that (i.e. collate the ensemble timeseries into spreadsheets). You will need to set gm_par_string_results_ext=".dat" for this to work - this is done in the example ensemble_09test.csv file (the default is ".res" for Matlab processing). Results (and any graphs created using section 4 below) will be saved in a folder in the "results" folder with a date string name.
+
+5. Execute section "4. Plot Results" to get an interactive plotting widget with a fairly self-explanatory GUI. The tables displayed below the graph will be of use in picking which lines to display (tab) and which variable. To save a graph, check and then uncheck the "save graph" box (leaving it checked will produce a new file every minute).
+
+6. For netcdf output, execute section 7 a. and then have a play with the other sections, which get more complicated (and computer resource intensive) as they go through the alphabet. Each one produces a GUI with geographic output that should be fairly intuitive.

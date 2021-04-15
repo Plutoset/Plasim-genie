@@ -1,0 +1,6 @@
+
+
+PATH: tst_diskless5.nc
+FLAGS: MEM=0 DISKLESS=1 TYPE=int
+|amountofprecip|=66600
+PASS run_diskless5.sh (exit status: 0)

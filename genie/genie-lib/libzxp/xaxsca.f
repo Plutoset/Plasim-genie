@@ -1,0 +1,212 @@
+      SUBROUTINE XAXSCA(XL,XR,XSTEP, YB,YT,YSTEP)
+C To draw ticks on border defined by (xl,xr,yb,yt) and annotate the
+C ticks.  Modifications: Options for annotation and ticking included
+C just as those in axis plotting routines.
+      INTEGER JUMP
+      INTEGER KOR
+      REAL XSTEP
+      REAL YSTEP
+      REAL UNITH
+      REAL XRANGE
+      REAL YRANGE
+      REAL UH
+      INTEGER NTMAG
+      REAL ANMAG
+      REAL ANSIZ
+      REAL YFACTR
+      REAL HX
+      REAL XFACTR
+      REAL HY
+      REAL HOLD
+      REAL XSTEPJ
+      REAL YSTEPJ
+      REAL XR
+      REAL XL
+      REAL YT
+      REAL YB
+      REAL XO
+      REAL X0
+      REAL YO
+      REAL Y0
+      INTEGER KTKX
+      REAL HTICK
+      REAL AXL
+      INTEGER IFOLD
+      INTEGER I
+      REAL X
+      REAL XHT
+      INTEGER KTKY
+      REAL AYB
+      INTEGER JFOLD
+      INTEGER J
+      REAL Y
+      REAL YHT
+      INTEGER KANX
+      INTEGER LAXFMT
+      INTEGER LCH
+      INTEGER KCH
+      INTEGER ICLENG
+      INTEGER KANY
+      REAL X1
+      REAL Y1
+      REAL PL
+      REAL PR
+      REAL PB
+      REAL PT
+      INTEGER LLBFMT
+C
+      PARAMETER( JUMP=2 )
+      COMMON /XPHY01/PL,PR,PB,PT,XRANGE,YRANGE
+      COMMON /XFTR06/ XFACTR,YFACTR
+      COMMON /XFMT33/ LBFMT, AXFMT
+      COMMON /XFMT34/ LLBFMT,LAXFMT
+      COMMON /XAXS18/ KANX,KANY, KTKX,KTKY
+      CHARACTER LBFMT*50, AXFMT*10
+      CHARACTER CH*20
+      COMMON /XAXM35/ NTMAG, ANMAG, ANSIZ
+      SAVE KOR, X0, Y0
+      DATA KOR /0/
+
+      IF( XSTEP.EQ.0.0.OR. YSTEP.EQ.0.0) RETURN
+      UNITH=SQRT(ABS( XRANGE*YRANGE))*0.01
+      UH= MIN( ABS(XRANGE), ABS(YRANGE) )*0.03
+      IF( NTMAG.EQ.0) ANMAG=UH
+      IF( NTMAG.EQ.2) ANMAG=ANSIZ*YFACTR
+      HX= ANMAG/XFACTR
+      HY= ANMAG/YFACTR
+      CALL XQCHMG( HOLD )
+      CALL XCHMAG( ANMAG )
+
+      XSTEPJ=XSTEP*JUMP
+      YSTEPJ=YSTEP*JUMP
+ 5    IF( NINT((XR-XL)/XSTEPJ).GT.6  ) THEN
+      XSTEPJ=XSTEPJ*2
+      GOTO 5
+      ENDIF
+ 6    IF( NINT((YT-YB)/YSTEPJ).GT.6  ) THEN
+      YSTEPJ=YSTEPJ*2
+      GOTO 6
+      ENDIF
+      IF( KOR.EQ.1) THEN
+      XO=X0
+      YO=Y0
+      ELSE
+      XO=XL
+      YO=YB
+      ENDIF
+
+      CALL XBOX(XL,XR,YB,YT)
+
+      IF( KTKX.NE.0) THEN
+      HTICK=UNITH/YFACTR*KTKX
+      AXL=XO+INT((XL-XO)/XSTEP)*XSTEP
+      IFOLD=XSTEPJ/XSTEP
+
+      DO 100 I=0,1000
+       X=AXL+I*XSTEP
+       IF ((X-XL)*(X-XR).GT.0.0) GOTO 110
+       XHT = HTICK
+       IF( MOD(I, IFOLD).EQ.0) XHT=HTICK+HTICK
+       CALL XPENUP(X,YB)
+       CALL XPENDN(X,YB+XHT)
+100   CONTINUE
+110   CONTINUE
+      DO 120 I=0,1000
+       X=AXL+I*XSTEP
+       IF ((X-XL)*(X-XR).GT.0.0) GOTO 130
+       XHT = HTICK
+       IF( MOD(I, IFOLD).EQ.0) XHT=HTICK+HTICK
+       CALL XPENUP(X,YT)
+       CALL XPENDN(X,YT-XHT)
+120   CONTINUE
+130   CONTINUE
+      ENDIF
+      IF(KTKY.NE.0)THEN
+      HTICK=UNITH/XFACTR*KTKY
+      AYB=YO+INT((YB-YO)/YSTEP)*YSTEP
+      JFOLD = YSTEPJ/YSTEP
+      DO 200 J=1,1000
+       Y=AYB+J*YSTEP
+       YHT = HTICK
+       IF( MOD(J, JFOLD).EQ.0) YHT=HTICK+HTICK
+       IF( (Y-YB)*(Y-YT).GT.0.0 ) GOTO 220
+       CALL XPENUP(XL,Y)
+       CALL XPENDN(XL+YHT,Y)
+200   CONTINUE
+220   CONTINUE
+      DO 230 J=1,1000
+       Y=AYB+J*YSTEP
+       YHT = HTICK
+       IF( MOD(J, JFOLD).EQ.0) YHT=HTICK+HTICK
+       IF( (Y-YB)*(Y-YT).GT.0.0 ) GOTO 240
+       CALL XPENUP(XR,Y)
+       CALL XPENDN(XR-YHT,Y)
+230   CONTINUE
+240   CONTINUE
+      ENDIF
+      IF( KANX.EQ.0 .AND. KTKX.EQ.0 ) GOTO 160
+      HTICK=UNITH*1.5/YFACTR*KTKX
+      AXL=XO+INT((XL-XO)/XSTEPJ)*XSTEPJ
+      DO 150 I=0,1000
+       X=AXL+I*XSTEPJ
+       IF ((X-XL)*(X-XR).GT.0.0) GOTO 160
+       IF( KANX.NE.0) THEN
+       IF( AXFMT(1:LAXFMT).EQ.'*') THEN
+         CALL XRCH(X, CH, LCH)
+       ELSE
+         DO 501 KCH=1,LAXFMT
+         IF((AXFMT(KCH:KCH).EQ.'I')
+     :       .or.(axfmt(kch:kch).eq.'i')) THEN
+           WRITE(CH,AXFMT(1:LAXFMT)) NINT(X)
+           GOTO 502
+         ENDIF
+ 501       CONTINUE
+           WRITE(CH,AXFMT(1:LAXFMT)) X
+ 502       LCH=ICLENG( CH )
+         CALL XCHLJ(CH(1:LCH), LCH)
+       ENDIF
+       IF(KANX.EQ. 1)
+     :     CALL XCHARC(X, YT+1.5*HY, CH(1:LCH))
+       IF(KANX.EQ.-1)
+     :     CALL XCHARC(X, YB-1.5*HY, CH(1:LCH))
+       ENDIF
+ 150  CONTINUE
+ 160  CONTINUE
+      IF( KANY.EQ.0 .AND. KTKY.EQ.0 ) GOTO 260
+      HTICK=UNITH/XFACTR*1.5*KTKX
+      AYB=YO+INT((YB-YO)/YSTEPJ)*YSTEPJ
+      DO 250 J=0,1000
+       Y=AYB+J*YSTEPJ
+       IF( (Y-YB)*(Y-YT).GT.0.0 ) GOTO 260
+       IF( KANY.NE.0) THEN
+       IF( AXFMT(1:LAXFMT).EQ.'*') THEN
+         CALL XRCH(Y, CH, LCH)
+       ELSE
+         DO 503 KCH=1,LAXFMT
+         IF((AXFMT(KCH:KCH).EQ.'I')
+     :       .or.(axfmt(kch:kch).eq.'i')) THEN
+           WRITE(CH,AXFMT(1:LAXFMT)) NINT(Y)
+           GOTO 504
+         ENDIF
+ 503       CONTINUE
+           WRITE(CH,AXFMT(1:LAXFMT)) Y
+ 504       LCH=ICLENG( CH )
+         CALL XCHLJ(CH(1:LCH), LCH)
+
+       ENDIF
+       IF(KANY.EQ.-1)
+     :     CALL XCHARR(XL-HX*0.7, Y-0.4*HY, CH(1:LCH) )
+       IF(KANY.EQ. 1)
+     :     CALL XCHARL(XR+HX*0.7, Y-0.4*HY, CH(1:LCH) )
+       ENDIF
+ 250  CONTINUE
+ 260  CONTINUE
+      CALL XCHMAG( HOLD )
+      RETURN
+      ENTRY XAXSOR(X1, Y1)
+C* ZXPLOTI *
+      KOR=1
+      X0=X1
+      Y0=Y1
+      RETURN
+      END

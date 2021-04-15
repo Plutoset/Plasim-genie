@@ -1,0 +1,40 @@
+++++
+24          Number of output variables
+1           Number of points for timeseries output
+++++
+Sb  Ts  Mn  Variable name                  Units           Low bound    Upp bound    Dim Reg
+++++----++++-------------------------------++++++++++++++++-------------+++++++++++++---+++
+F   F   F   air_temperature                K               +0.000E+00   +5.000E+02   1  0   1
+t   F   F   subsurface_temperature         K               +0.000E+00   +5.000E+02   1  1   2
+F   F   F   gridbox_surface_temperature    K               +0.000E+00   +5.000E+02   1  0   3
+F   F   F   gridbox_lying_snow             mm              +0.000E+00   +1.000E+04   1  1   4
+t   F   F   gridbox_soil_moisture          mm              +0.000E+00   +1.000E+04   1  1   5
+F   F   F   gridbox_evaporation            mm/s            -1.000E+05   +1.000E+05   1  1   6
+F   F   F   gridbox_sublimation            mm/s            -1.000E+05   +1.000E+05   1  1   7
+F   F   F   gridbox_runoff                 mm/s            -1.000E+05   +1.000E+05   1  0   8
+F   F   F   gridbox_snowmelt               mm/s            -1.000E+05   +1.000E+05   1  1   9
+F   F   F   gridbox_soil_carbon            kgC/m2          +0.000E+00   +1.000E+05   1  1   10
+F   F   F   gridbox_resp_s_dr              kgC/m2/year     +0.000E+00   +1.000E+05   1  1   11
+F   F   F   pft_g_leaf_day                 /year           -1.000e+10   +1.000e+10   2  1   12
+F   F   F   pft_g_leaf_phen                /year           -1.000e+10   +1.000e+10   2  1   13
+F   F   F   pft_g_leaf_dr                  /year           -1.000e+10   +1.000e+10   2  1   14
+F   F   F   pft_gpp_dr                     kgC/m2/year     -1.000e+10   +1.000e+10   2  1   15
+F   F   F   pft_npp_dr                     kgC/m2/year     -1.000e+10   +1.000e+10   2  1   16
+F   F   F   pft_resp_w_dr                  kgC/m2/year     +0.000e+00   +1.000e+10   2  1   17
+F   F   F   pft_height                     m               +0.000e+00   +5.000E+01   2  1   18
+F   F   F   pft_lai                        m2/m2           +0.000e+00   +5.000E+01   2  1   19
+F   F   F   pft_z0                         m               +0.000e+00   +5.000E+01   2  1   20
+F   F   F   pft_albedo_snf                 -               +0.000e+00   +1.000E+00   2  1   21
+F   F   F   pft_albedo_snc                 -               +0.000e+00   +1.000E+00   2  1   22
+t   F   F   tile_frac                      -               +0.000e+00   +1.000E+00   3  1   23
+F   F   F   tile_surface_temperature       K               +0.000e+00   +5.000E+02   3  1   24
+++++----++++-------------------------------++++++++++++++++-------------+++++++++++++---+++
+List of i,j points for timeseries output
+4   4
+30  30
+++++----
+
+Dimensions:
+1 = lat/long/time
+2 = pft/lat/long/time
+3 = tile/lat/long/time

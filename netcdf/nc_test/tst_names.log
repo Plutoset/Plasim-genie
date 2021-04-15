@@ -1,0 +1,7 @@
+
+*** testing names with file tst_names.nc...
+*** switching to netCDF classic format...ok.
+*** switching to netCDF 64-bit offset format...ok.
+*** switching to netCDF 64-bit data format...ok.
+*** Tests successful!
+PASS tst_names (exit status: 0)

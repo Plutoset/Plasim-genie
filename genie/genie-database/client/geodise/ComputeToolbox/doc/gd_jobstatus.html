@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+	<HEAD>
+		<TITLE>gd_jobsubmit (Matlab Functions) </TITLE>
+		<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+		<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.0  (Win32)">
+		<META NAME="CREATED" CONTENT="20031003;16082415">
+		<META NAME="CHANGED" CONTENT="20031006;17034960">
+		<META NAME="FORMATTER" CONTENT="Arachnophilia 5.2">
+		<!-- Created on 02-Oct-2003 11:39:22 -->
+		<!-- Top navigation bar -->
+		<STYLE> <!-- @page { size: 21cm 29.7cm }
+	TD P { color: #000000; font-family: "arial" }
+	P { color: #000000; font-family: "arial" }
+	A:link { color: #0000ff }
+	A:visited { color: #800080 }
+	ul {list-style-type: none}
+	--></STYLE>
+	</HEAD>
+	<BODY LANG="en-US" TEXT="#000000" LINK="#0000ff" VLINK="#800080" BGCOLOR="#ffffff" DIR="ltr">
+		<TABLE WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0" BGCOLOR="#99ccff" STYLE="PAGE-BREAK-BEFORE: always">
+			<TR>
+				<TD>
+					<P><B>MATLAB Function Reference</B>
+					</P>
+				</TD>
+				<TD>
+					<P ALIGN="right"><A HREF="gd_jobpoll.html"><IMG SRC="b_prev.gif" NAME="Graphic1" ALIGN="bottom" WIDTH="17" HEIGHT="17" BORDER="0"></A>
+						&nbsp;&nbsp;&nbsp; <A HREF="gd_jobsubmit.html"><IMG SRC="b_next.gif" NAME="Graphic2" ALIGN="bottom" WIDTH="17" HEIGHT="17" BORDER="0"></A>
+					</P>
+				</TD>
+			</TR>
+		</TABLE>
+		<P><FONT COLOR="#000099"><!-- Function name and short description --><FONT SIZE="6">gd_jobstatus
+				</FONT></FONT>
+		</P>
+		<P>Gets the status of a Globus GRAM job</P>
+		<P><FONT COLOR="#000099"><!-- Function syntax --><FONT SIZE="4"><B>Syntax</B> </FONT></FONT>
+		</P>
+		<UL>
+			<LI>
+				<P STYLE="MARGIN-BOTTOM: 0cm"><CODE>STATUS = gd_jobstatus(JOBHANDLE) </CODE>
+				</P>
+			</LI>
+		</UL>
+		<P><!-- Function description --><FONT SIZE="4"><FONT COLOR="#000099"><B>Description</B> </FONT>
+			</FONT>
+			<BR>
+			<BR>
+			<CODE>STATUS = gd_jobstatus(JOBHANDLE)</CODE> returns the status of a Globus 
+			GRAM job, where status:
+			<UL>
+				<LI>
+					<P STYLE="MARGIN-BOTTOM: 0cm">-1 is Unknown
+					</P>
+				<LI>
+					<P STYLE="MARGIN-BOTTOM: 0cm">1 is PENDING
+					</P>
+				<LI>
+					<P STYLE="MARGIN-BOTTOM: 0cm">2 is ACTIVE
+					</P>
+				<LI>
+					<P STYLE="MARGIN-BOTTOM: 0cm">3 is DONE
+					</P>
+				<LI>
+					<P STYLE="MARGIN-BOTTOM: 0cm">4 is FAILED
+					</P>
+				<LI>
+					<P STYLE="MARGIN-BOTTOM: 0cm">5 is SUSPENDED
+					</P>
+				<LI>
+					<P>6 is UNSUBMITTED
+					</P>
+				</LI>
+			</UL>
+		<P><!-- Examples --><FONT SIZE="4"><FONT COLOR="#000099"><B>Example</B> </FONT></FONT>
+			<BR>
+			<BR>
+			This example queries the status of a Globus job using the job handle returned 
+			by <code>gd_jobsubmit</code>.</P>
+		<UL>
+			<LI>
+				<P STYLE="MARGIN-BOTTOM: 0cm"><CODE>gd_jobstatus('https://escience-dept2.sesnet.soton.ac.uk:33342/10288/1029768382/')
+					</CODE>
+				</P>
+			</LI>
+		</UL>
+		<P><!-- See also --><FONT SIZE="4"><FONT COLOR="#000099"><B>See also</B> </FONT></FONT>
+			<BR>
+			<BR>
+			<CODE><A href="gd_createproxy.html">gd_createproxy</A>, <A href="gd_jobsubmit.html">gd_jobsubmit</A>,
+				<A href="gd_jobkill.html">gd_jobkill</A></CODE>
+		</P>
+		<TABLE WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0" BGCOLOR="#99ccff">
+			<TR>
+				<TD WIDTH="20">
+					<P ALIGN="left"><!-- Bottom navigation bar --><A HREF="gd_jobpoll.html"><IMG SRC="b_prev.gif" NAME="Graphic3" ALIGN="bottom" WIDTH="17" HEIGHT="17" BORDER="0"></A>
+					</P>
+				</TD>
+				<TD>
+					<P ALIGN="left">gd_jobpoll
+					</P>
+				</TD>
+				<TD>
+					<P>
+					</P>
+				</TD>
+				<TD>
+					<P ALIGN="right">gd_jobsubmit
+					</P>
+				</TD>
+				<TD WIDTH="20">
+					<P ALIGN="right"><A HREF="gd_jobsubmit.html"><IMG SRC="b_next.gif" NAME="Graphic4" ALIGN="bottom" WIDTH="17" HEIGHT="17" BORDER="0"></A>
+					</P>
+				</TD>
+			</TR>
+		</TABLE>
+		<P><BR>
+			<BR>
+		</P>
+	</BODY>
+</HTML>

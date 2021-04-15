@@ -1,0 +1,12 @@
+C
+C     Legendre polynomials and information about gaussian latitudes
+C
+      real alpj,dalpj,alp,dalp,rlp,rdlp,si,cs,sisq,cssq,secsq,
+     :     alat,gwt,aw
+      integer jh,jl,jinc
+      COMMON/LEGAU/ ALPJ(MJP),DALPJ(MJP)
+     +              ,ALP(NWJ2,2,JGL),DALP(NWJ2,2,JGL)
+     +              ,RLP(NWJ2,2,JGL),RDLP(NWJ2,2,JGL)
+     +              ,SI(JGG),CS(JGG),SISQ(JGG),CSSQ(JGG),SECSQ(JGG)
+     +              ,ALAT(JGG),GWT(JGG),AW(JGG),JH,JL,JINC
+C

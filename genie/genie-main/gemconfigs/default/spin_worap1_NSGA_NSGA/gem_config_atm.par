@@ -1,0 +1,46 @@
+
+ 01 02        03  04  05  06         07 08   09 10 11 12                                            13       14        15
+ \/ \/        \/  \/  \/  \/         \/ \/   \/ \/ \/ \/                                            \/       \/        \/
+
+-START-OF-DATA-
+ T  temp      01  01  00  0.0        F  0.0  F  F  F  'surface air temperature'                     'K'      73.15     373.15
+ T  humidity  02  02  00  0.0        F  0.0  F  F  F  'specific humidity'                           '1'       0.00     100.00
+ t  pCO2      03  03  01  278.0E-06  t  0.1  f  t  F  'carbon dioxide (CO2) partial pressure'       'atm'     0.00       1.00
+ t  pCO2_13C  04  03  11  -6.50      t  0.1  f  t  F  'd13C CO2'                                    'o/oo'   -9.99E+2    9.99E+2
+ t  pCO2_14C  05  03  12  0.0        t  0.1  f  t  F  'd14C CO2'                                    'o/oo'   -9.99E+5    9.99E+2
+ t  pO2       06  06  01  0.2095     F  1.0  F  F  f  'oxygen (O2) partial pressure'                'atm'     0.00       1.00
+ F  pO2_18O   07  06  13  0.0        F  1.0  F  F  F  'd18O O2'                                     'o/oo'   -9.99E+2    9.99E+2
+ F  pN2       08  08  01  0.7808     F  1.0  F  F  F  'nitrogen (N2) partial pressure'              'atm'     0.00       1.00
+ F  pN2_15N   09  08  14  0.0        F  1.0  F  F  F  'd15N N2'                                     'o/oo'   -9.99E+2    9.99E+2
+ F  pCH4      10  10  01  0.0        F  1.0  F  F  F  'methane (CH4) partial pressure'              'atm'    0.00        1.00
+ F  pCH4_13C  11  10  11  0.0        F  1.0  F  F  F  'd13C CH4'                                    'o/oo'   -9.99E+2    9.99E+2
+ F  pCH4_14C  12  10  12  0.0        F  1.0  F  F  F  'd14C CH4'                                    'o/oo'   -9.99E+5    9.99E+2
+ F  pSF6      13  13  01  0.0        F  1.0  F  F  F  'sulphur hexafloride (SF6) partial pressure'  'atm'     0.00       1.00
+ F  pN2O      14  14  01  0.0        F  1.0  F  F  F  'nitrous oxide (N2O) partial pressure'        'atm'     0.00       1.00
+ F  pN2O_15N  15  14  14  0.0        F  1.0  F  F  F  'd15N N2O'                                    'o/oo'   -9.99E+2    9.99E+2
+ f  pH2S      16  16  01  0.0        F  1.0  F  F  F  'hydrogen sulphide (H2S) partial pressure'    'atm'     0.00       1.00
+ F  pH2S_34S  17  16  15  0.0        F  1.0  F  F  F  'd32S of H2S'                                 'o/oo'   -9.99E+2    9.99E+2
+ t  pCFC11    18  18  01  0.0        t  0.1  F  F  F  'CFC-11 partial pressure'                     'atm'     0.00       1.00
+ t  pCFC12    19  19  01  0.0        t  0.1  F  F  F  'CFC-12 partial pressure'                     'atm'     0.00       1.00
+-END-OF-DATA-
+
+ /\ /\        /\  /\  /\  /\         /\ /\   /\ /\ /\ /\                                            /\       /\        /\
+ 01 02        03  04  05  06         07 08   09 10 11 12                                            13       14        15
+
+DATA FORMAT AND ORDER:
+
+COLUMN #01: include tracer? [DATA FORMAT: 'T'/'F' ('t'/'f')]
+COLUMN #02: tracer variable name [MAXIMUM STRING LENGTH = 16 CHARACTERS]
+COLUMN #03: tracer variable identifier [DO NOT ADJUST]
+COLUMN #04: tracer variable dependencies [DO NOT ADJUST]
+COLUMN #05: tracer variable type [DO NOT ADJUST]
+COLUMN #06: default (initial) value [DATA FORMAT: real]
+COLUMN #07: include restoring forcing of tracer? [DATA FORMAT: 'T'/'F' ('t'/'f')]
+COLUMN #08: time constant of restoring forcing (years) [DATA FORMAT: real]
+COLUMN #09: include flux forcing of tracer? [DATA FORMAT: 'T'/'F' ('t'/'f')]
+COLUMN #10: scale flux forcing of tracer? [DATA FORMAT: 'T'/'F' ('t'/'f')]
+COLUMN #11: force ocean surface in equilibrium with atmosphere? (needs ocean restoring forcing set) [DATA FORMAT: 'T'/'F' ('t'/'f')]
+COLUMN #13: tracer variable description [MAXIMUM STRING LENGTH = 128 CHARACTERS]
+COLUMN #14: tracer units [MAXIMUM STRING LENGTH = 12 CHARACTERS]
+COLUMN #15: min tracer value
+COLUMN #16: max tracer value

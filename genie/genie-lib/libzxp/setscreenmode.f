@@ -1,0 +1,2 @@
+      subroutine setscreenmode
+      end

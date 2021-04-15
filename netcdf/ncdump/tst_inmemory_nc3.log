@@ -1,0 +1,5 @@
+Testing small
+Testing ref_tst_nans
+Testing ref_tst_utf8
+*** PASS all tests
+PASS tst_inmemory_nc3.sh (exit status: 0)

@@ -1,0 +1,3 @@
+*** testing proper elatefill return...ok.
+*** Tests successful!
+PASS tst_global_fillval (exit status: 0)

@@ -1,0 +1,19 @@
+      SUBROUTINE XHATCH(Z,X,Y,MD,M,N,CL1,CL2, MODE)
+C
+      INTEGER MD
+      INTEGER MODE
+      INTEGER M
+      INTEGER N
+      REAL CL1
+      REAL CL2
+C
+      REAL X(MD,*),Y(MD,*),Z(MD,*)
+      IF( MODE.EQ.0) THEN
+      CALL XHATCX(Z,X,Y,MD,M,N,CL1,CL2)
+      CALL XHATCY(Z,X,Y,MD,M,N,CL1,CL2)
+      RETURN
+      ENDIF
+      IF( MODE.EQ.1)   CALL XHATCX(Z,X,Y,MD,M,N,CL1,CL2)
+      IF( MODE.EQ.-1)  CALL XHATCY(Z,X,Y,MD,M,N,CL1,CL2)
+      RETURN
+      END

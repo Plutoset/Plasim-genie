@@ -1,0 +1,2 @@
+      subroutine rtxcol
+      end

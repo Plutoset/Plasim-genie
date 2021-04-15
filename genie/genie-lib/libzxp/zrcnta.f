@@ -1,0 +1,11 @@
+      SUBROUTINE ZRCNTA(ZG,Z,MD,MG,JG,CVL,NC)
+      INTEGER MD,MG,JG,NC
+      REAL ZG,CV,CVL
+      DIMENSION ZG(MD,*),Z(MD,*),CVL(*)
+      INTEGER k
+      COMPLEX   Z
+      DO 100 K=1,NC
+      CV=CVL(K)
+  100 CALL ZRCNTR(ZG,Z,MD,MG,JG,CV)
+      RETURN
+      END

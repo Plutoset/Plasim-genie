@@ -1,0 +1,5 @@
+      real tempzero
+      logical coldstart_grid,coldstart_gmsp
+      COMMON/t42/
+     :     tempzero,
+     :     coldstart_grid,coldstart_gmsp

@@ -1,0 +1,1141 @@
+\documentclass[a4paper]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Setup external packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[round]{natbib}
+\usepackage{amsmath}
+\usepackage{graphicx}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Setup external packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\textwidth}{6.0in}
+\setlength{\textheight}{9.0in}
+\setlength{\topmargin}{0.1in}
+\setlength{\oddsidemargin}{0.0in}
+\newcommand{\gn}{GENIE}
+\newcommand{\gnl}{GENIE-land}
+\title{\gnl\ documentation version 0.1}
+\author{Phil P. Harris}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+\section{Introduction}\label{s:intro}
+This document is the equations that make up the forst version of the
+land-surface scheme in \gn.  This scheme is based on Pete Cox's
+Interactive Vegetation Model (IVM), which is itself a (very) reduced
+version of the tiled UM land-surface scheme MOSES2.  As a result, some
+of this text has been grafted from Hadley Centre Technial Notes 24
+(TRIFFID) and 30 (MOSES2).
+
+The surface scheme is forced with lowest atmospheric level variables
+given in Table~\ref{t:force}.
+\begin{table}[hb]
+\begin{center}
+\begin{tabular}{llll}\hline
+Variable & Symbol & Units \\ \hline
+Downward solar radiation    & $S_d$ & W~m$^{-2}$ \\
+Downward longwave radiation & $L_d$ & W~m$^{-2}$ \\
+Air temperature             & $T_1$ & K \\
+Air humidity                & $q_1$ & kg~kg$^{-1}$ \\
+Air pressure                & $p_1$ & Pa \\
+Wind speed                  & $u_1$ & m~s$^{-1}$ \\
+Rainfall rate               & $P_r$ & kg~m$^{-2}$~s$^{-1}$ \\
+Snowfall rate               & $P_s$ & kg~m$^{-2}$~s$^{-1}$ \\
+CO$_2$ concentration        & $p_{CO_2}$ & kg~m$^{-2}$ \\ \hline
+\end{tabular}
+\caption{Gridbox mean atmospheric variables used to force the land scheme.}\label{t:force}
+\end{center}
+\end{table}
+In each gridbox, the energy, water and carbon balance is calculated
+for seven tile types (broadleaf tree, needleleaf tree, C3 grass, C4
+grass, shrub, bare soil, land ice) under the same forcing. Gridbox
+means (GBMs) of a particular quantity are calculated by weighting tile
+values by the fractional coverage of each tile in the gridbox.
+e.g. for a quantity $Q$ the GBM is calculated as,
+\begin{equation}
+  \left< Q \right> = \sum_{i=1}^{ntiles} f_i Q_i, \label{e:gbm}
+\end{equation}
+where $f_i$ is the fraction of the gridbox covered by tile type $i$.
+For much of this document the subscript $i$ is not explicitly written
+to make the equations easier to read.  Unless stated otherwise, assume
+that an equation is solved for each tile separately.
+
+\section{Radiation}\label{s:radia}
+\begin{table}[b]
+\begin{center}
+\begin{tabular}{lccll}\hline
+                       & Symbol        & Units                & Bare soil & Land ice \\ \hline
+Snow-free albedo       & $\alpha_{sf}$ & --                   & 0.20      & 0.75 \\
+Snow-covered albedo    & $\alpha_{sc}$ & --                   & 0.80      & 0.80 \\
+Roughness length       & $z_0$         & m                    & 0.03      & 0.0001 \\
+Specific heat capacity & $C_s$         & MJ~K$^{-1}$~m$^{-3}$ & 3.3       & 0.63 \\
+Thermal conductivity   & $k_s$         & W~m$^{-1}$~K$^{-1}$  & 0.23      & 0.27 \\ \hline
+\end{tabular}
+\caption{Albedo and thermal parameters for non-vegetation
+tiles.}\label{t:nonveg}
+\end{center}
+\end{table}
+
+\begin{figure}
+\begin{center}
+\resizebox{\textwidth}{!}{%
+\includegraphics{plots/albedo_lai.eps}%
+\includegraphics{plots/albedo_temp.eps}%
+\includegraphics{plots/albedo_snow.eps}}
+\caption{Albedo of broadleaf tree tiles.  (a)  Snow-free and
+  snow-covered albedo as a function of leaf area index, (b) The effect
+  of snow aging on snow-covered albedo as a function of tile surface
+  temperature, (c) tile albedo as a function of lying snow mass
+  (neglecting snow aging effect).}\label{f:alb.bt}
+\end{center}
+\end{figure}
+
+Snow-free and cold deep snow albedos for non-vegetated tiles
+(i.e. bare soil) are given in Table~\ref{t:nonveg}.  For vegetation
+tiles with a leaf area index (LAI) of $L$, snow-free and deep snow
+albedos are calculated as,
+\begin{eqnarray}
+  \alpha_{sf} &=& (1 - f_r)\, \alpha_{sf}^{soil} + f_r \, \alpha_v
+  \label{e:a0} \\
+  \alpha_{sc} &=& (1 - f_r) \, \alpha_v^{smin} + f_r \, \alpha_v^{smax} \label{e:acds}
+\end{eqnarray}
+where,
+\begin{equation}
+  f_r = 1- e^{-k\, L} \label{e:fr}
+\end{equation}
+is the radiative fraction and $k$ is 0.5.  Values of the vegetation
+specific parameters $\alpha_v$, $\alpha_v^{smin}$, and
+$\alpha_v^{smax}$ are given in Table~\ref{t:veg}.  Snow aging is
+represented by reducing the snow albedo when surface temperature,
+$T_*$ is greater than $T_m$:
+\begin{equation}
+  \alpha_s = \left\{
+          \begin{array}{lc} 
+               \alpha_{sc} & T_* < T_m \\
+               \alpha_{sc} + \frac{0.3}{\delta T} \, (\alpha_{sf} -
+               \alpha_{sc})(T_* - T_m) & T_m \leq T_* \leq T_m +
+               \delta T \\
+                0.7\alpha_{sc} + 0.3\alpha_{sf} & T_* > T_m + \delta T
+          \end{array}\right. \label{e:als}
+\end{equation}
+\begin{table}
+\caption{There will be an albedo table here.}\label{t:veg}
+\end{table}
+For a tile in a gridbox with snow mass $S$, the tile albedo
+($\alpha_i$) is calculated from,
+\begin{equation}
+  \alpha_i = \alpha_{sf} + (\alpha_s-\alpha_{sf})\left( 1-e^{-0.2S}\right) \label{e:al}
+\end{equation}
+This is shown for a broadleaf tree tile in Fig.~\ref{f:alb.bt}c, in
+which the effect of snow cover on albedo saturates around
+30~kg~m$^{-2}$ snow water equivalent.  Gridbox mean albedos for output
+to the atmosphere model are calculated from tile albedos using a
+linear weighting by tile fraction (see Eqn.~\eqref{e:gbm}.
+
+Net solar radiation calculated by the atmosphere model is
+disaggregated into tile net solar radiation using the tile
+and gridbox mean albedos from the previous timestep:
+\begin{equation}
+  S_{Ni} = S_N \left(\frac{1-\alpha_i}{1-\alpha}\right) \label{e:sn}
+\end{equation}
+
+
+Terrestrial longwave radiation is calculated in the atmosphere module
+from the effective radiative surface temperature given by,
+\begin{equation}
+  T_R = \left(\sum_i f_i T_{*i}^4 \right)^{\frac{1}{4}} \label{e:tr}
+\end{equation}
+
+\subsection*{Estimation of PAR}
+{\em These are just notes for now.}  The photosynthesis sub-model is
+forced by the photosynthetically active portion of the incoming solar
+radiation, $I_{par}$, which is approximately half of the total
+downward solar radiation flux, $S_d$.  As the atmospheric models in
+GENIE have no diurnal cycle of solar radiation the input $S_d$ is a
+daily mean value, so the corresponding $I_{par}$ is also a daily mean
+value, $\overline{I_{par}}$.  This is insufficient information to
+distinguish between long, low maximum $I_{par}$ and short, high
+maximum $I_{par}$ days with the same $\overline{I_{par}}$.  This model
+uses an additional variable daylength fraction, $D$ (dimensionless),
+the fraction of 24 hours when the sun is above the horizon for the
+extra information.  Total daily photosynthesis is approximated as a
+``square-wave'' such that,
+\begin{equation}
+  \int_{-\pi}^{\pi} A(I_{par}(Z)) \, dZ \approx A(I_{par}(0)) \, D
+\end{equation}
+Whereas the maximum daily $I_{par}$, $I_{par}(0)$, is approximated as
+a ``triangle'' such that,
+\begin{equation}
+  I_{par}(0) \approx \frac{2 \, \overline{I_{par}}}{D^{\prime}}
+\end{equation}
+Where $D^{\prime} = \mbox{max}(D, 0.1)$ is used to prevent
+unrealistically high $I_{par}(0)$ values as $D \rightarrow 0$.  Note
+that both the total $A$ and $I_{par}(0)$ will usually be overestimated
+by these approximations.
+
+\section{Surface fluxes}\label{s:surf}
+\subsection{Penman-Monteith derivation}\label{s:surf.penmon}
+The surface energy partition for land uses a Penman-Monteith
+formulation which relates latent, sensible and ground heat fluxes
+directly to the surface radiative energy balance.  Net radiation for a
+single tile is calculated as,
+\begin{equation}
+  R_n = S_{Ni} + L_N \label{e:radbal}
+\end{equation}
+And this is partitioned into surface heat fluxes as,
+\begin{equation}
+  R_n = \lambda E + H + G + S \label{e:enbal}
+\end{equation}
+The fluxes $E$, $H$ and $G$ are expressed using bulk aerodynamic
+formulae in terms of the temperature or humidity difference between
+the surface and the first atmospheric layer or the sub-surface soil
+layer:
+\begin{eqnarray}
+  E &=& \frac{\psi \rho_*}{r_a} \left[ q_*^s - q_1 \right]
+  \label{e:E}\\
+  H &=& \frac{\rho_* c_p}{r_a} \left[ T_* - T_1 \right] \label{e:H} \\
+  G &=& A_s \left[ T_* - T_s \right] \label{e:G} \\
+  S &=& \frac{C_v}{\Delta t} \left[ T_*^{n+1} - T_* \right] \label{e:S}
+\end{eqnarray}
+where,
+\begin{eqnarray}
+  \psi &=& \frac{r_a}{r_a+r_s} \label{e:psi}\\
+  \rho_* &=& \frac{p_*}{R T_1} \label{e:rho}\\
+  A_s &=& \frac{2 k_s}{\Delta z} \label{e:as}
+\end{eqnarray}
+The thermal inertia of land is provided by a single soil layer, which
+has a thermal conductivity $k_s$ and heat capacity $C_s$.  At present,
+$k_s$ is not modified by lying snow, when the conductivity of snow is
+typically one-third that of soil.  Equations~\eqref{e:radbal}
+to~\eqref{e:S} provide six equations for seven unknowns ($R_n$, $T_*$,
+$E$, $H$, $G$, $q_*^s$, $T_*^{n+1}$).  A solution is obtained by
+linearising the equations in $T_*$ by Taylor expansion of the
+non-linear outgoing long-wave and saturated surface humidity about the
+lowest atmospheric temperature, $T_1$ to yield,
+\begin{eqnarray}
+  \sigma T_*^4 &\approx& \sigma T_1^4 + 4\sigma T_1^3(T_*-T_1)
+  \label{e:LWlin} \\
+  q_*^s &\approx& q_1^s + \alpha_1 \left( T_*-T_1 \right)
+  \label{e:QSlin} 
+\end{eqnarray}
+where $\alpha_1$ is given by the Clausius-Clapeyron equation evaluated
+at $T_1$,
+\begin{equation}
+  \alpha_1 = \left.\frac{\partial q^s}{\partial T} \right|_{T_1}
+  =\frac{\epsilon \, \lambda \, q_1^s}{R \, T_1^2} \label{e:a1}
+\end{equation}
+Substituting Equations~\eqref{e:LWlin} and~\eqref{e:QSlin} into
+Equations~\eqref{e:radbal} and~\eqref{e:E}, and using
+Equations~\eqref{e:enbal}, \eqref{e:H} and \eqref{e:G} the following
+expression for the surface temperature is obtained:
+\begin{eqnarray}
+  T_*^{n+1} &=& \frac{\left[r_a \hat{A} - \lambda \rho \psi \left(
+               \Delta q - \alpha_* T_*^n \right) + \rho c_p T_1 + A_s
+               T_{s1} + \frac{C_v}{\Delta t} T_*^n \right]}
+               {\left[\alpha_* \lambda \rho \psi + r_a \left( \rho c_p +
+               A_s + \frac{C_v}{\Delta t}\right) \right]}\label{e:T*} \\
+  \hat{A} &=& S_{Ni} + L_N \label{e:Ahat} \\
+  \Delta q &=& q^s(T_*^n) - q_1 \label{e:dq}
+%%   T_* &=& T_1 + \left[\frac{r_a \hat{A} - \rho \psi \lambda \Delta q_1}{\rho
+%%   \psi \alpha_1 \lambda + \rho c_p + r_a (4\sigma T_1^3 + A_s)}\right]
+%%   \label{e:T*} \\
+%%   \hat{A} &=& S_N + L_d - \sigma T_1^4 - A_s \left(T_{s1} - T_1\right)
+%%   \label{e:Ahat} \\
+%%   \Delta q_1 &=& q_1^s - q_1 \label{e:dq}
+\end{eqnarray}
+This surface temperature is then used in Equations~\eqref{e:E}
+and~\eqref{e:H} to calculate the latent and sensible heat fluxes
+respectively.  To ensure energy conservation, ground heat flux is
+calculated as the residual of the surface energy balance,
+\begin{equation}
+  G = R_n - \lambda E - H \label{e:G2}
+\end{equation}
+
+\subsection{Aerodynamic and surface resistance}\label{s:surf.aero}
+Roughness length for bare soil is a constant (see
+Table~\ref{t:nonveg}), and for vegetated tiles is calculated as,
+\begin{equation}
+  z_0 = \Delta_{zh} h \label{e:z0}
+\end{equation}
+where $\Delta_{zh}$ is a vegetation specific constant and $h$ is the
+vegetation height.  The exchange coefficient for sensible and latent
+heat fluxes on each tile between the surface and the lowest
+atmospheric level at a height $z_1$ is given by,
+\begin{equation}
+  C_{Hn} = \kappa^2 \left[ \ln\left(\frac{z_1+z_0}{z_0}\right)
+  \ln\left(\frac{z_1+z_0}{0.1 z_0}\right)\right]^{-1} \label{e:chn}
+\end{equation}
+where $\kappa$ is the von Karman constant (0.41).  Aerodynamic
+resistance, $r_a$, is calculated using this as,
+\begin{equation}
+  r_a = \frac{1}{C_{Hn}u_1} \label{e:ga}
+\end{equation}
+where $u_1$ is the non-directional windspeed at $z_1$.
+
+A soil moisture dependent surface resistance for bare soil is given
+by,
+\begin{equation}
+r_{soil} = \min{ \left( 10^6,\frac{r_{s0}}{\beta} \right) }
+%\left\{\begin{array}{lc} 
+%                   \frac{r_{s0}}{\beta} & \beta >
+%                   \frac{r_{s0}}{10^{-6}} \\ 
+%                   10^{-6} & \beta \leq r_{s0}
+%                 \end{array}\right.
+\label{e:rss}
+\end{equation}
+where $r_{s0}$ is 100~s~m$^{-1}$.
+
+Surface resistance for vegetation is linked to net leaf
+photosynthesis, $A$, following \citet{@@}:
+\begin{equation}
+  A = \frac{g_c}{1.6 R T_*}\left( c_c - c_i \right) \label{e:ags}
+\end{equation}
+where $g_c$ is surface conductance (the reciprocal of $r_s$), $R$ is
+the ideal gas constant, and $c_c$ and $c_i$ are the leaf surface and
+internal CO$_2$ partial pressures respectively.  The factor of 1.6
+accounts for the difference between the molecular diffusivities of
+water and carbon dioxide.  Leaf photosynthesis is known to be
+dependent on a number of environmental variables as well as internal
+CO$_2$ concentration, $c_i$:
+\begin{equation}
+  A = A\left(\underbar{X}, c_i\right) \label{e:a}
+\end{equation}
+where $\underbar{X}$ represents a general vector of environmental
+variables.  Equations~\eqref{e:ags} and~\eqref{e:a} contain three
+unknowns: $A$, $g_s$ and $c_i$.  Closure is obtained following the
+method of \citet{Jac94}:
+\begin{equation}
+  \left\{ \frac{c_i - \Gamma}{c_c - \Gamma} \right\} = f_0
+  \left\{ 1-\frac{D_*}{D_c}\right\}
+\label{e:jac}
+\end{equation}
+
+\subsection{Hydrology}\label{s:surf.hyd}
+Canopy interception is neglected from the model, so all precipitation
+reaches the soil surface even if vegetation is present.  All
+precipitation falling as rain infiltrates the soil, and all
+precipitation falling as snow is added to the surface lying snow
+amount.
+
+Before calculating snowmelt the soil temperature is updated using the
+grid-box mean soil heat flux:
+\begin{equation}
+  T_s^i = T_s^{i-1} + \frac{\Delta t \; G}{C_s \Delta z} \label{e:ts}
+\end{equation}
+where the indices $i$ and $i-1$ refer to the current and previous
+timesteps respectively and $C_s$ is the heat capacity of the soil
+(0.33~MJ~K$^{-1}$~m$^{-3}$).  If there is lying snow in the gridbox
+and $T_s$ increases from below to above snow melting temperature,
+$T_m$ (273.15~K), then $T_s$ is set to melting temperature and the
+excess heat flux is used to calculate the rate of snowmelt, $R_m$:
+\begin{equation}
+  R_m = \frac{k_s \Delta z}{\lambda_{f} \Delta t} \left(T_s^i -
+  T_m\right) \label{e:melt}
+\end{equation}
+Where $\lambda_f$ is the latent heat of fusion (0.334~MJ~kg$^{-1}$).
+Note that even if snow is present in a gridbox, the ground heat flux
+is used to heat the soil layer before heating the overlying snow.
+Lying snow is updated from the rates of snowfall, sublimation and
+snowmelt:
+\begin{equation}
+  M_s^i = \max(M_s^{i-1} + \Delta t (P_s - E_{sub} - R_m),0.0) \label{e:Dsnow}
+\end{equation}
+
+Surface and sub-surface runoff rates are calculated using a
+``leaky-bucket'' approach.
+\begin{eqnarray}
+  R_d &=& k_{sat} \left(\frac{M_v}{M_{sat}}
+  \right)^{2b+3} \label{e:drain} \\ 
+  R_s &=& P + M_s - E \label{e:roff}
+\end{eqnarray}
+And the soil moisture store updated using,
+\begin{equation}
+  M_v^i = \max( M_v^{i-1} + \Delta t (P + R_m - E - R_d - R_s), 0.0)
+\end{equation}
+If soil moisture would become negative during the timestep, then $R_d$
+is adjusted to ensure conservation of water.  This means that
+sub-surface runoff can be negative - acting, in some ways, like a
+water table.
+
+\section{Photosynthesis and respiration}\label{s:photo}
+Much of the text in Section~\ref{s:photo} and Section~\ref{s:trif} is
+taken verbatim from Hadley Centre Technial Note 24\footnote{Publically
+available from
+http://www.metoffice.com/research/hadleycentre/pubs/HCTN/HCTN\_24.pdf}.
+
+\subsection{Model Structure} \label{s:photo.stru}
+Stomatal openings are the pathways through which both water and carbon
+dioxide are exchanged between vegetation and the atmosphere.
+Consequently, net leaf photosynthesis, $A$ (mol CO$_{2}$ m$^{-2}$
+s$^{-1}$), and stomatal conductance to water vapour, $g_s$ (m
+$s^{-1}$), are linked through:
+\begin{eqnarray} 
+A &=& \frac{g_s}{1.6 \, R \, T_{*}} \,(c_{c} - c_{i})
+\label{e:A1}
+\end{eqnarray}
+where $R$ is the perfect gas constant, $T_{*}$ (K) is the leaf surface
+temperature, and $c_{c}$ and $c_{i}$ (Pa) are the leaf surface and
+internal CO$_{2}$ partial pressures respectively. The factor of 1.6
+accounts for the different molecular diffusivities of water and carbon
+dioxide. Leaf photosynthesis is known to be dependent on a number of
+environmental variables as well as the internal CO$_{2}$
+concentration, $c_{i}$:
+\begin{eqnarray}
+A &=& A (\vec{X},c_{i})
+\label{e:A2}
+\end{eqnarray} 
+where $\vec{X}$ represents a general vector of environmental
+variables.  Equations \eqref{e:A1} and \eqref{e:A2} contain three
+unknowns; $A$, $g$ and $c_{i}$. The closure suggested by
+\citet{Jac94} is in \gnl\ \citep{Cox98,Cox99}:
+\begin{eqnarray}
+\left\{ \frac{c_{i}-\Gamma}{c_{c}-\Gamma} \right\}
+&=& F_{0} \, \left\{ 1 - \frac{D_{*}}{D_{c}} \right\}
+\label{e:A3}
+\end{eqnarray}
+where $\Gamma$ is the internal partial pressure of CO$_{2}$ at which
+photosynthesis just balances photorespiration ( the ``photorespiration
+compensation point''), $D_{*}$ is the humidity deficit at the leaf
+surface, and $F_{0}$ and $D_{c}$ are vegetation specific parameters
+(see Table~\ref{t:gc}).
+\begin{table}
+\begin{center}
+\begin{tabular}{|ll|l|l|l|l|l|} \hline
+{\bf Parameter}   &{\bf Units}  & {\bf Broadleaf}& {\bf Needleleaf} & {\bf C$_{3}$ Grass} & {\bf C$_{4}$ Grass} & {\bf Shrub} \\
+                  &             & {\bf Tree}     & {\bf Tree}       &&&   \\ \hline
+$n_{l} (0)$       & kg N (kg C)$^{-1}$ & 0.040 & 0.030 & 0.060 & 0.030 & 0.030 \\
+$\sigma_{l}$      & kg C m$^{-2}$ LAI$^{-1}$     & 0.0375& 0.100 & 0.025 & 0.050 & 0.050 \\
+$F_{0}$           &             & 0.875 & 0.875 & 0.900 & 0.800 & 0.900 \\
+$D_{c}$           & kg (kg)$^{-1}$ & 0.090 & 0.060 & 0.100 & 0.075 & 0.100 \\
+$T_{low}$         & $^{\circ}$C & 0     & -5    & 0     & 13    & 0     \\
+$T_{upp}$         & $^{\circ}$C & 36    & 31    & 36    & 45    & 36    \\
+\hline
+\end{tabular}
+\caption{PFT-specific parameters used in the \gnl\ calculation of
+vegetation carbon fluxes. The values for top-leaf nitrogen
+concentration, $n_{l}(0)$, and specific leaf density, $\sigma_{l}$,
+are derived from the survey of \citet{Sch94}, which suggests that
+$n_{l}(0) \, \sigma_{l} = 1.5 \times 10^{-3}$ kg N m$^{-2}$ LAI$^{-1}$
+for broadleaf plants, and $n_{l}(0) \, \sigma_{l} = 3 \times 10^{-3}$
+kg N m$^{-2}$ LAI$^{-1}$ for needleleaf plants.  Values of the maximum
+ratio of internal to external CO$_{2}$, $F_{0}$, and the critical
+humidity deficit, $D_{c}$, are chosen to give realistic maxima and
+humidity dependences for the canopy conductance (see for example,
+\citet{Cox98}).  The lower and upper temperatures for photosynthesis,
+$T_{low}$ and $T_{upp}$ are consistent with the values prescribed by
+\citet{Col91} and \citet{Col92}, except for the introduction of a
+finite lower bound for the C$_{3}$ plants, and the shift of the
+$V_{m}$ curve for needleleaf trees by -5$^{\circ}$C.}
+\label{t:gc}
+\end{center}
+\end{table}
+The leaf photosynthesis models represented by \eqref{e:A2} are based on
+the work of \citet{Col91} and \citet{Col92} for C$_{3}$ and C$_{4}$
+plants respectively. Details of these models are given below.
+However, an additional direct soil moisture dependence is introduced
+as suggested by \citet{Cox98}:
+\begin{eqnarray}
+A &=& A_{p} \, \beta
+\label{e:A4}
+\end{eqnarray}
+where $A_{p}$ is the ``potential'' (non-moisture stressed) rate of net
+photosynthesis as given by the models described below, and $\beta$ is
+the moisture stress factor:
+\begin{equation}
+\beta = \left \{ \begin{array}{lll}
+              1 & \mbox{for $\Theta > \Theta_{c}$} \nonumber  \\ [5mm]
+  \displaystyle{\frac{\Theta-\Theta_{w}}{\Theta_{c}-\Theta_{w}}}
+     & \mbox{for $\Theta_{w} < \Theta \leq \Theta_{c}$} \nonumber \\ [5mm]
+              0 & \mbox{for $\Theta \leq \Theta_{w}$} \
+             \end{array} \right.
+\label{e:A5}
+\end{equation}
+Here, $\Theta_{c}$ and $\Theta_{w}$ are the critical and wilting soil
+moisture concentrations respectively, and $\Theta$ is the mean soil
+moisture concentration in the rootzone.
+
+Equations \eqref{e:A1} to \eqref{e:A5} represent a coupled model of
+stomatal conductance and leaf photosynthesis. Large-scale applications
+require an economical means of scaling the predicted leaf-level fluxes
+up to the canopy scale. The approach of \citet{Sel92ii} is used here,
+in which the primary determinants of photosynthesis, mean incident
+photosynthetically active radiation (PAR), $I_{par}$, and the maximum
+rate of carboxylation of Rubisco, $V_{max}$, are assumed to be
+proportional throughout the plant canopy:
+\begin{eqnarray}
+I_{par}(l) &=& I_{par}(0) \exp\left\{-k \, l \right\} \label{e:A6} \\ 
+V_{max}(l) &=& V_{max}(0) \exp\left\{-k \, l \right\}  \label{e:A7}
+\end{eqnarray}
+where $(l)$ denotes values beneath $l$ leaf layers, $(0)$ denotes
+values at the top of the canopy, and $k=0.5$ is the PAR extinction
+coefficient.  This assumption ensures that the relative importance of
+each of the photosynthesis limiting factors is the same at every depth
+in the canopy. As a consequence it is straightforward to integrate the
+leaf conductance and photosynthesis over the canopy leaf area index,
+$L$, to yield canopy conductance, $g_{c}$, net canopy photosynthesis,
+$A_{c}$, and (non-moisture stressed) canopy dark respiration,
+$R_{dc}$:
+\begin{eqnarray} 
+g_{c} &=& g \, f_{par} \label{e:A8} \\
+A_{c} &=& A \, f_{par} \label{e:A9} \\
+R_{dc} &=& R_{d} \, f_{par} \label{e:A10}
+\end{eqnarray}
+where $g$, $A$ and $R_{d}$ are the conductance, net photosynthesis and
+(non-moisture stressed) dark respiration rate of the top leaf layer
+and
+\begin{eqnarray}
+f_{par} &=& \frac{1-\exp \left\{-k \, L \right\}}{k}
+\label{e:A11}
+\end{eqnarray}
+Gross primary productivity, $\Pi_{G}$, is equivalent to the gross
+canopy photosynthesis:
+\begin{eqnarray}
+\Pi_{G} &=& 0.012 \, \left\{A_{c} + R_{dc} \, \beta\right\} 
+\label{e:A12}
+\end{eqnarray}
+where the factor $0.012$ converts from units of (mol CO$_{2}$ m$^{-2}$
+s$^{-1}$) to (kg C m$^{-2}$ s$^{-1}$), and the second term in the
+brackets is the actual (moisture modified) canopy dark
+respiration. Net primary productivity, $\Pi$ (kg C m$^{-2}$ s$^{-1}$),
+is:
+\begin{eqnarray}
+\Pi &=& \Pi_{G} - R_{p}
+\label{e:A13}
+\end{eqnarray}
+where $R_{p}$ (kg C m$^{-2}$ s$^{-1}$) is the total plant
+respiration. The calculation of $R_{p}$ is described in subsection
+\ref{s:photo.resp}.
+
+\subsection{Leaf Photosynthesis Models} \label{s:photo.leaf}
+The C$_{3}$ and C$_{4}$ photosynthesis models are based on the work of
+\citet{Col91} and \citet{Col92}, as applied by \citet{Sel96}. In both
+cases the rate of gross leaf photosynthesis, $W$ (mol CO$_{2}$
+m$^{-2}$ s$^{-1}$), is calculated in terms of three potentially
+limiting factors:
+\begin{enumerate}
+\item $W_{c}$ represents the rate of gross photosynthesis when
+the photosynthetic enzyme system (RuBP) is limiting:
+\begin{equation}
+W_{c} = \left \{ \begin{array}{lll}
+              \displaystyle{V_{m} \left\{\frac{c_{i} - \Gamma}
+ {c_{i} +K_{c} \, (1+O_{a}/K_{o})}\right\}} & \mbox{for C$_{3}$ plants}  \nonumber \\ [5mm]
+                 V_{m}                    & \mbox{for C$_{4}$ plants}
+             \end{array} \right.
+\end{equation}
+where $V_{m}$ (mol CO$_{2}$ m$^{-2}$ s$^{-1}$) is the maximum rate of
+carboxylation of Rubisco, $O_{a}$ (Pa) is the partial pressure of
+atmospheric oxygen, and $K_{c}$ and $K_{o}$ (Pa) are Michaelis-Menten
+constants for CO$_{2}$ and O$_{2}$ respectively.
+\item $W_{l}$ is the light-limited rate of gross photosynthesis:
+\begin{equation}
+W_{l} = \left \{ \begin{array}{lll}
+              \displaystyle{0.08 \, (1-\omega) \, I_{par} \, \left\{\frac{c_{i} - \Gamma}
+ {c_{i} +2 \Gamma}\right\}} & \mbox{for C$_{3}$ plants}  \nonumber \\ [5mm]
+                 0.04 \, (1-\omega)  \, I_{par}        & \mbox{for C$_{4}$ plants}
+             \end{array} \right.
+\end{equation}
+where $I_{par}$ is the incident photosynthetically active radiation
+(mol PAR photons m$^{-2}$ s$^{-1}$) and $\omega$ is the leaf
+scattering coefficient for PAR. The coefficients of 0.08 and 0.04
+represent the ``quantum efficiency'' of C$_{3}$ and C$_{4}$ plants
+respectively. We follow \citet{Col91} and \citet{Col92} in
+assuming $\omega=0.15$ for C$_{3}$ plants, and $\omega=0.17$ for
+C$_{4}$ plants.
+\item $W_{e}$ is the limitation associated with transport of the
+photosynthetic products for C$_{3}$ plants, but is the PEP-Carboxylase
+limitation for C$_{4}$ plants \citep{Col92}:
+\begin{equation}
+W_{e} = \left \{ \begin{array}{lll}
+                0.5 \, V_{m} & \mbox{for C$_{3}$ plants}  \nonumber \\ [5mm]
+   \displaystyle{2 \times 10^{4} \, V_{m} \, \frac{c_{i}}{p_{*}}}
+                             & \mbox{for C$_{4}$ plants}
+             \end{array} \right.
+\end{equation}
+where $p_{*}$ is the surface air pressure.
+\end{enumerate}
+The actual rate of gross photosynthesis, $W$, is calculated as the
+smoothed minimum of these three limiting rates:
+\begin{eqnarray}
+\beta_{1} W_{p}^{2} - W_{p} \left\{W_{c} + W_{l} \right\} + W_{c} W_{l} &=& 0 \\
+\beta_{2} W_{}^{2} - W_{} \left\{W_{p} + W_{e} \right\} + W_{p} W_{e} &=& 0
+\end{eqnarray}
+where $W_{p}$ is the smoothed minimum of $W_{c}$ and $W_{l}$, and
+$\beta_{1}=0.83$ and $\beta_{2}=0.93$ are ``co-limitation''
+coefficients. The smallest root of each quadratic is selected. Finally
+(non-moisture stressed) net leaf photosynthesis, $A_{p}$, is
+calculated by subtracting the rate of dark respiration, $R_{d}$, from
+the gross photosynthetic rate, $W$:
+\begin{eqnarray}
+A_{p} &=& W - R_{d}
+\end{eqnarray}
+The parameters $R_{d}$, $V_{m}$, $K_{o}$, $K_{c}$ and $\Gamma$ are all
+temperature dependent functions derived from \citet{Col91} for
+C$_{3}$ plants and \citet{Col92} for C$_{4}$ plants:
+\begin{itemize}
+\item $V_{m}$, (mol CO$_{2}$ m$^{-2}$ s$^{-1}$) the maximum rate of
+carboxylation of Rubisco:
+\begin{equation}
+V_{m} = \displaystyle{\frac{V_{max} \, f_{T}(2.0)}
+{\left[1+\exp \left\{0.3\,(T_{c}-T_{upp}) \right\} \right]
+ \left[1+\exp \left\{0.3\,(T_{low}-T_{c}) \right\} \right]}}
+\label{e:Vm}
+\end{equation}
+where $T_{c}$ is the leaf temperature in $^{\circ}$C, $T_{upp}$ and
+$T_{low}$ are PFT-dependent parameters, and $f_{T}$ is the standard
+``Q10'' temperature dependence:
+\begin{eqnarray}
+f_{T}(q_{10}) &=& q_{10}^{0.1 \, (T_{c} - 25)}
+\end{eqnarray}
+The standard photosynthesis models of \citet{Col91} and
+\citet{Col92} assume specific values of $T_{upp}$ and $T_{low}$ for
+C$_{3}$ and C$_{4}$ plants respectively ($T_{low} \rightarrow
+-\infty$, $T_{upp}=36$ $^{\circ}$C for $C_{3}$ plants, and
+$T_{low}=13$ $^{\circ}$C, $T_{upp}=45$ $^{\circ}$C for C$_{4}$
+plants).  However, in order to capture the temperature responses of
+all terrestrial eceosystems, it is necessary to make these parameters
+more generally dependent on PFT (i.e. not just dependent on the
+photosynthetic pathway). Values of the values chosen are shown in
+Table~\ref{t:gc}.
+
+$V_{max}$ (mol CO$_{2}$ m$^{-2}$ s$^{-1}$) is assumed to be linearly
+dependent on the leaf nitrogen concentration, $n_{l}$ (kg N (kg
+C)$^{-1}$):
+\begin{equation}
+V_{max} = \left \{ \begin{array}{lll}
+             0.0008 \, n_{l} & \mbox{for C$_{3}$ plants}  \nonumber \\ [5mm]
+             0.0004 \, n_{l} & \mbox{for C$_{4}$ plants} 
+             \end{array} \right.
+\end{equation}
+The constants of proportionality are derived from \citet{Sch94} by
+assuming that dry matter is 40 \% carbon by mass and that the maximum
+rate of photosynthesis is approximately equal to $0.5 V_{max}$ for
+C$_{3}$ plants and approximately equal to $V_{max}$ for C$_{4}$
+plants.
+\item $\Gamma$, (Pa) the photorespiration compensation point:
+\begin{equation}
+\Gamma = \left \{ \begin{array}{lll}
+  \displaystyle{\frac{O_{a}}{2 \, \tau}} & \mbox{for C$_{3}$ plants}
+                                              \nonumber \\ [5mm]
+              0 & \mbox{for C$_{4}$ plants} 
+             \end{array} \right.
+\end{equation}
+where $\tau$ is the Rubisco specificity for CO$_{2}$ relative to
+O$_{2}$:
+\begin{eqnarray}
+\tau &=& 2600 \, f_{T}(0.57)
+\end{eqnarray}
+\item $K_{c}$ and $K_{o}$ (Pa), Michaelis-Menten constants for
+CO$_{2}$ and O$_{2}$:
+\begin{eqnarray}
+K_{c} &=& 30 \, f_{T}(2.1) \\
+K_{o} &=& 3 \times 10^{4} \, f_{T}(1.2)
+\end{eqnarray}
+\item The rate of dark respiration, $R_d$ (mol CO$_{2}$ m$^{-2}$
+s$^{-1}$) is also assumed to have a ``Q10'' temperature dependence,
+with a constant of proportionality which depends on $V_{max}$ (i.e.
+leaf nitrogen concentration):
+\begin{equation}
+R_{d} = \left \{ \begin{array}{lll}
+                0.015 \, V_{max} \, f_{T}(2.0) & \mbox{for C$_{3}$ plants}  \nonumber \\ [5mm]
+                0.025 \, V_{max} \, f_{T}(2.0) & \mbox{for C$_{4}$ plants}  
+             \end{array} \right.
+\end{equation}
+Note: this differs from the dark respiration rate used by \citet{Cox98}
+and \citet{Cox99}, which was taken to be directly proportional to
+$V_{m}$ as given by \eqref{e:Vm}.
+\end{itemize}
+
+
+\subsection{Plant Respiration} \label{s:photo.resp}
+Plant respiration, $R_{p}$, is split into maintenance and growth
+respiration:
+\begin{eqnarray}
+R_{p} &=& R_{pm} + R_{pg}
+\end{eqnarray}
+Growth respiration is assumed to be a fixed fraction of the net
+primary productivity, thus:
+\begin{eqnarray}
+R_{pg} &=& r_{g} \, \left\{\Pi_{G} - R_{pm} \right\}
+\end{eqnarray}
+where $\Pi_{G}$ is the gross primary productivity, and the growth
+respiration coefficient is set to $r_{g} = 0.25$ for all plant
+functional types.  Leaf maintenance respiration is equivalent to the
+moisture modified canopy dark respiration, $\beta R_{dc}$, while root
+and stem respiration is assumed to be independent of soil moisture,
+but to have the same dependences on nitrogen content and
+temperature. Thus total maintenance respiration is given by:
+\begin{eqnarray}
+R_{pm} &=& 0.012 \, R_{dc} \left\{\beta + \frac{(N_{r}+N_{s})}{N_{l}} \right\}
+\end{eqnarray}
+where $N_{l}$, $N_{s}$ and $N_{r}$ are the nitrogen contents of leaf,
+stem and root, and the factor of $0.012$ converts from (mol CO$_{2}$
+m$^{-2}$ s$^{-1}$) to (kg C m$^{-2}$ s$^{-1}$). The nitrogen contents
+are given by:
+\begin{eqnarray}
+N_{l} &=& n_{l} \, \sigma_{l} \, L \\
+N_{r} &=& \mu_{rl} \, n_{l} \, {\cal R} \\
+N_{s} &=& \mu_{sl} \, n_{l} \, {\cal S}
+\end{eqnarray}
+where $n_{l}$ is the mean leaf nitrogen concentration (kg N (kg
+C)$^{-1}$), ${\cal R}$ and ${\cal S}$ are the carbon contents of
+respiring root and stem, $L$ is the canopy leaf area index and
+$\sigma_{l}$ (kg C m$^{-2}$) is the specific leaf density. The
+nitrogen concentrations of root and stem are assumed to be fixed
+(functional type dependent) multiples, $\mu_{rl}$ and $\mu_{sl}$, of
+the mean leaf nitrogen concentration. In this study, we assume
+$\mu_{rl}=1.0$ for all PFTS, $\mu_{sl}=0.1$ for woody plants (trees
+and shrubs) and $\mu_{sl}=1.0$ for grasses.  The respiring stemwood is
+calculated using a ``pipemodel'' approach in which live stemwood is
+proportional to leaf area, $L$, and canopy height, $h$:
+\begin{eqnarray}
+{\cal S} &=& \eta_{sl} \, h \, L
+\label{e:A34}
+\end{eqnarray}
+The PFT dependent constants of proportionality, $\eta_{sl}$, are
+approximated from \citet{Fri93}.
+
+\section{Vegetation dynamics (TRIFFID)}\label{s:trif}
+At the core of TRIFFID are first order differential equations
+describing how the vegetation carbon density, $C_v$, and fractional
+coverage, $\nu$, of a given PFT are updated based on the carbon
+balance of that PFT and on competition with other PFTs:
+\begin{eqnarray}
+\frac{d C_{v}}{dt} &=& (1-\lambda) \, \Pi - \Lambda_{l} \label{e:Cv} \\ [10mm]
+C_{v} \, \frac{d \nu}{dt} &=& \lambda \, \Pi \, \nu_{*} \,
+\left\{1 - \sum_{j} c_{ij} \, \nu_j \right\}
+-\gamma_{\nu} \, \nu_{*} \, C_{v} \label{e:nu}
+\end{eqnarray}
+\newline
+where $\nu_{*}=\mbox{MAX} \left\{\nu,0.01 \right\}$, and $\Pi$ is the
+net primary productivity per unit vegetated area of the PFT in
+question (as calculated in Section~\ref{s:photo}).  A fraction $\lambda$
+of this NPP is utilised in increasing the fractional coverage
+(equation \eqref{e:nu}), and the remainder increases the carbon content
+of the existing vegetated area (equation \eqref{e:Cv}).  Equation
+\eqref{e:Cv} therefore represents the local carbon balance as utilised
+in most terrestrial carbon cycle models. TRIFFID is unusual in that
+this is coupled to equation \eqref{e:nu}, which is based on the the
+Lotka-Volterra approach to intraspecies and interspecies competition
+\citep[see for example ]{Sil87}.  Lotka-Volterra equations are used
+frequently in theoretical population dynamics but have not previously
+been applied in a DGVM. In order to do so here, we have replaced the
+usual population state variable of number density with the fractional
+area covered by the PFT, and driven increases in $\nu$ directly with
+NPP (via the first term on the righthandside of equation
+\eqref{e:nu}). Under most circumstances the variable $\nu_*$ is
+identical to the areal fraction, $\nu$, but each PFT is ``seeded'' by
+ensuring that $\nu_*$ never drops below the ``seed fraction'' of 0.01.
+
+The competition coefficients, $c_{ij}$, represent the impact of
+vegetation type ``j'' on the vegetation type of interest (type ``i'',
+although for clarity this subscript has been dropped from other
+variables in equations \eqref{e:Cv} and \eqref{e:nu}). These
+coefficients all lie between zero and unity, so that competition for
+space acts to reduce the growth of $\nu$ that would otherwise occur
+(i.e. it produces density-dependent litter production). Each PFT
+experiences ``intraspecies'' competition, with $c_{ii}=1$ so that
+vegetation fraction is always limited to be less than one. Competition
+between natural PFTs is based on a tree-shrub-grass dominance
+heirachy, with dominant types ``i'' limiting the expansion of
+subdominant types ``j'' ($c_{ji}=1$), but not vice-versa ($c_{ij}=0$).
+However, the tree types (broadleaf and needleleaf) and grass types
+(C$_{3}$ and C$_{4}$) co-compete with competition coefficients
+dependent on their relative heights, $h_{i}$ and $h_{j}$:
+\begin{eqnarray}
+c_{ij}=\frac{1}{1+\exp\left\{20 \, (h_{i}-h_{j})/(h_{i}+h_{j}) \right\}}
+\label{e:cocomp}
+\end{eqnarray}
+The form of this function ensures that the i$^{th}$ PFT dominates when
+it is much taller, and the j$^{th}$ PFT dominates in the opposite
+limit. The factor of 20 was chosen to give co-competition over a
+reasonable range of height differences. Some allowance is made for
+agricultural regions, from which the woody types (i.e. trees and
+grasses) are excluded, and C$_{3}$ and C$_{4}$ grasses are
+reinterpreted as ``crops''.
+
+The $\lambda$ partitioning coefficient in equations \eqref{e:Cv} and
+\eqref{e:nu} is assumed to be piecewise linear in the leaf area index,
+with all of the NPP being used for growth for small LAI values, and
+all the NPP being used for ``spreading'' for large LAI values:
+\begin{eqnarray}
+\lambda &=& \left \{ \begin{array}{lll}
+         1  & \mbox{for $L_b > L_{max}$}   \\ [5mm]
+         \displaystyle{\frac{L_{b~~}-L_{min}}{L_{max}-L_{min}}}
+     & \mbox{for $L_{min} < L_{b} \leq L_{max}$}  \\ [5mm]
+              0 & \mbox{for $L_b \leq L_{min}$}
+             \end{array} \right. 
+\label{e:lambda}
+\end{eqnarray} 
+where $L_{max}$ and $L_{min}$ are parameters describing the maximum
+and minimum leaf area index values for the given plant functional
+type, and $L_b$ is the ``balanced'' LAI which would be reached if the
+plant was in ``full leaf''. The actual LAI depends on $L_b$ and the
+phenological status of the vegetation type, which is updated as a
+function of temperature (see section \ref{s:phenol}).
+
+Changes in vegetation carbon density, $C_v$, are related
+allometrically to changes in the balanced LAI, $L_b$.  First, $C_v$ is
+broken down into leaf, $\cal{L}$, root, $\cal{R}$, and total stem
+carbon, $\cal{W}$:
+\begin{eqnarray}
+C_v &=& {\cal L} + {\cal R} + {\cal W}
+\label{e:Cv2}
+\end{eqnarray}
+Then each of these components are related to $L_b$. Root carbon is set
+equal to leaf carbon, which is itself linear in LAI, and total stem
+carbon is related to $L_b$ by a power law \citep{Enq98}:
+\begin{eqnarray}
+{\cal L} &=& \sigma_l \, L_{b} \label{e:L_LAI}\\ [5mm]
+{\cal R} &=& {\cal L} \label{e:R_L} \\ [5mm]
+{\cal W} &=& a_{wl} \, L_{b}^{5/3} \label{e:W_L}
+\end{eqnarray}
+Here $\sigma_l$ is the specific leaf carbon density (kg C m$^{-2}$
+LAI$^{-1}$) of the vegetation type, and $a_{wl}$ is a PFT-dependent
+parameter in the power law relating LAI and total stem biomass.
+Recent work by \citet{Enq98} suggests that 4/3 (rather than 5/3)
+may be a more appropriate power to use in the next version of TRIFFID.
+Values of canopy height, $h$, are directly from ${\cal W}$ as
+described in section \ref{s:sparm}.
+
+The local litterfall rate, $\Lambda_l$, in equation \eqref{e:Cv},
+consists of contributions from leaf, root and stem carbon:
+\begin{eqnarray}
+\Lambda_l &=&\gamma_{l} \, {\cal L} + \gamma_{r} \, {\cal R} + \gamma_{w} \, {\cal W}
+\label{e:lambdal}
+\end{eqnarray}
+where $\gamma_{l}$, $\gamma_{r}$ and $\gamma_{w}$ are turnover rates
+(yr$^{-1}$) for leaf, root and stem carbon respectively. The leaf
+turnover rate is calculated to be consistent with the phenological
+module as described in section \ref{s:phenol}. The root turnover
+rate is set equal to the minimum leaf turnover rate $\gamma_{0}=0.25$
+for all PFTs, but the total stem turnover is PFT-dependent to reflect
+the different fractions of woody biomass (see Table~\ref{t:TRIF}).
+
+There is an additional litter contribution arising from large-scale
+disturbance which results in loss of vegetated area at the prescribed
+rate $\gamma_{\nu}$, as represented by the last term on the
+righthandside of equation \eqref{e:nu}.
+
+\begin{table}[tb]
+\begin{center}
+\begin{tabular}{|ll|c|c|c|c|c|} \hline
+{\bf Parameter}   &{\bf Units}  & {\bf Broadleaf}& {\bf Needleleaf} & {\bf C$_{3}$ Grass} & {\bf C$_{4}$ Grass} & {\bf Shrub} \\
+                  &             & {\bf Tree}     & {\bf Tree} &&&   \\ \hline
+$a_{wl}$   & kg C m$^{-2}$ & 0.650 & 0.650 & 0.005 & 0.005 & 0.100 \\
+$\eta_{sl}$  & kg C m$^{-3}$ & 0.010 & 0.010 & 0.010 & 0.010 & 0.010 \\
+$\gamma_{\nu}$ & yr$^{-1}$ & 0.004 & 0.004 & 0.100 & 0.100 & 0.030 \\
+$\gamma_{w}$ & yr$^{-1}$   & 0.010 & 0.010 & 0.200& 0.200 & 0.050 \\
+$\gamma_{0}$ & yr$^{-1}$   & 0.250 & 0.250 & 0.250 &0.250 & 0.250 \\
+$L_{max}$    &             &  9 &  9 & 4 & 4 & 4 \\
+$L_{min}$    &             &  3 &  3 & 1 & 1 & 1 \\ \hline 
+\end{tabular}
+\caption{PFT-specific parameters for the dynamic vegetation component
+of TRIFFID.  The values of $a_{wl}$ were chosen to give realistic
+maximum biomass densities from equation~\eqref{e:W_L}. The other
+parameters were chosen largely by model calibration in offline tests,
+but realistic constraints were applied. For example, the large-scale
+disturbance rate, $\gamma_{\nu}$, should yield realistic effective
+plant lifetimes, and the total stemwood turnover rate, $\gamma_{w}$,
+should reflect the differing percentages of wood amongst the PFTs. The
+minimum leaf turnover rate, $\gamma_{0}$, was set uniform across the
+PFTs for simplicity. This value is also used to specify the turnover
+of root biomass.}
+\label{t:TRIF}
+\end{center}
+\end{table}
+
+\subsection{Leaf Phenology} \label{s:phenol}
+Leaf mortality rates, $\gamma_{lm}$, for the tree-types are assumed to
+be a function of temperature, increasing from a minimum value of
+$\gamma_{0}$, as the leaf temperature drops below a threshold value,
+$T_{off}$:
+\begin{equation}
+\gamma_{lm} = \left \{ \begin{array}{lll}
+         \gamma_{0} & \mbox{for $T > T_{off}$}  \\ [5mm]
+   \gamma_{0} \left\{1 + 9 \, (T_{off}-T) \right\}
+     & \mbox{for $T \leq T_{off}$} \\ [5mm]
+             \end{array} \right.
+\label{e:llit}
+\end{equation}
+where $T_{off}=0^{\circ}$C for broadleaf trees and $T_{off}=
+-30^{\circ}$C for needleleaf trees \citep{Woo87}. The factor of
+9 is such that the leaf turnover rate increases by a factor of 10 when
+the temperature drops $1^{\circ}$C below $T_{off}$.  Equation
+\eqref{e:llit} describes how leaf mortality varies with temperature,
+but it is not sufficient to produce realistic phenology.  A new
+variable, $p$, is introduced which describes the phenological status
+of the vegetation:
+\begin{equation}
+L = p \, L_{b}
+\end{equation}
+where $L$ is the actual LAI of the canopy, and $L_{b}$ is the balanced
+(or seasonal maximum) LAI as updated by TRIFFID via the inverse of
+equation \eqref{e:W_L}.  The phenological status, $p$, is updated on a
+daily basis assuming:
+\begin{itemize}
+\item leaves are dropped at a constant absolute rate ($\gamma_{p} \, L_{b}$) 
+when the daily mean value of leaf turnover, as given by equation \eqref{e:llit}, 
+exceeds twice its minimum value
+\item  budburst occurs at the same rate when $\gamma_{lm}$ drops back below this 
+threshold, and ``full leaf'' is approached assymptotically thereafter:
+\end{itemize}
+\begin{equation}
+\frac{dp}{dt} = \left \{ \begin{array}{lll}
+         - \gamma_{p} & \mbox{for $\gamma_{lm} > 2 \,\gamma_{0}$}   \\ [5mm]
+         \gamma_{p} \left\{1 - p \right\} & \mbox{for $\gamma_{lm} \leq \,2 \, \gamma_{0}$}   \\ [5mm]
+             \end{array} \right.
+\label{e:p}
+\end{equation}
+where $\gamma_{p}=20$ yr$^{-1}$. The effective leaf turnover rate,
+$\gamma_l$, as used in equation \eqref{e:lambdal}, must also be updated
+to ensure conservation of carbon when phenological changes are
+occurring:
+\begin{equation}
+\gamma_{l} = \left \{ \begin{array}{lll}
+         - \displaystyle{\frac{dp}{dt}} & \mbox{for $\gamma_{lm} > 2 \,\gamma_{0}$}   \\ [5mm]
+          p \, \gamma_{lm} & \mbox{for $\gamma_{lm} \leq \,2 \, \gamma_{0}$}   \\ [5mm]
+             \end{array} \right.
+\label{e:phenol}
+\end{equation}
+Taken together, equation \eqref{e:llit}, \eqref{e:p} and \eqref{e:phenol}
+amount to a ``chilling-days'' parametrization of leaf phenology.  A
+similar approach may be taken for drought-deciduous phenology and for
+the cold-deciduous phenology of the other (non-tree) PFTs, but neither
+is included in this version of TRIFFID.
+
+\subsection{Soil Carbon}  \label{s:Cs}
+Soil carbon storage, $C_s$, is increased by the total litterfall,
+$\Lambda_c$, and reduced by microbial soil respiration, $R_s$, which
+returns CO$_{2}$ to the atmosphere:
+\begin{eqnarray}
+\frac{d C_{s}}{dt} &=& \Lambda_{c} - R_{s}
+\label{e:Cs}
+\end{eqnarray}
+In each gridbox, the total litterfall is made-up of the area-weighted
+sum of the local litterfall from each PFT (as given by equation
+\eqref{e:lambdal}), along with terms due to the large-scale disturbance
+rate, $\gamma_{\nu}$, and PFT competition:
+\begin{eqnarray}
+\Lambda_{c} = \sum_{i} \nu_{i}
+\left\{\Lambda_{li}+\gamma_{\nu i} \, C_{vi}+
+\Pi_i \, \sum_{j} c_{ij} \, \nu_j \right\} 
+\label{e:Lambda_c}
+\end{eqnarray}
+The competition term (last term on the righthand side of equation
+\eqref{e:Lambda_c}) is derived by imposing carbon conservation on the
+soil-vegetation system as described by equations \eqref{e:Cv},
+\eqref{e:nu} and \eqref{e:Cs}. It implies that the NPP of each PFT will
+be lost entirely as litter once the PFT occupies all of the space
+available to it (i.e. when $\sum_j c_{ij} \nu_j \, = \, 1 $).
+
+The rate of soil respiration, $R_{s}$, is dependent on the soil
+temperature, $T_{s}$, volumetric soil moisture concentration,
+$\Theta$, and soil carbon content, $C_{s}$:
+\begin{eqnarray}
+R_{s} &=& \kappa_{s} \, C_{s} \, f_{\Theta} \, f_{T}
+\end{eqnarray}
+where $\kappa_{s}=5 \times 10^{-9}$ s$^{-1}$ is the specific soil
+respiration rate at 25 $^{\circ}$ C, and $f_{\Theta}$ and $f_{T}$ are
+moisture and temperature dependent functions respectively.  The latter
+is assumed to take the ``Q10'' form:
+\begin{eqnarray}
+f_{T} &=& q_{10}^{0.1 \, (T_{s}-25)}
+\end{eqnarray}
+where $T_{s}$ is the soil temperature in $^{\circ}$C and
+$q_{10}=2.0$. The moisture dependence is based on the model of
+\citet{McG92} in which the respiration rate increases with soil
+moisture content until an optimum value of moisture is
+reached. Thereafter the rate of respiration is reduced with further
+increases in soil moisture. The curves presented by \citet{McG92}
+were approximated by piecewise linear functions in order to minimise
+the number of additional soil variables required.
+\begin{equation}
+f_{\Theta} = \left \{ \begin{array}{lll}
+         1 - 0.8 \, \left\{S - S_{o}\right\} & \mbox{for $S > S_{o}$}   \\ [5mm]
+  0.2 + 0.8 \, \displaystyle{\left\{\frac{S-S_{w}}{S_{o}-S_{w}}\right\}}
+     & \mbox{for $S_{w} < S \leq S_{o}$}  \\ [5mm]
+              0.2 & \mbox{for $S \leq S_{w}$} \
+             \end{array} \right.
+\end{equation}
+Here $S$, $S_{w}$ and $S_{o}$ are the (unfrozen) soil moisture, the
+wilting soil moisture and the optimum soil moisture as a fraction of
+saturation:
+\begin{eqnarray}
+S &=& \frac{\Theta}{\Theta_{s}} \\[3mm]
+S_{w} &=& \frac{\Theta_{w}}{\Theta_{s}} \\ [3mm]
+S_{o} &=& 0.5 \, \left\{1 + S_{w} \right\}
+\end{eqnarray}
+where $\Theta$, $\Theta_{s}$ and $\Theta_{w}$ are the (unfrozen) soil
+moisture concentration, the saturation soil moisture concentration and
+the wilting soil moisture concentration respectively. 
+
+\subsection{Updating Biophysical Parameters} \label{s:sparm}
+In order to close the biophysical feedback loop (see
+Figure~\ref{fig:IVM}), the land-surface parameters required by the
+\gnl\ are recalculated directly from the LAI and canopy height of each
+PFT, each time the vegetation cover is updated.  Values of canopy
+height, $h$, are derived by assuming a fixed ratio, $a_{ws}$, of total
+stem carbon, ${\cal W}$, to respiring stem carbon, ${\cal S}$:
+\begin{eqnarray}
+{\cal W} &=& a_{ws} \, {\cal S}
+\end{eqnarray}
+where we assume $a_{ws}=10.0$ for woody plants and $a_{ws}=1.0$ for
+grasses \citep{Fri93}).  Combining with equations \eqref{e:W_L} and
+\eqref{e:A34} enables canopy height to be diagnosed directly from the
+total stem biomass:
+\begin{eqnarray}
+h &=& \frac{{\cal W}}{a_{ws} \, \eta_{sl}} \, \left\{\frac{a_{wl}}{{\cal W}}\right\}^{1/b_{wl}}
+\end{eqnarray}
+The aerodynamic roughness lengths, which are used by \gnl\ to
+calculate surface-atmosphere fluxes of heat, water, momentum and
+CO$_{2}$, are assumed to be directly proportional to this canopy
+height:
+\begin{equation}
+z_0 = \left \{ \begin{array}{lll}
+         0.05 \, h & \mbox{for trees}   \\ [2mm] 
+         0.10 \, h & \mbox{for grasses and shrubs}  
+\end{array}
+\right.
+\label{e:z0}
+\end{equation}
+where $z_0$ is the roughness length for momentum. The roughness
+lengths for scalars (heat, water and CO$_{2}$) are taken to be 0.1 of
+this value.
+
+The snow-free albedo of each vegetation tile, $\alpha_{sf}$, is
+calculated as a weighted sum of the soil albedo, $\alpha_00$, and a
+prescribed maximum canopy albedo, $\alpha_{0\infty}$:
+\begin{equation}
+\alpha_{sf} = \alpha_{00} \, \exp \left\{-k \, L \right\} + \alpha_{0 \infty} \left(1- \exp \left\{-k \, L \right\} \right)
+\label{e:albedo}
+\end{equation}
+where $L$ is the LAI, $k=0.5$ and $\exp \left\{-k L \right\}$
+represents the fraction of the incident light which passes through to
+the soil surface.  This simple albedo parametrization uses values of
+$\alpha_{0 \infty}=0.1$ for tree types, and $\alpha_{0 \infty}=0.2$
+for grasses and shrubs. The soil albedo is a geographically varying
+field derived from the dataset of \citet{Wil85}.  A similar equation
+is used to calculate the ``cold deep-snow'' albedo, but here both
+albedo parameters are PFT-dependent. We assume maximum snow albedos of
+$\alpha_{s0}=0.3$ for trees, and $\alpha_{s0}=0.8$ for shrubs and
+grasses.  The prescribed minimum snow albedos are; $\alpha_{s
+\infty}=0.15$ for the tree types, $\alpha_{s \infty}=0.6$ for grass
+types and $\alpha_{s \infty}=0.4$ for shrubs.  In all cases these
+parameters were chosen to approximate the albedo values used by
+\citet{Cox99}.
+
+%% The canopy catchment capacity, $c_{m}$, which determines the amount of
+%% water which is freely available for evaporation from the surface,
+%% varies linearly with LAI:
+%% \begin{equation}
+%% c_{m} = 0.5 + 0.05 \, L
+%% \label{e:catch}
+%% \end{equation}
+%% where the offset of $0.5$ represents puddling of water on the soil
+%% surface and interception by leafless plants.  The other hydrological
+%% land-surface parameters required by \gnl\ are PFT-dependent, but do
+%% not depend directly on LAI or canopy height in this version. Root
+%% density is taken to fall off exponentially with depth, such that it is
+%% $e^{-2}$ of its surface value at a specified rootdepth (of 3.0m for
+%% broadleaf trees, 1.0m for needleleaf trees and 0.5m for grasses and
+%% shrubs). Roots are assumed to enhance the maximum surface infiltration
+%% rate for water by a factor of 4 for trees, and 2 for the other PFTs.
+
+\subsection{Spin-up Methodology}\label{s:TRIF.spin}
+Soil carbon and forest area have timescales of order 1000 years to
+reach equilibrium which means it is not feasible to carry out this
+spin-up in the fully coupled GCM. However, it is still vital to reach
+a good approximation to the pre-industrial equilibrium. The
+contemporary carbon sink is only a small fraction of the gross carbon
+exchanges between the Earth's surface and the atmosphere, and any
+significant model drift could easily swamp this signal. With this in
+mind, TRIFFID was designed to be usable in both ``equilibrium'' and
+``dynamic'' mode.
+
+This flexibility relies on the numerical design of the model. The
+TRIFFID equations to update the plant fractional coverage and leaf
+area index are written to enable both ``explicit'' and ``implicit''
+timestepping. Thus for example, the dynamical equation for leaf area
+index, $L$, can be represented by:
+\begin{eqnarray}
+\frac{d L}{dt} = F(L)
+\end{eqnarray}
+where $F$ is a non-linear function of $L$. An explicit scheme uses the
+beginning-of-timestep value, $L_{n}$, to calculate $F$, whilst a fully
+implicit scheme uses the end-of-timestep value, $L_{n+1}$. In general
+the update equation may be written:
+\begin{eqnarray}
+\frac{\Delta L}{\Delta t} = F (L_{n} + f \Delta L)
+\end{eqnarray}
+where $\Delta t$ is the model timestep and $f$ is the ``forward
+timestep weighting factor'', which is 0 for an explicit scheme and 1
+for a fully implicit scheme. Taylor expansion about $L_{n}$ provides
+an algebraic update for $L$:
+\begin{eqnarray}
+\Delta L = \frac{F(L_{n}) \, \Delta t}{1 - f \, F^{'}(L_n) \, \Delta t}
+\label{e:update}
+\end{eqnarray}
+where $F^{'}(L_n)$ is the derivative of $F$ with respect to $L$ at
+$L=L_{n}$.  For $f=1$ and large timesteps this equation reduces to the
+Newton-Raphson algorithm for iteratively approaching the equilibrium
+given by $F(L)=0$.
+
+Each of the TRIFFID prognostic equations is written in the form
+represented by equation \eqref{e:update}, which allows the model to be
+used in two distinct modes.  In ``equilibrium mode'' TRIFFID is
+coupled asynchronously to the atmospheric model, with accumulated
+carbon fluxes passed from \gnl\ typically every 5 or 10 years.  On
+each TRIFFID call, the vegetation and soil variables are updated
+iteratively using an implicit scheme ($f=1$) with a long internal
+timestep (10,000 years by default). Offline tests have shown that this
+approach is very effective in producing equilibrium states for the
+slowest variables (e.g. soil carbon and forest cover).  In ``dynamic
+mode'', equation \eqref{e:update} is used with $f=0$ and a timestep
+equal to the TRIFFID-GCM coupling period (typically 10 days).
+
+Although the equilibrium mode is effective at bringing the slower
+components to equilibrium, it is often necessary to carry-out a
+subsequent dynamical TRIFFID run so as to allow the faster varying
+components (such as grasses) to come into equilibrium with the
+seasonally varying climate. During the pre-industrial spin-up of the
+HadCM3LC coupled climate-carbon cycle model, \citet{Cox00} completed a
+60 year GCM run with TRIFFID in equilibrium mode (5 year coupling
+period) and followed this by a GCM simulation of 90 years with TRIFFID
+in its dynamical mode (10 day coupling period). This was necessary to
+meet the rather stringent requirements of net carbon balance set to
+ensure that the current carbon sink was not swamped by model
+drift. For many other purposes (such as simulations of
+palaeoclimate-vegetation interactions) much shorter simulations should
+suffice (e.g. 20 years in equilibrium mode followed by 10 years in
+dynamical mode).
+
+\section{Coupling}\label{s:coup}
+\subsection{Coupling with GOLDSTEIN ocean}\label{s:coup.gold}
+The land and ocean only interact directly through freshwater runoff
+from land (see Section~\ref{s:} for details of calculation).  Runoff
+from each land point is routed instantaneously to the ocean using an
+input field of runoff destinations (specified as ocean points) on the
+atmospheric grid (typically either IGCM3 or GOLDSTEIN) with mass
+conserving regridding done in {\em genie.F}.  This runoff mask is
+derived offline from the model from TRIP $1^{\circ} \times\ 1^{\circ}$
+present-day observed river routing.  Example present-day runoff masks
+are provided for use with the EMBM and IGCM atmosphere models.
+
+\subsection{Coupling with EMBM atmosphere}\label{s:coup.embm}
+\subsection{Coupling with IGCM3 atmosphere}\label{s:coup.igcm}
+\subsection{Coupling with genie-fixedatmos atmosphere}\label{s:coup.fixatm}
+\subsection{Coupling with GLIMMER ice-sheets}\label{s:coup.glim}
+\subsection{Coupling with ATCHEM biogeochemistry}\label{s:coup.chem}
+
+\section{Sample results}\label{s:result}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% REFERENCES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\addcontentsline{toc}{part}{\protect References}
+\renewcommand{\bibname}{References}
+\bibliographystyle{plainnat}
+\bibliography{genie_land_refs}
+\end{document}

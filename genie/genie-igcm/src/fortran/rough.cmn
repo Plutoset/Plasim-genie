@@ -1,0 +1,2 @@
+      REAL rough
+      COMMON/rough/rough(igc,jg)

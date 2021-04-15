@@ -1,0 +1,51 @@
+! Setup commands
+ CANCEL MODE VERIFY
+ CANCEL DATA/ALL
+ SET WINDOW/ASPECT=1.2
+ DEFINE VIEWPORT/xlim=0.0,0.5/ylim=0.67,1.00 tl
+ DEFINE VIEWPORT/xlim=0.5,1.0/ylim=0.67,1.00 tr
+ DEFINE VIEWPORT/xlim=0.0,0.5/ylim=0.33,0.66 ml
+ DEFINE VIEWPORT/xlim=0.5,1.0/ylim=0.33,0.66 mr
+ DEFINE VIEWPORT/xlim=0.0,0.5/ylim=0.00,0.33 bl
+ DEFINE VIEWPORT/xlim=0.5,1.0/ylim=0.00,0.33 br
+
+ USE "/users/global/ppha/genie_cvs/genie/results/genie_eb_go_gs/embm/embm_spn_da_4500_00.nc"
+ DEFINE GRID/LIKE=landmask[D=1] atm_grid
+
+ FILE/VAR=frac_bt/GRID=atm_grid/COLUMNS=36/FORMAT=(36E15.5) pft_frac.bt.out
+ LET frac_bt_lsm = frac_bt
+ SET VIEWPORT tl
+ SHADE/LEVEL=(0.11,1.01,0.1) frac_bt_lsm ; GO land
+
+
+ FILE/VAR=frac_nt/GRID=atm_grid/COLUMNS=36/FORMAT=(36E15.5) pft_frac.nt.out
+ LET frac_nt_lsm = frac_nt
+ SET VIEWPORT tr
+ SHADE/LEVEL=(0.11,1.01,0.1) frac_nt_lsm ; GO land
+
+ FILE/VAR=frac_c3/GRID=atm_grid/COLUMNS=36/FORMAT=(36E15.5) pft_frac.c3.out
+ LET frac_c3_lsm = frac_c3
+ SET VIEWPORT ml
+ SHADE/LEVEL=(0.11,1.01,0.1) frac_c3_lsm ; GO land
+
+ FILE/VAR=frac_c4/GRID=atm_grid/COLUMNS=36/FORMAT=(36E15.5) pft_frac.c4.out
+ LET frac_c4_lsm = frac_c4
+ SET VIEWPORT mr
+ SHADE/LEVEL=(0.11,1.01,0.1) frac_c4_lsm ; GO land
+
+ FILE/VAR=frac_sh/GRID=atm_grid/COLUMNS=36/FORMAT=(36E15.5) pft_frac.sh.out
+ LET frac_sh_lsm = frac_sh
+ SET VIEWPORT br
+ SHADE/LEVEL=(0.11,1.01,0.1) frac_sh_lsm ; GO land
+
+ FILE/VAR=frac_bs/GRID=atm_grid/COLUMNS=36/FORMAT=(36E15.5) pft_frac.bs.out
+ LET frac_bs_lsm = frac_bs
+ SET VIEWPORT bl
+ SHADE/LEVEL=(0.11,1.01,0.1) frac_bs_lsm ; GO land
+
+ FILE/VAR=frac_ice/GRID=atm_grid/COLUMNS=36/FORMAT=(36E15.5) pft_frac.ice.out
+ LET frac_ice_lsm = frac_ice
+ SET VIEWPORT br
+ SHADE/LEVEL=(0.11,1.01,0.1) frac_ice_lsm ; GO land
+
+! SAVE/FILE="tile_fracs.nc" frac_bt_lsm[D=2],frac_nt_lsm[D=3],frac_c3_lsm[D=4],frac_c4_lsm[D=5],frac_sh_lsm[D=6],frac_bs_lsm[D=7],frac_ice_lsm[D=8]

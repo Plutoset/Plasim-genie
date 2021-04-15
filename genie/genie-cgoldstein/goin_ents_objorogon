@@ -1,0 +1,24 @@
+100000 100000 100000 10000 10000 
+n                        
+100   5                  
+20 20 0.90 1.948523998260498     
+9017.4130859375 2.306408532604109e-05      
+2.498753786087036                      
+2289657.5 1662080.375 1.754039764404297 0.0005213320255279541
+0.6806960105895996 0.0 0.6257511973381042 0.6257511973381042
+2.0 0.0      
+co2 info:
+0 0 0                    time-varying prescribed co2? (0/1), nco2, co2steps
+dummyfilename
+896.2147827148438     
+0. 0. 0.             
+-0.02581767439842224 0.1463001549243927 0.1549060463905334    
+tst/001    
+tst/001.avg  
+orography file info:
+0 0 0                    time-varying orography? (0/1), norog, orogsteps
+../genie-simpleland/data/orography.dat
+icemask file info:
+0 0 0                    time-varying landicemask? (0/1), nlice, licesteps
+../genie-simpleland/data/icemask.dat
+0.8675305247306824 3.981284856796265

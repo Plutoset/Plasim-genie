@@ -1,0 +1,263 @@
+<job>
+  <vars>
+    <var name="EXPID">ensemble_Aug08_def</var><!-- ensemble "control run" modified to work on trunk (i.e. without several code modifications, so won't give the same results)-->
+  </vars>
+  <config>
+    <model name="embm"/>
+    <model name="goldstein"/>
+    <model name="goldsteinseaice"/>
+    <model name="atchem"/>
+    <model name="biogem"/>
+    <model name="ents"/>
+  </config>
+  <parameters>
+    <control>
+      <!-- main -->
+      <param name="write_flag_atm">.false.</param>
+      <param name="ksic_loop">5</param>
+      <param name="koverall_total">25500</param><!-- 51 years, actually was 2500500 or 5001 years-->
+      <param name="genie_timestep">63115.2</param>
+      <param name="write_flag_sic">.false.</param>
+      <param name="kocn_loop">5</param>
+      <param name="dt_write">2500</param>
+      <param name="lgraphics">.false.</param>
+      <!-- gem -->
+      <paramArray name="atm_select">
+	<param index="3">.true.</param><!-- CO2 -->
+	<param index="4">.true.</param><!-- CO2_13C -->
+	<param index="5">.true.</param><!-- CO2_14C -->
+	<param index="6">.true.</param><!-- O2 -->
+        <param index="13">.false.</param><!-- SF6 (YELLOW) -->
+      </paramArray>
+      <paramArray name="ocn_select">
+	<param index="3">.true.</param><!-- DIC -->
+	<param index="4">.true.</param><!-- DIC_13C -->
+	<param index="5">.true.</param><!-- DIC_14C -->
+	<param index="8">.true.</param><!-- PO4 -->
+        <param index="9">.false.</param><!-- Fe (diss) -->
+	<param index="10">.true.</param><!-- O2 -->
+	<param index="12">.true.</param><!-- ALK -->
+	<param index="13">.false.</param><!-- SiO2 (diss) -->
+	<param index="15">.true.</param><!-- DOM_C -->
+	<param index="16">.true.</param><!-- DOM_C_13C -->
+	<param index="17">.true.</param><!-- DOM_C_14C -->
+	<param index="20">.true.</param><!-- DOM_P -->
+        <param index="21">.false.</param><!-- DOM_Cd -->
+        <param index="22">.false.</param><!-- DOM_Fe -->
+        <param index="23">.false.</param><!-- ligand-bound Fe -->
+        <param index="24">.false.</param><!-- free-ligand (Fe binding) -->
+        <param index="34">.false.</param><!-- Cd (diss) -->
+        <param index="35">.false.</param><!-- Ca (diss) -->
+        <param index="47">.true.</param><!-- SF6 (YELLOW) -->
+        <param index="48">.true.</param><!-- RED -->
+        <param index="49">.true.</param><!-- BLUE -->
+      </paramArray>
+        <paramArray name="sed_select">
+	<param index="3">.true.</param><!-- POC -->
+	<param index="4">.true.</param><!-- POC_13C -->
+	<param index="5">.true.</param><!-- POC_14C -->
+	<param index="8">.true.</param><!-- POP -->
+        <param index="9">.false.</param><!-- POCd -->
+        <param index="10">.false.</param><!-- POFe -->
+        <param index="13">.false.</param><!-- POM scav Fe -->
+	<param index="14">.true.</param><!-- CaCO3 -->
+	<param index="15">.true.</param><!-- CaCO3_13C -->
+	<param index="16">.true.</param><!-- CaCO3_14C -->
+        <param index="18">.false.</param><!-- CaCO3 inc Cd -->
+        <param index="21">.false.</param><!-- CaCO3 scav Fe-->
+	<param index="22">.true.</param><!-- det -->
+        <param index="25">.false.</param><!-- det scav Fe -->
+	<param index="26">.false.</param><!-- opal -->
+        <param index="31">.false.</param><!-- opal scav Fe -->
+	<param index="33">.true.</param><!-- POC_frac2 --> 
+	<param index="34">.true.</param><!-- CaCO3_frac2 -->
+	<param index="35">.true.</param><!-- opal_frac2 -->
+	<param index="36">.true.</param><!-- CaCO3_age -->
+      </paramArray>
+    </control>
+    <model name="embm">
+      <param name="ans">n</param><!--y-->
+      <param name="lin">spn.5</param>
+      <param name="npstp">100000</param>
+      <param name="itstp">100000</param>
+      <param name="ianav">1000</param><!--250000-->
+      <param name="iwstp">1000</param><!--250000-->
+      <param name="world">worjh2</param>
+      <param name="atchem_radfor">y</param>
+      <param name="ents_radfor">y</param>
+      <param name="orbit_radfor">n</param>
+      <param name="netout">n</param>
+      <param name="difflin">0.07</param>
+      <param name="diffwid">1.0</param>
+      <param name="ascout">y</param>
+      <param name="lout">spn</param>
+      <param name="extra1b">0.17</param><!-- 0.17enspar002x1ens -->
+      <param name="extra1c">0.18</param><!-- 0.18enspar002ens -->
+      <param name="scl_fwf">1.0</param><!-- 1.0enspar001ens -->
+      <param name="scf">1.7</param><!-- 1.7enspar004ens -->
+<!--      <param name="oscsob">0.397789</param> 0.397789enspar011ens -->
+<!--      <param name="oscgam">1.352631</param> 1.352631enspar012ens -->
+      <paramArray name="diffamp">
+	<param index="1">2.5e6</param><!-- 2.5e6enspar016ens -->
+	<param index="2">1.5e6</param><!-- 1.5e6enspar017ens -->
+      </paramArray>
+      <paramArray name="betaz">
+	<param index="1">0.06</param>
+	<param index="2">0.14</param>
+      </paramArray>
+      <paramArray name="betam">
+	<param index="1">0.0</param>
+	<param index="2">0.14</param>
+      </paramArray>
+    </model>
+    <model name="goldstein">
+      <param name="ans">n</param><!--y-->
+     <param name="lin">spn.5</param>
+      <param name="npstp">1000</param>
+      <param name="itstp">1000</param>
+      <param name="ianav">1000</param><!--250000-->
+      <param name="iwstp">1000</param><!--250000-->
+      <param name="world">worjh2</param>
+      <param name="tdatafile">worjh2.k1_T.silo</param>
+      <param name="sdatafile">worjh2.k1_S.silo</param>
+      <param name="rel">0.9000000</param>
+      <param name="temp1">0.0</param>
+      <param name="temp0">0.0</param>
+      <param name="adrag">2.939598</param>
+      <paramArray name="diff">
+	<param index="2">1.0e-4</param><!-- 1.0e-04enspar006ens -->
+	<param index="1">4000.0</param>
+      </paramArray>
+      <param name="ascout">y</param>
+      <param name="lout">spn</param>
+      <param name="netout">n</param>
+      <param name="iconv">1</param><!-- 1enspar014ens -->
+      <param name="ieos">1</param><!-- 1enspar018ens -->
+      <param name="iediff">1</param>
+      <param name="ediffpow1">1.0</param><!-- 0.5enspar007ens -->
+      <param name="ediffpow2">1.0</param><!-- 0.5enspar008ens -->
+      <param name="ediffvar">0.0</param><!-- 0.0enspar009ens -->
+      <param name="scf">1.7</param><!-- 1.7enspar004ens -->
+<!--      <param name="atbfs">enspar003ens</param>-->
+<!--      <param name="atbss">5.0</param>-->
+    </model>
+    <model name="goldsteinseaice">
+      <param name="ans">n</param><!--y-->
+      <param name="lin">spn.5</param>
+      <param name="npstp">100000</param>
+      <param name="itstp">100000</param>
+      <param name="ianav">1000</param><!--250000-->
+      <param name="iwstp">1000</param><!--250000-->
+      <param name="world">worjh2</param>
+      <param name="netout">n</param>
+      <param name="diffsic">6000.0</param>
+      <param name="ascout">y</param>
+      <param name="lout">spn</param>
+    </model>
+    <model name="atchem">
+      <param name="ctrl_continuing">.false.</param>
+      <paramArray name="atm_init">
+	<param index="3">278.0E-06</param><!--enspar020x2ens remember to change with DIC -->
+	<param index="4">-6.50</param>
+        <param index="5">-34.00</param>
+	<param index="6">0.2095</param>
+<!--        <param index="13">0.0</param>-->
+      </paramArray>
+    </model>
+    <model name="biogem">
+      <param name="ctrl_continuing">.false.</param>
+      <paramArray name="ocn_init">
+	<param index="3">2.205E-03</param><!-- enspar020x1ens DIC 2.205E-03 replacing 2.244E-03--> 
+	<param index="4">0.0</param><!-- DIC d13C -->
+        <param index="5">-200.0</param><!-- DIC d14C -->
+	<param index="8">2.159E-06</param><!-- P -->
+        <param index="9">0.0</param><!-- Fe (diss)--> 
+	<param index="10">1.696E-04</param><!-- O2 -->
+	<param index="12">2.203E-03</param><!-- enspar019x1ens ALK 2.203E-03 replacing 2.363E-03 -->
+        <param index="13">70.0E-06</param><!-- Si (diss), Treguer 1995-->
+        <param index="23">0.0</param><!-- ligand-bound Fe -->
+        <param index="24">1.0E-09</param><!-- free-ligand (Fe binding), as used by Parekh et al (2008); see also Wu, Boyle et al 2008 --> 
+        <param index="34">0.65E-09</param><!-- Cd (diss), approx inferred from Cd/P Elderfield & Rickaby --> 
+        <param index="35">0.010251</param><!-- Ca (diss), Millero, cmngem, with S=34.9 -->
+        <param index="47">0.0</param><!-- SF6 (YELLOW) -->
+        <param index="48">0.0</param><!-- RED -->
+        <param index="49">0.0</param><!-- BLUE -->
+      </paramArray>
+      <param name="par_misc_t_start">0</param>
+      <param name="par_misc_t_runtime">10000</param>
+      <param name="par_windspeed_file">windspeed.dat</param>
+<!--      <param name="par_fordir_name">/padata/beta/users/koliver/GENIE/genie_ensemble_Aug08/genie/genie-main/configs/ensemble_Aug08/eb_go_gs_ac_bg_el/ens_ctrl/</param>-->
+<!--      <param name="par_indir_name">/padata/beta/users/koliver/GENIE/genie_ensemble_Aug08/genie/genie-main/configs/ensemble_Aug08/eb_go_gs_ac_bg_el/</param>-->
+<!--      <param name="par_infile_slice_name">ens_Aug08_save_timeslice.dat</param>-->
+<!--      <param name="par_infile_sig_name">ens_Aug08_save_sig.dat</param>-->
+      <param name="ctrl_data_save_slice_ascii">.true.</param>
+      <param name="ctrl_data_save_slice_ocnatm">.true.</param>
+      <param name="ctrl_data_save_slice_ocn">.true.</param>
+      <param name="ctrl_data_save_slice_ocnsed">.true.</param>
+      <param name="ctrl_data_save_slice_fairsea">.true.</param>
+      <param name="ctrl_data_save_slice_focnatm">.true.</param>
+      <param name="ctrl_data_save_slice_focnsed">.true.</param>
+      <param name="ctrl_data_save_slice_bio">.true.</param>
+      <param name="ctrl_data_save_slice_carb">.true.</param>
+      <param name="ctrl_data_save_slice_carbconst">.true.</param>
+      <param name="ctrl_data_save_slice_phys_atm">.true.</param>
+      <param name="ctrl_data_save_slice_phys_ocn">.true.</param>
+      <param name="ctrl_data_save_slice_misc">.true.</param>
+      <param name="ctrl_data_save_slice_diag">.true.</param>
+      <param name="par_bio_red_POC_CaCO3">0.2</param><!--enspar013ens0.2 -->
+<!--      <param name="par_gastransfer_so_nlim">enspar015ens</param>-->
+<!--      <param name="par_gastransfer_so_frac">0.0</param>-->
+<!--      <param name="par_scf_gastransfer">enspar005ens</param>-->
+    </model>
+    <model name="ents">
+      <param name="ents_npstp">10000</param>
+      <param name="ents_ianav">500000</param>
+      <param name="ents_itstp">10000</param>
+      <param name="ents_iwstp">500000</param>
+      <param name="ents_netout">n</param>
+      <param name="ents_ascout">y</param>
+      <!--<param name="fixedveg">.true.</param>-->
+<!--      <param name="t_orog">2</param>-->
+<!--      <param name="norog">1</param>-->
+<!--      <param name="orogsteps">0</param>-->
+<!--      <param name="filenameorog">/padata/beta/users/koliver/GENIE/genie_ensemble_Aug08/genie/genie-ents/data/orography000kyr.dat</param>-->
+<!--      <param name="t_lice">2</param>-->
+<!--      <param name="nlice">1</param>-->
+<!--      <param name="licesteps">0</param>-->
+<!--      <param name="filenamelice">/padata/beta/users/koliver/GENIE/genie_ensemble_Aug08/genie/genie-ents/data/icemask000kyr.dat</param>-->
+    </model>
+
+  </parameters>
+  <build>
+    <make-arg name="IGCMATMOSDP">TRUE</make-arg>
+    <make-arg name="GENIEDP">TRUE</make-arg>
+    <macro handle="GENIENYOPTS" status="defined">
+      <identifier>GENIENY</identifier>
+      <replacement>36</replacement>
+    </macro>
+    <macro handle="GENIENXOPTS" status="defined">
+      <identifier>GENIENX</identifier>
+      <replacement>36</replacement>
+    </macro>
+    <macro handle="GOLDSTEINOPTS" status="defined">
+      <identifier>GENIENX</identifier>
+      <replacement>36</replacement>
+    </macro>
+    <macro handle="GOLDSTEINNLONSOPTS" status="defined">
+      <identifier>GOLDSTEINNLONS</identifier>
+      <replacement>36</replacement>
+    </macro>
+    <macro handle="GOLDSTEINNLATSOPTS" status="defined">
+      <identifier>GOLDSTEINNLATS</identifier>
+      <replacement>36</replacement>
+    </macro>
+    <macro handle="GOLDSTEINNLEVSOPTS" status="defined">
+      <identifier>GOLDSTEINNLEVS</identifier>
+      <replacement>16</replacement>
+    </macro>
+    <macro handle="GOLDSTEINNTRACSOPTS" status="defined">
+      <identifier>GOLDSTEINNTRACS</identifier>
+      <replacement>16</replacement>
+    </macro>
+  </build>
+</job>

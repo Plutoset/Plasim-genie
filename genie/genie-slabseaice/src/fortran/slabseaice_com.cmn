@@ -1,0 +1,17 @@
+      REAL albedo_seaice,tm2,slab_depth
+      logical flag_fixedextent
+      logical flag_checkenergy_slabseaice
+      logical flag_checkwater_slabseaice
+      logical flag_limitfluxes
+      logical coldstart_slabseaice
+      logical readflux_slabseaice
+      real fluxlimit_max,fluxlimit_min
+      COMMON/slabseaice_com/albedo_seaice,
+     :      tm2,slab_depth,
+     :      flag_fixedextent,
+     :      flag_checkenergy_slabseaice,
+     :      flag_checkwater_slabseaice,
+     :      flag_limitfluxes,
+     :      coldstart_slabseaice,
+     :      readflux_slabseaice,
+     :      fluxlimit_max,fluxlimit_min

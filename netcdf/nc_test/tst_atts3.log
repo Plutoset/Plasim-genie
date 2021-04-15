@@ -1,0 +1,15 @@
+
+*** Testing netcdf-3 attribute functions.
+*** testing really simple global atts...ok.
+*** testing simple global atts...ok.
+*** testing attribute data type conversions...ok.
+*** testing zero-length attributes...ok.
+*** testing zero-length attributes and redef...(this test skipped for HDF5-1.8.0 beta1ok.
+*** testing attribute deletes and renames...ok.
+*** testing attribute create order...ok.
+*** testing attribute ordering some more...ok.
+*** testing attribute ordering even more...ok.
+*** testing attributes and enddef/redef...ok.
+*** testing copy of simple global atts...ok.
+*** Tests successful!
+PASS tst_atts3 (exit status: 0)

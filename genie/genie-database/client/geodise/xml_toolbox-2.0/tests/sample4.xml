@@ -1,0 +1,10 @@
+<var_data>
+	<vardata>
+		<ID>var_3c295a75-9f96-4c1b-bf27-8930ea9af935</ID>
+	</vardata>
+	<text type="char" idx="1" size="1 8">test  </text>
+	<details type="struct" idx="1" size="1 1" fields="five date">
+		<five type="double" idx="1" size="1 1">5 </five>
+		<date type="char" idx="1" size="1 19">2003-07-21 15:30:37</date>
+	</details>
+</var_data>

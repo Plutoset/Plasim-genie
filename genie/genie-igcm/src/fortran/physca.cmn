@@ -1,0 +1,34 @@
+      real tstar,qstar,frad,tstaro,tdeepo,smstar,
+     :     tdeep,hsnow,sqstar,salb,sbal,blcd,svege,cd,drag,
+     :     bla,blvb,akvv,aktv,akqv,escona,esconb,
+     :     epsiq,ctq,ccc,ctqi,sdsn,shcs,shcsp,shcsn,skse,sksn,slhf,
+     :     sd1,sd2,sdw,ssmc,sdsnd,sasnow,saice,shsstar,shsmax,
+     :     shco,shci,ccr,rcon,dtbuoy,tsla,tslb,tslc,tsld,
+     :     cut1,cut2,curhm,aktc,akqc,cubmt,cbadjt,cbadjp,
+     :     skap,sk,fws,clr,fb,ttdc,qtdc,ttmc,qtmc,tc,qc,
+     :     ctcr,ctlr,delt2c,XGEOP1,XGEOP2,WVI,GRDSIG,GRDSCP
+      integer itsll,itslo,navrd,navwt,nlcr,ncutop
+      LOGICAL LVD,LCR,LCR_TIEDTKE,LLR,LRD,LCUBM,LCBADJ
+     :       ,LNOICE,LOLDBL,LCOND,LNNSK
+      COMMON/PHYS/   TSTAR(IGC,JG),QSTAR(IGC,JG),FRAD(JG,NHEM)
+     :              ,TSTARO(IGC,JG),TDEEPO(IGC,JG),smstar(igc,jg)
+     :              ,tdeep(igc,jg),hsnow(igc,jg),sqstar(igc,jg)
+     :              ,SALB(IGC,JG),SBAL(IGC,JG),BLCD(IGC)
+     :              ,SVEGE(IGC,JG),CD,DRAG,BLA,BLVB(IGC)
+     :              ,AKVV,AKTV,AKQV,ESCONA,ESCONB,EPSIQ,CTQ,CCC
+     : ,ctqi,sdsn,shcs,shcsp,shcsn,skse,sksn,slhf,sd1,sd2,sdw
+     :        ,ssmc,sdsnd,sasnow,saice,shsstar,shsmax
+     :     ,SHCO,SHCI
+     :              ,CCR,RCON,DTBUOY,TSLA,TSLB,TSLC,TSLD,CUT1,CUT2
+     :              ,CURHM,AKTC,AKQC,CUBMT,CBADJT,CBADJP
+     :              ,SKAP(NL),SK(NLM),FWS(NL),CLR(NL),FB(NLM)
+     :              ,TTDC(NL),QTDC(NL),TTMC(NL),QTMC(NL),TC(NL),QC(NL)
+     :              ,CTCR(NL,NHEM),CTLR(NL,NHEM),DELT2C
+     :              ,XGEOP1(NL),XGEOP2(NL),WVI(NL,2),GRDSIG(NL)
+     :              ,GRDSCP(NL)
+     :              ,ITSLL,ITSLO,NAVRD,NAVWT
+     :              ,NLCR,NCUTOP
+     :              ,LVD,LCR,LCR_TIEDTKE,LLR,LRD,LCUBM,LCBADJ
+     :              ,LNOICE,LOLDBL,LCOND,LNNSK
+
+C

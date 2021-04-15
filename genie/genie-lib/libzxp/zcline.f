@@ -1,0 +1,81 @@
+
+      SUBROUTINE ZCLINE(X,Y,N,I,ZLIM,ANGLE,IPLOT,IFAIL)
+C
+      INTEGER N
+      INTEGER IFAIL
+      REAL X1
+      INTEGER I
+      REAL Y1
+      REAL DS
+      REAL ZLEN
+      REAL ZLIM
+      INTEGER IPLOT
+      REAL ANGLE
+      REAL DSTEMP
+      REAL PIH
+      REAL ZSTEP
+      REAL ZCHAR
+      INTEGER LABON
+      INTEGER IHTLAB
+C
+      REAL X(N),Y(N)
+C1.3
+      INTEGER NLABEL
+
+C
+      COMMON/ZLABL/PIH,ZSTEP,ZLEN,ZCHAR,NLABEL,LABON,IHTLAB
+C
+C
+C
+      COMMON/ZLABLC/CLABEL
+      CHARACTER CLABEL*20
+C
+C
+
+      IFAIL=0
+
+      X1=X(I)
+      Y1=Y(I)
+
+      IF(I.EQ.N)THEN
+      IFAIL=1
+      RETURN
+      ENDIF
+
+10    CONTINUE
+      DS=SQRT( (X(I+1)-X1)*(X(I+1)-X1) + (Y(I+1)-Y1)*(Y(I+1)-Y1) )
+
+      IF( (DS+ZLEN).LT.ZLIM) THEN
+      ZLEN=ZLEN+DS
+      I=I+1
+      X1=X(I)
+      Y1=Y(I)
+
+      IF(IPLOT.EQ.1) CALL XLPNDN(X1,Y1)
+
+      IF(I.EQ.N)THEN
+        IFAIL=1
+        GO TO 20
+      ENDIF
+
+      GO TO 10
+      ELSE
+      ANGLE=ATAN2(Y(I+1)-Y1,X(I+1)-X1)
+      DSTEMP=ZLIM - ZLEN
+
+      X1=X1 + DSTEMP*COS(ANGLE)
+      Y1=Y1 + DSTEMP*SIN(ANGLE)
+
+      X(I)=X1
+      Y(I)=Y1
+
+      IF(IPLOT.EQ.1)THEN
+        CALL XLPNDN(X1,Y1)
+      ELSE
+        CALL XLPNUP(X1,Y1)
+      ENDIF
+      ENDIF
+
+20    CONTINUE
+      RETURN
+      END

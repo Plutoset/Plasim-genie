@@ -1,0 +1,133 @@
+      SUBROUTINE XVECTK(X0,Y0, XLENG, UUNIT, KEY )
+C Plot unit vectors  starting at (X0,Y0)
+C KEY=-1, 0, 1, 2, for none,in both X and Y-direction,X only, Y only
+      REAL PI
+      REAL ANGLE1
+      REAL ANGLE2
+      REAL SINA1
+      REAL COSA1
+      REAL SINA2
+      REAL COSA2
+      REAL XRG
+      REAL YRG
+      REAL XL
+      REAL XR
+      REAL YB
+      REAL YT
+      REAL XSCALE
+      REAL YSCALE
+      REAL YF
+      REAL CTRSIZ
+      REAL VUNIT
+      REAL UUNIT
+      REAL DX
+      REAL XLENG
+      REAL DY
+      REAL PXO
+      REAL X0
+      REAL PYO
+      REAL Y0
+      REAL PX1
+      REAL PY1
+      REAL PX2
+      REAL PY2
+      REAL DPH
+      REAL DPV
+      INTEGER KEY
+      REAL ARROW
+      REAL COSTA
+      REAL SINTA
+      REAL DX1
+      REAL DY1
+      REAL DX2
+      REAL DY2
+      INTEGER LCH
+      REAL XANG
+      REAL YANG
+      REAL ASYM
+C
+      PARAMETER(PI=3.14159,ANGLE1=(15./180+1)*PI,ANGLE2=(-15./180+1)*PI)
+      PARAMETER(SINA1=-.17365,COSA1=-.98481,SINA2=-SINA1,COSA2=COSA1)
+      CHARACTER CH*20
+      CALL XQRANG(XRG,YRG)
+      CALL XQMAP(XL,XR,YB,YT)
+      XSCALE=XR-XL
+      YSCALE=YT-YB
+      YF=0.4+( MIN(XRG,YRG)    -0.4)*0.5
+      CTRSIZ=3.0*YF*0.01
+      CALL XCHMAG(CTRSIZ)
+
+      VUNIT=UUNIT
+      DX=XLENG
+      DY=XLENG
+      PXO=X0
+      PYO=Y0
+      PX1=X0+DX
+      PY1=Y0
+      PX2=X0
+      PY2=Y0+DY
+      CALL XTRANS(PXO,PYO)
+      CALL XTRANS(PX1,PY1)
+      CALL XTRANS(PX2,PY2)
+      DPH=SQRT( (PX1-PXO)**2+(PY1-PYO)**2  )
+      DPV=SQRT( (PX2-PXO)**2+(PY2-PYO)**2  )
+ 5    IF( DPV.GT.1.5*DPH ) THEN
+        DPV=DPV*0.5
+        DY=DY*0.5
+        VUNIT=VUNIT*0.5
+        GOTO 5
+      ENDIF
+ 6    IF( DPV.LT.0.75*DPH ) THEN
+        DPV=DPV*2
+        DY=DY*2
+        VUNIT=VUNIT*2
+        GOTO 6
+      ENDIF
+      PX2=X0
+      PY2=Y0+DY
+      CALL XTRANS(PX2,PY2)
+
+      IF( KEY.EQ.0.OR.KEY.EQ.1) THEN
+      ARROW=0.30*DPH
+      COSTA=(PX1-PXO)/DPH
+      SINTA=(PY1-PYO)/DPH
+      DX1=ARROW*(COSTA*COSA1-SINTA*SINA1)
+      DY1=ARROW*(SINTA*COSA1+COSTA*SINA1)
+      DX2=ARROW*(COSTA*COSA2-SINTA*SINA2)
+      DY2=ARROW*(SINTA*COSA2+COSTA*SINA2)
+      CALL XTPNUP(PXO,PYO)
+      CALL XTPNDN(PX1    , PY1)
+C       CALL XTPNUP(PX1    , PY1    )
+      CALL XTPNDN(PX1+DX1, PY1+DY1)
+      CALL XTPNUP(PX1    , PY1    )
+      CALL XTPNDN(PX1+DX2, PY1+DY2)
+      WRITE(CH,'(F6.1,'' m/s'')') UUNIT
+      LCH=10
+      CALL XCHLJ (CH,LCH)
+      CALL XCHARL(X0+DX   +0.01*XSCALE,Y0,CH(1:LCH) )
+      ENDIF
+      IF(KEY.EQ.0.OR.KEY.EQ.2)  THEN
+      ARROW=0.20*DPH
+      COSTA=(PX2-PXO)/DPV
+      SINTA=(PY2-PYO)/DPV
+      DX1=ARROW*(COSTA*COSA1-SINTA*SINA1)
+      DY1=ARROW*(SINTA*COSA1+COSTA*SINA1)
+      DX2=ARROW*(COSTA*COSA2-SINTA*SINA2)
+      DY2=ARROW*(SINTA*COSA2+COSTA*SINA2)
+      CALL XTPNUP(PXO,PYO)
+      CALL XTPNDN(PX2    , PY2)
+C       CALL XTPNUP(PX2    , PY2    )
+      CALL XTPNDN(PX2+DX1, PY2+DY1)
+      CALL XTPNUP(PX2    , PY2    )
+      CALL XTPNDN(PX2+DX2, PY2+DY2)
+      CALL XQOBAG( XANG, YANG )
+      CALL XQCHOR( ASYM )
+      CALL XCHORI(90.0+ YANG- XANG)
+      WRITE(CH,'(F6.1,'' m/s'')') VUNIT
+      LCH=10
+      CALL XCHLJ (CH,LCH)
+      CALL XCHARL(X0-.02*XSCALE ,Y0 ,CH(1:LCH) )
+      CALL XCHORI( ASYM )
+      ENDIF
+      RETURN
+      END

@@ -1,0 +1,50 @@
+C
+C     Determines model resolution
+C
+
+C The minimum number of levels for the IGCM atmos
+#define MINIGCMNL 7
+
+#ifndef GENIENX
+#define GENIENX 64
+#endif
+
+#ifndef GENIENY
+#define GENIENY 32
+#endif
+
+#ifndef IGCMNWJ2
+#define IGCMNWJ2 121
+#endif
+
+#ifndef IGCMNN
+#define IGCMNN 21
+#endif
+
+#ifndef IGCMMM
+#define IGCMMM 21
+#endif
+
+#ifndef GENIENL
+#define GENIENL MINIGCMNL
+#endif
+
+#if GENIENL < MINIGCMNL
+#define GENIENL MINIGCMNL
+#endif
+
+#ifndef GENIENLEVRF
+#define GENIENLEVRF 1
+#endif
+
+#ifndef GENIENTRAC
+#define GENIENTRAC 1
+#endif
+
+      integer nn,mm,nhem,nl,moct,mg,jg,nwj2,ncray,jgl,ntrac,
+     :        nlevrf
+      PARAMETER(NN=IGCMNN,MM=IGCMMM,NHEM=2,MOCT=1,MG=GENIENX
+     :         ,JG=GENIENY/2,NWJ2=IGCMNWJ2
+     :         ,NCRAY=64,JGL=JG,NTRAC=GENIENTRAC)
+      parameter(nl=GENIENL,nlevrf=GENIENLEVRF)
+C

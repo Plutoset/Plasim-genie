@@ -1,0 +1,18 @@
+
+      SUBROUTINE XAXNMG(A)
+C
+      REAL ANMAG
+      REAL A
+      INTEGER NTMAG
+      REAL ANSIZ
+      REAL B
+C
+      COMMON /XAXM35/ NTMAG, ANMAG, ANSIZ
+      ANMAG = A
+      NTMAG=1
+
+      RETURN
+      ENTRY XAXNSZ(B)
+      NTMAG=2
+      ANSIZ=B
+      END

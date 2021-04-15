@@ -1,0 +1,85 @@
+
+ 01 02         03  04  05  06         07 08 09   10 11 12                                        13          14         15
+ \/ \/         \/  \/  \/  \/         \/ \/ \/   \/ \/ \/                                        \/          \/         \/
+
+-START-OF-DATA-
+ T  temp       01  01  00  0.0        f  f  0.1  F  F  'temperature'                             'K'         260.0      360.0
+ T  sal        02  02  00  0.0        f  f  0.1  f  t  'salinity'                                'PSU'         0.0       50.0
+ t  DIC        03  03  01  2.244E-03  f  f  0.1  f  t  'dissolved inorganic carbon (DIC)'        'mol kg-1'    0.00E+0    9.99E-1
+ t  DIC_13C    04  03  11  0.4        F  T  1.0  F  F  'd13C of DIC'                             'o/oo'       -9.99E+2    9.99E+2
+ t  DIC_14C    05  03  12  0.0        F  T  1.0  F  F  'd14C of DIC'                             'o/oo'       -9.99E+5    9.99E+2
+ f  NO3        06  06  01  3.210E-05  F  T  1.0  F  F  'dissolved nitrate (NO3)'                 'mol kg-1'    0.00E+0    9.99E-1
+ F  NO3_15N    07  06  14  5.0        F  T  1.0  F  F  'd15N of NO3'                             'o/oo'       -9.99E+2    9.99E+2
+ t  PO4        08  08  01  2.159E-06  f  t  0.1  f  t  'dissolved phosphate (PO4)'               'mol kg-1'    0.00E+0    9.99E-1
+ f  Fe         09  09  01  0.600E-09  F  T  1.0  F  F  'dissolved iron (Fe)'                     'mol kg-1'    0.00E+0    9.99E-1
+ t  O2         10  10  01  1.696E-04  f  t  0.5  F  F  'dissolved oxygen (O2)'                   'mol kg-1'    0.00E+0    9.99E-1
+ F  O2_18O     11  10  13  0.0        F  T  1.0  F  F  'd18O of O2'                              'o/oo'       -9.99E+2    9.99E+2
+ t  ALK        12  12  01  2.363E-03  f  f  0.1  F  F  'alkalinity (ALK)'                        'mol kg-1'    0.00E+0    9.99E-1
+ f  SiO2       13  13  01  0.877E-04  F  T  1.0  F  F  'aqueous silicic acid (H4SiO4)'           'mol kg-1'    0.00E+0    9.99E-1
+ F  SiO2_30Si  14  13  16  0.0        F  T  1.0  F  F  'd30Si of H4SiO4'                         'o/oo'       -9.99E+2    9.99E+2
+ t  DOM_C      15  15  01  0.0        F  T  1.0  F  F  'dissolved organic matter (DOM); carbon'  'mol kg-1'    0.00E+0    9.99E-1
+ t  DOM_C_13C  16  15  11  0.0        F  T  1.0  F  F  'd13C of DOM-C'                           'o/oo'       -9.99E+2    9.99E+2
+ t  DOM_C_14C  17  15  12  0.0        F  T  1.0  F  F  'd14C of DOM-C'                           'o/oo'       -9.99E+5    9.99E+2
+ f  DOM_N      18  18  01  0.0        F  T  1.0  F  F  'dissolved organic matter; nitrogen'      'mol kg-1'    0.00E+0    9.99E-1
+ F  DOM_N_15N  19  18  14  0.0        F  T  1.0  F  F  'd15N of DOM-N'                           'o/oo'       -9.99E+2    9.99E+2
+ t  DOM_P      20  20  01  0.0        F  T  1.0  F  F  'dissolved organic matter; phosphorous'   'mol kg-1'    0.00E+0    9.99E-1
+ f  DOM_Cd     21  21  01  0.0        F  T  1.0  F  F  'dissolved organic matter; cadmium'       'mol kg-1'    0.00E+0    9.99E-1
+ f  DOM_Fe     22  22  01  0.0        F  T  1.0  F  F  'dissolved organic matter; iron'          'mol kg-1'    0.00E+0    9.99E-1
+ f  FeL        23  23  01  0.0        F  T  1.0  F  F  'ligand-bound Fe'                         'mol kg-1'    0.00E+0    9.99E-1
+ f  L          24  24  01  1.000E-09  F  T  1.0  F  F  'ligand concentration (iron binding)'     'mol kg-1'    0.00E+0    9.99E-1
+ F  CH4        25  25  01  0.000E-00  F  T  1.0  F  F  'dissolved methane (CH4)'                 'mol kg-1'    0.00E+0    9.99E-1
+ F  CH4_13C    26  25  11  0.0        F  T  1.0  F  F  'd13C of CH4'                             'o/oo'       -9.99E+2    9.99E+2
+ F  CH4_14C    27  25  12  0.0        F  T  1.0  F  F  'd14C of CH4'                             'o/oo'       -9.99E+2    9.99E+2
+ F  NH3        28  28  01  0.0        F  T  1.0  F  F  'dissolved ammonia (NH3)'                 'mol kg-1'    0.00E+0    9.99E-1
+ F  NH3_15N    29  28  14  0.0        F  T  1.0  F  F  'd15N of NH3'                             'mol kg-1'    0.00E+0    9.99E-1
+ F  N2         30  30  01  0.390E-03  F  T  1.0  F  F  'dissolved nitrogen (N2)'                 'mol kg-1'    0.00E+0    9.99E-1
+ F  N2_15N     31  30  14  0.0        F  T  1.0  F  F  'd15N of N2'                              'o/oo'       -9.99E+2    9.99E+2
+ F  N2O        32  32  01  0.0        F  T  1.0  F  F  'dissolved nitrous oxide (N2O)'           'mol kg-1'    0.00E+0    9.99E-1
+ F  N2O_15N    33  32  14  0.0        F  T  1.0  F  F  'd15N of N2O'                             'o/oo'       -9.99E+2    9.99E+2
+ f  Cd 	       34  34  01  0.620E-09  f  T  1.0  F  F  'dissolved cadmium (Cd)'                  'mol kg-1'    0.00E+0    9.99E-1
+ f  Ca         35  35  01  1.025E-02  F  T  1.0  F  F  'dissolved calcium (Ca)'                  'mol kg-1'    0.00E+0    9.99E-1
+ F  B          36  36  01  0.0        F  T  1.0  F  F  'dissolved boron (B)'                     'mol kg-1'    0.00E+0    9.99E-1
+ F  F          37  37  01  0.0        F  T  1.0  F  F  'dissolved florine (F)'                   'mol kg-1'    0.00E+0    9.99E-1
+ f  SO4        38  38  01  2.916E-02  F  T  1.0  F  F  'dissolved sulphate (SO4)'                'mol kg-1'    0.00E+0    9.99E-1
+ F  SO4_34S    39  38  15  0.0        F  T  1.0  F  F  '32S of SO4'                              'o/oo'       -9.99E+2    9.99E+2
+ f  H2S        40  40  01  0.0        F  T  1.0  F  F  'dissolved hydrogen sulphide (H2S)'       'mol kg-1'    0.00E+0    9.99E-1
+ F  H2S_34S    41  40  15  0.0        F  T  1.0  F  F  '32S of H2S'                              'o/oo'       -9.99E+2    9.99E+2
+ F  Ge         42  42  01  0.0        F  T  1.0  F  F  'gemanium'                                'mol kg-1'    0.00E+0    9.99E-1
+ F  231Pa      43  43  01  0.0        F  T  1.0  F  F  '231Pa'                                   'mol kg-1'    0.00E+0    9.99E-1
+ F  230Th      44  44  01  0.0        F  T  1.0  F  F  '230Th'                                   'mol kg-1'    0.00E+0    9.99E-1
+ t  CFC11      45  45  01  0.0        F  T  1.0  f  F  'dissolved CFC-11'                        'mol kg-1'    0.00E+0    9.99E-1
+ t  CFC12      46  46  01  0.0        F  T  1.0  f  F  'dissolved CFC-12'                        'mol kg-1'    0.00E+0    9.99E-1
+ F  SF6        47  47  01  0.0        F  T  1.0  F  F  'dissolved sulphur hexafloride (SF6)'     'mol kg-1'    0.00E+0    9.99E-1
+ f  colr       48  48  01  0.0        F  T  1.0  f  F  'RED numerical (color) tracer'            'n/a'         0.00E+0    9.99E-1
+ f  colb       49  49  01  0.0        F  T  1.0  f  F  'BLUE numerical (color) tracer'           'n/a'         0.00E+0    9.99E-1
+-END-OF-DATA-
+
+ /\ /\         /\  /\  /\  /\         /\ /\ /\   /\ /\ /\                                        /\          /\         /\
+ 01 02         03  04  05  06         07 08 09   10 11 12                                        13          14         15
+
+DATA FORMAT AND ORDER
+---------------------
+
+COLUMN #01: include tracer? [DATA FORMAT: 'T'/'F' ('t'/'f')]
+COLUMN #02: tracer variable name [MAXIMUM STRING LENGTH = 16 CHARACTERS]
+COLUMN #03: tracer variable identifier [DO NOT ADJUST]
+COLUMN #04: tracer variable dependencies [DO NOT ADJUST]
+COLUMN #05: tracer variable type [DO NOT ADJUST]
+COLUMN #06: default (initial) value [DATA FORMAT: real]
+COLUMN #07: include restoring forcing of tracer? [DATA FORMAT: 'T'/'F' ('t'/'f')]
+COLUMN #08: restrict restoring forcing to surface? [DATA FORMAT: 'T'/'F' ('t'/'f')]
+COLUMN #09: time constant of restoring forcing (years) [DATA FORMAT: real]
+COLUMN #10: include flux forcing of tracer? [DATA FORMAT: 'T'/'F' ('t'/'f')]
+COLUMN #11: scale flux forcing of tracer? [DATA FORMAT: 'T'/'F' ('t'/'f')]
+COLUMN #12: tracer variable description [MAXIMUM STRING LENGTH = 128 CHARACTERS]
+COLUMN #13: tracer UNITS [MAXIMUM STRING LENGTH = 12 CHARACTERS]
+COLUMN #14: tracer min
+COLUMN #15: tracer max
+
+INFO: TRACER ASSIGNMENT RULES
+-----------------------------
+
+
+
+
+

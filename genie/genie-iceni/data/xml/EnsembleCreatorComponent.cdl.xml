@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<componentTypeDefinition
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.iceni.ic.ac.uk/xmlSchema/cdl"
+  xsi:schemaLocation="http://www.iceni.ic.ac.uk/xmlSchema/cdl
+	              http://www.lesc.ic.ac.uk/iceni/xml/runtime/CDL.xsd">
+
+  <componentName>EnsembleCreatorComponent</componentName>
+  <componentPackage>org.icenigrid.genie.components</componentPackage>
+  
+  <!-- ports -->
+  <port>
+    <portName>jobNumbersIn</portName>
+    <portType>text</portType>
+    <dataflow>in</dataflow>
+  </port>
+
+  <port>
+    <portName>parametersIn</portName>
+    <portType>text</portType>
+    <dataflow>in</dataflow>
+  </port>
+
+  <port>
+    <portName>JDMLout</portName>
+    <portType>text</portType>
+    <dataflow>out</dataflow>
+  </port>
+
+  <!-- properties -->
+  <property>
+    <propertyName>job.type</propertyName>
+    <propertyType>string</propertyType>
+  </property>
+
+  <property>
+    <propertyName>job.begin</propertyName>
+    <propertyType>integer</propertyType>
+  </property>
+
+  <property>
+    <propertyName>job.end</propertyName>
+    <propertyType>integer</propertyType>
+  </property>
+
+</componentTypeDefinition>

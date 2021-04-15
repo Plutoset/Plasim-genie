@@ -1,0 +1,16 @@
+200001 100000 200000 1000 200000  nsteps npstp iwstp itstp ianav
+n                        new/continuing
+100   5                  timesteps per year and A/O dt ratio
+20. 20. 0.90 1.229       temp0 temp1 rel scl_tau
+0.5698E+04    0.3173E-05 ocean diffusivites iso/dia (or horiz/vert)
+0.2080E+01               inverse minimum drag in days
+0.3815E+07    0.5328E+06 
+1.525         0.1        atm. diff. amp. for T and q and dist'n width, slope
+0.1754E-01    0.0000E+00    
+0.2757E-01    0.2757E-01 atm. advection factors for T_z, T_m, q_z, q_m
+1.0 0.0                  scl_co2 pc_co2_rise
+0.8537E+03               sea-ice eddy diffusivity
+0. 0. 0.                 tatm relh0_ocean relh0_land
+-0.3308E-01    0.1875E+00    0.1985E+00 extra1a extra1b extra1c
+tmp/002                  output file number
+tmp/002.1                input file name

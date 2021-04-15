@@ -1,0 +1,5 @@
+
+*** Testing nofill mode.
+*** Create file in nofill mode using nc_create()...ok.
+*** Tests successful!
+PASS tst_nofill3 (exit status: 0)

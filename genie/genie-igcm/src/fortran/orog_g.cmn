@@ -1,0 +1,4 @@
+       REAL GSG,ALAND
+       INTEGER ILAND
+       COMMON/GSG/GSG(IGC,JG),
+     :            aland(igc,jg),iland(igc,jg)

@@ -1,0 +1,70 @@
+DOWNLOAD & INSTALLATION
+
+Many thanks for your interest in the XML Toolbox for Matlab.
+
+Quick Instructions:	
+
+ + Fill in contact details on download page at http://www.geodise.org
+ + Get file xml_toolbox-2.0.zip
+ + Unpack the file with the password which will be sent to you by email
+
+Detailed Instructions:
+
+The XML Toolbox for Matlab is free of charge and can be downloaded from 
+http://www.geodise.org. Please follow the links on the webpage to get to
+the download page. Fill in the contact information required, then click 
+on "submit" and obtain the xml_toolbox-2.0.zip file (size is approx. 12kB)
+which contains all the necessary Matlab source files and documentation.
+
+Unpack the downloaded zip file using a suitable software package (Linux 
+unzip, Winzip, XP's built-in zip, etc.). This will create a folder called 
+xml_toolbox-2.0. The installation instructions and documentation files 
+should be immediately accessible. The other files are password protected.
+
+The password will be sent automatically to the email address you have 
+supplied on the download page. We will not use your information or email
+for any other purpose than to send you the password and required information 
+for maintaining the XML Toolbox. 
+If you have problems obtaining the password or require further information, 
+please send an email to gridem@soton.ac.uk with "xml toolbox" in the subject 
+line. We will try to send you a reply as soon as possible.
+
+Again, you are welcome to use the XML Toolbox for Matlab to your liking; 
+it is free of charge, however, please be aware of the terms and conditions
+as set out in the licence file LICENCE.TXT. 
+
+When you have obtained the password, use it to unpack the remaining files 
+in the xml_toolbox.zip archive. When the files are unpacked, add the new 
+folder to your Matlab path. This is best done by typing the following line 
+(replaced with your path) on the Matlab command prompt.
+
+     addpath( 'c:/your/path/to/xml_toolbox-2.0' )
+
+In addition you might want to add this line to your startup.m file in the 
+matlab subdirectory of your home directory.
+
+The following files should be present:
+INSTALL.TXT       - this file, installation instructions
+LICENCE.TXT       - software licence file - please read
+xml_help.m        - displays information about the provided functions
+xml_format.m      - converts a Matlab variable/structure into XML string
+xml_parse.m       - converts a XML string back into Matlab variable/structure
+xml_save.m        - saves a Matlab variable/structure in .xml file
+xml_load.m        - loads the .xml file written with xml_save()
+tests/xml_tests.m - performs a number of tests to verify that the functions work
+matlab.xsd        - XML Schema for Matlab XML file validation
+strsplit.m        - utility function which splits string at specified characters
+doc/xml_matlab    - documentation of the XML Toolbox for Matlab
+
+Testing:
+
+Finally, type "xml_help" at the Matlab prompt. If the installation was succesful,
+the help for the XML Toolbox functions should be displayed. Each function is 
+easy to use and contains its own help section in the header (as is standard Matlab 
+practice). To test, try to execute the following at the Matlab command prompt:
+
+>> xml_format( 'Hello World!' )
+>> 
+>> str = xml_format(17.29)
+>> a = xml_parse(str)
+>> whos( 'a' )

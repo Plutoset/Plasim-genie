@@ -1,0 +1,6 @@
+
+*** Testing some extra stuff.
+*** Trying to open non-netCDF files of tiny length...ok.
+*** Trying to create netCDF-4 file without netCDF-4...ok.
+*** Tests successful!
+PASS tst_misc (exit status: 0)

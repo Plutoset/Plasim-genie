@@ -1,0 +1,5 @@
+      real blvad,fluxfactor,enhancestable,enhancelim,blrh
+     :     ,txblcnst,tyblcnst
+      COMMON/igcm_flux/blvad,fluxfactor,
+     :         enhancestable,enhancelim,blrh,
+     :         txblcnst,tyblcnst

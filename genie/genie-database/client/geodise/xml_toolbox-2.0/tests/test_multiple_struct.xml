@@ -1,0 +1,21 @@
+<root>
+	<a>1.0000</a>
+	<b>this is a string</b>
+	<c>
+		<item>
+			<d>1.234560</d>
+		</item>
+	</c>
+	<d>
+		<e>hello world</e>
+	</d>
+	<e>
+		<item>alpha</item>
+		<item>beta</item>
+		<item>42</item>
+	</e>
+	<f>
+		<item>this should be v.f(1).item or v.f{1} or v.f{1}.item{1}</item>
+		<item>this should be v.f(2).item or v.f{2} or v.f{1}.item{2}</item>
+	</f>
+</root>

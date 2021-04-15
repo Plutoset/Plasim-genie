@@ -1,0 +1,2 @@
+      real increaseu,increaseq,increaset
+      COMMON/igcm_vdiff/increaseu,increaseq,increaset

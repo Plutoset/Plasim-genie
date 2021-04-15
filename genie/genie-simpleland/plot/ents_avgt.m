@@ -1,0 +1,80 @@
+clear all;
+
+ents_constants;
+
+disp('ENTS_AVGT: A script for plotting global annual average ');
+disp('carbon inventory and flux timeseries.');
+file=input('What is the file name? \n','s');
+
+filename=sprintf('%s%s.slavgt',path,file);
+
+a=load(filename);
+
+asze=size(a);
+
+disp('1......Global annual average land carbon fluxes');
+disp('2......Global annual average carbon inventories');
+disp('3......Global annual average fractional quantities');
+disp('4......Global annual average net primary production (NPP)');;
+disp('5......Global annual average net ecosystem productivity (NEP)');
+disp(' ');
+option=input('What would you like to plot? (1-5) \n');
+
+figure;
+if option==1;
+    plot(a(:,1),a(:,2),'g');
+    hold on;
+    plot(a(:,1),a(:,3));
+    plot(a(:,1),a(:,4),'k');
+    plot(a(:,1),a(:,5),'r');
+    grid on;
+    legend('Photosynthesis','Vegetation respiration','Leaf litter','Soil respiration',0);
+    xlabel('year (relative to start of run)');
+    ylabel('Carbon flux (GtC/yr)');
+    plotitle=sprintf('Global annual average land carbon fluxes: %s.slavgt',file);
+    title(plotitle);
+end;
+if option==2;
+    plot(a(:,1),a(:,6),'g');
+    hold on;
+    plot(a(:,1),a(:,7),'k');
+    plot(a(:,1),a(:,10),'r');
+    if asze(2)==11;
+        plot(a(:,1),a(:,11));
+        legend('Vegetation carbon','Soil carbon','Atmospheric carbon','Ocean carbon',0);
+    else;
+        legend('Vegetation carbon','Soil carbon','Atmospheric carbon',0);
+    end;
+    grid on;
+    xlabel('year (relative to start of run)');
+    ylabel('Carbon inventory (GtC)');
+    plotitle=sprintf('Global annual average carbon inventories: %s.slavgt',file);
+    title(plotitle);
+end;
+if option==3;
+    plot(a(:,1),a(:,8));
+    grid on;
+    hold on;
+    plot(a(:,1),a(:,9),'r');
+    xlabel('year (relative to start of run)');
+    ylabel('Fraction');
+    plotitle=sprintf('Global annual average fractional quantities: %s.slavgt',file);
+    title(plotitle);
+    legend('Vegetation fractional cover','Vegetation shelf shading fraction',0);
+end;
+if option==4;
+    plot(a(:,1),a(:,2)-a(:,3),'g');
+    grid on;
+    xlabel('year (relative to start of run)');
+    ylabel('NPP (GtC/yr)');
+    plotitle=sprintf('Global annual average net primary productivity: %s.slavgt',file);
+    title(plotitle);
+end;
+if option==5;
+    plot(a(:,1),a(:,2)-a(:,3)-a(:,5),'k');
+    grid on;
+    xlabel('year (relative to start of run)');
+    ylabel('NEP (GtC/yr)');
+    plotitle=sprintf('Global annual average net ecosystem productivity: %s.slavgt',file);
+    title(plotitle);
+end;

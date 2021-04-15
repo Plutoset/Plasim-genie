@@ -1,0 +1,7 @@
+C
+C     Polynomial used to aid vectorization of Legendre transforms
+C
+      real poly
+      COMMON/POLYNO/POLY(NWJ2,2,4),CMPA(IGL)
+      COMPLEX CMPA
+C

@@ -1,0 +1,101 @@
+      SUBROUTINE LGNDRE_lib(ALP,DALP,SIT,CSJ,JH,MM,NN,NWJ2,JG,MOCT)
+      IMPLICIT NONE
+      INTEGER JH,NWJ2,JG,MM,NN,MOCT
+      REAL ALP(NWJ2+NWJ2,JG),DALP(NWJ2+NWJ2,JG),SIT,CSJ
+C
+C     CALCULATES LEGNDRE FUNCTIONS
+C
+      INTEGER LM,M1,M,M2,MMO,JFM,K,N
+      REAL F1M,F2M,AM,A2M,E2,AN,AN2,ANM2,AMSQ,E1
+C
+      LM=2
+      ALP(1,JH)=SQRT(.5)
+      F1M=SQRT(1.5)
+      ALP(2,JH)=F1M*SIT
+      DALP(1,JH)=0.
+      DO 1 M1=1,MM
+      M=M1-1
+      AM=M
+      A2M=M+M
+      E2=SQRT(A2M+3.)
+      IF(M.EQ.0)GOTO 3
+      F2M=-F1M*SQRT(CSJ/A2M)
+      F1M=F2M*E2
+      IF(M.NE.MMO)GOTO 1
+      LM=LM+1
+      ALP(LM,JH)=F2M
+      LM=LM+1
+      ALP(LM,JH)=F1M*SIT
+      DALP(LM-1,JH)=-AM*ALP(LM,JH)/E2
+    3 M2=M+2
+      MMO=M+MOCT
+      JFM=((NN-M1)/2)*2+M2-1
+      IF(JFM.LT.M2)GO TO 5
+      K=LM-M2+1
+      AMSQ=AM*AM
+      DO 4 N=M2,JFM
+      AN=N
+      AN2=N*N
+      ANM2=(N-1)*(N-1)
+      E1=SQRT((ANM2-AMSQ)/(4.*ANM2-1.))
+      E2=SQRT((4.*AN2-1.)/(AN2-AMSQ))
+      ALP(K+N,JH)=E2*(SIT*ALP(K+N-1,JH)-E1*ALP(K+N-2,JH))
+      DALP(K+N-1,JH)= (1.-AN)*ALP(K+N,JH)/E2+AN*E1*ALP(K+N-2,JH)
+    4 CONTINUE
+      LM=LM+JFM-M2+1
+ 5    CONTINUE
+      DALP(LM,JH)=-AN*SIT*ALP(LM,JH)+(AN+AN+1.0)*ALP(LM-1,JH)/E2
+    1 CONTINUE
+      RETURN
+      END
+c
+      SUBROUTINE LGNDRE8(ALP,DALP,SIT,CSJ,JH,MM,NN,NWJ2,JG,MOCT)
+      IMPLICIT NONE
+      INTEGER JH,NWJ2,JG,MM,NN,MOCT
+      REAL*8 ALP(NWJ2+NWJ2,JG),DALP(NWJ2+NWJ2,JG),SIT,CSJ
+C
+C     CALCULATES LEGNDRE FUNCTIONS
+C
+      INTEGER LM,M1,M,M2,MMO,JFM,K,N
+      REAL*8 F1M,F2M,AM,A2M,E2,AN,AN2,ANM2,AMSQ,E1
+C
+      LM=2
+      ALP(1,JH)=SQRT(.5)
+      F1M=SQRT(1.5)
+      ALP(2,JH)=F1M*SIT
+      DALP(1,JH)=0.
+      DO 1 M1=1,MM
+      M=M1-1
+      AM=M
+      A2M=M+M
+      E2=SQRT(A2M+3.)
+      IF(M.EQ.0)GOTO 3
+      F2M=-F1M*SQRT(CSJ/A2M)
+      F1M=F2M*E2
+      IF(M.NE.MMO)GOTO 1
+      LM=LM+1
+      ALP(LM,JH)=F2M
+      LM=LM+1
+      ALP(LM,JH)=F1M*SIT
+      DALP(LM-1,JH)=-AM*ALP(LM,JH)/E2
+    3 M2=M+2
+      MMO=M+MOCT
+      JFM=((NN-M1)/2)*2+M2-1
+      IF(JFM.LT.M2)GO TO 5
+      K=LM-M2+1
+      AMSQ=AM*AM
+      DO 4 N=M2,JFM
+      AN=N
+      AN2=N*N
+      ANM2=(N-1)*(N-1)
+      E1=SQRT((ANM2-AMSQ)/(4.*ANM2-1.))
+      E2=SQRT((4.*AN2-1.)/(AN2-AMSQ))
+      ALP(K+N,JH)=E2*(SIT*ALP(K+N-1,JH)-E1*ALP(K+N-2,JH))
+      DALP(K+N-1,JH)= (1.-AN)*ALP(K+N,JH)/E2+AN*E1*ALP(K+N-2,JH)
+    4 CONTINUE
+      LM=LM+JFM-M2+1
+ 5    CONTINUE
+      DALP(LM,JH)=-AN*SIT*ALP(LM,JH)+(AN+AN+1.0)*ALP(LM-1,JH)/E2
+    1 CONTINUE
+      RETURN
+      END

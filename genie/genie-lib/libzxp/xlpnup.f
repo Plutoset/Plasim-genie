@@ -1,0 +1,218 @@
+c
+      SUBROUTINE XLPNUP(XP,YP)
+C Used in contouring routine in the place of XPENUP to incorperate
+C contour labeling.
+C
+      INTEGER NCALLS
+      INTEGER NCALDN
+      INTEGER NBUF
+      INTEGER NN
+      REAL WL
+      REAL XP1
+      REAL XP
+      REAL YP1
+      REAL YP
+      INTEGER ICLI
+      INTEGER ICLON
+      REAL XPP1
+      REAL XLTRNX
+      REAL YPP1
+      REAL XLTRNY
+      REAL DL
+      REAL DLABEL
+      INTEGER KLBTYP
+      REAL SIZLB
+      REAL YT
+      REAL YB
+      REAL HLABEL
+      REAL YFACTR
+      REAL WLABEL
+      INTEGER LCLAB
+      REAL XP2
+      REAL YP2
+      REAL D21
+      REAL DRATIO
+      REAL XLB1
+      REAL YLB1
+      REAL XLBP1
+      REAL YLBP1
+      REAL XLB2
+      REAL YLB2
+      REAL XLBP2
+      REAL YLBP2
+      INTEGER LABROT
+      REAL ANG
+      REAL DPX
+      REAL DPY
+      REAL XLB
+      REAL YLB
+      REAL DX
+      REAL DY
+      REAL AK
+      REAL A
+      REAL ANGSYM
+      REAL CMAG
+      REAL XFACTR
+      REAL XL
+      REAL XR
+      REAL XSCALE
+      REAL YSCALE
+C
+      COMMON /XFTR06/ XFACTR,YFACTR
+      COMMON /XMAP04/ XL,XR,YB,YT,XSCALE,YSCALE
+      COMMON /XLAB14/ DLABEL,WLABEL,HLABEL,SIZLB,KLBTYP,ICLI,ICLON
+      CHARACTER CLABEL*20
+      COMMON /CLABEL/XP1,YP1,XPP1,YPP1,DL,WL
+      COMMON /XLAB15/CLABEL
+      COMMON /XLAB16/ LCLAB
+      COMMON /XLBA33/ LABROT
+      REAL XBUF(0:31), YBUF(0:31)
+      REAL XPP2,YPP2
+      SAVE NCALLS ,XLB1, YLB1 ,XP2,YP2 ,NCALDN,XBUF,YBUF,NBUF,
+     :     XPP2,YPP2
+      DATA NCALLS ,NCALDN /0, 0/, NBUF/0/, XPP2,YPP2/0.0,0.0/
+c
+      IF(NBUF.NE.0.AND. NCALDN.NE.0 ) THEN
+      CALL XPENUP(XBUF(0), YBUF(0))
+        DO NN=0,NBUF
+           CALL XPENDN(XBUF(NN),YBUF(NN))
+        end do
+C       PRINT*, 'NBUF= ', NBUF
+      NBUF=0
+      WL=0.0
+      ENDIF
+ 
+      NCALLS=NCALLS+1
+      XP1=XP
+      YP1=YP
+      CALL XPENUP(XP1,YP1)
+      IF( ICLI .EQ.0.OR.ICLON.EQ.0) RETURN
+      XPP1=XLTRNX(XP)
+      YPP1=XLTRNY(YP)
+      DL=DLABEL*ABS(SIN(137.0*NCALLS))*0.5
+      WL=0.0
+      NBUF=0
+      IF( KLBTYP ) 1,2,3
+ 1      SIZLB=0.02*(YT-YB)
+ 3      HLABEL=SIZLB*YFACTR
+      WLABEL= HLABEL*LCLAB*0.77
+ 2    CONTINUE
+      RETURN
+      ENTRY XLPNDN (XP,YP)
+C Used in contouring routine in the place of XPENDN to incorperate
+C contour labeling.
+      XP2=XP
+      YP2=YP
+      IF( ICLI .EQ.0.OR.ICLON.EQ.0) GOTO 9101
+      XPP2=XLTRNX(XP)
+      YPP2=XLTRNY(YP)
+      D21=SQRT((XPP2-XPP1)*(XPP2-XPP1)+(YPP2-YPP1)*(YPP2-YPP1))
+      IF(D21.LT.1.0E-10)GOTO 9101
+      DL=DL+D21
+      IF(DL-DLABEL) 9101,9102,9102
+ 9102 IF(WL.EQ.0.0) THEN
+      DRATIO=(DLABEL-DL+D21)/D21
+      XLB1=XP1+DRATIO*(XP2-XP1)
+      YLB1=YP1+DRATIO*(YP2-YP1)
+      XLBP1=XLTRNX(XLB1)
+      YLBP1=XLTRNY(YLB1)
+      CALL XPENDN( XLB1,YLB1 )
+      NCALDN=1
+      XP1=XLB1
+      YP1=YLB1
+      XPP1=XLBP1
+      YPP1=YLBP1
+      XBUF(0)=XLB1
+      YBUF(0)=YLB1
+      NBUF=0
+      ENDIF
+      D21=SQRT((XPP2-XPP1)*(XPP2-XPP1)+(YPP2-YPP1)*(YPP2-YPP1))
+      WL=SQRT( (XPP2-XLBP1)*(XPP2-XLBP1)+(YPP2-YLBP1)*(YPP2-YLBP1))
+      IF(WL    -WLABEL) 9111,9112,9112
+ 9112 DRATIO=(WLABEL-WL+D21) /D21
+      XLB2=XP1+DRATIO*(XP2-XP1)
+      YLB2=YP1+DRATIO*(YP2-YP1)
+      XLBP2=XLTRNX(XLB2)
+      YLBP2=XLTRNY(YLB2)
+      IF( LABROT.EQ.0) THEN
+      ANG=0.0
+      DPX=0.0
+      DPY=HLABEL*0.4
+      XLB =(XLBP1+ XLBP2)*0.5
+      YLB =(YLBP1+ YLBP2)*0.5-DPY
+      GOTO 130
+      ENDIF
+      IF(ABS( XLBP2-XLBP1).LE. 1.0E-10) THEN
+      ANG=90.0
+      ELSE
+      ANG=ATAN( (YLBP2-YLBP1)/(XLBP2-XLBP1) )*180/3.1415926535
+      ENDIF
+      DX=XLBP2-XLBP1
+      DY=YLBP2-YLBP1
+      IF( ABS(DX).LT.1.0E-6) THEN
+        DPX=HLABEL*0.4
+        DPY=0.0
+      ELSE
+        AK=DY/DX
+        A=SQRT(1.0+AK*AK)
+        DPX=HLABEL*AK/A  *0.4
+        DPY=HLABEL/A     *0.4
+      ENDIF
+      XLB =(XLBP1+ XLBP2)*0.5  +ABS(DPX) *SIGN(1.0, ANG)
+      YLB =(YLBP1+ YLBP2)*0.5  -ABS(DPY)
+ 130    CONTINUE
+C Draw boxes  around labels . Usful when wish to blank the labeled area.
+C     DBX=DPX*1.5
+C     DBY=DPY*1.5
+C       XB1=XLBP1+DBX
+C       YB1=YLBP1-DBY
+C       XB2=XLBP1-DBX
+C       YB2=YLBP1+DBY
+C       XB3=XLBP2-DBX
+C       YB3=YLBP2+DBY
+C       XB4=XLBP2+DBX
+C       YB4=YLBP2-DBY
+C       CALL XLINVT( XB1,YB1 )
+C       CALL XLINVT( XB2,YB2 )
+C       CALL XLINVT( XB3,YB3 )
+C       CALL XLINVT( XB4,YB4 )
+C       CALL XPENUP( XB1,YB1)
+C       CALL XPENDN( XB2,YB2)
+C       CALL XPENDN( XB3,YB3)
+C       CALL XPENDN( XB4,YB4)
+C       CALL XPENDN( XB1,YB1)
+C
+      CALL XLINVT( XLB, YLB )
+      CALL XQCHOR( ANGSYM )
+      CALL XCHORI( ANG)
+      CALL XQCHMG( CMAG )
+      CALL XCHMAG( HLABEL)
+      CALL XCHARC( XLB,YLB, CLABEL(1:LCLAB) )
+      CALL XCHORI( ANGSYM )
+      CALL XCHMAG( CMAG )
+      DL=MIN( WL    -WLABEL , DLABEL)
+      WL=0.0
+      NBUF=0
+      CALL XPENUP( XLB2, YLB2)
+      CALL XPENDN( XP2,YP2 )
+      GOTO 9150
+ 9111 WL=WL
+C     CALL XPENUP(XP2,YP2)
+      NBUF=NBUF+1
+      XBUF(NBUF)=XP2
+      YBUF(NBUF)=YP2
+      IF(NBUF.GE.30) THEN
+       DO 210 NN=0,NBUF,2
+       XBUF(NN/2)=XBUF(NN)
+  210    YBUF(NN/2)=YBUF(NN)
+       NBUF=NN/2
+      ENDIF
+      GOTO 9150
+ 9101 CALL XPENDN(XP2,YP2)
+ 9150 XP1=XP2
+      YP1=YP2
+      XPP1=XPP2
+      YPP1=YPP2
+ 9200 CONTINUE
+      RETURN
+      END

@@ -1,0 +1,10 @@
+
+*** Testing netCDF-3 nccopy -v/-V flags on 
+*** One Dimensional Tests
+*** Testing nccopy -v
+*** Testing nccopy -V
+*** Two Dimensional Tests
+*** Testing nccopy -v
+*** Testing nccopy -V
+nccopy passed!
+PASS tst_nccopy3_subset.sh (exit status: 0)

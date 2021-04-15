@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job author="config2xml.py - automatic conversion of ASCII text config file">
+	<vars>
+		<var name="EXPID">genie_ig_fi_fi_ml</var>
+	</vars>
+	<config>
+		<model name="fixedchem"/>
+		<model name="fixedseaice"/>
+		<model name="fixedicesheet"/>
+		<model name="fixedocean"/>
+		<model name="igcm"/>
+		<model name="mosestriffid"/>
+	</config>
+	<parameters>
+		<control>
+			<param name="koverall_total">86400</param>
+		</control>
+		<model name="fixedchem">
+		</model>
+		<model name="fixedseaice">
+			<param name="dt_restart_fixedseaice">120</param>
+		</model>
+		<model name="fixedicesheet">
+		</model>
+		<model name="fixedocean">
+			<param name="dt_restart_fixedocean">15</param>
+		</model>
+		<model name="igcm">
+			<param name="KOUNTR">720</param>
+			<param name="itsll">1</param>
+			<param name="dt_restart_igcmoceansurf">720</param>
+		</model>
+		<model name="mosestriffid">
+			<param name="irest_land">720</param>
+		</model>
+	</parameters>
+	<build>
+                <make-arg name="FLAG_MOSESTRIFFID">ON</make-arg>
+	</build>
+	<testing>
+	</testing>
+</job>

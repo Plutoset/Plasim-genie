@@ -1,0 +1,2013 @@
+      subroutine setup_nc1(nlon,nlat,nl,ntime,
+     :     nmaxdims,nall,
+     :     ndim,nvar,natts,nattsvar,vdims,
+     :     vadims,ndims,
+     :     dimname,varname,attdimname,
+     :     attvarname)
+      implicit none
+      integer nlon,nlat,nl,ntime,nmaxdims,nall
+      integer ndim,nvar,natts(nall),nattsvar(nall),
+     :     vdims(nall),vadims(nmaxdims,nall),
+     :     ndims(nall)
+      character dimname(nall)*200,varname(nall)*200,
+     :     attdimname(2,nmaxdims,nall)*200,
+     :     attvarname(2,nmaxdims,nall)*200
+c     
+c     Create netcdf structure for daily data 
+c
+      integer loc_dim
+c     
+      ndim=0
+c     
+      ndim=ndim+1
+      dimname(ndim)='longitude'
+      ndims(ndim)=nlon
+      natts(ndim)=2
+      attdimname(1,1,ndim)='long_name'
+      attdimname(2,1,ndim)='longitude'
+      attdimname(1,2,ndim)='units'
+      attdimname(2,2,ndim)='degrees_east'
+c     
+      ndim=ndim+1
+      dimname(ndim)='latitude'
+      ndims(ndim)=nlat
+      natts(ndim)=2
+      attdimname(1,1,ndim)='long_name'
+      attdimname(2,1,ndim)='latitude'
+      attdimname(1,2,ndim)='units'
+      attdimname(2,2,ndim)='degrees_north'
+c     
+      ndim=ndim+1
+      dimname(ndim)='p'
+      ndims(ndim)=nl
+      natts(ndim)=2
+      attdimname(1,1,ndim)='units'
+      attdimname(2,1,ndim)='mb'
+      attdimname(1,2,ndim)='positive'
+      attdimname(2,2,ndim)='down'
+c     
+      ndim=ndim+1
+      dimname(ndim)='time'
+      ndims(ndim)=ntime
+      natts(ndim)=2
+      attdimname(1,1,ndim)='long_name'
+      attdimname(2,1,ndim)='time'
+      attdimname(1,2,ndim)='units'
+      attdimname(2,2,ndim)='days or months'
+c     
+      ndim=ndim+1
+      dimname(ndim)='p_norm'
+      ndims(ndim)=nl
+      natts(ndim)=2
+      attdimname(1,1,ndim)='units'
+      attdimname(2,1,ndim)='mb'
+      attdimname(1,2,ndim)='positive'
+      attdimname(2,2,ndim)='down'
+c     
+      nvar=1
+      varname(nvar)='zonal_wind'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Zonal Wind'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='ms-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='temp'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Temperature'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='oC'
+c
+      nvar=nvar+1
+      varname(nvar)='zonal_wind_p'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p_norm',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Zonal Wind (pressure levels)'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='ms-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='northward_wind_p'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p_norm',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Meridional Wind (pressure levels)'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='ms-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='air_temperature_p'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p_norm',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Temperature (pressure levels)'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='oC'
+c     
+      nvar=nvar+1
+      varname(nvar)='specific_humidity_p'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p_norm',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Specific Humidity (pressure levels)'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='kg/kg'
+c     
+      nvar=nvar+1
+      varname(nvar)='geopotential_height_p'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p_norm',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Geopotential Height (pressure levels)'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='m'
+c          
+      nvar=nvar+1
+      varname(nvar)='pstar'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface Pressure'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='mbar'
+c     
+      nvar=nvar+1
+      varname(nvar)='mslp'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Mean Sea-Level Pressure'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='mbar'
+c     
+      nvar=nvar+1
+      varname(nvar)='convrain'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Convective Rainfall'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='unknown'
+c     
+      nvar=nvar+1
+      varname(nvar)='lscalerain'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Large Scale Rainfall'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='unknown'
+c     
+      nvar=nvar+1
+      varname(nvar)='surftemp'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface temperature'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='oC'
+c     
+      nvar=nvar+1
+      varname(nvar)='surfhum'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface specific humidity'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='kg/kg'
+c     
+      nvar=nvar+1
+      varname(nvar)='sensheat'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface sensible heat'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='latentheat'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Latent sensible heat'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='snowdepth'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Snow depth'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='m'
+c     
+      nvar=nvar+1
+      varname(nvar)='temp2m'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     '2m air temperature'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='oC'
+c     
+      nvar=nvar+1
+      varname(nvar)='landevap'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'surface evaporation'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='mm/s'
+c     
+      nvar=nvar+1
+      varname(nvar)='netsolar'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Net Solar Surface Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='netlong'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Net Longwave Surface Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='downsolar'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Downward Solar Surface Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='downlong'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Downward Longwave Surface Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='netsolar_toa'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Net Solar TOA Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='netlong_toa'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Net Longwave TOA Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='downsolar_toa'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Downward Solar TOA Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='downlong_toa'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Downward Longwave TOA Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='stressx'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface Wind Stress X-component'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='N/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='stressy'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface Wind Stress Y-component'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='N/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='cloudl'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Low cloud (700 hPa to 1000hPa) '
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='0-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='cloudm'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Mid cloud (350 hPa to 700hPa) '
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='0-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='cloudh'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Low cloud (120 hPa to 350hPa) '
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='0-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='cloudshc'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Shallow convective cloud '
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='0-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='cloudc'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Deep convective cloud '
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='0-1'
+c     
+      return
+      end
+c
+      subroutine setup_nc2(nlon,nlat,nl,ntime,
+     :     nmaxdims,nall,
+     :     ndim,nvar,natts,nattsvar,vdims,
+     :     vadims,ndims,
+     :     dimname,varname,attdimname,
+     :     attvarname)
+      implicit none
+      integer nlon,nlat,nl,ntime,nmaxdims,nall
+      integer ndim,nvar,natts(nall),nattsvar(nall),
+     :     vdims(nall),vadims(nmaxdims,nall),
+     :     ndims(nall)
+      character dimname(nall)*200,varname(nall)*200,
+     :     attdimname(2,nmaxdims,nall)*200,
+     :     attvarname(2,nmaxdims,nall)*200
+c     
+      integer loc_dim
+c     
+      ndim=0
+c     
+      ndim=ndim+1
+      dimname(ndim)='longitude'
+      ndims(ndim)=nlon
+      natts(ndim)=2
+      attdimname(1,1,ndim)='long_name'
+      attdimname(2,1,ndim)='longitude'
+      attdimname(1,2,ndim)='units'
+      attdimname(2,2,ndim)='degrees_east'
+c     
+      ndim=ndim+1
+      dimname(ndim)='latitude'
+      ndims(ndim)=nlat
+      natts(ndim)=2
+      attdimname(1,1,ndim)='long_name'
+      attdimname(2,1,ndim)='latitude'
+      attdimname(1,2,ndim)='units'
+      attdimname(2,2,ndim)='degrees_north'
+c     
+      ndim=ndim+1
+      dimname(ndim)='p'
+      ndims(ndim)=nl
+      natts(ndim)=2
+      attdimname(1,1,ndim)='units'
+      attdimname(2,1,ndim)='mb'
+      attdimname(1,2,ndim)='positive'
+      attdimname(2,2,ndim)='down'
+c     
+      ndim=ndim+1
+      dimname(ndim)='time'
+      ndims(ndim)=ntime
+      natts(ndim)=2
+      attdimname(1,1,ndim)='long_name'
+      attdimname(2,1,ndim)='time'
+      attdimname(1,2,ndim)='units'
+      attdimname(2,2,ndim)='days or months'
+c     
+      ndim=ndim+1
+      dimname(ndim)='p_norm'
+      ndims(ndim)=nl
+      natts(ndim)=2
+      attdimname(1,1,ndim)='units'
+      attdimname(2,1,ndim)='mb'
+      attdimname(1,2,ndim)='positive'
+      attdimname(2,2,ndim)='down'
+c     
+      nvar=1
+      varname(nvar)='zonal_wind'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Zonal Wind'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='ms-1'
+c         
+      nvar=nvar+1
+      varname(nvar)='temp'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Temperature'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='oC'
+c
+      nvar=nvar+1
+      varname(nvar)='zonal_wind_p'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p_norm',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Zonal Wind (pressure levels)'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='ms-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='northward_wind_p'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p_norm',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Meridional Wind (pressure levels)'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='ms-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='air_temperature_p'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p_norm',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Temperature (pressure levels)'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='oC'
+c     
+      nvar=nvar+1
+      varname(nvar)='specific_humidity_p'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p_norm',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Specific Humidity (pressure levels)'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='kg/kg'
+c     
+      nvar=nvar+1
+      varname(nvar)='geopotential_height_p'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p_norm',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Geopotential Height (pressure levels)'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='m'
+c          
+      nvar=nvar+1
+      varname(nvar)='pstar'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface Pressure'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='mbar'
+c     
+      nvar=nvar+1
+      varname(nvar)='mslp'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Mean Sea-Level Pressure'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='mbar'
+c
+      nvar=nvar+1
+      varname(nvar)='convrain'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Convective Rainfall'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='unknown'
+c     
+      nvar=nvar+1
+      varname(nvar)='lscalerain'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Large Scale Rainfall'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='unknown'
+c     
+      nvar=nvar+1
+      varname(nvar)='surftemp'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface temperature'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='oC'
+c     
+      nvar=nvar+1
+      varname(nvar)='surfhum'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface specific humidity'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='kg/kg'
+c     
+      nvar=nvar+1
+      varname(nvar)='sensheat'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface sensible heat'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='latentheat'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Latent sensible heat'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='snowdepth'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Snow depth'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='m'
+c     
+      nvar=nvar+1
+      varname(nvar)='temp2m'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     '2m air temperature'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='oC'
+c     
+      nvar=nvar+1
+      varname(nvar)='landevap'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'surface evaporation'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='mm/s'
+c     
+      nvar=nvar+1
+      varname(nvar)='netsolar'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Net Solar Surface Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='netlong'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Net Longwave Surface Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='downsolar'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Downward Solar Surface Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='downlong'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Downward Longwave Surface Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='netsolar_toa'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Net Solar TOA Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='netlong_toa'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Net Longwave TOA Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='downsolar_toa'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Downward Solar TOA Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='downlong_toa'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Downward Longwave TOA Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='stressx'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface Wind Stress X-component'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='N/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='stressy'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface Wind Stress Y-component'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='N/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='cloudl'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Low cloud (700 hPa to 1000hPa) '
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='0-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='cloudm'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Mid cloud (350 hPa to 700hPa) '
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='0-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='cloudh'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Low cloud (120 hPa to 350hPa) '
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='0-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='cloudshc'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Shallow convective cloud '
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='0-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='cloudc'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Deep convective cloud '
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='0-1'
+c     
+      return
+      end
+c
+      subroutine setup_nc3(nlon,nlat,nl,ntime,
+     :     nmaxdims,nall,
+     :     ndim,nvar,natts,nattsvar,vdims,
+     :     vadims,ndims,
+     :     dimname,varname,attdimname,
+     :     attvarname)
+      implicit none
+      integer nlon,nlat,nl,ntime,nmaxdims,nall
+      integer ndim,nvar,natts(nall),nattsvar(nall),
+     :     vdims(nall),vadims(nmaxdims,nall),
+     :     ndims(nall)
+      character dimname(nall)*200,varname(nall)*200,
+     :     attdimname(2,nmaxdims,nall)*200,
+     :     attvarname(2,nmaxdims,nall)*200
+c     
+      integer loc_dim
+c     
+      ndim=0
+c     
+      ndim=ndim+1
+      dimname(ndim)='longitude'
+      ndims(ndim)=nlon
+      natts(ndim)=2
+      attdimname(1,1,ndim)='long_name'
+      attdimname(2,1,ndim)='longitude'
+      attdimname(1,2,ndim)='units'
+      attdimname(2,2,ndim)='degrees_east'
+c     
+      ndim=ndim+1
+      dimname(ndim)='latitude'
+      ndims(ndim)=nlat
+      natts(ndim)=2
+      attdimname(1,1,ndim)='long_name'
+      attdimname(2,1,ndim)='latitude'
+      attdimname(1,2,ndim)='units'
+      attdimname(2,2,ndim)='degrees_north'
+c     
+      ndim=ndim+1
+      dimname(ndim)='p'
+      ndims(ndim)=nl
+      natts(ndim)=2
+      attdimname(1,1,ndim)='units'
+      attdimname(2,1,ndim)='mb'
+      attdimname(1,2,ndim)='positive'
+      attdimname(2,2,ndim)='down'
+c     
+      ndim=ndim+1
+      dimname(ndim)='time'
+      ndims(ndim)=ntime
+      natts(ndim)=2
+      attdimname(1,1,ndim)='long_name'
+      attdimname(2,1,ndim)='time'
+      attdimname(1,2,ndim)='units'
+      attdimname(2,2,ndim)='days or months'
+c     
+      ndim=ndim+1
+      dimname(ndim)='p_norm'
+      ndims(ndim)=nl
+      natts(ndim)=2
+      attdimname(1,1,ndim)='units'
+      attdimname(2,1,ndim)='mb'
+      attdimname(1,2,ndim)='positive'
+      attdimname(2,2,ndim)='down'
+c     
+      nvar=1
+      varname(nvar)='zonal_wind'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Zonal Wind'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='ms-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='temp'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Temperature'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='oC'
+c          
+      nvar=nvar+1
+      varname(nvar)='zonal_wind_p'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p_norm',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Zonal Wind (pressure levels)'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='ms-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='northward_wind_p'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p_norm',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Meridional Wind (pressure levels)'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='ms-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='air_temperature_p'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p_norm',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Temperature (pressure levels)'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='oC'
+c     
+      nvar=nvar+1
+      varname(nvar)='specific_humidity_p'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p_norm',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Specific Humidity (pressure levels)'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='kg/kg'
+c     
+      nvar=nvar+1
+      varname(nvar)='geopotential_height_p'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p_norm',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Geopotential Height (pressure levels)'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='m'
+c     
+      nvar=nvar+1
+      varname(nvar)='pstar'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface Pressure'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='mbar'
+c     
+      nvar=nvar+1
+      varname(nvar)='mslp'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Mean Sea-Level Pressure'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='mbar'
+c
+      nvar=nvar+1
+      varname(nvar)='convrain'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Convective Rainfall'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='unknown'
+c     
+      nvar=nvar+1
+      varname(nvar)='lscalerain'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Large Scale Rainfall'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='unknown'
+c     
+      nvar=nvar+1
+      varname(nvar)='surftemp'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface temperature'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='oC'
+c     
+      nvar=nvar+1
+      varname(nvar)='surfhum'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface specific humidity'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='kg/kg'
+c     
+      nvar=nvar+1
+      varname(nvar)='sensheat'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface sensible heat'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='latentheat'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Latent sensible heat'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='snowdepth'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Snow depth'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='m'
+c     
+      nvar=nvar+1
+      varname(nvar)='temp2m'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     '2m air temperature'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='oC'
+c     
+      nvar=nvar+1
+      varname(nvar)='landevap'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'surface evaporation'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='mm/s'
+c     
+      nvar=nvar+1
+      varname(nvar)='netsolar'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Net Solar Surface Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='netlong'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Net Longwave Surface Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='downsolar'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Downward Solar Surface Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='downlong'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Downward Longwave Surface Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='netsolar_toa'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Net Solar TOA Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='netlong_toa'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Net Longwave TOA Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='downsolar_toa'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Downward Solar TOA Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='downlong_toa'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Downward Longwave TOA Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='stressx'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface Wind Stress X-component'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='N/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='stressy'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface Wind Stress Y-component'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='N/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='cloudl'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Low cloud (700 hPa to 1000hPa) '
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='0-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='cloudm'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Mid cloud (350 hPa to 700hPa) '
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='0-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='cloudh'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Low cloud (120 hPa to 350hPa) '
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='0-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='cloudshc'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Shallow convective cloud '
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='0-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='cloudc'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Deep convective cloud '
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='0-1'
+c     
+      return
+      end
+c
+      subroutine setup_nc4(nlon,nlat,nl,ntime,
+     :     nmaxdims,nall,
+     :     ndim,nvar,natts,nattsvar,vdims,
+     :     vadims,ndims,
+     :     dimname,varname,attdimname,
+     :     attvarname)
+      implicit none
+      integer nlon,nlat,nl,ntime,nmaxdims,nall
+      integer ndim,nvar,natts(nall),nattsvar(nall),
+     :     vdims(nall),vadims(nmaxdims,nall),
+     :     ndims(nall)
+      character dimname(nall)*200,varname(nall)*200,
+     :     attdimname(2,nmaxdims,nall)*200,
+     :     attvarname(2,nmaxdims,nall)*200
+c     
+      integer loc_dim
+c     
+      ndim=0
+c     
+      ndim=ndim+1
+      dimname(ndim)='longitude'
+      ndims(ndim)=nlon
+      natts(ndim)=2
+      attdimname(1,1,ndim)='long_name'
+      attdimname(2,1,ndim)='longitude'
+      attdimname(1,2,ndim)='units'
+      attdimname(2,2,ndim)='degrees_east'
+c     
+      ndim=ndim+1
+      dimname(ndim)='latitude'
+      ndims(ndim)=nlat
+      natts(ndim)=2
+      attdimname(1,1,ndim)='long_name'
+      attdimname(2,1,ndim)='latitude'
+      attdimname(1,2,ndim)='units'
+      attdimname(2,2,ndim)='degrees_north'
+c     
+      ndim=ndim+1
+      dimname(ndim)='p'
+      ndims(ndim)=nl
+      natts(ndim)=2
+      attdimname(1,1,ndim)='units'
+      attdimname(2,1,ndim)='mb'
+      attdimname(1,2,ndim)='positive'
+      attdimname(2,2,ndim)='down'
+c     
+      ndim=ndim+1
+      dimname(ndim)='time'
+      ndims(ndim)=ntime
+      natts(ndim)=2
+      attdimname(1,1,ndim)='long_name'
+      attdimname(2,1,ndim)='time'
+      attdimname(1,2,ndim)='units'
+      attdimname(2,2,ndim)='days or months'
+c     
+      ndim=ndim+1
+      dimname(ndim)='p_norm'
+      ndims(ndim)=nl
+      natts(ndim)=2
+      attdimname(1,1,ndim)='units'
+      attdimname(2,1,ndim)='mb'
+      attdimname(1,2,ndim)='positive'
+      attdimname(2,2,ndim)='down'
+c     
+      nvar=1
+      varname(nvar)='zonal_wind'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Zonal Wind'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='ms-1'
+c
+      nvar=nvar+1
+      varname(nvar)='temp'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Temperature'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='oC'
+c          
+      nvar=nvar+1
+      varname(nvar)='zonal_wind_p'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p_norm',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Zonal Wind (pressure levels)'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='ms-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='northward_wind_p'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p_norm',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Meridional Wind (pressure levels)'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='ms-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='air_temperature_p'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p_norm',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Temperature (pressure levels)'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='oC'
+c     
+      nvar=nvar+1
+      varname(nvar)='specific_humidity_p'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p_norm',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Specific Humidity (pressure levels)'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='kg/kg'
+c     
+      nvar=nvar+1
+      varname(nvar)='geopotential_height_p'
+      vdims(nvar)=4
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('p_norm',dimname,nall)
+      vadims(4,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Geopotential Height (pressure levels)'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='m'
+c     
+      nvar=nvar+1
+      varname(nvar)='pstar'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface Pressure'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='mbar'
+c     
+      nvar=nvar+1
+      varname(nvar)='mslp'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Mean Sea-Level Pressure'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='mbar'
+c
+      nvar=nvar+1
+      varname(nvar)='convrain'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Convective Rainfall'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='unknown'
+c     
+      nvar=nvar+1
+      varname(nvar)='lscalerain'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Large Scale Rainfall'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='unknown'
+c     
+      nvar=nvar+1
+      varname(nvar)='surftemp'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface temperature'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='oC'
+c     
+      nvar=nvar+1
+      varname(nvar)='surfhum'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface specific humidity'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='kg/kg'
+c     
+      nvar=nvar+1
+      varname(nvar)='sensheat'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface sensible heat'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='latentheat'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Latent sensible heat'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='snowdepth'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Snow depth'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='m'
+c     
+      nvar=nvar+1
+      varname(nvar)='temp2m'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     '2m air temperature'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='oC'
+c     
+      nvar=nvar+1
+      varname(nvar)='landevap'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'surface evaporation'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='mm/s'
+c     
+      nvar=nvar+1
+      varname(nvar)='netsolar'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Net Solar Surface Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='netlong'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Net Longwave Surface Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='downsolar'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Downward Solar Surface Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='downlong'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Downward Longwave Surface Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='netsolar_toa'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Net Solar TOA Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='netlong_toa'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Net Longwave TOA Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='downsolar_toa'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Downward Solar TOA Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='downlong_toa'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Downward Longwave TOA Flux'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='W/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='stressx'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface Wind Stress X-component'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='N/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='stressy'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Surface Wind Stress Y-component'
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='N/m2'
+c     
+      nvar=nvar+1
+      varname(nvar)='cloudl'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Low cloud (700 hPa to 1000hPa) '
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='0-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='cloudm'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Mid cloud (350 hPa to 700hPa) '
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='0-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='cloudh'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Low cloud (120 hPa to 350hPa) '
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='0-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='cloudshc'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Shallow convective cloud '
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='0-1'
+c     
+      nvar=nvar+1
+      varname(nvar)='cloudc'
+      vdims(nvar)=3
+      vadims(1,nvar)=loc_dim('longitude',dimname,nall)
+      vadims(2,nvar)=loc_dim('latitude',dimname,nall)
+      vadims(3,nvar)=loc_dim('time',dimname,nall)
+      nattsvar(nvar)=2
+      attvarname(1,1,nvar)='long_name'
+      attvarname(2,1,nvar)=
+     :     'Deep convective cloud '
+      attvarname(1,2,nvar)='units'
+      attvarname(2,2,nvar)='0-1'
+c     
+      return
+      end

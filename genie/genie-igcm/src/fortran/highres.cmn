@@ -1,0 +1,9 @@
+#ifndef IGCMHRLONS
+#define IGCMHRLONS 320
+#endif
+#ifndef IGCMHRLATS
+#define IGCMHRLATS 160
+#endif
+
+      integer nhrlon,nhrlat
+      parameter(nhrlon=IGCMHRLONS,nhrlat=IGCMHRLATS)

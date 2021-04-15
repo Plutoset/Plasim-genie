@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!-- written on 04-Aug-2003 14:07:10 -->
+<struct xmlns="http://www.geodise.org/matlab.xsd" idx="0" fields="str">
+	<cell idx="1" name="str" size="1 9"> 
+		<char idx="1" size="1 7">&lt;root/&gt;</char>
+		<char idx="2" size="1 13">&lt;root&gt;&lt;/root&gt;</char>
+		<char idx="3" size="1 29">&lt;root&gt;&lt;a&gt;1&lt;/a&gt;&lt;a&gt;2&lt;/a&gt;&lt;/root&gt;</char>
+		<char idx="4" size="1 33">&lt;root&gt;&lt;a&gt;1&lt;/a&gt;&lt;a&gt;2&lt;/a&gt;&lt;b/&gt;&lt;/root&gt;</char>
+		<char idx="5" size="1 37">&lt;root&gt;&lt;a&gt;1&lt;/a&gt;&lt;a&gt;2&lt;/a&gt;&lt;b/&gt;&lt;b/&gt;&lt;/root&gt;</char>
+		<char idx="6" size="1 48">&lt;root&gt;&lt;a&gt;1&lt;/a&gt;&lt;a&gt;2&lt;/a&gt;&lt;b/&gt;&lt;b&gt;&lt;c&gt;4&lt;/c&gt;&lt;/b&gt;&lt;/root&gt;</char>
+		<char idx="7" size="1 29">&lt;root&gt;&lt;a idx=&quot;1&quot;&gt;1&lt;/a&gt;&lt;/root&gt;</char>
+		<char idx="8" size="1 43">&lt;root&gt;5&lt;/root&gt;&lt;root&gt;&lt;a idx=&quot;3&quot;&gt;1&lt;/a&gt;&lt;/root&gt;</char>
+		<char idx="9" size="1 41">&lt;root&gt;&lt;n type=&quot;double&quot;&gt; 5.321 &lt;/n&gt;&lt;/root&gt;</char>
+	</cell>
+</struct>

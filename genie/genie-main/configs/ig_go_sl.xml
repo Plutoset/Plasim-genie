@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job author="config2xml.py - automatic conversion of ASCII text config file">
+	<vars>
+		<var name="EXPID">genie_ig_go_sl_dyex_test</var>
+	</vars>
+	<config>
+		<model name="fixedchem"/>
+		<model name="fixedicesheet"/>
+		<model name="goldstein"/>
+		<model name="igcm"/>
+		<model name="slabseaice"/>
+	</config>
+	<parameters>
+		<control>
+			<param name="lgraphics">.false.</param>
+		</control>
+		<model name="fixedchem">
+		</model>
+		<model name="fixedicesheet">
+		</model>
+		<model name="goldstein">
+			<param name="ianav">90000</param>
+			<param name="itstp">9000</param>
+			<param name="npstp">90000</param>
+			<param name="nyear">180</param>
+			<param name="yearlen">360</param>
+			<param name="iwstp">18000</param>
+		</model>
+		<model name="igcm">
+		</model>
+		<model name="slabseaice">
+			<param name="flag_fixedextent">.false.</param>
+		</model>
+	</parameters>
+	<build>
+	</build>
+	<testing>
+	</testing>
+</job>

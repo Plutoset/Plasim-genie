@@ -1,0 +1,24 @@
+100000 100000 100000 10000 100        nsteps npstp iwstp itstp ianav
+n                                       new/continuing
+100   5                                 timesteps per year and A/O dt ratio
+20 20 0.90 2.718565940856934            temp0 temp1 rel scl_tau
+7630.62255859375 6.769551691832021e-05  ocean diffusivites iso/dia (or horiz/vert)
+3.711707830429077                       inverse minimum drag in days
+3421457 2867627.25 1.657689690589905 0.07230085134506226     atm. diff. amp. for T and q and dist'n width, slope
+0.3007551431655884 0.0 0.5939368009567261 0.5939368009567261     atm. advection factors for T_z, T_m, q_z, q_m
+1.0 0.0                  scl_co2 pc_co2_rise
+co2 info:
+0 0 0                    time-varying prescribed co2? (0/1), nco2, co2steps
+dummyfilename
+5958.28173828125                    sea-ice eddy diffusivity
+0. 0. 0.                 tatm relh0_ocean relh0_land
+-0.03006985902786255 0.1703958678245545 0.1804191541671753          extra1a extra1b extra1c
+tst/001                 output file number
+tst/001.avg               input file name
+orography file info:
+0 0 0                    time-varying orography? (0/1), norog, orogsteps
+../genie-simpleland/data/orography.dat
+icemask file info:
+0 0 0                    time-varying landicemask? (0/1), nlice, licesteps
+../genie-simpleland/data/icemask.dat
+0.6798022389411926 4.143721580505371                    rmax timepptn

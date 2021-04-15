@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job author="config2xml.py - automatic conversion of ASCII text config file">
+	<vars>
+		<var name="EXPID">genie_ig_go_sl_restartread_l22</var>
+		<var name="RESTARTREAD">"TRUE"</var>
+	</vars>
+	<config>
+		<model name="fixedchem"/>
+		<model name="fixedicesheet"/>
+		<model name="goldstein"/>
+		<model name="igcm"/>
+		<model name="slabseaice"/>
+	</config>
+	<parameters>
+		<control>
+			<param name="ksic_loop">16</param>
+			<param name="koverall_total">1920</param>
+			<param name="genie_timestep">1350.0</param>
+			<param name="kocn_loop">128</param>
+		</control>
+		<model name="fixedchem">
+		</model>
+		<model name="fixedicesheet">
+		</model>
+		<model name="goldstein">
+			<param name="filenetin"><varref>OUTROOT</varref>/<varref>ASSUMEDGOOD_NAME</varref>/goldstein/goldstein_restart_2000_01_30.nc</param>
+			<param name="lin">spn.1</param>
+			<param name="ianav">90000</param>
+			<param name="itstp">9000</param>
+			<param name="iwstp">15</param>
+			<param name="npstp">90000</param>
+			<param name="nyear">180</param>
+			<param name="yearlen">360</param>
+			<param name="ans">c</param>
+			<param name="netout">y</param>
+			<param name="netin">y</param>
+		</model>
+		<model name="igcm">
+			<param name="dt_restart_igcmlandsurf">1920</param>
+			<param name="LSHORT">.false.</param>
+			<param name="fname_restart_igcmlandsurf"><varref>OUTROOT</varref>/<varref>ASSUMEDGOOD_NAME</varref>/igcm/igcmlandsurf_restart_2000_01_30.nc</param>
+			<param name="fname_restart_igcmoceansurf"><varref>OUTROOT</varref>/<varref>ASSUMEDGOOD_NAME</varref>/igcm/igcmoceansurf_restart_2000_01_30.nc</param>
+			<param name="dt_restart_igcmoceansurf">1920</param>
+			<param name="fname_spectral"><varref>OUTROOT</varref>/<varref>ASSUMEDGOOD_NAME</varref>/igcm/igcm_rs_2000_01.nc</param>
+			<param name="fname_gridpt"><varref>OUTROOT</varref>/<varref>ASSUMEDGOOD_NAME</varref>/igcm/igcm_rg_2000_01.nc</param>
+			<param name="KRUN">23040</param>
+			<param name="coldstart">.false.</param>
+			<param name="KOUNTR">1920</param>
+			<param name="L22L">.true.</param>
+			<param name="TSPD">64</param>
+		</model>
+		<model name="slabseaice">
+			<param name="fname_restart_slabseaice"><varref>OUTROOT</varref>/<varref>ASSUMEDGOOD_NAME</varref>/slabseaice/slabseaice_restart_2000_01_30.nc</param>
+			<param name="flag_fixedextent">.false.</param>
+			<param name="dt_restart_slabseaice">120</param>
+		</model>
+	</parameters>
+	<build>
+		<make-arg name="IGCMATMOSDP">TRUE</make-arg>
+		<make-arg name="GENIEDP">TRUE</make-arg>
+		<macro handle="GENIEMXLEVOPTS" status="defined">
+			<identifier>GENIEMXLEV</identifier>
+			<replacement>22</replacement>
+		</macro>
+		<macro handle="GENIENLOPTS" status="defined">
+			<identifier>GENIENL</identifier>
+			<replacement>22</replacement>
+		</macro>
+                <macro handle="GENIENLEVRFOPTS" status="defined">
+                        <identifier>GENIENLEVRF</identifier>
+                        <replacement>2</replacement>
+                </macro>
+	</build>
+	<testing>
+		<var name="ASSUMEDGOOD_NAME">genie_ig_go_sl_restartmake_l22</var>
+		<var name="TESTFILE">igcm/igcm_cl_2000_02.nc</var>
+	</testing>
+</job>

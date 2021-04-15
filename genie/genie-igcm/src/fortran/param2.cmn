@@ -1,0 +1,22 @@
+C
+C     Sets basic constants, especially those needed for array dimensions
+C
+      integer mh,nnp,mgpp,jgp,jgg,jggp,mjp,nlm,nlp,nlpp,
+     :        nla,nlb,nl2,ida,idb,idc,idd,ide,idf,idg,idh,
+     :        idi,idj,idk,idl,idm,idn,nww,iga,igb,igc,igd,igg,igl,
+     :        igm,ign,igo,igp,nftwg,nftgw,nftgd,nltr,
+     :        ngrpad
+      real pi,pi2
+      PARAMETER(MH=2,PI=3.14159265359,PI2=2.0*PI
+     +,NNP=NN+1,MGPP=MG+2,JGP=JG+1,JGG=JG*NHEM,JGGP=JGG+1,MJP=NWJ2+NWJ2
+     +,NLM=NL-1,NLP=NL+1,NLPP=NL+2,NLA=NL+3,NLB=NL+4,NL2=NL*NL
+     +,IDA=(MG+MG+MG)/2+1,IDB=NWJ2*NL,IDC=IDB+IDB,IDD=MGPP*NL
+     +,IDE=NL2*NN,IDF=NCRAY*(MG+1),IDG=JG*NL,IDH=JG*MG
+     +,IDI=NNP/2,IDJ=IDI*IDI,IDK=NL*IDI,IDL=MGPP/2,IDM=NNP/2,IDN=IDM*NL
+     +,NWW=1+(MM-1)/MOCT)
+      PARAMETER(IGA=NWJ2*NHEM,IGB=IDB*NHEM,IGC=MGPP*NHEM,IGD=IDD*NHEM
+     +,IGG=IDG*NHEM,IGL=IDL*NHEM,IGM=IDM*NHEM,IGN=IDN*NHEM
+     +,IGO=IGA+IGA,IGP=IGB+IGB,NFTWG=(5+NTRAC)*NL+3
+     +,NFTGW=(6+3*NTRAC)*NL+2,NFTGD=(3+NTRAC)*NL,NLTR=NL*NTRAC)
+      PARAMETER (NGRPAD=29*IGC*JG+2*IGC+IGC*NL*JG)
+C

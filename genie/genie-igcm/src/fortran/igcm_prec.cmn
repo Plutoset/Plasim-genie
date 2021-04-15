@@ -1,0 +1,5 @@
+      REAL prec_larg,prec_conv
+      logical lownprecip
+      COMMON/igcm_prec/prec_larg(igc,jg),
+     :         prec_conv(igc,jg),
+     :         lownprecip

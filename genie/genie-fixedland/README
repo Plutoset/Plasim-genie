@@ -1,0 +1,21 @@
+***********************************
+         genie-fixedland
+***********************************
+
+This module provides a fixed land-surface for use with other GENIE
+components in the same way that genie-fixedatmos and genie-fixedocean
+do for the atmosphere and ocean models.
+
+The idea is that it has exactly the same I/O (argument list) as the
+full genie-land module, but provides an unresponsive boundary
+condition.  There will probably be 3 configurations of
+genie-fixedland:
+
+C1: "Do Nothing Land", which tries to replicate the old c-goldstein
+land (LWout=LWin, LE=H=0, Tsurf=Tatm, Runoff=precip)
+
+C2: "Do Something Land", which provides constant, uniform fluxes and
+state variables.
+
+C3: "Seasonal Land", which provides geographically varying monthly
+mean fluxes and state variables.

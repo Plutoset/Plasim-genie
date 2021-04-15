@@ -1,0 +1,111 @@
+Installing the Geodise computational toolkit for Matlab version 0.5
+
+Graeme Pound 		
+Copyright Geodise Project	    				  28th March 2003
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This version of the Geodise computational toolkit for Matlab provides a
+Globus v2.x client from the Matlab environment. It has been designed to 
+work with Matlab 6.5 (running within Java 1.3.1; "version -java"), the 
+Java CoG 1.1alpha
+
+The user should have a valid X509 certificate from a Certificate 
+Authority acceptable to the managers of the Globus resources that the 
+user wishes to access. To access Globus resources the user should submit 
+the subject line of their certificate to the resource managers to allow 
+them to map it to the user's account.
+
+These installation instructions will describe how to setup the Java CoG, 
+and how to install the Geodise computation toolkit in the Matlab 
+environment.
+
+
+1) Setting up the Java CoG.
+	This creates a creates a cog.properties file containing the default 
+	settings for the Java CoG, in a .globus directory in the user's 
+	home directory. Once this process is complete the Java CoG command 
+	line tools may be used.
+
+	a) Create a .globus directory in the user's home directory
+
+	b) Copy the example cog.properties file into the .globus directory, 
+	and edit the values of the properties 'usercert', 'userkey', 'proxy'
+	and 'cacert' to the correct values
+
+	c) OPTIONAL: For performance the user may wish to change the random 
+	seed algorithm, see the section II.3 of the Java CoG FAQ
+
+2) Add the required Java Classes to the Matlab classpath.
+	The Java classes which comprise the Java CoG, the Geodise toolkit 
+	and additional required libraries must all be made available via 
+	the Matlab classpath. This is set in the file classpath.txt in the 
+	directory $MATLABROOT\toolbox\local\. However on a shared system 
+	changes made to this file will effect all users, it may be better 
+	to edit a copy of the original classpath.txt kept in the directory 
+	from which Matlab is started. For more information see: http://www.mathworks.com/access/helpdesk/help/techdoc/matlab_external/ch_java4.shtml
+
+	The locations of the following jar files should be added to the 
+	classpath.txt file:
+
+	a) jar files distributed with the Java CoG 1.1a (in the \lib directory)	
+		cog-jglobus.jar
+		cog-lib.jar
+		cog-tools.jar
+		cryptix-asn1.jar
+		cryptix.jar
+		cryptix32.jar
+		jaas.jar
+		jce-jdk13-117.jar
+		jgss.jar
+		jndi.jar
+		junit.jar
+		ldap.jar
+		ldapbp.jar
+		log4j-1.2.7.jar
+		puretls.jar
+
+	b) jar file containing the Geodise computational toolkit classes
+		gdcompute.jar
+	
+	e) OPTIONAL: Random seed algorithm if used, see section 1.d above
+		InfiniteMonkey.jar 	
+
+	It is necessary to restart Matlab for changes to the classpath to 
+	take effect. 
+
+3) Running the the Geodise computational toolkit for Matlab.
+	Navigate to the directory containing the toolbox .m files and run 
+	testScript.m to test the installation. The testScript.m should be 
+	edited to add the name of a Globus compute resource which the user 
+	is authorized to use. 
+
+	There are three (no four) types of error which you may recieve;
+
+	a) The toolbox is incorrectly installed. If you receive an error 
+	such as;
+      "??? Undefined variable 'org' or class 'org.geodise.computational."
+	the Geodise computational toolkit classes, or any of the packages 
+	which it requires is not visible to Matlab. Check that all the .jar 
+	files listed above have been added to the Matlab classpath.
+
+	b) The Java CoG is incorrectly configured. A correct cog.properties 
+	file is required by the Java CoG to locate the user's certificate, 
+	private key	and CA certificates.
+
+	c) A failure to communicate with the Globus server. Unfortuately 
+	there are numerous ways for Globus to fall over, typically the Java 
+	CoG will return a more or less crypic Java error. I am trying to 
+	identify and handle these errors within the Matlab code, if you have 
+	such and error please send it to me and the problem may be handled 
+	better in the next release. This webpage may help diagnose any 
+	mysterious errors;
+		http://www.globus.org/about/faq/errors.html
+	
+	d) A bug in the code. The testScript is designed to be flexible, but
+	it may not be appropriate for configuration of your server, let me 
+	know if you have a problem.
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+This product includes software developed by and/or derived from the 
+Globus project (http://www.globus.org/).

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job author="config2xml.py - automatic conversion of ASCII text config file">
+	<vars>
+		<var name="EXPID">genie_ig_fi_fi_tunehadam_mod</var>
+	</vars>
+	<config>
+		<model name="fixedchem"/>
+		<model name="fixedseaice"/>
+		<model name="fixedicesheet"/>
+		<model name="fixedocean"/>
+		<model name="igcm"/>
+	</config>
+	<parameters>
+		<control>
+			<param name="koverall_total">95040</param>
+		</control>
+		<model name="fixedchem">
+			<param name="co2_fix">345.0e-6</param>
+		</model>
+		<model name="fixedseaice">
+			<param name="fname_sstetc"><varref>CODEDIR</varref>/genie-fixedseaice/data/input/sst_xajpa.nc</param>
+		</model>
+		<model name="fixedicesheet">
+			<param name="fname_iland"><varref>CODEDIR</varref>/genie-fixedicesheet/data/input/limit_pelt_0_new.nc</param>
+			<param name="fname_orog"><varref>CODEDIR</varref>/genie-fixedicesheet/data/input/limit_pelt_0_new.nc</param>
+			<param name="fname_icefrac"><varref>CODEDIR</varref>/genie-fixedicesheet/data/input/limit_pelt_0_new.nc</param>
+		</model>
+		<model name="fixedocean">
+			<param name="fname_sstetc"><varref>CODEDIR</varref>/genie-fixedocean/data/input/sst_xajpa.nc</param>
+		</model>
+		<model name="igcm">
+			<param name="p_zobl">23.446</param>
+			<param name="LOROG">.false.</param>
+			<param name="fname_vegetation"><varref>CODEDIR</varref>/genie-igcm/data/input/limit_pelt_0_new.nc</param>
+			<param name="p_zecc">0.01724</param>
+			<param name="p_zproff">-1.44994</param>
+			<param name="p_zw">281.37</param>
+			<param name="exact_orbit">.true.</param>
+			<param name="fname_runoff"><varref>CODEDIR</varref>/genie-igcm/data/input/runoff_pelt_nn_t21.nc</param>
+		</model>
+	</parameters>
+	<build>
+	</build>
+	<testing>
+	</testing>
+</job>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job author="config2xml.py - automatic conversion of ASCII text config file">
+	<vars>
+		<var name="EXPID">genie_igt42_go_sl_l22_new</var>
+	</vars>
+	<config>
+		<model name="fixedchem"/>
+		<model name="fixedicesheet"/>
+		<model name="goldstein"/>
+		<model name="igcm"/>
+		<model name="slabseaice"/>
+	</config>
+	<parameters>
+		<control>
+			<param name="ksic_loop">16</param>
+			<param name="koverall_total">320</param>
+			<param name="genie_timestep">1350.0</param>
+			<param name="kocn_loop">128</param>
+			<param name="dt_write">23040</param>
+		</control>
+		<model name="fixedchem">
+		</model>
+		<model name="fixedicesheet">
+			<param name="fname_icefrac"><varref>CODEDIR</varref>/genie-fixedicesheet/data/input/icefrac_t42.nc</param>
+			<param name="fname_orog"><varref>CODEDIR</varref>/genie-fixedicesheet/data/input/orog_grid_std_t42.nc</param>
+			<param name="fname_iland"><varref>CODEDIR</varref>/genie-fixedicesheet/data/input/landmask_std_t42.nc</param>
+		</model>
+		<model name="goldstein">
+			<param name="ianav">90000</param>
+			<param name="itstp">900</param>
+			<param name="iwstp">180</param>
+			<param name="npstp">90000</param>
+			<param name="nyear">180</param>
+			<param name="yearlen">360</param>
+		</model>
+		<model name="igcm">
+			<param name="dt_restart_igcmlandsurf">23040</param>
+			<param name="KOUNTR">23040</param>
+			<param name="fname_ozone"><varref>CODEDIR</varref>/genie-igcm/data/input/ozone_t42.nc</param>
+			<param name="KRUN">23040</param>
+			<param name="coldstart_grid">.true.</param>
+			<param name="dt_restart_igcmoceansurf">23040</param>
+			<param name="fname_sstetc"><varref>CODEDIR</varref>/genie-igcm/data/input/tqpap_t42.nc</param>
+			<param name="fname_runoff"><varref>CODEDIR</varref>/genie-igcm/data/input/runoff_t42.nc</param>
+			<param name="NDEL">0</param>
+			<param name="lmonthly">.false.</param>
+			<param name="ldaily">.true.</param>
+			<param name="fname_orog_spec"><varref>CODEDIR</varref>/genie-igcm/data/input/orog_spectral_std_t42.nc</param>
+			<param name="tempzero">30.0</param>
+			<param name="coldstart_gmsp">.true.</param>
+			<param name="fname_vegetation"><varref>CODEDIR</varref>/genie-igcm/data/input/vegetation_new_t42.nc</param>
+			<param name="coldstart_lsurf">.true.</param>
+			<param name="L22L">.true.</param>
+			<param name="TSPD">64</param>
+			<param name="fname_watervapour"><varref>CODEDIR</varref>/genie-igcm/data/input/water_t42.nc</param>
+		</model>
+		<model name="slabseaice">
+			<param name="flag_fixedextent">.false.</param>
+			<param name="readflux_slabseaice">.false.</param>
+			<param name="dt_restart_slabseaice">1440</param>
+			<param name="coldstart_slabseaice">.true.</param>
+		</model>
+	</parameters>
+	<build>
+		<make-arg name="IGCMATMOSDP">TRUE</make-arg>
+		<make-arg name="GENIEDP">TRUE</make-arg>
+		<macro handle="IGCMPQSATTESTOPTS" status="defined">
+			<identifier>IGCMPQSATTEST</identifier>
+		</macro>
+		<macro handle="GENIENYOPTS" status="defined">
+			<identifier>GENIENY</identifier>
+			<replacement>64</replacement>
+		</macro>
+		<macro handle="GENIENLOPTS" status="defined">
+			<identifier>GENIENL</identifier>
+			<replacement>22</replacement>
+		</macro>
+		<macro handle="IGCMNNOPTS" status="defined">
+			<identifier>IGCMNN</identifier>
+			<replacement>42</replacement>
+		</macro>
+		<macro handle="GENIENXOPTS" status="defined">
+			<identifier>GENIENX</identifier>
+			<replacement>128</replacement>
+		</macro>
+		<macro handle="GENIEMXLEVOPTS" status="defined">
+			<identifier>GENIEMXLEV</identifier>
+			<replacement>22</replacement>
+		</macro>
+		<macro handle="IGCMMMOPTS" status="defined">
+			<identifier>IGCMMM</identifier>
+			<replacement>42</replacement>
+		</macro>
+		<macro handle="IGCMNWJ2OPTS" status="defined">
+			<identifier>IGCMNWJ2</identifier>
+			<replacement>462</replacement>
+		</macro>
+		<macro handle="GENIENLEVRFOPTS" status="defined">
+			<identifier>GENIENLEVRF</identifier>
+			<replacement>2</replacement>
+		</macro>
+	</build>
+	<testing>
+	</testing>
+</job>

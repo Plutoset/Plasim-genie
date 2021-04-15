@@ -1,0 +1,23 @@
+
+*** testing length of classic file
+*** testing length of rewritten classic file
+*** testing length of rewritten classic file written with NOFILL
+*** testing length of 64-bit offset file
+*** testing length of 64-bit offset file written with NOFILL
+*** testing length of rewritten 64-bit offset file
+*** testing length of rewritten 64-bit offset file written with NOFILL
+*** testing length of 64-bit data file
+*** testing length of 64-bit data file
+*** testing length of 64-bit data file written with NOFILL
+*** testing length of rewritten 64-bit data file
+*** testing length of rewritten 64-bit data file written with NOFILL
+*** testing length of one-record-variable classic file
+*** testing length of one-record-variable 64-bit data file
+*** testing length of one-record-variable 64-bit data file
+*** testing length of one-record-variable 64-bit data file written with NOFILL
+*** testing length of one-record-variable classic file written with NOFILL
+*** testing length of one-record-variable classic file written with NOFILL
+*** testing length of one-record-variable classic file written with NOFILL
+*** testing length of one-record-variable 64-bit offset file
+*** testing length of one-record-variable 64-bit offset file written with NOFILL
+PASS tst_lengths.sh (exit status: 0)

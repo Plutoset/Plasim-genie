@@ -1,0 +1,8 @@
+C
+C     Constants and arrays needed for the fast Fourier transforms
+C
+      real trig,work
+      integer ntgw,nrstgw,ntwg,nrstwg,ntgd,nrstgd,ifax
+      COMMON/COMFFT/NTGW,NRSTGW,NTWG,NRSTWG,NTGD,NRSTGD
+     +              ,TRIG(IDA),WORK(IDF),IFAX(10)
+C

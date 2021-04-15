@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job author="config2xml.py - automatic conversion of ASCII text config file">
+	<vars>
+		<var name="EXPID">genie_ig_sl_sl_std</var>
+	</vars>
+	<config>
+		<model name="fixedchem"/>
+		<model name="slabocean"/>
+		<model name="fixedicesheet"/>
+		<model name="igcm"/>
+		<model name="slabseaice"/>
+	</config>
+	<parameters>
+		<control>
+			<param name="lgraphics">.false.</param>
+			<param name="koverall_total">86400</param>
+		</control>
+		<model name="fixedchem">
+		</model>
+		<model name="slabocean">
+			<param name="fname_siflux"><varref>OUTDIR</varref>/genie_ig_sl_sl_fluxmaker/slabseaice/slabseaice_fluxes.nc</param>
+			<param name="fname_ocflux"><varref>OUTDIR</varref>/genie_ig_sl_sl_fluxmaker/slabocean/slabocean_fluxes.nc</param>
+		</model>
+		<model name="fixedicesheet">
+		</model>
+		<model name="igcm">
+		</model>
+		<model name="slabseaice">
+			<param name="fname_ocflux"><varref>OUTDIR</varref>/genie_ig_sl_sl_fluxmaker/slabocean/slabocean_fluxes.nc</param>
+			<param name="flag_fixedextent">.false.</param>
+			<param name="fname_siflux"><varref>OUTDIR</varref>/genie_ig_sl_sl_fluxmaker/slabseaice/slabseaice_fluxes.nc</param>
+		</model>
+	</parameters>
+	<build>
+	</build>
+	<testing>
+	</testing>
+</job>

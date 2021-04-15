@@ -1,0 +1,28 @@
+#!/bin/ksh
+
+# This script runs the igcm-slabseaice-goldstein combo for 2 years,
+#   produces a climate which can be read by the fixedatmos, and then
+#   runs a 10-year fixedatmos-goldstein run.
+
+# *************************************************************
+# The code and output directories:
+GENIEROOT=~/genie
+OUTPUTDIR=/export/dryas/array-02/ggdjl/genie_output
+# *************************************************************
+
+
+
+cd $GENIEROOT/genie-main
+
+make cleanall
+
+
+# The loop would start here if we had many iterations...
+
+make clean
+genie_example.job genie_ig_go_sl_makefixed.config
+$GENIEROOT/genie-utilities/src/ksh/make_clim_scr 2 2000 2 2002 genie_ig_go_sl_makefixed $OUTPUTDIR
+
+make clean
+genie_example.job genie_fi_go_igcm.config
+

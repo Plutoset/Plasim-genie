@@ -1,0 +1,11 @@
+C
+C     Array ordering in SPECTR must correspond to that in GRIDP.
+C
+      COMMON/SPECTR/Z(IGB),D(IGB),T(IGB),TRA(IGB,NTRAC),SP(IGA),GS(IGA)
+     :              ,SPA(IGA),VP(IGA),DTE(IGB),TT(IGB)
+     :              ,TRAT(IGB,NTRAC),DT(IGB),ZT(IGB)
+     :              ,ZMI(IGB),DMI(IGB),TMI(IGB)
+     :              ,TRAMI(IGB,NTRAC),SPMI(IGA)
+      COMPLEX Z,D,T,TRA,SP,GS,SPA,VP,DTE,TT,TRAT,DT,ZT
+     :       ,ZMI,DMI,TMI,TRAMI,SPMI
+C

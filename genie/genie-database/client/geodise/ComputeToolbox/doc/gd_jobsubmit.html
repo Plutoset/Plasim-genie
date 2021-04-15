@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE> gd_jobsumit (Matlab Functions) </TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.0  (Win32)">
+	<META NAME="CREATED" CONTENT="20031003;16082415">
+	<META NAME="CHANGED" CONTENT="20031006;17183449">
+	<META NAME="FORMATTER" CONTENT="Arachnophilia 5.2">
+	<!-- Created on 02-Oct-2003 11:39:22 -->
+	<!-- Top navigation bar -->
+	<STYLE>
+	<!--
+		@page { size: 21cm 29.7cm }
+		TD P { color: #000000; font-family: "arial" }
+		P { color: #000000; font-family: "arial" }
+		A:link { color: #0000ff }
+		A:visited { color: #800080 }
+		ul {list-style-type: none}
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" TEXT="#000000" LINK="#0000ff" VLINK="#800080" BGCOLOR="#ffffff" DIR="LTR">
+<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0 BGCOLOR="#99ccff" STYLE="page-break-before: always">
+	<TR>
+		<TD>
+			<P><B>MATLAB Function Reference</B> 
+			</P>
+		</TD>
+		<TD>
+			<P ALIGN=RIGHT><A HREF="gd_jobstatus.html"><IMG SRC="b_prev.gif" NAME="Graphic1" ALIGN=BOTTOM WIDTH=17 HEIGHT=17 BORDER=0></A>
+			&nbsp;&nbsp;&nbsp; 
+			<A HREF="gd_listjobs.html"><IMG SRC="b_next.gif" NAME="Graphic2" ALIGN=BOTTOM WIDTH=17 HEIGHT=17 BORDER=0></A>
+						</P>
+		</TD>
+	</TR>
+</TABLE>
+<P><FONT COLOR="#000099"><!-- Function name and short description --><FONT SIZE=6>gd_jobsubmit
+</FONT></FONT>
+</P>
+<P>Submits a compute job to a Globus GRAM job manager</P>
+<P><FONT COLOR="#000099"><!-- Function syntax --><FONT SIZE=4><B>Syntax</B>
+</FONT></FONT>
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm"><CODE>JOBHANDLE =
+	gd_jobsubmit(RSL,HOST)</CODE></P>
+	<P STYLE="margin-bottom: 0cm"><CODE> </CODE>
+	</P>
+</UL>
+<P><!-- Function description --><FONT SIZE=4><FONT COLOR="#000099"><B>Description</B>
+</FONT></FONT><BR><BR><CODE>JOBHANDLE = gd_jobsubmit(RSL,HOST)</CODE>
+This command submits a compute job to a Globus server running a GRAM
+job manager. Where RSL is a string describing the submitted job, HOST
+is the name of the Globus server, and JOBHANDLE is the handle for a
+successfully submitted job. 
+</P>
+<P><!-- Remarks --><FONT SIZE=4><FONT COLOR="#000099"><B>Remarks</B>
+</FONT></FONT><BR><BR>Note that a valid proxy certificate is required
+to submit a GRAM job. For more information about RSL see
+<A HREF="http://www.globus.org/gram/">http://www.globus.org/gram/</A>.</P>
+<P><!-- Examples --><FONT SIZE=4><FONT COLOR="#000099"><B>Examples</B>
+</FONT></FONT><BR><BR>This is an example job submission.</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm"><CODE>jobHandle =
+	gd_jobsubmit('&amp;(executable =/bin/date)','myhost.mydomain.com') </CODE>
+	</P>
+	<P STYLE="margin-bottom: 0cm"></P>
+</UL>
+<P><!-- See also --><FONT SIZE=4><FONT COLOR="#000099"><B>See also</B>
+</FONT></FONT><BR><BR><CODE><A HREF="gd_createproxy.html"><SPAN STYLE="font-style: normal">gd_createproxy</SPAN></A>,
+<A HREF="gd_jobkill.html">gd_jobkill</A>, <A HREF="gd_jobstatus.html">gd_jobstatus</A></CODE>
+</P>
+<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0 BGCOLOR="#99ccff">
+	<TR>
+		<TD WIDTH=20>
+			<P ALIGN=LEFT><!-- Bottom navigation bar --><A HREF="gd_jobstatus.html"><IMG SRC="b_prev.gif" NAME="Graphic3" ALIGN=BOTTOM WIDTH=17 HEIGHT=17 BORDER=0></A>
+						</P>
+		</TD>
+		<TD>
+			<P ALIGN=LEFT>gd_jobstatus 
+			</P>
+		</TD>
+		<TD>
+			<P>&nbsp; 
+			</P>
+		</TD>
+		<TD>
+			<P ALIGN=RIGHT>gd_listjobs 
+			</P>
+		</TD>
+		<TD WIDTH=20>
+			<P ALIGN=RIGHT><A HREF="gd_listjobs.html"><IMG SRC="b_next.gif" NAME="Graphic4" ALIGN=BOTTOM WIDTH=17 HEIGHT=17 BORDER=0></A>
+						</P>
+		</TD>
+	</TR>
+</TABLE>
+<P><BR><BR>
+</P>
+</BODY>
+</HTML>

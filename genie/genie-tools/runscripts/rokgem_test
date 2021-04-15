@@ -1,0 +1,118 @@
+# --- CLIMATE --------------------------------------------------
+#
+# set climate feedback
+ea_36=y
+# set no seasonal cycle
+ea_dosc=.false.
+go_dosc=.false.
+gs_dosc=.false.
+#
+# --- TRACER SELECTION -----------------------------------------
+#
+# Set number of tracers
+GOLDSTEINNTRACSOPTS='$(DEFINE)GOLDSTEINNTRACS=10'
+# Set selected tracers
+gm_atm_select_3=.true.
+gm_atm_select_6=.true.
+gm_ocn_select_3=.true.
+gm_ocn_select_8=.true.
+gm_ocn_select_10=.true.
+gm_ocn_select_12=.true.
+gm_ocn_select_15=.true.
+gm_ocn_select_20=.true.
+gm_ocn_select_35=.true.
+gm_ocn_select_50=.true.
+gm_sed_select_3=.true.
+gm_sed_select_8=.true.
+gm_sed_select_14=.true.
+gm_sed_select_22=.true.
+gm_sed_select_32=.true.
+gm_sed_select_33=.true.
+gm_sed_select_34=.true.
+gm_sed_select_36=.true.
+# Set tracer initial values
+ac_atm_init_3=278.0E-06
+ac_atm_init_6=0.2095
+bg_ocn_init_3=2.244E-03
+bg_ocn_init_8=2.159E-06
+bg_ocn_init_10=1.696E-04
+bg_ocn_init_12=2.363E-03
+bg_ocn_init_35=1.025E-02
+bg_ocn_init_50=5.282E-02
+#
+# --- BIOLOGICAL NEW PRODUCTION --------------------------------
+#
+# maximum rate of conversion of dissolved PO4 into organic matter by phytoplankton (mol kg-1 yr-1)
+bg_par_bio_k0_PO4=1.9582242E-06
+#[PO4] M-M half-sat value (mol kg-1)
+bg_par_bio_c0_PO4=2.1989611E-07
+#
+# --- ORGANIC MATTER EXPORT RATIOS -----------------------------
+#
+#production fraction of dissolved organic matter
+bg_par_bio_red_DOMfrac=0.66
+#
+# --- INORGANIC MATTER EXPORT RATIOS ---------------------------
+#
+# underlying export CaCO3 as a proportion of particulate organic matter (i.e. CaCO3/POC)
+bg_par_bio_red_POC_CaCO3=0.044372
+#exponent for modifier of CaCO3:POC export ratio
+bg_par_bio_red_POC_CaCO3_pP=0.8053406
+#
+bg_ctrl_force_CaCO3toPOCrainratio=.true.
+bg_par_CaCO3toPOCrainratio_file="CaCO3toPOCrainratio_worbe2_preindustrial.dat"
+#
+# --- REMINERALIZATION -----------------------------------------
+#
+#DOC lifetime (yrs)
+bg_par_bio_remin_DOMlifetime=0.5
+#initial fractional abundance of POC component #2
+bg_par_bio_remin_POC_frac2=6.4591110E-02
+# depth of remineralization or particulate organic matter
+bg_par_bio_remin_POC_eL1=550.5195
+#remineralization length #2 for POC
+bg_par_bio_remin_POC_eL2=1000000.0
+#initial fractional abundance of CaCO3 component #2
+bg_par_bio_remin_CaCO3_frac2=0.4325
+# depth of remineralization or CaCO3
+bg_par_bio_remin_CaCO3_eL1=1083.486
+#remineralization length #2 for CaCO3
+bg_par_bio_remin_CaCO3_eL2=1000000.0
+#
+# --- MISC -----------------------------------------------------
+#
+bg_ctrl_force_sed_closedsystem=.false.
+bg_ctrl_debug_lvl2=.true.
+#
+# --- DATA SAVING ----------------------------------------------
+#
+bg_par_infile_sig_name="save_sig_log10.dat"
+bg_par_infile_slice_name="save_sig_log10.dat"
+bg_opt_append_data=.TRUE.
+#sg_par_output_years_file_0d="sedgem_output_years_0d.dat"
+#rg_par_output_years_file_0d="rokgem_output_years_0d.dat"
+gm_par_string_results_ext=".dat" 
+#
+# --- FORCINGS -------------------------------------------------
+#
+#
+# --- WEATHERING -----------------------------------------------
+rg_par_weather_CaCO3=5.16095E+12
+rg_par_weather_CaSiO3=5.16095E+12
+rg_par_outgas_CO2=5.16095E+12
+rg_opt_weather_T_Ca=.TRUE.
+rg_opt_weather_T_Si=.TRUE.
+# --- GENERATED ENSEMBLE VARIABLES ------------------------------
+bg_par_fordir_name="$RUNTIME_ROOT/../genie_forcings/none"
+rg_par_weathopt="Global_avg"
+bg_par_misc_t_start=0.0
+rg_start_year=0.0
+sg_start_year=0.0
+
+bg_par_misc_t_start=4.0
+rg_start_year=4.0
+sg_start_year=4.0
+
+bg_par_misc_t_start=8.0
+rg_start_year=8.0
+sg_start_year=8.0

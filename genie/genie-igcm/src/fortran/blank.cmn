@@ -1,0 +1,27 @@
+C
+C     Basic planetary parameters for run plus information about
+C     vertical grid structure
+C
+C     Note that RD and GASCON are identical and CPD is set from RD,AKAP.
+C
+      REAL SQ,RSQ,SIGMAH,SIGMA,T01S2,T0,ALPHA,DSIGMA,RDSIG,
+     :     TKP,C,SQH,AKAP,GA,GASCON,RADEA,WW,P0,PFAC,
+     :     RD,RV,CPD,CLATNT
+      COMPLEX EZ,AIOCT
+      LOGICAL LRSTRT,LSHORT,LTVEC,LSTRETCH,LBALAN,LRESTIJ
+     +       ,LFLUX,LNOISE
+     +       ,LCLIM, LPERPET, L22L,LOROG,LCSFCT,lcheckwater
+      INTEGER MF,MFP,JZF,NF,NFP
+      COMMON        SQ(NNP),RSQ(NNP),SIGMAH(NLM),SIGMA(NL)
+     +              ,T01S2(NLM),T0(NL),ALPHA(NL),DSIGMA(NL),RDSIG(NL)
+     +              ,TKP(NL),C(NL2),SQH(NNP)
+     +              ,AKAP,GA,GASCON,RADEA,WW,P0,PFAC
+     +              ,RD,RV,CPD,CLATNT
+     +              ,EZ,AIOCT
+     +              ,LRSTRT,LSHORT,LTVEC,LSTRETCH
+     +              ,LFLUX
+     +              ,LBALAN,LRESTIJ
+     +              ,LCLIM, LPERPET, L22L,LOROG,LCSFCT
+     +              ,LNOISE,lcheckwater
+     +              ,MF,MFP,JZF,NF,NFP
+C

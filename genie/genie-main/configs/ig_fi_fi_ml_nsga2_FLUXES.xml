@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job author="config2xml.py - automatic conversion of ASCII text config file">
+	<vars>
+		<var name="EXPID">genie_ig_fi_fi_ml_nsga2_FLUXES</var>
+	</vars>
+	<config>
+		<model name="fixedchem"/>
+		<model name="fixedseaice"/>
+		<model name="fixedicesheet"/>
+		<model name="fixedocean"/>
+		<model name="igcm"/>
+		<model name="mosestriffid"/>
+	</config>
+	<parameters>
+		<control>
+			<param name="koverall_total">86400</param>
+		</control>
+		<model name="fixedchem">
+			<param name="co2_fix">279.0e-6</param>
+		</model>
+		<model name="fixedseaice">
+			<param name="fname_sstetc">../../genie/genie-fixedseaice/data/input/sst_xbmsc.nc</param>
+			<param name="dt_restart_fixedseaice">120</param>
+			<param name="albedo_seaice">0.691367506980896</param>
+		</model>
+		<model name="fixedicesheet">
+			<param name="albedo_icesheet">0.787802219390869</param>
+		</model>
+		<model name="fixedocean">
+			<param name="fname_sstetc">../../genie/genie-fixedocean/data/input/sst_xbmsc.nc</param>
+			<param name="dt_restart_fixedocean">15</param>
+			<param name="albedo_ocean">0.074954211711883</param>
+		</model>
+		<model name="igcm">
+			<param name="supersatlarg">0.039187271147966</param>
+			<param name="powercloud">1.091452956199646</param>
+			<param name="akqv">1.150378465652465</param>
+			<param name="rough_ocean">0.001524954219348</param>
+			<param name="tyblcnst">4.945201396942138</param>
+			<param name="shsstar">2.326943397521972</param>
+			<param name="lcr">.false.</param>
+			<param name="cloudconvbase">0.997374832630157</param>
+			<param name="rhil">1.596593379974365</param>
+			<param name="itsll">1</param>
+			<param name="dt_restart_igcmoceansurf">720</param>
+			<param name="redshc">0.296031743288040</param>
+			<param name="increaseu">7.446703433990478</param>
+			<param name="increaset">2.253891944885253</param>
+			<param name="fluxfactor">1.009035468101501</param>
+			<param name="cloudmfact">3.715430498123168</param>
+			<param name="segrad">0.230302199721336</param>
+			<param name="cloudlfact">3.913232564926147</param>
+			<param name="lcr_tiedtke">.true.</param>
+			<param name="txblcnst">4.945201396942138</param>
+			<param name="supersatconv">0.029205586761236</param>
+			<param name="enhancestable">0.050778388977050</param>
+			<param name="trcnv">22.15814971923828</param>
+			<param name="zradef">19.72641944885253</param>
+			<param name="KOUNTR">720</param>
+			<param name="rhbl">1.646098852157592</param>
+			<param name="trshc">10.20775318145752</param>
+			<param name="blvad">4.718925476074218</param>
+			<param name="cloudconvnorm">0.119670331478118</param>
+			<param name="rhgrad">1.067081212997436</param>
+			<param name="albedo_fix">0.050183150917291</param>
+			<param name="humcloudmax">0.856431603431701</param>
+			<param name="emissconstb">139.3015899658203</param>
+			<param name="emissconsta">1.298809528350830</param>
+			<param name="entmax">0.936568975448608</param>
+			<param name="enhancelim">2.021733760833740</param>
+			<param name="blrh">119.8852233886718</param>
+			<param name="increaseq">1.250012159347534</param>
+			<param name="trvdi">35.32051467895507</param>
+			<param name="cloudhfact">1.816163063049316</param>
+			<param name="lvar_albedo">.true.</param>
+			<param name="smf">0.966025650501251</param>
+			<param name="humcloudmin">0.605064094066619</param>
+			<param name="trvds">33.52985382080078</param>
+			<paramArray name="snolook">
+				<param index="2">0.833943843841552</param>
+			</paramArray>
+		</model>
+		<model name="mosestriffid">
+			<param name="irest_land">720</param>
+		</model>
+	</parameters>
+	<build>
+                <make-arg name="FLAG_MOSESTRIFFID">ON</make-arg>
+	</build>
+	<testing>
+	</testing>
+</job>

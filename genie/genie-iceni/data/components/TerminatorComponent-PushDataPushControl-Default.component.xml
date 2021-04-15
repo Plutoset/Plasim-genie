@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<privateResourceInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.iceni.ic.ac.uk/xmlSchema/resource"
+  xmlns:basic="http://www.iceni.ic.ac.uk/xmlSchema/basic"
+  xmlns:policy="http://www.iceni.ic.ac.uk/xmlSchema/policy"
+  xsi:schemaLocation="http://www.iceni.ic.ac.uk/xmlSchema/resource http://www.lesc.ic.ac.uk/iceni/xml/runtime/RESOURCE.xsd"
+  type="org.icenigrid.component_runtime.component.SoftwareResource" publicType="org.icenigrid.component_runtime.component.PublicSoftwareResource" name="TerminatorComponent-PushDataPushControl-Default">
+    <classpath>
+        <basic:module>iceni-component-runtime</basic:module>
+    </classpath>
+    <staticAttribute name="cdl" public="false" type="org.icenigrid.runtime.component.cdl.ComponentTypeDefinition">
+        <contents>TerminatorComponent-PushDataPushControl-Default.cdl.xml</contents>
+    </staticAttribute>
+    <staticAttribute name="bdl" public="false" type="org.icenigrid.runtime.component.bdl.ComponentBehaviour">
+        <contents>TerminatorComponent-PushDataPushControl-Default.bdl.xml</contents>
+    </staticAttribute>
+    <staticAttribute name="idl" public="false" type="org.icenigrid.runtime.component.idl.ComponentImplementation">
+        <contents>TerminatorComponent-PushDataPushControl-Default.idl.xml</contents>
+    </staticAttribute>
+    <staticAttribute name="publicDomains" public="false" type="org.icenigrid.runtime.domain.info.PublicDomainContainer">
+        <contents>TerminatorComponent-PushDataPushControl-Default.contract.xml</contents>
+    </staticAttribute>
+</privateResourceInfo>

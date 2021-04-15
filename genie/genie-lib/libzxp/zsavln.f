@@ -1,0 +1,31 @@
+c
+      SUBROUTINE ZSAVLN(X1,Y1,I1)
+      INTEGER ICOUNT
+      INTEGER I
+      INTEGER I1
+      INTEGER I2
+      REAL X1(*),Y1(*),X2(*),Y2(*)
+      REAL XSAVE(8000),YSAVE(8000)
+      SAVE XSAVE,YSAVE,ICOUNT
+      DATA ICOUNT/0/
+C
+      DO I=ICOUNT+1,ICOUNT+I1
+         XSAVE(I)=X1(I-ICOUNT)
+         YSAVE(I)=Y1(I-ICOUNT)
+      END DO
+      ICOUNT=ICOUNT+I1+1
+      XSAVE(ICOUNT)=-999.999
+      YSAVE(ICOUNT)=-999.999
+      RETURN
+      ENTRY ZGETLN(X2,Y2,I2)
+C
+      DO I=1,ICOUNT
+         X2(I)=XSAVE(I)
+         Y2(I)=YSAVE(I)
+      END DO
+C
+      I2=ICOUNT
+      ICOUNT=0
+C
+      RETURN
+      END

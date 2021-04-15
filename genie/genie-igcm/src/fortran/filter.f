@@ -1,0 +1,51 @@
+      SUBROUTINE FILTER(FILT,MM,AFIL,MFIL)
+      IMPLICIT NONE
+      INTEGER MM
+      REAL FILT(0:MM+1),TEMP
+C
+      REAL AFIL,FK
+      INTEGER MFIL,N
+C
+C     CALCULATE FILTER WEIGHTS
+C
+      IF(AFIL.NE.0.)THEN
+        DO 1 N=0,MM+1
+    1   FILT(N)=0.
+        FK=MFIL*(MFIL+1)
+        FK=-LOG(AFIL)/(FK*FK)
+        DO 2 N=0,MIN(MM+1,MFIL)
+        TEMP=N*(N+1)
+    2   FILT(N)=EXP(-FK*TEMP*TEMP)
+      ELSE
+        DO 3 N=0,MM+1
+    3   FILT(N)=1.
+      ENDIF
+C
+      RETURN
+      END
+C
+      SUBROUTINE FILTER8(FILT,MM,AFIL,MFIL)
+      IMPLICIT NONE
+      INTEGER MM
+      REAL*8 FILT(0:MM+1),TEMP
+C
+      REAL*8 AFIL,FK
+      INTEGER MFIL,N
+C
+C     CALCULATE FILTER WEIGHTS
+C
+      IF(AFIL.NE.0.)THEN
+        DO 1 N=0,MM+1
+    1   FILT(N)=0.
+        FK=MFIL*(MFIL+1)
+        FK=-LOG(AFIL)/(FK*FK)
+        DO 2 N=0,MIN(MM+1,MFIL)
+        TEMP=N*(N+1)
+    2   FILT(N)=EXP(-FK*TEMP*TEMP)
+      ELSE
+        DO 3 N=0,MM+1
+    3   FILT(N)=1.
+      ENDIF
+C
+      RETURN
+      END

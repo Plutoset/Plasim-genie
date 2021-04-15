@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+	<HEAD>
+		<TITLE>gd_proxyquery (Matlab Functions) </TITLE>
+		<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+		<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.0  (Win32)">
+		<META NAME="CREATED" CONTENT="20031003;16082415">
+		<META NAME="CHANGED" CONTENT="20031008;12500319">
+		<META NAME="FORMATTER" CONTENT="Arachnophilia 5.2">
+		<!-- Created on 02-Oct-2003 11:39:22 -->
+		<!-- Top navigation bar -->
+		<STYLE> <!-- @page { size: 21cm 29.7cm }
+	TD P { color: #000000; font-family: "arial" }
+	P { color: #000000; font-family: "arial" }
+	A:link { color: #0000ff }
+	A:visited { color: #800080 }
+	ul {list-style-type: none}
+	--></STYLE>
+	</HEAD>
+	<BODY LANG="en-US" TEXT="#000000" LINK="#0000ff" VLINK="#800080" BGCOLOR="#ffffff" DIR="ltr">
+		<TABLE WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0" BGCOLOR="#99ccff" STYLE="PAGE-BREAK-BEFORE: always">
+			<TR>
+				<TD>
+					<P><B>MATLAB Function Reference</B>
+					</P>
+				</TD>
+				<TD>
+					<P ALIGN="right"><A HREF="gd_proxyinfo.html"><IMG SRC="b_prev.gif" NAME="Graphic1" ALIGN="bottom" WIDTH="17" HEIGHT="17" BORDER="0"></A>
+						&nbsp;&nbsp;&nbsp; <A HREF="gd_putfile.html"><IMG SRC="b_next.gif" NAME="Graphic2" ALIGN="bottom" WIDTH="17" HEIGHT="17" BORDER="0"></A>
+					</P>
+				</TD>
+			</TR>
+		</TABLE>
+		<P><FONT COLOR="#000099"><!-- Function name and short description --><FONT SIZE="6">gd_proxyquery
+				</FONT></FONT>
+		</P>
+		<P>Queries whether a valid proxy certificate exists.</P>
+		<P><FONT COLOR="#000099"><!-- Function syntax --><FONT SIZE="4"><B>Syntax</B> </FONT></FONT>
+		</P>
+		<UL>
+			<LI>
+				<P STYLE="MARGIN-BOTTOM: 0cm"><CODE><CODE>ISVALID</CODE> = gd_proxyquery </CODE>
+				</P>
+			<LI>
+				<P><CODE><CODE>ISVALID</CODE> = gd_proxyquery(FLAG, NUMVALUE) </CODE>
+				</P>
+			</LI>
+		</UL>
+		<P><!-- Function description --><FONT SIZE="4"><FONT COLOR="#000099"><B>Description</B> </FONT>
+			</FONT>
+			<BR>
+			<BR>
+			<CODE>ISVALID = gd_proxyquery</CODE> This command determines whether a valid 
+			proxy certificate exists for user's certificate. where ISVALID is 1 if a valid 
+			proxy certificate exists at the location specified by the COG.PROPERTIES file, 
+			otherwise 0.
+			<BR>
+			<BR>
+			<CODE>ISVALID = gd_proxyquery(<CODE>FLAG</CODE>, <CODE>NUMVALUE</CODE>)</CODE> This 
+			queries the strength or time remaining during which the proxy certificate is 
+			valid. Where EXISTS is 1 if the proxy certificate meets the requirements of 
+			remaining lifetime or cryptographic strength, otherwise 0. If FLAG = 'time' the 
+			time remaining for the proxy certificate is queried against minValue hours. If 
+			FLAG = 'strength' the cryptographic strength of the proxy certificate is 
+			queried against MINVALUE bits.
+		</P>
+		<P><!-- Examples --><FONT SIZE="4"><FONT COLOR="#000099"><B>Example</B> </FONT></FONT>
+			<BR>
+			<BR>
+			This example returns EXISTS = 0 for a proxy certificate of strength 512.</P>
+		<UL>
+			<LI>
+				<P STYLE="MARGIN-BOTTOM: 0cm"><CODE>exists = gd_proxyquery('strength',1024)</CODE></P>
+				<P STYLE="MARGIN-BOTTOM: 0cm"></P>
+			</LI>
+		</UL>
+		<P><!-- See also --><FONT SIZE="4"><FONT COLOR="#000099"><B>See also</B> </FONT></FONT>
+			<BR>
+			<BR>
+			<CODE><A href="gd_proxyinfo.html">gd_proxyinfo</A>, <A href="gd_certinfo.html">gd_certinfo</A>,
+				<A href="gd_createproxy.html">gd_createproxy</A>, <A href="gd_destroyproxy.html">gd_destroyproxy</A></CODE><A href="gd_destroyproxy.html">
+			</A>
+		</P>
+		<TABLE WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0" BGCOLOR="#99ccff">
+			<TR>
+				<TD WIDTH="20">
+					<P ALIGN="left"><!-- Bottom navigation bar --><A HREF="gd_proxyinfo.html"><IMG SRC="b_prev.gif" NAME="Graphic3" ALIGN="bottom" WIDTH="17" HEIGHT="17" BORDER="0"></A>
+					</P>
+				</TD>
+				<TD>
+					<P ALIGN="left">gd_proxyinfo
+					</P>
+				</TD>
+				<TD>
+					<P>
+					</P>
+				</TD>
+				<TD>
+					<P ALIGN="right">gd_putfile
+					</P>
+				</TD>
+				<TD WIDTH="20">
+					<P ALIGN="right"><A HREF="gd_putfile.html"><IMG SRC="b_next.gif" NAME="Graphic4" ALIGN="bottom" WIDTH="17" HEIGHT="17" BORDER="0"></A>
+					</P>
+				</TD>
+			</TR>
+		</TABLE>
+		<P><BR>
+			<BR>
+		</P>
+	</BODY>
+</HTML>

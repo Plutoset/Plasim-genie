@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job author="config2xml.py - automatic conversion of ASCII text config file">
+	<vars>
+		<var name="EXPID">genie_fi_go_sl_igcm_test</var>
+	</vars>
+	<config>
+		<model name="fixedchem"/>
+		<model name="fixedicesheet"/>
+		<model name="goldstein"/>
+		<model name="fixedatmos"/>
+		<model name="slabseaice"/>
+	</config>
+	<parameters>
+		<control>
+			<param name="lgraphics">.false.</param>
+			<param name="koverall_total">43200000</param>
+			<param name="dt_write">86400</param>
+		</control>
+		<model name="fixedchem">
+		</model>
+		<model name="fixedicesheet">
+		</model>
+		<model name="goldstein">
+			<param name="ianav">90000</param>
+			<param name="itstp">9000</param>
+			<param name="npstp">90000</param>
+			<param name="nyear">180</param>
+			<param name="yearlen">360</param>
+			<param name="iwstp">18000</param>
+		</model>
+		<model name="fixedatmos">
+			<param name="timestep">3600</param>
+			<param name="dt_restart_fixedatmos">8640</param>
+			<param name="output_time">720</param>
+		</model>
+		<model name="slabseaice">
+		</model>
+	</parameters>
+	<build>
+	</build>
+	<testing>
+	</testing>
+</job>

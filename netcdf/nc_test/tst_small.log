@@ -1,0 +1,31 @@
+
+*** Testing small files.
+Switching to 64-bit data format.
+*** testing simple small file with a global attribute...ok.
+*** testing simple small file with fixed dimensions...ok.
+*** testing simple small file with an unlimited dimension...ok.
+*** testing small file with one variable...ok.
+*** testing small file with one variable and one att...ok.
+*** testing small file with one record variable, which grows...ok.
+*** testing small file with one growing record variable, with attributes added...ok.
+*** testing small file with two growing record variables, with attributes added...ok.
+Switching to 64-bit offset format.
+*** testing simple small file with a global attribute...ok.
+*** testing simple small file with fixed dimensions...ok.
+*** testing simple small file with an unlimited dimension...ok.
+*** testing small file with one variable...ok.
+*** testing small file with one variable and one att...ok.
+*** testing small file with one record variable, which grows...ok.
+*** testing small file with one growing record variable, with attributes added...ok.
+*** testing small file with two growing record variables, with attributes added...ok.
+Switching to netCDF classic format.
+*** testing simple small file with a global attribute...ok.
+*** testing simple small file with fixed dimensions...ok.
+*** testing simple small file with an unlimited dimension...ok.
+*** testing small file with one variable...ok.
+*** testing small file with one variable and one att...ok.
+*** testing small file with one record variable, which grows...ok.
+*** testing small file with one growing record variable, with attributes added...ok.
+*** testing small file with two growing record variables, with attributes added...ok.
+*** Tests successful!
+PASS tst_small (exit status: 0)

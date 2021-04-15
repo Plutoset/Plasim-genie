@@ -1,0 +1,603 @@
+<project name="genie-iceni" default="build">
+  
+  <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+  
+  <!-- set local properties -->
+  <property name="fsrcdir" value="${basedir}/src/fortran" />
+  <property name="fsrcs" value="${fsrcdir}/binbit.f ${fsrcdir}/co.f ${fsrcdir}/diag.f ${fsrcdir}/diag2.f ${fsrcdir}/diag3.f ${fsrcdir}/diaga.f ${fsrcdir}/diagend.f ${fsrcdir}/drgset.f ${fsrcdir}/gseto.f ${fsrcdir}/gseta.f ${fsrcdir}/inm.f ${fsrcdir}/invert.f ${fsrcdir}/island.f ${fsrcdir}/jbar.f ${fsrcdir}/mains.F ${fsrcdir}/outm.f ${fsrcdir}/readroff.f ${fsrcdir}/surflux.f ${fsrcdir}/tstepa.f ${fsrcdir}/tstepo.F ${fsrcdir}/tstepsic.f ${fsrcdir}/tstipa.f ${fsrcdir}/tstipo.F ${fsrcdir}/ubarsolv.f ${fsrcdir}/velc.f ${fsrcdir}/wind.f" />
+
+  <target name="_prepareProperties">
+    <!-- import all essential properties -->
+    <property environment="env"/>
+  
+    <!-- determine the user running this script -->
+    <if>
+      <!-- the *NIX user environment-->
+      <isset property="env.USER"/>
+      <then>
+        <property name="build.user" value="${env.USER}"/>
+      </then>
+      <else>
+        <!-- try obtain a username from USERNAME (Windows platform)-->
+        <if>
+          <isset property="env.USERNAME"/>
+          <then>
+            <property name="build.user" value="${env.USERNAME}"/>            
+          </then>
+          <else>
+            <property name="build.user" value="unknown"/>
+          </else>
+        </if>
+      </else>
+    </if>
+  
+    <!-- determine the cvs server name -->
+    <if>
+      <isset property="use.proxy"/>
+      <then>
+        <property name="cvs.server" value="localhost"/>
+      </then>
+      <else>
+        <property name="cvs.server" value="cvs.icpc.doc.ic.ac.uk"/>
+      </else>
+    </if>
+
+    <!-- determine the cvs user name -->
+    <if>
+      <isset property="cvs.user"/>
+      <then>
+        <property name="cvs.user" value="${cvs.user}"/>
+      </then>
+      <else>
+        <property name="cvs.user" value="${build.user}"/>
+      </else>
+    </if>
+
+    <!-- load all properties from file -->
+    <loadproperties srcFile="${basedir}/build.properties">
+      <filterchain>
+        <expandproperties/>  
+      </filterchain>  
+    </loadproperties>
+    
+    <!-- make sure all essentials properties are defined -->
+    <if>
+      <and>
+        <isset property="module.name"/>
+        <isset property="module.build.version"/>
+      </and>
+      <then>
+        <echo message="preparing ${module.name} (${module.build.version})"/>
+        <property name="build.path" value="${basedir}/build/dist/${module.name}-${module.build.version}/${module.name}"/>
+      </then>
+      <else>
+        <fail message="module.name and module.build.version must be specified"/>
+      </else>
+    </if>
+    <!-- determine host name -->
+    <if>
+      <isset property="env.HOST"/>
+      <then>
+        <property name="build.host" value="${env.HOST}"/>
+      </then>
+      <else>
+        <if>
+          <isset property="env.HOSTNAME"/>
+          <then>
+            <property name="build.host" value="${env.HOSTNAME}"/>
+          </then>
+          <else>
+            <property name="build.host" value="localhost"/>
+          </else>
+        </if>
+      </else>
+    </if>
+    <!-- determine build java version-->
+    <property name="build.java.version" value="${ant.java.version}"/>
+    
+    
+    <echo message="cvs root is ${cvs.root}"/>
+    <echo message="The build host is ${build.host}"/>
+    <tstamp>
+      <format property="build.time" pattern="hh:mm aa 'on' d/MM/yyyy 'GMT'" timezone="gmt"/>
+    </tstamp>
+    <osfamily property="build.os"/>
+    <property name="build.description" value="${module.name} ${module.build.version} built by ${build.user} at ${build.time} on ${build.os} (jdk ${build.java.version})"/>
+    
+  </target>    
+      
+  <target name="prepare" depends="_prepareProperties" description="prepare for a build">
+    
+    <!-- all build properties are prepared -->
+    <!-- create the empty DEPENDENCY file -->
+    <!--<delete file="${basedir}/DEPENDENCY"/>-->
+    <touch file="${basedir}/DEPENDENCY"/>
+    <!-- see whether this module needs iceni-external -->
+    <echo message="module.dependencies = ${module.dependencies}"/>
+    <if>
+      <and>
+          <isset property="module.dependencies"/>
+                           <not><isset property="nodependency"/></not>
+      </and>
+      <then>
+        <delete file="${basedir}/DEPENDENCY"/>
+        <foreach list="${module.dependencies}" delimiter="," target="_prepareExternalDependency" param="module.dependency"/>
+      </then>
+    </if>
+    
+    <!-- all dependent modules should now have been built -->
+    
+    <!-- prepare for compilation classpath -->
+    
+    <loadfile property="build.dependencies.path" srcFile="${basedir}/DEPENDENCY" />
+    <if>
+      <available file="${basedir}/lib"/>  
+      <then>
+        <path id="build.classpath">
+          <pathelement path="${build.dependencies.path}"/>
+          <fileset dir="${basedir}/lib" includes="**/*.jar"/>
+        </path>
+      </then>
+      <else>
+        <path id="build.classpath">
+          <pathelement path="${build.dependencies.path}"/>
+        </path>
+      </else>
+    </if>
+    
+    <!-- create the standard build/[classes|javadoc|dist] directories -->
+    <mkdir dir="${basedir}/build/bin"/>
+    <mkdir dir="${basedir}/build/classes/"/>
+    <mkdir dir="${basedir}/build/javadoc/"/>
+    <mkdir dir="${build.path}/"/>
+    <!-- create the standard binary distribution directory -->
+    <mkdir dir="${build.path}/lib"/>
+    <mkdir dir="${build.path}/doc"/>
+    <mkdir dir="${build.path}/data"/>
+    <mkdir dir="${build.path}/conf"/>
+    <mkdir dir="${build.path}/bin"/>
+  </target>
+
+  <target name="clean" depends="_prepareProperties" description="quickly clean the last build">
+    <echo message="cleaning the last build"/>
+    <!-- perform actual cleaning tasks here -->
+     
+    <!-- delete all directories created by the standard prepare tasks -->
+    <delete dir="${basedir}/build/classes"/>
+    <delete dir="${basedir}/build/javadoc"/>
+    <delete dir="${basedir}/build/dist"/>
+  </target>
+
+  <target name="compile" depends="prepare" description="incrementally compile all sources">
+    <echo message="compiling module"/>
+    <!-- perform actual compiling tasks here -->
+
+    <!-- by default, compile all java source codes in the src/java/ directory -->
+    <if>
+      <available file="${basedir}/src/java"/>
+      <then>
+        <javac destdir="${basedir}/build/classes/" srcdir="${basedir}/src/java">
+        <!-- default to include all *.java files in the compilation set -->  
+          <include name="**/*.java"/>
+          <!-- add additional exclude statement to exclude certain files or packages -->
+          <!--<exclude name="com/company/package/ClassToIgnore.java"/>-->
+          <!--<exclude name="com/company/packagetoignore/**"/>-->
+          <classpath refid="build.classpath"/>
+        </javac>
+      </then>
+    </if>
+    <!-- compile native library -->
+    <antcall target="compile.binary" />
+  </target>
+
+  <target name="build" depends="prepare,compile" description="incrementally build the current module">
+    <echo message="building distribution - ${build.path}"/>
+    <!-- perform actual build tasks here -->
+
+    <!-- copy licence file in the distribution directory -->
+    <if>
+      <available file="${basedir}/LICENCE.txt"/>
+      <then>
+        <copy file="${basedir}/LICENCE.txt" todir="${build.path}"/>
+      </then>
+      <else>
+        <fail message="Cannot find LICENCE.txt"/>
+      </else>
+    </if>
+
+    <!-- copy all data/ into the distribution data/ directory -->
+    <if>
+      <available file="${basedir}/data"/>
+      <then>
+        <copy todir="${build.path}/data">
+          <fileset dir="${basedir}/data">
+            <!-- copy all files by default -->
+            <include name="**"/>
+            <!-- add exclude statement to exclude certain files -->
+            <!--<exclude name="xml/NotToBeCopied.xml"/>-->
+            <!--<exclude name="xml/nottobecopieddir/**"/>-->
+          </fileset>
+        </copy>
+      </then>
+    </if>
+    <!-- jar up all classes file in the build/classes directory in a jar file -->
+    
+    <jar destfile="${build.path}/lib/${module.name}.jar">
+      <fileset dir="${basedir}/build/classes">
+        <!-- by default, includes all files. Add exclude/include statements to customise -->
+        <!-- <include name="**"/> -->
+        <!-- <exclude name="**"/> -->
+      </fileset>
+     </jar>
+    <!-- optionally copy everything from the lib/ directory to the distribution's lib/ directory -->
+    <if>
+      <available file="${basedir}/lib"/>
+      <then>
+        <copy todir="${build.path}/lib">
+          <fileset dir="${basedir}/lib">
+            <!-- copy all files by default -->
+            <include name="**/*.jar"/>
+            <!-- add exclude statement to exclude certain files -->
+            <!--<exclude name="xml/NotToBeCopied.xml"/>-->
+            <!--<exclude name="xml/nottobecopieddir/**"/>-->
+          </fileset>
+        </copy>
+      </then>
+    </if>
+    
+    <!-- create a VERSION file in the distribution directory -->
+    <echo message="${build.description}" file="${build.path}/VERSION"/>
+    
+    <!-- create a LIBRARIES file in the distribution/lib directory -->
+    <path id="build.libraries">
+      <fileset dir="${build.path}/lib">
+        <include name="**/*.jar"/>
+      </fileset>
+    </path>
+    
+    <pathconvert targetos="${build.os}" property="build.libraries.path" refid="build.libraries">
+      <map from="${build.path}" to="${_dependency.base}"/>
+    </pathconvert>
+    <echo message="${build.libraries.path}" file="${build.path}/LIBRARIES"/> 
+  </target>
+
+  <target name="all" description="cleanly build the current module">
+    <echo message="building module"/>
+    <antcall target="clean"/>
+    <antcall target="build"/>
+    <!-- perform actual buildall tasks here -->
+  </target>
+
+  <target name="javadoc" depends="prepare" description="generate all javadoc of the source code">
+    <echo message="generating javadoc"/>
+    <!-- perform actual javadoc generation tasks here -->
+    <trycatch property="javadocgen.error" reference="exception1">
+      <try>
+        <javadoc  destdir="${basedir}/build/javadoc"
+          author="true"
+                 version="true"
+                 use="true"
+                 windowtitle="${module.name} ${module.build.version}"
+            >
+          <fileset dir="${basedir}/src/java">
+                <!-- add include/exclude statements here to customise -->  
+                <include name="**"/>
+            </fileset>
+        </javadoc>
+      </try>
+      <catch>
+        <echo message="unable to generate javadoc: ${javadocgen.error}"/>
+      </catch>
+    </trycatch>
+  </target>
+  
+  <target name="distclean" depends="clean" description="clean up the module to the checkout state">
+    <echo message="cleaning module"/>
+    <!-- perform more cleaning tasks here -->
+    <delete dir="${basedir}/build"/>
+    <delete>
+         <fileset dir="${basedir}" includes="**/*.bak"/>
+         <fileset dir="${basedir}" includes="**/*.orig"/>
+         <fileset dir="${basedir}" includes="**/*~"/>
+         <fileset dir="${basedir}" includes="DEPENDENCY"/>
+         <fileset dir="${basedir}" includes="LIBRARIES"/>
+      </delete>
+  </target>
+  
+  <target name="test" depends="build" description="execute all junit tests">
+    <echo message="testing module"/>
+    <!--
+      add junit test command here 
+     -->
+     <mkdir dir="${basedir}/build/test"/>
+     <junit printsummary="yes">
+       <classpath>
+           <path refid="build.classpath"/>
+           <pathelement path="${basedir}/build/classes"/>
+       </classpath>
+      <formatter type="plain"/>
+    
+      <!-- add individual test here -->
+        <!--<test name="my.test.TestCase" haltonfailure="yes" todir="${basedir}/build/test/"/>-->
+        
+      <!-- add batch tests here -->
+      
+      <batchtest fork="yes" todir="${basedir}/build/test/" failureproperty="test.failure">
+        <fileset dir="${basedir}/build/classes">
+          <include name="**/*TestCase.class"/>
+        </fileset>
+      </batchtest>
+      
+    </junit>
+    <if>
+      <isset property="test.failure"/>  
+      <then><fail message="test failed"/></then>
+    </if>
+    <echo message="test complete"/>
+  </target>
+
+  <target name="zip" depends="build" description="create the binary distribution">
+    <echo message="zip the binary distribution"/>
+    <zip destfile="${build.path}/../${module.name}.zip">
+      <zipfileset dir="${build.path}" prefix="${module.name}"/>
+                </zip>
+  </target>
+
+  <!-- hidden tasks -->
+  <target name="_prepareExternalDependency"  depends="_prepareProperties">
+    <echo message="preparing dependency ${module.dependency}"/>
+    <propertycopy name="dependency.tagname" from="module.dependency.${module.dependency}.version" silent="true" />
+    <propertycopy name="dependency.sourceorbinary" from="module.dependency.${module.dependency}.distribution" silent="true"/>
+    <propertycopy name="dependency.cvsroot" from="module.dependency.${module.dependency}.cvsroot" silent="true" />
+    
+    <!-- determine whether the dependency is a source/binary distribution -->
+    <if>
+      <equals arg1="${dependency.sourceorbinary}" arg2="binary"/>
+      <then>
+        <property name="dependency.issource" value="false"/>
+        <echo message="module is a binary distribution"/>
+      </then>
+      <else>
+        <property name="dependency.issource" value="true"/>
+        <echo message="module is a source distribution"/>
+        <if>
+          <isset property="dependency.cvsroot"/>
+          <then>
+            <property name="module.dependency.cvsroot" value="${dependency.cvsroot}"/>
+          </then>
+          <else>
+            <property name="module.dependency.cvsroot" value="${cvs.root}"/>
+          </else>
+        </if>
+      </else>
+    </if>
+    <!-- determine module tag -->
+    <if>
+      <isset property="dependency.tagname"/>
+      <then>
+        <property name="module.dependency.tag" value="${dependency.tagname}"/>
+      </then>
+    </if>
+    <echo message="dependency version ${module.dependency.tag}"/>
+    
+    <!-- determine module cvs root if source -->
+    <if>
+      <isset property="dependency.tagname"/>
+      <then>
+        
+      </then>
+    </if>
+    <echo message="dependency version ${module.dependency.tag}"/>
+    
+    <!-- checkout or download module -->
+    <if>
+      <istrue value="${dependency.issource}"/>
+      <then>
+      
+      <!-- checkout from repositories into ${basedir}/../ -->
+      <if>
+        <available file="${basedir}/../${module.dependency}/"/>
+        <then>
+          <if>
+            <istrue value="${module.dependencies.update.force}"/> 
+            <then>
+              <echo message="updating dependency ${module.dependency} from CVS"/>
+            
+              <!-- force update -->
+              <if>
+                <isset property="module.dependency.tag"/>
+                <then>
+                  <cvs 
+                  cvsroot="${module.dependency.cvsroot}" 
+                  dest="${basedir}/../${module.dependency}"
+                  tag="${module.dependency.tag}"
+                  command="update"
+                  failonerror="true"
+                  />
+                </then>
+                <else>
+                  <cvs 
+                  cvsroot="${module.dependency.cvsroot}" 
+                  dest="${basedir}/../${module.dependency}"
+                  command="update"
+                  failonerror="true"
+                  />
+                </else>
+              </if>
+            </then>
+          </if>
+        </then>
+        <else>
+          <!-- check out -->
+          <echo message="checking out dependency ${module.dependency} from CVS"/>
+          <if>
+            <isset property="module.dependency.tag"/>
+            <then>
+              <cvs 
+                cvsroot="${module.dependency.cvsroot}" 
+                package="${module.dependency}" 
+                dest="${basedir}/../"
+                tag="${module.dependency.tag}"
+                command="checkout"
+                failonerror="true"
+              />
+            </then>
+            <else>
+              <cvs 
+                cvsroot="${module.dependency.cvsroot}" 
+                package="${module.dependency}" 
+                dest="${basedir}/../"
+                command="checkout"
+                failonerror="true"
+              />
+            </else>
+          </if>
+        </else>
+      </if>
+    </then>
+    <else>
+      <!-- a binary distribution -->
+      <if>
+        <not><isset property="module.dependency.tag"/></not>
+        <then>
+          <property name="module.dependency.tag" value="latest"/>
+        </then>
+      </if>
+      <get src="${binary.root}/${module.dependency}/${module.dependency.tag}/${module.dependency}.zip" dest="${basedir}/../${module.dependency}.zip"/>
+      <unzip src="${basedir}/../${module.dependency}.zip" dest="${basedir}/../"/>
+    </else>
+  </if>
+  <!-- build the dependent module if it is a source distribution-->
+  <if>
+    <not><available file="${basedir}/../${module.dependency}/LIBRARIES"/></not>
+    <then>
+      <!-- is source distribution -->
+      <if>
+        <istrue value="${module.dependencies.build.force}"/> 
+        <then>
+          <ant dir="${basedir}/../${module.dependency}/" target="all" inheritall="false" inheritrefs="false" />
+        </then>
+        <else>
+          <ant dir="${basedir}/../${module.dependency}/" target="build" inheritall="false" inheritrefs="false" />
+        </else>
+      </if>  
+    </then>
+  </if>
+    
+    
+  <!-- find out the set of libraries exported from this module -->
+  <if>
+    <available file="${basedir}/../${module.dependency}/LIBRARIES"/>
+    <then>
+      <!-- a binary distribution -->
+      <property name="module.dependency.library.dir" value="${basedir}/../${module.dependency}"/>
+    </then>
+    <else>
+      <!-- could be a src distribution, look into the build/dist/ directory -->
+      <loadproperties srcFile="${basedir}/../${module.dependency}/build.properties">
+        <filterchain>
+          <prefixlines prefix="dependency."/>
+          <!--<linecontains>
+              <contains value="module.name"/>
+              <contains value="module.build.version"/>
+          </linecontains>-->
+        </filterchain>
+        </loadproperties>
+        <property name="module.dependency.library.dir" value="${basedir}/../${module.dependency}/build/dist/${dependency.module.name}-${dependency.module.build.version}/${dependency.module.name}"/>
+        <if>
+        <not><available file="${module.dependency.library.dir}/LIBRARIES"/></not>
+        <then>
+          <fail message="LIBRARIES file does not exist! ${module.dependency} is not a standard ICENI module"/>
+        </then>
+      </if>
+    </else>
+  </if>
+  <echo message="examining LIBRARY file at ${module.dependency.library.dir}/LIBRARIES"/>
+  <property name="_dependency.base" value="${module.dependency.library.dir}"/>
+  <copy file="${module.dependency.library.dir}/LIBRARIES" tofile="${basedir}/DEPENDENCY.tmp">
+    <filterchain >
+      <expandproperties/>
+    </filterchain>
+  </copy>
+  <concat destfile="${basedir}/DEPENDENCY" append="true">
+    <fileset dir="${basedir}">
+      <include name="DEPENDENCY.tmp"/>
+    </fileset>
+  </concat>
+  <concat destfile="${basedir}/DEPENDENCY" append="true">:</concat>
+  <delete file="${basedir}/DEPENDENCY.tmp"/>
+  
+</target>
+  
+<!-- iceni-GENIE specific tasks -->
+
+<!-- compile native binary -->
+<target name="compile.binary" description="compile native binary">
+  <echo>compiling native binary...</echo>
+  <condition property="isLinux">
+    <and>
+      <os name="Linux" />
+      <not><isset property="nocompile" /></not>
+    </and>
+  </condition>
+  <condition property="isSunOS">
+    <and>
+      <os name="SunOS" />
+      <not><isset property="nocompile" /></not>
+    </and>
+  </condition>
+  <antcall target="compile.linux.binary" />
+  <antcall target="compile.sunos.binary" />
+</target>
+
+<!-- compile goldstein on Linux -->
+<target name="compile.linux.binary" if="isLinux">
+  <echo>compiling goldstein on Linux...</echo>
+  <exec os="Linux" executable="${f90.linux}">
+    <arg line="${fopts.linux} ${fsrcs} -o ${basedir}/build/bin/goldstein.LINUX" />
+  </exec>
+  <echo>compiling goldstein on Linux for Condor...</echo>
+  <exec os="Linux" executable="${condor.home.linux}/bin/condor_compile">
+    <arg line="${f90.linux} ${fopts.linux} ${fsrcs} -o ${basedir}/build/bin/goldstein.condor.LINUX" />
+  </exec>
+</target>
+
+<!-- compile goldstein on SunOS -->
+<target name="compile.sunos.binary" if="isSunOS">
+  <echo>compiling goldstein on SunOS...</echo>
+  <exec os="SunOS" executable="${f90.sunos}">
+    <arg line="${fopts.sunos} ${fsrcs} -o ${basedir}/build/bin/goldstein.SOLARIS28" />
+  </exec>
+  <echo>compiling goldstein on SunOS for Condor...</echo>
+  <exec os="SunOS" executable="${condor.home.sunos}/bin/condor_compile">
+    <arg line="${f90.sunos} ${fopts.sunos} ${fsrcs} -o ${basedir}/build/bin/goldstein.condor.SOLARIS28" />
+  </exec>
+</target>
+
+<!-- generate component skeleton -->
+<target name="skeleton" description="generate component skeleton">
+  <echo>generating component skeleton...</echo>
+  <property name="component.dir" value="${basedir}/src/java" />
+  <property name="xml.dir" value="${basedir}/data/xml" />
+  <exec executable="skeletonGenerator.sh">
+    <arg line="${component.dir} ${xml.dir}/EnsembleCreatorComponent.cdl.xml ${xml.dir}/EnsembleCreatorComponent.bdl.xml ${xml.dir}/EnsembleCreatorComponent.idl.xml" />
+  </exec>
+  <exec executable="skeletonGenerator.sh">
+    <arg line="${component.dir} ${xml.dir}/ParameterGeneratorComponent.cdl.xml ${xml.dir}/ParameterGeneratorComponent.bdl.xml ${xml.dir}/ParameterGeneratorComponent.idl.xml" />
+  </exec>
+</target>
+
+<!-- create software resources -->
+<target name="resources" description="create software resources">
+  <echo>creating software resources...</echo>
+  <property name="component.dir" value="${basedir}/data/components" />
+  <property name="xml.dir" value="${basedir}/data/xml" />
+  <exec executable="softwareResourceFactory.sh">
+    <arg line="${component.dir} ${xml.dir}/EnsembleCreatorComponent.cdl.xml ${xml.dir}/EnsembleCreatorComponent.bdl.xml ${xml.dir}/EnsembleCreatorComponent.idl.xml" />
+  </exec>
+  <exec executable="softwareResourceFactory.sh">
+    <arg line="${component.dir} ${xml.dir}/ParameterGeneratorComponent.cdl.xml ${xml.dir}/ParameterGeneratorComponent.bdl.xml ${xml.dir}/ParameterGeneratorComponent.idl.xml" />
+  </exec>
+</target>
+
+</project>

@@ -1,0 +1,16 @@
+
+*** Testing ncdump -t output for times with CF calendar attribute
+*** creating netcdf file tst_calendars.nc from tst_calendars.cdl...
+*** creating tst_times.cdl from tst_calendars.nc with ncdump -t ...
+*** comparing tst_times.cdl with ref_times.cdl...
+
+*** Testing ncdump -t output
+*** creating tst_mud4.cdl from tst_mud4.nc ...
+create: test_360_day_1900.cdl from test_360_day_1900.nc
+compare: test_360_day_1900.cdl ref_test_360_day_1900.cdl
+create: test_365_day_1900.cdl from test_365_day_1900.nc
+compare: test_365_day_1900.cdl ref_test_365_day_1900.cdl
+create: test_366_day_1900.cdl from test_366_day_1900.nc
+compare: test_366_day_1900.cdl ref_test_366_day_1900.cdl
+*** All ncdump test output for -t option with CF calendar atts passed!
+PASS tst_calendars.sh (exit status: 0)

@@ -1,0 +1,116 @@
+      SUBROUTINE XPENDN(X,Y)
+C Join  point (x,y) defined in maths space
+CPV
+C
+      REAL XP1
+      REAL XPEN
+      REAL YP1
+      REAL YPEN
+      REAL XP2
+      REAL X
+      REAL YP2
+      REAL Y
+      REAL XMPEN
+      REAL YMPEN
+      INTEGER LFULL
+      INTEGER IPV
+      REAL ZL
+      REAL XR
+      REAL YR
+      INTEGER NPD
+      REAL HF
+      REAL HF1
+      REAL HB
+      REAL HB1
+      REAL HF2
+      REAL HB2
+      REAL BLEN
+      REAL FLEN
+      REAL XMP
+      REAL YMP
+      REAL XPP
+      REAL YPP
+      INTEGER IPSC
+      INTEGER IPSCTMP
+      INTEGER ICOLTX
+      INTEGER IPSCEXP
+      INTEGER IMASKCOL
+      INTEGER LTHICK
+      REAL DTHICK
+C
+      COMMON /XPVD01/ IPV,IPSC,IPSCTMP,ICOLTX(4),IPSCEXP,IMASKCOL
+C
+C
+CPV
+      COMMON /XPEN11/ XPEN,YPEN,FLEN,BLEN,NPD,XMPEN,YMPEN
+      COMMON /XLPN13/ HF1,HB1,HF2,HB2 , LFULL ,LTHICK, DTHICK
+      SAVE HF,HB
+      XP1=XPEN
+      YP1=YPEN
+      XP2 = X
+      YP2 = Y
+      XMPEN = X
+      YMPEN = Y
+      CALL XTRANS(XP2 ,YP2 )
+CPV  change for efficient dashed lines
+      IF(LFULL.EQ.0.OR.IPV.EQ.1)THEN
+C     IF(LFULL.EQ.1) THEN
+CPV
+      CALL XTPNDN(XP2 ,YP2 )
+      RETURN
+      ENDIF
+      ZL=SQRT((XP2-XP1)*(XP2-XP1)+(YP2-YP1)*(YP2-YP1))
+      IF( ZL.LT.1.0E-20  ) GO TO 16
+      XR=(XP2-XP1)/ZL
+      YR=(YP2-YP1)/ZL
+      IF(MOD(NPD,2).EQ.0)THEN
+      HF=HF1
+      HB=HB1
+      ELSE
+      HF=HF2
+      HB=HB2
+      ENDIF
+      IF(BLEN.NE.0.0 ) GOTO 28
+ 20   IF(ZL-(HF-FLEN)) 22,21,21
+ 21   XP1=XP1+(HF-FLEN)*XR
+      YP1=YP1+(HF-FLEN)*YR
+      IF( HF.LT.1.0E-10) THEN
+      CALL XPPONT(XP1,YP1)
+      ELSE
+      CALL XTPNDN (XP1,YP1)
+      ENDIF
+      ZL=ZL-(HF-FLEN)
+      FLEN=0.0
+ 28   IF(ZL-(HB-BLEN)) 26,25,25
+ 25   XP1=XP1+(HB-BLEN)*XR
+      YP1=YP1+(HB-BLEN)*YR
+      CALL XTPNUP(XP1,YP1)
+      ZL=ZL-(HB-BLEN)
+      BLEN=0.0
+      NPD=NPD+1
+      IF(MOD(NPD,2).EQ.0)THEN
+      HF=HF1
+      HB=HB1
+      ELSE
+      HF=HF2
+      HB=HB2
+      ENDIF
+      GO TO 20
+ 22   FLEN=FLEN+ZL
+      BLEN=0.0
+      IF( HF.GE.1.0E-10)CALL XTPNDN(XP2,YP2)
+      GO TO 15
+ 26   BLEN=BLEN+ZL
+      FLEN=0.0
+ 16   CALL XTPNUP(XP2,YP2)
+ 15   CONTINUE
+      RETURN
+      ENTRY XQMPEN( XMP, YMP )
+      XMP=XMPEN
+      YMP=YMPEN
+      RETURN
+      ENTRY XQPPEN( XPP, YPP )
+      XPP=XPEN
+      YPP=YPEN
+      RETURN
+      END

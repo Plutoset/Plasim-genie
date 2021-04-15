@@ -1,0 +1,21 @@
+      SUBROUTINE RFFTB (N,R,WSAVE,IFAX)
+      IMPLICIT NONE
+      INTEGER N
+      REAL    R,WSAVE
+      DIMENSION       R(*)       ,WSAVE(*)
+      INTEGER IFAX(*)
+      IF (N .EQ. 1) RETURN
+      CALL RFFTB1 (N,R,WSAVE,WSAVE(N+1),IFAX)
+      RETURN
+      END
+c
+      SUBROUTINE RFFTB8 (N,R,WSAVE,IFAX)
+      IMPLICIT NONE
+      INTEGER N
+      REAL*8 R,WSAVE
+      INTEGER IFAX(*)
+      DIMENSION       R(*)       ,WSAVE(*)
+      IF (N .EQ. 1) RETURN
+      CALL RFFTB18 (N,R,WSAVE,WSAVE(N+1),IFAX)
+      RETURN
+      END

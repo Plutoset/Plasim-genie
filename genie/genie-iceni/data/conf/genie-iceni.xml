@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<config:configuration xmlns:config="http://www.iceni.ic.ac.uk/xmlSchema/config" xmlns:abc="http://example.org/abc">
+
+   <!--
+
+        Configuration file for genie-iceni
+
+   -->
+
+    <!-- directory for genie-iceni -->
+    <property name="org.icenigrid.genie.home"
+              value="${iceni.home}/genie-iceni" />
+
+    <!-- directory where GENIE experiments are created
+         NB: must be in a filespace shared by all resources -->
+    <property name="org.icenigrid.genie.experiments.dir"
+              value="${user.home}/tmp/genie" />
+
+    <!-- home directory for Condor distribution on Linux systems -->
+    <property name="org.icenigrid.genie.condor.home.linux"
+              value="/usr/local/globus/condor" />
+
+    <!-- home directory for Condor distribution on SunOS systems -->
+    <property name="org.icenigrid.genie.condor.home.sunos"
+              value="/usr/local/globus/condor" />
+
+    <!-- home directory for SGE distribution on Linux systems -->
+    <property name="org.icenigrid.genie.sge.home.linux"
+              value="/usr/local/sgeee-5.3p3/bin/glinux" />
+
+    <!-- home directory for SGE distribution on SunOS systems -->
+    <property name="org.icenigrid.genie.sge.home.sunos"
+              value="/opt/sgee/bin/solaris64" />
+
+    <!-- logger for genie-iceni -->
+    <logger name="org.icenigrid.genie" level="FINEST" />
+
+</config:configuration>

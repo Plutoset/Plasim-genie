@@ -1,0 +1,61 @@
+Created by Agatha de Boer, 5 Dec 2006, adeboer@uea.ac.uk
+
+Fake Atmosphere will have an initial part and part called at each timestep
+
+In order not to change the variables that are passed in any of the 
+current routines, we highjack the variables as follows:
+
+Will make all heat fluxes zero but put total flux in latent_ocn 
+(call it fluxh in fake atmos routines).
+Make evap and runoff zero and put all salt fluxes in precip_ocn
+(call it fluxs in fake atmos routines).
+
+
+#### At initial timestep
+
+# add to genie-global.f90 the variables 
+flag_trest, flag_srest, 4 stress files, trest, srest, fluxh, fluxs, sst, sss
+
+## initialise fake atmos
+call fake_atmos_ini (flag_trest, flag_srest, 4 stress files, trest, srest, fluxh and other heat, fluxs
+and other salt fluxes, sst, sss)
+
+-read 4 stress files,  
+-set all other variables used as input in goldstein (such as sensible heat, albedo) 
+to zero or other value.
+
+if flag_trest
+  read in trest
+  if initial, read in sst
+  if restart, read in sst from restart. (read ts(1) and convert)
+else
+  read in fluxh,  from ini of restart file
+end if
+
+if flag_rests
+  read in srest from file
+else
+  read in fluxs from ini or restart file
+end if
+  
+## now initial ocean
+
+
+#### At every timestep
+
+## call fake atmosphere
+call fake_atmosphere (flag_trest, flag_srest, trest, srest, fluxh, fluxs, sst, sss)
+
+sst = ts(1, 1:maxi, 1:maxj, kmax)
+sss = ts(2, 1:maxi, 1:maxj, kmax)
+
+if flag_trest
+  fluxh = const ( trest - sst)    # maybe add some other options later. 
+  
+end if   # don't need else because fluxh does not change
+
+end if flag_rests
+  fluxs = const ( srest - sss)
+end if
+
+## call goldstein

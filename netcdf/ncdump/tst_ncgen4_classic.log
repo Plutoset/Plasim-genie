@@ -1,0 +1,1358 @@
+
+*** Performing diff/cycle tests for classic format: k=1
++ test x/netcdf/ncdump = x
++ . ../test_common.sh
+++ TOPSRCDIR=/netcdf
+++ TOPBUILDDIR=/netcdf
+++ set -e
+++ test x = x1
+++ top_srcdir=/netcdf
+++ top_builddir=/netcdf
+++ test x/netcdf/ncdump = x
++++ pwd
+++ builddir=/netcdf/ncdump
+++ execdir=/netcdf/ncdump
++++ basename /netcdf/ncdump
+++ thisdir=ncdump
++++ pwd
+++ WD=/netcdf/ncdump
+++ cd /netcdf/ncdump
++++ pwd
+++ srcdir=/netcdf/ncdump
+++ cd /netcdf/ncdump
+++ cd /netcdf
++++ pwd
+++ top_srcdir=/netcdf
+++ cd /netcdf/ncdump
+++ cd /netcdf/ncdump
++++ pwd
+++ builddir=/netcdf/ncdump
+++ cd /netcdf/ncdump
+++ cd /netcdf
++++ pwd
+++ top_builddir=/netcdf
+++ cd /netcdf/ncdump
+++ cd /netcdf/ncdump
++++ pwd
+++ execdir=/netcdf/ncdump
+++ cd /netcdf/ncdump
+++ export srcdir top_srcdir builddir top_builddir execdir
+++ test -e /netcdf/ncdump/ncdump.exe
+++ ext=
+++ export NCDUMP=/netcdf/ncdump/ncdump
+++ NCDUMP=/netcdf/ncdump/ncdump
+++ export NCCOPY=/netcdf/ncdump/nccopy
+++ NCCOPY=/netcdf/ncdump/nccopy
+++ export NCGEN=/netcdf/ncgen/ncgen
+++ NCGEN=/netcdf/ncgen/ncgen
+++ export NCGEN3=/netcdf/ncgen3/ncgen3
+++ NCGEN3=/netcdf/ncgen3/ncgen3
+++ ncgen3c0=/netcdf/ncgen3/c0.cdl
+++ ncgenc0=/netcdf/ncgen/c0.cdl
+++ ncgenc04=/netcdf/ncgen/c0_4.cdl
+++ cd /netcdf/ncdump
++ . /netcdf/ncdump/tst_ncgen_shared.sh
+++ test x/netcdf/ncdump = x
+++ . ../test_common.sh
++++ TOPSRCDIR=/netcdf
++++ TOPBUILDDIR=/netcdf
++++ set -e
++++ test x = x1
++++ top_srcdir=/netcdf
++++ top_builddir=/netcdf
++++ test x/netcdf/ncdump = x
+++++ pwd
++++ builddir=/netcdf/ncdump
++++ execdir=/netcdf/ncdump
+++++ basename /netcdf/ncdump
++++ thisdir=ncdump
+++++ pwd
++++ WD=/netcdf/ncdump
++++ cd /netcdf/ncdump
+++++ pwd
++++ srcdir=/netcdf/ncdump
++++ cd /netcdf/ncdump
++++ cd /netcdf
+++++ pwd
++++ top_srcdir=/netcdf
++++ cd /netcdf/ncdump
++++ cd /netcdf/ncdump
+++++ pwd
++++ builddir=/netcdf/ncdump
++++ cd /netcdf/ncdump
++++ cd /netcdf
+++++ pwd
++++ top_builddir=/netcdf
++++ cd /netcdf/ncdump
++++ cd /netcdf/ncdump
+++++ pwd
++++ execdir=/netcdf/ncdump
++++ cd /netcdf/ncdump
++++ export srcdir top_srcdir builddir top_builddir execdir
++++ test -e /netcdf/ncdump/ncdump.exe
++++ ext=
++++ export NCDUMP=/netcdf/ncdump/ncdump
++++ NCDUMP=/netcdf/ncdump/ncdump
++++ export NCCOPY=/netcdf/ncdump/nccopy
++++ NCCOPY=/netcdf/ncdump/nccopy
++++ export NCGEN=/netcdf/ncgen/ncgen
++++ NCGEN=/netcdf/ncgen/ncgen
++++ export NCGEN3=/netcdf/ncgen3/ncgen3
++++ NCGEN3=/netcdf/ncgen3/ncgen3
++++ ncgen3c0=/netcdf/ncgen3/c0.cdl
++++ ncgenc0=/netcdf/ncgen/c0.cdl
++++ ncgenc04=/netcdf/ncgen/c0_4.cdl
++++ cd /netcdf/ncdump
+++ set -e
+++ RESULTSDIR=./results_10821
+++ cdl=/netcdf/ncdump/cdl
+++ expected=/netcdf/ncdump/expected
+++ case "x${KFLAG}" in
+++ CLASSIC=1
+++ MODE=3
+++ CLASSIC3='nc_enddef ref_tst_unicode ref_tst_utf8 simple_xy small nc_sync ref_tst_small small2 tst_ncml
+n3time ref_tst_chardata ref_tst_nul3 ref_tst_long_charconst tst_chararray unlimtest1 ref_keyword'
+++ NONCLASSIC3='test0 sfc_pres_temp fills c0 example_good pres_temp_4D ref_nctst ref_nctst_64bit_offset ref_ctest1_nc4 ref_ctest1_nc4c ref_nctst_netcdf4 ref_nctst_netcdf4_classic ref_tst_unlim2 ref_tst_names '
+++ test 1 = 1
+++ TESTS3='nc_enddef ref_tst_unicode ref_tst_utf8 simple_xy small nc_sync ref_tst_small small2 tst_ncml
+n3time ref_tst_chardata ref_tst_nul3 ref_tst_long_charconst tst_chararray unlimtest1 ref_keyword'
+++ TESTS4='ref_dimscope ref_typescope ref_tst_string_data ref_tst_comp ref_tst_comp2 ref_tst_comp3 ref_tst_group_data ref_tst_opaque_data ref_tst_solar_1 ref_tst_solar_2 ref_tst_enum_data ref_tst_special_atts ref_tst_nans ref_solar unlimtest2 ref_tst_vlen_data ref_tst_vlen_data ref_tst_vlen_data2 ref_niltest ref_tst_h_scalar ref_tst_nul4 '
+++ SPECIALTESTS3=ref_tst_special_atts3
+++ SPECIALTESTS='ref_tst_special_atts3 ref_tst_special_atts'
+++ XFAILTESTS=
+++ XFAILTESTS='ref_tst_unlim2 '
+++ XFAILTESTS='ref_const_test ref_tst_unlim2 '
+++ XFAILTESTS='ref_tst_chardata ref_const_test ref_tst_unlim2 '
+++ BIGTESTS3='bigf1 bigf2 bigr1 bigr2'
+++ XFAILBIG=bigf3
+++ BIGTESTS4=ref_tst_solar_1
+++ BIGTESTS='bigf1 bigf2 bigr1 bigr2 ref_tst_solar_1 '
+++ failcount=0
+++ passcount=0
+++ xfailcount=0
+++ rm -fr ./results_10821
++ ALLXFAIL='ref_tst_chardata ref_const_test ref_tst_unlim2  ref_tst_special_atts3 ref_tst_special_atts'
++ test 3 = 3
++ test 1 = 4
++ TESTSET='nc_enddef ref_tst_unicode ref_tst_utf8 simple_xy small nc_sync ref_tst_small small2 tst_ncml
+n3time ref_tst_chardata ref_tst_nul3 ref_tst_long_charconst tst_chararray unlimtest1 ref_keyword'
++ echo '*** Testing ncgen with -k1'
+*** Testing ncgen with -k1
++ mkdir ./results_10821
++ cd ./results_10821
++ for x in ${TESTSET}
++ test 0 = 1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xnc_enddef
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xnc_enddef
++ isxfail=
++ for t in ${ALLXFAIL}
++ test xref_tst_chardata = xnc_enddef
++ for t in ${ALLXFAIL}
++ test xref_const_test = xnc_enddef
++ for t in ${ALLXFAIL}
++ test xref_tst_unlim2 = xnc_enddef
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts3 = xnc_enddef
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts = xnc_enddef
++ rm -f nc_enddef.nc nc_enddef.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o nc_enddef_10821.nc /netcdf/ncdump/cdl/nc_enddef.cdl
++ /netcdf/ncdump/ncdump -n nc_enddef nc_enddef_10821.nc
++ sed s/e+0/e+/g
++ test x = x1 -a x = x
++ diff -b -w /netcdf/ncdump/expected/nc_enddef.dmp nc_enddef.dmp
++ ok=1
++ test x1 = x1
++ test 0 = 1
+++ expr 0 + 1
++ passcount=1
++ for x in ${TESTSET}
++ test 0 = 1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xref_tst_unicode
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xref_tst_unicode
++ isxfail=
++ for t in ${ALLXFAIL}
++ test xref_tst_chardata = xref_tst_unicode
++ for t in ${ALLXFAIL}
++ test xref_const_test = xref_tst_unicode
++ for t in ${ALLXFAIL}
++ test xref_tst_unlim2 = xref_tst_unicode
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts3 = xref_tst_unicode
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts = xref_tst_unicode
++ rm -f ref_tst_unicode.nc ref_tst_unicode.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o ref_tst_unicode_10821.nc /netcdf/ncdump/cdl/ref_tst_unicode.cdl
++ /netcdf/ncdump/ncdump -n ref_tst_unicode ref_tst_unicode_10821.nc
++ sed s/e+0/e+/g
++ test x = x1 -a x = x
++ diff -b -w /netcdf/ncdump/expected/ref_tst_unicode.dmp ref_tst_unicode.dmp
++ ok=1
++ test x1 = x1
++ test 0 = 1
+++ expr 1 + 1
++ passcount=2
++ for x in ${TESTSET}
++ test 0 = 1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xref_tst_utf8
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xref_tst_utf8
++ isxfail=
++ for t in ${ALLXFAIL}
++ test xref_tst_chardata = xref_tst_utf8
++ for t in ${ALLXFAIL}
++ test xref_const_test = xref_tst_utf8
++ for t in ${ALLXFAIL}
++ test xref_tst_unlim2 = xref_tst_utf8
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts3 = xref_tst_utf8
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts = xref_tst_utf8
++ rm -f ref_tst_utf8.nc ref_tst_utf8.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o ref_tst_utf8_10821.nc /netcdf/ncdump/cdl/ref_tst_utf8.cdl
++ /netcdf/ncdump/ncdump -n ref_tst_utf8 ref_tst_utf8_10821.nc
++ sed s/e+0/e+/g
++ test x = x1 -a x = x
++ diff -b -w /netcdf/ncdump/expected/ref_tst_utf8.dmp ref_tst_utf8.dmp
++ ok=1
++ test x1 = x1
++ test 0 = 1
+++ expr 2 + 1
++ passcount=3
++ for x in ${TESTSET}
++ test 0 = 1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xsimple_xy
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xsimple_xy
++ isxfail=
++ for t in ${ALLXFAIL}
++ test xref_tst_chardata = xsimple_xy
++ for t in ${ALLXFAIL}
++ test xref_const_test = xsimple_xy
++ for t in ${ALLXFAIL}
++ test xref_tst_unlim2 = xsimple_xy
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts3 = xsimple_xy
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts = xsimple_xy
++ rm -f simple_xy.nc simple_xy.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o simple_xy_10821.nc /netcdf/ncdump/cdl/simple_xy.cdl
++ /netcdf/ncdump/ncdump -n simple_xy simple_xy_10821.nc
++ sed s/e+0/e+/g
++ test x = x1 -a x = x
++ diff -b -w /netcdf/ncdump/expected/simple_xy.dmp simple_xy.dmp
++ ok=1
++ test x1 = x1
++ test 0 = 1
+++ expr 3 + 1
++ passcount=4
++ for x in ${TESTSET}
++ test 0 = 1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xsmall
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xsmall
++ isxfail=
++ for t in ${ALLXFAIL}
++ test xref_tst_chardata = xsmall
++ for t in ${ALLXFAIL}
++ test xref_const_test = xsmall
++ for t in ${ALLXFAIL}
++ test xref_tst_unlim2 = xsmall
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts3 = xsmall
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts = xsmall
++ rm -f small.nc small.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o small_10821.nc /netcdf/ncdump/cdl/small.cdl
++ /netcdf/ncdump/ncdump -n small small_10821.nc
++ sed s/e+0/e+/g
++ test x = x1 -a x = x
++ diff -b -w /netcdf/ncdump/expected/small.dmp small.dmp
++ ok=1
++ test x1 = x1
++ test 0 = 1
+++ expr 4 + 1
++ passcount=5
++ for x in ${TESTSET}
++ test 0 = 1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xnc_sync
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xnc_sync
++ isxfail=
++ for t in ${ALLXFAIL}
++ test xref_tst_chardata = xnc_sync
++ for t in ${ALLXFAIL}
++ test xref_const_test = xnc_sync
++ for t in ${ALLXFAIL}
++ test xref_tst_unlim2 = xnc_sync
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts3 = xnc_sync
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts = xnc_sync
++ rm -f nc_sync.nc nc_sync.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o nc_sync_10821.nc /netcdf/ncdump/cdl/nc_sync.cdl
++ /netcdf/ncdump/ncdump -n nc_sync nc_sync_10821.nc
++ sed s/e+0/e+/g
++ test x = x1 -a x = x
++ diff -b -w /netcdf/ncdump/expected/nc_sync.dmp nc_sync.dmp
++ ok=1
++ test x1 = x1
++ test 0 = 1
+++ expr 5 + 1
++ passcount=6
++ for x in ${TESTSET}
++ test 0 = 1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xref_tst_small
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xref_tst_small
++ isxfail=
++ for t in ${ALLXFAIL}
++ test xref_tst_chardata = xref_tst_small
++ for t in ${ALLXFAIL}
++ test xref_const_test = xref_tst_small
++ for t in ${ALLXFAIL}
++ test xref_tst_unlim2 = xref_tst_small
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts3 = xref_tst_small
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts = xref_tst_small
++ rm -f ref_tst_small.nc ref_tst_small.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o ref_tst_small_10821.nc /netcdf/ncdump/cdl/ref_tst_small.cdl
++ /netcdf/ncdump/ncdump -n ref_tst_small ref_tst_small_10821.nc
++ sed s/e+0/e+/g
++ test x = x1 -a x = x
++ diff -b -w /netcdf/ncdump/expected/ref_tst_small.dmp ref_tst_small.dmp
++ ok=1
++ test x1 = x1
++ test 0 = 1
+++ expr 6 + 1
++ passcount=7
++ for x in ${TESTSET}
++ test 0 = 1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xsmall2
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xsmall2
++ isxfail=
++ for t in ${ALLXFAIL}
++ test xref_tst_chardata = xsmall2
++ for t in ${ALLXFAIL}
++ test xref_const_test = xsmall2
++ for t in ${ALLXFAIL}
++ test xref_tst_unlim2 = xsmall2
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts3 = xsmall2
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts = xsmall2
++ rm -f small2.nc small2.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o small2_10821.nc /netcdf/ncdump/cdl/small2.cdl
++ /netcdf/ncdump/ncdump -n small2 small2_10821.nc
++ sed s/e+0/e+/g
++ test x = x1 -a x = x
++ diff -b -w /netcdf/ncdump/expected/small2.dmp small2.dmp
++ ok=1
++ test x1 = x1
++ test 0 = 1
+++ expr 7 + 1
++ passcount=8
++ for x in ${TESTSET}
++ test 0 = 1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xtst_ncml
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xtst_ncml
++ isxfail=
++ for t in ${ALLXFAIL}
++ test xref_tst_chardata = xtst_ncml
++ for t in ${ALLXFAIL}
++ test xref_const_test = xtst_ncml
++ for t in ${ALLXFAIL}
++ test xref_tst_unlim2 = xtst_ncml
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts3 = xtst_ncml
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts = xtst_ncml
++ rm -f tst_ncml.nc tst_ncml.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o tst_ncml_10821.nc /netcdf/ncdump/cdl/tst_ncml.cdl
++ /netcdf/ncdump/ncdump -n tst_ncml tst_ncml_10821.nc
++ sed s/e+0/e+/g
++ test x = x1 -a x = x
++ diff -b -w /netcdf/ncdump/expected/tst_ncml.dmp tst_ncml.dmp
++ ok=1
++ test x1 = x1
++ test 0 = 1
+++ expr 8 + 1
++ passcount=9
++ for x in ${TESTSET}
++ test 0 = 1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xn3time
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xn3time
++ isxfail=
++ for t in ${ALLXFAIL}
++ test xref_tst_chardata = xn3time
++ for t in ${ALLXFAIL}
++ test xref_const_test = xn3time
++ for t in ${ALLXFAIL}
++ test xref_tst_unlim2 = xn3time
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts3 = xn3time
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts = xn3time
++ rm -f n3time.nc n3time.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o n3time_10821.nc /netcdf/ncdump/cdl/n3time.cdl
++ /netcdf/ncdump/ncdump -n n3time n3time_10821.nc
++ sed s/e+0/e+/g
++ test x = x1 -a x = x
++ diff -b -w /netcdf/ncdump/expected/n3time.dmp n3time.dmp
++ ok=1
++ test x1 = x1
++ test 0 = 1
+++ expr 9 + 1
++ passcount=10
++ for x in ${TESTSET}
++ test 0 = 1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xref_tst_chardata
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xref_tst_chardata
++ isxfail=
++ for t in ${ALLXFAIL}
++ test xref_tst_chardata = xref_tst_chardata
++ isxfail=1
++ for t in ${ALLXFAIL}
++ test xref_const_test = xref_tst_chardata
++ for t in ${ALLXFAIL}
++ test xref_tst_unlim2 = xref_tst_chardata
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts3 = xref_tst_chardata
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts = xref_tst_chardata
++ rm -f ref_tst_chardata.nc ref_tst_chardata.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o ref_tst_chardata_10821.nc /netcdf/ncdump/cdl/ref_tst_chardata.cdl
++ /netcdf/ncdump/ncdump -n ref_tst_chardata ref_tst_chardata_10821.nc
++ sed s/e+0/e+/g
++ test x1 = x1 -a x = x
++ diff -b -bw /netcdf/ncdump/expected/ref_tst_chardata.dmp ref_tst_chardata.dmp
++ ok=0
++ test x0 = x1
++ test x1 = x1
++ echo '*** XFAIL : ref_tst_chardata'
+*** XFAIL : ref_tst_chardata
+++ expr 0 + 1
++ xfailcount=1
++ for x in ${TESTSET}
++ test 0 = 1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xref_tst_nul3
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xref_tst_nul3
++ isxfail=
++ for t in ${ALLXFAIL}
++ test xref_tst_chardata = xref_tst_nul3
++ for t in ${ALLXFAIL}
++ test xref_const_test = xref_tst_nul3
++ for t in ${ALLXFAIL}
++ test xref_tst_unlim2 = xref_tst_nul3
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts3 = xref_tst_nul3
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts = xref_tst_nul3
++ rm -f ref_tst_nul3.nc ref_tst_nul3.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o ref_tst_nul3_10821.nc /netcdf/ncdump/cdl/ref_tst_nul3.cdl
++ /netcdf/ncdump/ncdump -n ref_tst_nul3 ref_tst_nul3_10821.nc
++ sed s/e+0/e+/g
++ test x = x1 -a x = x
++ diff -b -w /netcdf/ncdump/expected/ref_tst_nul3.dmp ref_tst_nul3.dmp
++ ok=1
++ test x1 = x1
++ test 0 = 1
+++ expr 10 + 1
++ passcount=11
++ for x in ${TESTSET}
++ test 0 = 1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xref_tst_long_charconst
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xref_tst_long_charconst
++ isxfail=
++ for t in ${ALLXFAIL}
++ test xref_tst_chardata = xref_tst_long_charconst
++ for t in ${ALLXFAIL}
++ test xref_const_test = xref_tst_long_charconst
++ for t in ${ALLXFAIL}
++ test xref_tst_unlim2 = xref_tst_long_charconst
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts3 = xref_tst_long_charconst
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts = xref_tst_long_charconst
++ rm -f ref_tst_long_charconst.nc ref_tst_long_charconst.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o ref_tst_long_charconst_10821.nc /netcdf/ncdump/cdl/ref_tst_long_charconst.cdl
++ /netcdf/ncdump/ncdump -n ref_tst_long_charconst ref_tst_long_charconst_10821.nc
++ sed s/e+0/e+/g
++ test x = x1 -a x = x
++ diff -b -w /netcdf/ncdump/expected/ref_tst_long_charconst.dmp ref_tst_long_charconst.dmp
++ ok=1
++ test x1 = x1
++ test 0 = 1
+++ expr 11 + 1
++ passcount=12
++ for x in ${TESTSET}
++ test 0 = 1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xtst_chararray
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xtst_chararray
++ isxfail=
++ for t in ${ALLXFAIL}
++ test xref_tst_chardata = xtst_chararray
++ for t in ${ALLXFAIL}
++ test xref_const_test = xtst_chararray
++ for t in ${ALLXFAIL}
++ test xref_tst_unlim2 = xtst_chararray
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts3 = xtst_chararray
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts = xtst_chararray
++ rm -f tst_chararray.nc tst_chararray.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o tst_chararray_10821.nc /netcdf/ncdump/cdl/tst_chararray.cdl
++ /netcdf/ncdump/ncdump -n tst_chararray tst_chararray_10821.nc
++ sed s/e+0/e+/g
++ test x = x1 -a x = x
++ diff -b -w /netcdf/ncdump/expected/tst_chararray.dmp tst_chararray.dmp
++ ok=1
++ test x1 = x1
++ test 0 = 1
+++ expr 12 + 1
++ passcount=13
++ for x in ${TESTSET}
++ test 0 = 1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xunlimtest1
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xunlimtest1
++ isxfail=
++ for t in ${ALLXFAIL}
++ test xref_tst_chardata = xunlimtest1
++ for t in ${ALLXFAIL}
++ test xref_const_test = xunlimtest1
++ for t in ${ALLXFAIL}
++ test xref_tst_unlim2 = xunlimtest1
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts3 = xunlimtest1
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts = xunlimtest1
++ rm -f unlimtest1.nc unlimtest1.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o unlimtest1_10821.nc /netcdf/ncdump/cdl/unlimtest1.cdl
++ /netcdf/ncdump/ncdump -n unlimtest1 unlimtest1_10821.nc
++ sed s/e+0/e+/g
++ test x = x1 -a x = x
++ diff -b -w /netcdf/ncdump/expected/unlimtest1.dmp unlimtest1.dmp
++ ok=1
++ test x1 = x1
++ test 0 = 1
+++ expr 13 + 1
++ passcount=14
++ for x in ${TESTSET}
++ test 0 = 1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xref_keyword
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xref_keyword
++ isxfail=
++ for t in ${ALLXFAIL}
++ test xref_tst_chardata = xref_keyword
++ for t in ${ALLXFAIL}
++ test xref_const_test = xref_keyword
++ for t in ${ALLXFAIL}
++ test xref_tst_unlim2 = xref_keyword
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts3 = xref_keyword
++ for t in ${ALLXFAIL}
++ test xref_tst_special_atts = xref_keyword
++ rm -f ref_keyword.nc ref_keyword.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o ref_keyword_10821.nc /netcdf/ncdump/cdl/ref_keyword.cdl
++ /netcdf/ncdump/ncdump -n ref_keyword ref_keyword_10821.nc
++ sed s/e+0/e+/g
++ test x = x1 -a x = x
++ diff -b -w /netcdf/ncdump/expected/ref_keyword.dmp ref_keyword.dmp
++ ok=1
++ test x1 = x1
++ test 0 = 1
+++ expr 14 + 1
++ passcount=15
++ cd ..
+++ expr 15 + 0 + 1
++ totalcount=16
+++ expr 15 + 1
++ okcount=16
++ echo '*** PASSED: 16/16 ; 1 expected failures ; 0 unexpected failures'
+*** PASSED: 16/16 ; 1 expected failures ; 0 unexpected failures
++ rm -rf ./results_10821
++ test 0 -gt 0
++ exit 0
++ test x/netcdf/ncdump = x
++ . ../test_common.sh
+++ TOPSRCDIR=/netcdf
+++ TOPBUILDDIR=/netcdf
+++ set -e
+++ test x = x1
+++ top_srcdir=/netcdf
+++ top_builddir=/netcdf
+++ test x/netcdf/ncdump = x
++++ pwd
+++ builddir=/netcdf/ncdump
+++ execdir=/netcdf/ncdump
++++ basename /netcdf/ncdump
+++ thisdir=ncdump
++++ pwd
+++ WD=/netcdf/ncdump
+++ cd /netcdf/ncdump
++++ pwd
+++ srcdir=/netcdf/ncdump
+++ cd /netcdf/ncdump
+++ cd /netcdf
++++ pwd
+++ top_srcdir=/netcdf
+++ cd /netcdf/ncdump
+++ cd /netcdf/ncdump
++++ pwd
+++ builddir=/netcdf/ncdump
+++ cd /netcdf/ncdump
+++ cd /netcdf
++++ pwd
+++ top_builddir=/netcdf
+++ cd /netcdf/ncdump
+++ cd /netcdf/ncdump
++++ pwd
+++ execdir=/netcdf/ncdump
+++ cd /netcdf/ncdump
+++ export srcdir top_srcdir builddir top_builddir execdir
+++ test -e /netcdf/ncdump/ncdump.exe
+++ ext=
+++ export NCDUMP=/netcdf/ncdump/ncdump
+++ NCDUMP=/netcdf/ncdump/ncdump
+++ export NCCOPY=/netcdf/ncdump/nccopy
+++ NCCOPY=/netcdf/ncdump/nccopy
+++ export NCGEN=/netcdf/ncgen/ncgen
+++ NCGEN=/netcdf/ncgen/ncgen
+++ export NCGEN3=/netcdf/ncgen3/ncgen3
+++ NCGEN3=/netcdf/ncgen3/ncgen3
+++ ncgen3c0=/netcdf/ncgen3/c0.cdl
+++ ncgenc0=/netcdf/ncgen/c0.cdl
+++ ncgenc04=/netcdf/ncgen/c0_4.cdl
+++ cd /netcdf/ncdump
++ . /netcdf/ncdump/tst_ncgen_shared.sh
+++ test x/netcdf/ncdump = x
+++ . ../test_common.sh
++++ TOPSRCDIR=/netcdf
++++ TOPBUILDDIR=/netcdf
++++ set -e
++++ test x = x1
++++ top_srcdir=/netcdf
++++ top_builddir=/netcdf
++++ test x/netcdf/ncdump = x
+++++ pwd
++++ builddir=/netcdf/ncdump
++++ execdir=/netcdf/ncdump
+++++ basename /netcdf/ncdump
++++ thisdir=ncdump
+++++ pwd
++++ WD=/netcdf/ncdump
++++ cd /netcdf/ncdump
+++++ pwd
++++ srcdir=/netcdf/ncdump
++++ cd /netcdf/ncdump
++++ cd /netcdf
+++++ pwd
++++ top_srcdir=/netcdf
++++ cd /netcdf/ncdump
++++ cd /netcdf/ncdump
+++++ pwd
++++ builddir=/netcdf/ncdump
++++ cd /netcdf/ncdump
++++ cd /netcdf
+++++ pwd
++++ top_builddir=/netcdf
++++ cd /netcdf/ncdump
++++ cd /netcdf/ncdump
+++++ pwd
++++ execdir=/netcdf/ncdump
++++ cd /netcdf/ncdump
++++ export srcdir top_srcdir builddir top_builddir execdir
++++ test -e /netcdf/ncdump/ncdump.exe
++++ ext=
++++ export NCDUMP=/netcdf/ncdump/ncdump
++++ NCDUMP=/netcdf/ncdump/ncdump
++++ export NCCOPY=/netcdf/ncdump/nccopy
++++ NCCOPY=/netcdf/ncdump/nccopy
++++ export NCGEN=/netcdf/ncgen/ncgen
++++ NCGEN=/netcdf/ncgen/ncgen
++++ export NCGEN3=/netcdf/ncgen3/ncgen3
++++ NCGEN3=/netcdf/ncgen3/ncgen3
++++ ncgen3c0=/netcdf/ncgen3/c0.cdl
++++ ncgenc0=/netcdf/ncgen/c0.cdl
++++ ncgenc04=/netcdf/ncgen/c0_4.cdl
++++ cd /netcdf/ncdump
+++ set -e
+++ RESULTSDIR=./results_11357
+++ cdl=/netcdf/ncdump/cdl
+++ expected=/netcdf/ncdump/expected
+++ case "x${KFLAG}" in
+++ CLASSIC=1
+++ MODE=3
+++ CLASSIC3='nc_enddef ref_tst_unicode ref_tst_utf8 simple_xy small nc_sync ref_tst_small small2 tst_ncml
+n3time ref_tst_chardata ref_tst_nul3 ref_tst_long_charconst tst_chararray unlimtest1 ref_keyword'
+++ NONCLASSIC3='test0 sfc_pres_temp fills c0 example_good pres_temp_4D ref_nctst ref_nctst_64bit_offset ref_ctest1_nc4 ref_ctest1_nc4c ref_nctst_netcdf4 ref_nctst_netcdf4_classic ref_tst_unlim2 ref_tst_names '
+++ test 1 = 1
+++ TESTS3='nc_enddef ref_tst_unicode ref_tst_utf8 simple_xy small nc_sync ref_tst_small small2 tst_ncml
+n3time ref_tst_chardata ref_tst_nul3 ref_tst_long_charconst tst_chararray unlimtest1 ref_keyword'
+++ TESTS4='ref_dimscope ref_typescope ref_tst_string_data ref_tst_comp ref_tst_comp2 ref_tst_comp3 ref_tst_group_data ref_tst_opaque_data ref_tst_solar_1 ref_tst_solar_2 ref_tst_enum_data ref_tst_special_atts ref_tst_nans ref_solar unlimtest2 ref_tst_vlen_data ref_tst_vlen_data ref_tst_vlen_data2 ref_niltest ref_tst_h_scalar ref_tst_nul4 '
+++ SPECIALTESTS3=ref_tst_special_atts3
+++ SPECIALTESTS='ref_tst_special_atts3 ref_tst_special_atts'
+++ XFAILTESTS=
+++ XFAILTESTS='ref_tst_unlim2 '
+++ XFAILTESTS='ref_const_test ref_tst_unlim2 '
+++ XFAILTESTS='ref_tst_chardata ref_const_test ref_tst_unlim2 '
+++ BIGTESTS3='bigf1 bigf2 bigr1 bigr2'
+++ XFAILBIG=bigf3
+++ BIGTESTS4=ref_tst_solar_1
+++ BIGTESTS='bigf1 bigf2 bigr1 bigr2 ref_tst_solar_1 '
+++ failcount=0
+++ passcount=0
+++ xfailcount=0
+++ rm -fr ./results_11357
++ test 3 = 3
++ TESTSET='nc_enddef ref_tst_unicode ref_tst_utf8 simple_xy small nc_sync ref_tst_small small2 tst_ncml
+n3time ref_tst_chardata ref_tst_nul3 ref_tst_long_charconst tst_chararray unlimtest1 ref_keyword bigf1 bigf2 bigr1 bigr2 '
++ test 1 = 4
++ echo '*** Cycle testing ncgen with -k1'
+*** Cycle testing ncgen with -k1
++ mkdir ./results_11357
++ cd ./results_11357
++ for x in ${TESTSET}
++ test x0 = x1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xnc_enddef
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xnc_enddef
++ isxfail=0
++ for t in ${XFAILTESTS}
++ test xref_tst_chardata = xnc_enddef
++ for t in ${XFAILTESTS}
++ test xref_const_test = xnc_enddef
++ for t in ${XFAILTESTS}
++ test xref_tst_unlim2 = xnc_enddef
++ test 0 = 1
++ rm -f nc_enddef_11357.nc nc_enddef_11357.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o nc_enddef_11357.nc /netcdf/ncdump/cdl/nc_enddef.cdl
++ /netcdf/ncdump/ncdump -n nc_enddef nc_enddef_11357.nc
++ rm -f nc_enddef_11357.nc
++ /netcdf/ncgen/ncgen -b -k1 -o nc_enddef_11357.nc nc_enddef_11357.dmp
++ /netcdf/ncdump/ncdump -n nc_enddef nc_enddef_11357.nc
++ diff -b -w nc_enddef_11357.dmp nc_enddef_11357.dmp2
++ ok=1
++ rm -f nc_enddef_11357.nc nc_enddef_11357.dmp
++ test x1 = x1
++ test x0 = x1
+++ expr 0 + 1
++ passcount=1
++ for x in ${TESTSET}
++ test x0 = x1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xref_tst_unicode
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xref_tst_unicode
++ isxfail=0
++ for t in ${XFAILTESTS}
++ test xref_tst_chardata = xref_tst_unicode
++ for t in ${XFAILTESTS}
++ test xref_const_test = xref_tst_unicode
++ for t in ${XFAILTESTS}
++ test xref_tst_unlim2 = xref_tst_unicode
++ test 0 = 1
++ rm -f ref_tst_unicode_11357.nc ref_tst_unicode_11357.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o ref_tst_unicode_11357.nc /netcdf/ncdump/cdl/ref_tst_unicode.cdl
++ /netcdf/ncdump/ncdump -n ref_tst_unicode ref_tst_unicode_11357.nc
++ rm -f ref_tst_unicode_11357.nc
++ /netcdf/ncgen/ncgen -b -k1 -o ref_tst_unicode_11357.nc ref_tst_unicode_11357.dmp
++ /netcdf/ncdump/ncdump -n ref_tst_unicode ref_tst_unicode_11357.nc
++ diff -b -w ref_tst_unicode_11357.dmp ref_tst_unicode_11357.dmp2
++ ok=1
++ rm -f ref_tst_unicode_11357.nc ref_tst_unicode_11357.dmp
++ test x1 = x1
++ test x0 = x1
+++ expr 1 + 1
++ passcount=2
++ for x in ${TESTSET}
++ test x0 = x1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xref_tst_utf8
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xref_tst_utf8
++ isxfail=0
++ for t in ${XFAILTESTS}
++ test xref_tst_chardata = xref_tst_utf8
++ for t in ${XFAILTESTS}
++ test xref_const_test = xref_tst_utf8
++ for t in ${XFAILTESTS}
++ test xref_tst_unlim2 = xref_tst_utf8
++ test 0 = 1
++ rm -f ref_tst_utf8_11357.nc ref_tst_utf8_11357.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o ref_tst_utf8_11357.nc /netcdf/ncdump/cdl/ref_tst_utf8.cdl
++ /netcdf/ncdump/ncdump -n ref_tst_utf8 ref_tst_utf8_11357.nc
++ rm -f ref_tst_utf8_11357.nc
++ /netcdf/ncgen/ncgen -b -k1 -o ref_tst_utf8_11357.nc ref_tst_utf8_11357.dmp
++ /netcdf/ncdump/ncdump -n ref_tst_utf8 ref_tst_utf8_11357.nc
++ diff -b -w ref_tst_utf8_11357.dmp ref_tst_utf8_11357.dmp2
++ ok=1
++ rm -f ref_tst_utf8_11357.nc ref_tst_utf8_11357.dmp
++ test x1 = x1
++ test x0 = x1
+++ expr 2 + 1
++ passcount=3
++ for x in ${TESTSET}
++ test x0 = x1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xsimple_xy
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xsimple_xy
++ isxfail=0
++ for t in ${XFAILTESTS}
++ test xref_tst_chardata = xsimple_xy
++ for t in ${XFAILTESTS}
++ test xref_const_test = xsimple_xy
++ for t in ${XFAILTESTS}
++ test xref_tst_unlim2 = xsimple_xy
++ test 0 = 1
++ rm -f simple_xy_11357.nc simple_xy_11357.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o simple_xy_11357.nc /netcdf/ncdump/cdl/simple_xy.cdl
++ /netcdf/ncdump/ncdump -n simple_xy simple_xy_11357.nc
++ rm -f simple_xy_11357.nc
++ /netcdf/ncgen/ncgen -b -k1 -o simple_xy_11357.nc simple_xy_11357.dmp
++ /netcdf/ncdump/ncdump -n simple_xy simple_xy_11357.nc
++ diff -b -w simple_xy_11357.dmp simple_xy_11357.dmp2
++ ok=1
++ rm -f simple_xy_11357.nc simple_xy_11357.dmp
++ test x1 = x1
++ test x0 = x1
+++ expr 3 + 1
++ passcount=4
++ for x in ${TESTSET}
++ test x0 = x1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xsmall
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xsmall
++ isxfail=0
++ for t in ${XFAILTESTS}
++ test xref_tst_chardata = xsmall
++ for t in ${XFAILTESTS}
++ test xref_const_test = xsmall
++ for t in ${XFAILTESTS}
++ test xref_tst_unlim2 = xsmall
++ test 0 = 1
++ rm -f small_11357.nc small_11357.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o small_11357.nc /netcdf/ncdump/cdl/small.cdl
++ /netcdf/ncdump/ncdump -n small small_11357.nc
++ rm -f small_11357.nc
++ /netcdf/ncgen/ncgen -b -k1 -o small_11357.nc small_11357.dmp
++ /netcdf/ncdump/ncdump -n small small_11357.nc
++ diff -b -w small_11357.dmp small_11357.dmp2
++ ok=1
++ rm -f small_11357.nc small_11357.dmp
++ test x1 = x1
++ test x0 = x1
+++ expr 4 + 1
++ passcount=5
++ for x in ${TESTSET}
++ test x0 = x1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xnc_sync
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xnc_sync
++ isxfail=0
++ for t in ${XFAILTESTS}
++ test xref_tst_chardata = xnc_sync
++ for t in ${XFAILTESTS}
++ test xref_const_test = xnc_sync
++ for t in ${XFAILTESTS}
++ test xref_tst_unlim2 = xnc_sync
++ test 0 = 1
++ rm -f nc_sync_11357.nc nc_sync_11357.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o nc_sync_11357.nc /netcdf/ncdump/cdl/nc_sync.cdl
++ /netcdf/ncdump/ncdump -n nc_sync nc_sync_11357.nc
++ rm -f nc_sync_11357.nc
++ /netcdf/ncgen/ncgen -b -k1 -o nc_sync_11357.nc nc_sync_11357.dmp
++ /netcdf/ncdump/ncdump -n nc_sync nc_sync_11357.nc
++ diff -b -w nc_sync_11357.dmp nc_sync_11357.dmp2
++ ok=1
++ rm -f nc_sync_11357.nc nc_sync_11357.dmp
++ test x1 = x1
++ test x0 = x1
+++ expr 5 + 1
++ passcount=6
++ for x in ${TESTSET}
++ test x0 = x1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xref_tst_small
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xref_tst_small
++ isxfail=0
++ for t in ${XFAILTESTS}
++ test xref_tst_chardata = xref_tst_small
++ for t in ${XFAILTESTS}
++ test xref_const_test = xref_tst_small
++ for t in ${XFAILTESTS}
++ test xref_tst_unlim2 = xref_tst_small
++ test 0 = 1
++ rm -f ref_tst_small_11357.nc ref_tst_small_11357.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o ref_tst_small_11357.nc /netcdf/ncdump/cdl/ref_tst_small.cdl
++ /netcdf/ncdump/ncdump -n ref_tst_small ref_tst_small_11357.nc
++ rm -f ref_tst_small_11357.nc
++ /netcdf/ncgen/ncgen -b -k1 -o ref_tst_small_11357.nc ref_tst_small_11357.dmp
++ /netcdf/ncdump/ncdump -n ref_tst_small ref_tst_small_11357.nc
++ diff -b -w ref_tst_small_11357.dmp ref_tst_small_11357.dmp2
++ ok=1
++ rm -f ref_tst_small_11357.nc ref_tst_small_11357.dmp
++ test x1 = x1
++ test x0 = x1
+++ expr 6 + 1
++ passcount=7
++ for x in ${TESTSET}
++ test x0 = x1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xsmall2
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xsmall2
++ isxfail=0
++ for t in ${XFAILTESTS}
++ test xref_tst_chardata = xsmall2
++ for t in ${XFAILTESTS}
++ test xref_const_test = xsmall2
++ for t in ${XFAILTESTS}
++ test xref_tst_unlim2 = xsmall2
++ test 0 = 1
++ rm -f small2_11357.nc small2_11357.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o small2_11357.nc /netcdf/ncdump/cdl/small2.cdl
++ /netcdf/ncdump/ncdump -n small2 small2_11357.nc
++ rm -f small2_11357.nc
++ /netcdf/ncgen/ncgen -b -k1 -o small2_11357.nc small2_11357.dmp
++ /netcdf/ncdump/ncdump -n small2 small2_11357.nc
++ diff -b -w small2_11357.dmp small2_11357.dmp2
++ ok=1
++ rm -f small2_11357.nc small2_11357.dmp
++ test x1 = x1
++ test x0 = x1
+++ expr 7 + 1
++ passcount=8
++ for x in ${TESTSET}
++ test x0 = x1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xtst_ncml
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xtst_ncml
++ isxfail=0
++ for t in ${XFAILTESTS}
++ test xref_tst_chardata = xtst_ncml
++ for t in ${XFAILTESTS}
++ test xref_const_test = xtst_ncml
++ for t in ${XFAILTESTS}
++ test xref_tst_unlim2 = xtst_ncml
++ test 0 = 1
++ rm -f tst_ncml_11357.nc tst_ncml_11357.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o tst_ncml_11357.nc /netcdf/ncdump/cdl/tst_ncml.cdl
++ /netcdf/ncdump/ncdump -n tst_ncml tst_ncml_11357.nc
++ rm -f tst_ncml_11357.nc
++ /netcdf/ncgen/ncgen -b -k1 -o tst_ncml_11357.nc tst_ncml_11357.dmp
++ /netcdf/ncdump/ncdump -n tst_ncml tst_ncml_11357.nc
++ diff -b -w tst_ncml_11357.dmp tst_ncml_11357.dmp2
++ ok=1
++ rm -f tst_ncml_11357.nc tst_ncml_11357.dmp
++ test x1 = x1
++ test x0 = x1
+++ expr 8 + 1
++ passcount=9
++ for x in ${TESTSET}
++ test x0 = x1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xn3time
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xn3time
++ isxfail=0
++ for t in ${XFAILTESTS}
++ test xref_tst_chardata = xn3time
++ for t in ${XFAILTESTS}
++ test xref_const_test = xn3time
++ for t in ${XFAILTESTS}
++ test xref_tst_unlim2 = xn3time
++ test 0 = 1
++ rm -f n3time_11357.nc n3time_11357.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o n3time_11357.nc /netcdf/ncdump/cdl/n3time.cdl
++ /netcdf/ncdump/ncdump -n n3time n3time_11357.nc
++ rm -f n3time_11357.nc
++ /netcdf/ncgen/ncgen -b -k1 -o n3time_11357.nc n3time_11357.dmp
++ /netcdf/ncdump/ncdump -n n3time n3time_11357.nc
++ diff -b -w n3time_11357.dmp n3time_11357.dmp2
++ ok=1
++ rm -f n3time_11357.nc n3time_11357.dmp
++ test x1 = x1
++ test x0 = x1
+++ expr 9 + 1
++ passcount=10
++ for x in ${TESTSET}
++ test x0 = x1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xref_tst_chardata
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xref_tst_chardata
++ isxfail=0
++ for t in ${XFAILTESTS}
++ test xref_tst_chardata = xref_tst_chardata
++ isxfail=1
++ for t in ${XFAILTESTS}
++ test xref_const_test = xref_tst_chardata
++ for t in ${XFAILTESTS}
++ test xref_tst_unlim2 = xref_tst_chardata
++ test 1 = 1
++ echo 'xfail test: ref_tst_chardata: ignored'
+xfail test: ref_tst_chardata: ignored
+++ expr 0 + 1
++ xfailcount=1
++ for x in ${TESTSET}
++ test x0 = x1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xref_tst_nul3
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xref_tst_nul3
++ isxfail=0
++ for t in ${XFAILTESTS}
++ test xref_tst_chardata = xref_tst_nul3
++ for t in ${XFAILTESTS}
++ test xref_const_test = xref_tst_nul3
++ for t in ${XFAILTESTS}
++ test xref_tst_unlim2 = xref_tst_nul3
++ test 0 = 1
++ rm -f ref_tst_nul3_11357.nc ref_tst_nul3_11357.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o ref_tst_nul3_11357.nc /netcdf/ncdump/cdl/ref_tst_nul3.cdl
++ /netcdf/ncdump/ncdump -n ref_tst_nul3 ref_tst_nul3_11357.nc
++ rm -f ref_tst_nul3_11357.nc
++ /netcdf/ncgen/ncgen -b -k1 -o ref_tst_nul3_11357.nc ref_tst_nul3_11357.dmp
++ /netcdf/ncdump/ncdump -n ref_tst_nul3 ref_tst_nul3_11357.nc
++ diff -b -w ref_tst_nul3_11357.dmp ref_tst_nul3_11357.dmp2
++ ok=1
++ rm -f ref_tst_nul3_11357.nc ref_tst_nul3_11357.dmp
++ test x1 = x1
++ test x0 = x1
+++ expr 10 + 1
++ passcount=11
++ for x in ${TESTSET}
++ test x0 = x1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xref_tst_long_charconst
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xref_tst_long_charconst
++ isxfail=0
++ for t in ${XFAILTESTS}
++ test xref_tst_chardata = xref_tst_long_charconst
++ for t in ${XFAILTESTS}
++ test xref_const_test = xref_tst_long_charconst
++ for t in ${XFAILTESTS}
++ test xref_tst_unlim2 = xref_tst_long_charconst
++ test 0 = 1
++ rm -f ref_tst_long_charconst_11357.nc ref_tst_long_charconst_11357.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o ref_tst_long_charconst_11357.nc /netcdf/ncdump/cdl/ref_tst_long_charconst.cdl
++ /netcdf/ncdump/ncdump -n ref_tst_long_charconst ref_tst_long_charconst_11357.nc
++ rm -f ref_tst_long_charconst_11357.nc
++ /netcdf/ncgen/ncgen -b -k1 -o ref_tst_long_charconst_11357.nc ref_tst_long_charconst_11357.dmp
++ /netcdf/ncdump/ncdump -n ref_tst_long_charconst ref_tst_long_charconst_11357.nc
++ diff -b -w ref_tst_long_charconst_11357.dmp ref_tst_long_charconst_11357.dmp2
++ ok=1
++ rm -f ref_tst_long_charconst_11357.nc ref_tst_long_charconst_11357.dmp
++ test x1 = x1
++ test x0 = x1
+++ expr 11 + 1
++ passcount=12
++ for x in ${TESTSET}
++ test x0 = x1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xtst_chararray
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xtst_chararray
++ isxfail=0
++ for t in ${XFAILTESTS}
++ test xref_tst_chardata = xtst_chararray
++ for t in ${XFAILTESTS}
++ test xref_const_test = xtst_chararray
++ for t in ${XFAILTESTS}
++ test xref_tst_unlim2 = xtst_chararray
++ test 0 = 1
++ rm -f tst_chararray_11357.nc tst_chararray_11357.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o tst_chararray_11357.nc /netcdf/ncdump/cdl/tst_chararray.cdl
++ /netcdf/ncdump/ncdump -n tst_chararray tst_chararray_11357.nc
++ rm -f tst_chararray_11357.nc
++ /netcdf/ncgen/ncgen -b -k1 -o tst_chararray_11357.nc tst_chararray_11357.dmp
++ /netcdf/ncdump/ncdump -n tst_chararray tst_chararray_11357.nc
++ diff -b -w tst_chararray_11357.dmp tst_chararray_11357.dmp2
++ ok=1
++ rm -f tst_chararray_11357.nc tst_chararray_11357.dmp
++ test x1 = x1
++ test x0 = x1
+++ expr 12 + 1
++ passcount=13
++ for x in ${TESTSET}
++ test x0 = x1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xunlimtest1
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xunlimtest1
++ isxfail=0
++ for t in ${XFAILTESTS}
++ test xref_tst_chardata = xunlimtest1
++ for t in ${XFAILTESTS}
++ test xref_const_test = xunlimtest1
++ for t in ${XFAILTESTS}
++ test xref_tst_unlim2 = xunlimtest1
++ test 0 = 1
++ rm -f unlimtest1_11357.nc unlimtest1_11357.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o unlimtest1_11357.nc /netcdf/ncdump/cdl/unlimtest1.cdl
++ /netcdf/ncdump/ncdump -n unlimtest1 unlimtest1_11357.nc
++ rm -f unlimtest1_11357.nc
++ /netcdf/ncgen/ncgen -b -k1 -o unlimtest1_11357.nc unlimtest1_11357.dmp
++ /netcdf/ncdump/ncdump -n unlimtest1 unlimtest1_11357.nc
++ diff -b -w unlimtest1_11357.dmp unlimtest1_11357.dmp2
++ ok=1
++ rm -f unlimtest1_11357.nc unlimtest1_11357.dmp
++ test x1 = x1
++ test x0 = x1
+++ expr 13 + 1
++ passcount=14
++ for x in ${TESTSET}
++ test x0 = x1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xref_keyword
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xref_keyword
++ isxfail=0
++ for t in ${XFAILTESTS}
++ test xref_tst_chardata = xref_keyword
++ for t in ${XFAILTESTS}
++ test xref_const_test = xref_keyword
++ for t in ${XFAILTESTS}
++ test xref_tst_unlim2 = xref_keyword
++ test 0 = 1
++ rm -f ref_keyword_11357.nc ref_keyword_11357.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o ref_keyword_11357.nc /netcdf/ncdump/cdl/ref_keyword.cdl
++ /netcdf/ncdump/ncdump -n ref_keyword ref_keyword_11357.nc
++ rm -f ref_keyword_11357.nc
++ /netcdf/ncgen/ncgen -b -k1 -o ref_keyword_11357.nc ref_keyword_11357.dmp
++ /netcdf/ncdump/ncdump -n ref_keyword ref_keyword_11357.nc
++ diff -b -w ref_keyword_11357.dmp ref_keyword_11357.dmp2
++ ok=1
++ rm -f ref_keyword_11357.nc ref_keyword_11357.dmp
++ test x1 = x1
++ test x0 = x1
+++ expr 14 + 1
++ passcount=15
++ for x in ${TESTSET}
++ test x0 = x1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xbigf1
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xbigf1
++ isxfail=0
++ for t in ${XFAILTESTS}
++ test xref_tst_chardata = xbigf1
++ for t in ${XFAILTESTS}
++ test xref_const_test = xbigf1
++ for t in ${XFAILTESTS}
++ test xref_tst_unlim2 = xbigf1
++ test 0 = 1
++ rm -f bigf1_11357.nc bigf1_11357.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o bigf1_11357.nc /netcdf/ncdump/cdl/bigf1.cdl
++ /netcdf/ncdump/ncdump -n bigf1 bigf1_11357.nc
++ rm -f bigf1_11357.nc
++ /netcdf/ncgen/ncgen -b -k1 -o bigf1_11357.nc bigf1_11357.dmp
++ /netcdf/ncdump/ncdump -n bigf1 bigf1_11357.nc
++ diff -b -w bigf1_11357.dmp bigf1_11357.dmp2
++ ok=1
++ rm -f bigf1_11357.nc bigf1_11357.dmp
++ test x1 = x1
++ test x0 = x1
+++ expr 15 + 1
++ passcount=16
++ for x in ${TESTSET}
++ test x0 = x1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xbigf2
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xbigf2
++ isxfail=0
++ for t in ${XFAILTESTS}
++ test xref_tst_chardata = xbigf2
++ for t in ${XFAILTESTS}
++ test xref_const_test = xbigf2
++ for t in ${XFAILTESTS}
++ test xref_tst_unlim2 = xbigf2
++ test 0 = 1
++ rm -f bigf2_11357.nc bigf2_11357.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o bigf2_11357.nc /netcdf/ncdump/cdl/bigf2.cdl
++ /netcdf/ncdump/ncdump -n bigf2 bigf2_11357.nc
++ rm -f bigf2_11357.nc
++ /netcdf/ncgen/ncgen -b -k1 -o bigf2_11357.nc bigf2_11357.dmp
++ /netcdf/ncdump/ncdump -n bigf2 bigf2_11357.nc
++ diff -b -w bigf2_11357.dmp bigf2_11357.dmp2
++ ok=1
++ rm -f bigf2_11357.nc bigf2_11357.dmp
++ test x1 = x1
++ test x0 = x1
+++ expr 16 + 1
++ passcount=17
++ for x in ${TESTSET}
++ test x0 = x1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xbigr1
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xbigr1
++ isxfail=0
++ for t in ${XFAILTESTS}
++ test xref_tst_chardata = xbigr1
++ for t in ${XFAILTESTS}
++ test xref_const_test = xbigr1
++ for t in ${XFAILTESTS}
++ test xref_tst_unlim2 = xbigr1
++ test 0 = 1
++ rm -f bigr1_11357.nc bigr1_11357.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o bigr1_11357.nc /netcdf/ncdump/cdl/bigr1.cdl
++ /netcdf/ncdump/ncdump -n bigr1 bigr1_11357.nc
++ rm -f bigr1_11357.nc
++ /netcdf/ncgen/ncgen -b -k1 -o bigr1_11357.nc bigr1_11357.dmp
++ /netcdf/ncdump/ncdump -n bigr1 bigr1_11357.nc
++ diff -b -w bigr1_11357.dmp bigr1_11357.dmp2
++ ok=1
++ rm -f bigr1_11357.nc bigr1_11357.dmp
++ test x1 = x1
++ test x0 = x1
+++ expr 17 + 1
++ passcount=18
++ for x in ${TESTSET}
++ test x0 = x1
++ specflag=
++ headflag=
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts3 = xbigr2
++ for s in ${SPECIALTESTS}
++ test xref_tst_special_atts = xbigr2
++ isxfail=0
++ for t in ${XFAILTESTS}
++ test xref_tst_chardata = xbigr2
++ for t in ${XFAILTESTS}
++ test xref_const_test = xbigr2
++ for t in ${XFAILTESTS}
++ test xref_tst_unlim2 = xbigr2
++ test 0 = 1
++ rm -f bigr2_11357.nc bigr2_11357.dmp
++ /netcdf/ncgen/ncgen -b -k1 -o bigr2_11357.nc /netcdf/ncdump/cdl/bigr2.cdl
++ /netcdf/ncdump/ncdump -n bigr2 bigr2_11357.nc
++ rm -f bigr2_11357.nc
++ /netcdf/ncgen/ncgen -b -k1 -o bigr2_11357.nc bigr2_11357.dmp
++ /netcdf/ncdump/ncdump -n bigr2 bigr2_11357.nc
++ diff -b -w bigr2_11357.dmp bigr2_11357.dmp2
++ ok=1
++ rm -f bigr2_11357.nc bigr2_11357.dmp
++ test x1 = x1
++ test x0 = x1
+++ expr 18 + 1
++ passcount=19
++ cd ..
+++ expr 19 + 0 + 1
++ totalcount=20
+++ expr 19 + 1
++ okcount=20
++ echo '*** PASSED: 20/20 ; 0 unexpected failures; 1 expected failures ignored'
+*** PASSED: 20/20 ; 0 unexpected failures; 1 expected failures ignored
++ rm -rf ./results_11357
++ test 0 -gt 0
++ exit 0
+SUCCESS!!
+PASS tst_ncgen4_classic.sh (exit status: 0)

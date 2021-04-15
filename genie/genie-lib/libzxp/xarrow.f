@@ -1,0 +1,89 @@
+C
+      SUBROUTINE XARROW(U,V,X0,Y0, XLENG,UUNIT)
+C Plot vector (U,V) at (X0,Y0). Unit X-component UUNIT is plotted with
+C length XLENG in mapped maths coordinate. Length of vector in
+C Y-direction is scaled according to the mapping.
+C
+      REAL PI
+      REAL ANGLE1
+      REAL ANGLE2
+      REAL SINA1
+      REAL COSA1
+      REAL SINA2
+      REAL COSA2
+      REAL U
+      REAL V
+      REAL ALPHA
+      REAL XLENG
+      REAL UUNIT
+      REAL XC0
+      REAL YC0
+      REAL XPLENG
+      REAL XPNTSD
+      REAL DX
+      REAL DY
+      REAL PX0
+      REAL X0
+      REAL PY0
+      REAL Y0
+      REAL PX1
+      REAL PY1
+      REAL DPX
+      REAL DPY
+      REAL DPXY
+      REAL SINTA
+      REAL COSTA
+      REAL ARROW
+      INTEGER KARTYP
+      REAL DX1
+      REAL DY1
+      REAL DX2
+      REAL DY2
+      INTEGER KTYPE
+      INTEGER KVMODE
+      REAL VSC
+C
+      PARAMETER(PI=3.14159,ANGLE1=(10./180+1)*PI,ANGLE2=(-10./180+1)*PI)
+      PARAMETER(SINA1=-.17365,COSA1=-.98481,SINA2=-SINA1,COSA2=COSA1)
+      COMMON /XART36/ KARTYP,KVMODE,VSC
+C
+      IF( ABS(U)+ABS(V).EQ.0.0) RETURN
+      ALPHA= XLENG/UUNIT *0.5
+      XC0=0.0
+      YC0=0.0
+      XPLENG =XPNTSD( XC0,YC0,XC0+XLENG,YC0 )
+      DX=U*ALPHA
+      DY=V*ALPHA
+C TO PLOT ARROW IN ABSOLUTE SPACE (FOR CONFORMALITY)
+      PX0=X0
+      PY0=Y0
+      PX1=X0+DX
+      PY1=Y0+DY
+      CALL XTRANS(PX0,PY0)
+      CALL XTRANS(PX1,PY1)
+      DPX=PX1-PX0
+      DPY=PY1-PY0
+
+      DPXY=SQRT( DPX*DPX+DPY*DPY)
+      IF(DPXY.GT.1.0E-30) THEN
+      SINTA=DPY/DPXY
+      COSTA=DPX/DPXY
+      ARROW=0.30* MIN(XPLENG,2*DPXY)
+      IF( KARTYP.EQ.1 ) ARROW=0.30* MIN(XPLENG,2*DPXY)
+      IF( KARTYP.EQ.2 ) ARROW=0.30* DPXY*2
+      DX1=ARROW*(COSTA*COSA1-SINTA*SINA1)
+      DY1=ARROW*(SINTA*COSA1+COSTA*SINA1)
+      DX2=ARROW*(COSTA*COSA2-SINTA*SINA2)
+      DY2=ARROW*(SINTA*COSA2+COSTA*SINA2)
+      CALL XPENUP(X0-DX, Y0-DY)
+      CALL XPENDN(X0+DX, Y0+DY)
+      CALL XTPNUP(PX1    , PY1    )
+      CALL XTPNDN(PX1+DX1, PY1+DY1)
+      CALL XTPNUP(PX1    , PY1    )
+      CALL XTPNDN(PX1+DX2, PY1+DY2)
+      ENDIF
+      RETURN
+      ENTRY XARTYP(KTYPE)
+      KARTYP=KTYPE
+      RETURN
+      END

@@ -1,0 +1,14 @@
+      real land_tendlowestlu_atm,land_tendlowestlv_atm,
+     :     land_tendlowestlq_atm,land_tendlowestlt_atm
+      real ocean_tendlowestlu_atm,ocean_tendlowestlv_atm,
+     :     ocean_tendlowestlq_atm,ocean_tendlowestlt_atm
+
+      COMMON/tendencies/
+     :     land_tendlowestlu_atm(mg,jgg),
+     :     land_tendlowestlv_atm(mg,jgg),
+     :     land_tendlowestlq_atm(mg,jgg),
+     :     land_tendlowestlt_atm(mg,jgg),
+     :     ocean_tendlowestlu_atm(mg,jgg),
+     :     ocean_tendlowestlv_atm(mg,jgg),
+     :     ocean_tendlowestlq_atm(mg,jgg),
+     :     ocean_tendlowestlt_atm(mg,jgg)

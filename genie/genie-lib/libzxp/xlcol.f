@@ -1,0 +1,118 @@
+
+
+      SUBROUTINE XLCOL(IDIS1,IPSTH1,IPSCL1,IVID1)
+C
+      include 'uniras.inc'
+C
+      INCLUDE 'f77pc.inc'
+      include 'colours.inc'
+      include 'mappings.inc'
+      include 'vpsc.inc'
+C
+      INTEGER NOCOL
+      INTEGER IDIS
+      INTEGER IVID
+      INTEGER IPSCOL
+      INTEGER IDIS1
+      INTEGER IPSCL1
+      INTEGER IPSTH2
+      INTEGER IPSTH1
+      INTEGER IVID1
+      INTEGER IPSC
+      INTEGER KCOL
+      INTEGER LCOL
+      INTEGER MCOL
+      INTEGER N1COL
+      INTEGER IPV
+      INTEGER IPSCTMP
+      INTEGER ICOLTX
+      INTEGER IPSCEXP
+      INTEGER IMASKCOL
+C
+      COMMON /XPVD01/ IPV,IPSC,IPSCTMP,ICOLTX(4),IPSCEXP,IMASKCOL
+C
+C
+      SAVE IPSCOL,IDIS,IVID
+      DATA NOCOL/0/,IDIS/1/,IVID/0/,IPSCOL/4/
+C
+      IF(IJOIN.GT.1)
+     :   CALL XUDRAW(XJOIN,YJOIN,IJOIN,RLINWI,UNICOL,DASHNO)
+C
+      IDIS=IDIS1
+      IPSCOL=IPSCL1
+      IPSTH2=IPSTH1
+      ICOLPC=IDIS
+      IVID=IVID1
+C
+C     print*,' idis1, ispth1, ipscl1, ivid1 ',
+C    :         idis1, ipsth1, ipscl1, ivid1
+      IF(IMON.EQ.0)THEN
+        IF (IDIS.EQ.0.OR.IDIS.EQ.1)THEN
+c        UNICOL=WHITE
+          UNICOL=1
+      ELSEIF(IDIS.EQ.2)THEN
+C        UNICOL=RED
+          UNICOL=2
+      ELSEIF(IDIS.EQ.3)THEN
+C        UNICOL=GREEN
+          UNICOL=3
+      ELSEIF(IDIS.EQ.4)THEN
+C        UNICOL=BLUE
+          UNICOL=4
+      ELSEIF(IDIS.EQ.5)THEN
+C        UNICOL=BLACK
+          UNICOL=0
+      ELSEIF(IDIS.EQ.6)THEN
+C         UNICOL=CYAN
+          UNICOL=8
+      ELSEIF(IDIS.EQ.8)THEN
+C        UNICOL=MEDIUMGREY
+          UNICOL=6
+      ELSEIF(IDIS.EQ.9)THEN
+C        UNICOL=LIGHTRED
+          UNICOL=9
+      ELSEIF(IDIS.EQ.10)THEN
+C        UNICOL=LIGHTGREEN
+          UNICOL=IDIS
+      ELSEIF(IDIS.EQ.11)THEN
+C        UNICOL=LIGHTBLUE
+          UNICOL=IDIS
+      ELSEIF(IDIS.EQ.12)THEN
+C        UNICOL=LIGHTCYAN
+          UNICOL=IDIS
+      ELSEIF(IDIS.EQ.13)THEN
+C        UNICOL=LIGHTMAGENTA
+          UNICOL=IDIS
+      ELSEIF(IDIS.EQ.14)THEN
+C        UNICOL=LIGHTGREY
+          UNICOL=IDIS
+      ELSEIF(IDIS.EQ.15)THEN
+C        UNICOL=YELLOW
+          UNICOL=IDIS
+        ELSE
+          print*,' Warning this colour is not coded '
+          UNICOL=IDIS
+      ENDIF
+      ENDIF
+
+      IF(NOCOL.EQ.1)IPSTH2=1
+c
+      IF(IPSC.EQ.1)CALL XCLPSC(IPSTH2,IPSCOL)
+C      PRINT*,IDIS,IPS,UNICOL,ICOL,NOCOL,ICOLPC
+      RETURN
+
+      ENTRY XQCOL(KCOL,LCOL,MCOL,N1COL)
+      KCOL=IDIS
+      LCOL=IPSTHI
+      MCOL=IPSCOL
+      N1COL=IVID
+      RETURN
+
+      ENTRY XOFCOL
+      NOCOL=1
+      RETURN
+
+      ENTRY XONCOL
+      NOCOL=0
+      RETURN
+      END

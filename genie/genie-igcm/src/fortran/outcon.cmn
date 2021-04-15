@@ -1,0 +1,20 @@
+C     
+C     Switches counters and constants controlling type and frequency of
+C     model output
+C     
+      real rntape,rntapo,day,sqr2,rsqr2,eam1,eam2,tout1,tout2,rmg
+      integer kountd,kounte,kounth,kountr,
+     :        koutd,koute,kouth,koutr
+      COMMON/OUTCON/RNTAPE
+     +              ,RNTAPO
+     +              ,KOUNTD,KOUNTE,KOUNTH,KOUNTR
+     +              ,KOUTD,KOUTE,KOUTH,KOUTR,DAY
+     +              ,SQR2,RSQR2,EAM1,EAM2,TOUT1,TOUT2,RMG
+     +              ,LSPO(NL),LGPO(NL)
+     +              ,LSHIST,LMINIH,lgraphics
+     +              ,lnetcdf,ldaily,lmonthly,lannual,ldecadal
+     +              ,lannual_restart,ldecadal_restart
+      LOGICAL LSHIST,LMINIH,lgraphics
+      LOGICAL LSPO,LGPO,lnetcdf,ldaily,lmonthly,lannual,ldecadal,
+     :        lannual_restart,ldecadal_restart
+C

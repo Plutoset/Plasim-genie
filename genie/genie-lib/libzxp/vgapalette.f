@@ -1,0 +1,2 @@
+      subroutine vgapalette
+      end

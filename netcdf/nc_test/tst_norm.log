@@ -1,0 +1,4 @@
+
+*** testing UTF-8 normalization...ok.
+*** Tests successful!
+PASS tst_norm (exit status: 0)

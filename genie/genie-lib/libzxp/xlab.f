@@ -1,0 +1,40 @@
+
+      SUBROUTINE XLAB(IX,LABEL,ICH)
+C
+C    Converts integer to character
+C
+      INTEGER IX
+      INTEGER ICH
+C
+      CHARACTER LABEL*(*)
+      IF(IX.LT.-10000)THEN
+      PRINT*,' ERROR IS POSTSCRIPT FILE, SEE PV '
+      ELSEIF(IX.LE.-1000)THEN
+      WRITE(LABEL,'(I6)')IX
+      ICH=6
+      ELSEIF(IX.LE.-100)THEN
+      WRITE(LABEL,'(I5)')IX
+      ICH=5
+      ELSEIF(IX.LE.-10)THEN
+      WRITE(LABEL,'(I4)')IX
+      ICH=4
+      ELSEIF(IX.LT.0)THEN
+      WRITE(LABEL,'(I3)')IX
+      ICH=3
+      ELSEIF(IX.LT.10)THEN
+      WRITE(LABEL,'(I2)')IX
+      ICH=2
+      ELSEIF(IX.LT.100)THEN
+      WRITE(LABEL,'(I3)')IX
+      ICH=3
+      ELSEIF(IX.LT.1000)THEN
+      WRITE(LABEL,'(I4)')IX
+      ICH=4
+      ELSEIF(IX.LT.10000)THEN
+      WRITE(LABEL,'(I5)')IX
+      ICH=5
+      ELSE
+       PRINT*,' POST ERROR NUMBER TOO LARGE'
+      ENDIF
+      RETURN
+      END

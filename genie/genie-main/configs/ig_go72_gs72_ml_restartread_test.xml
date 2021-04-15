@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job author="config2xml.py - automatic conversion of ASCII text config file">
+	<vars>
+		<var name="EXPID">genie_ig_go72_gs72_ml_restartread</var>
+		<var name="RESTARTREAD">"TRUE"</var>
+	</vars>
+	<config>
+		<model name="fixedchem"/>
+		<model name="fixedicesheet"/>
+		<model name="goldstein"/>
+		<model name="igcm"/>
+		<model name="goldsteinseaice"/>
+		<model name="mosestriffid"/>
+	</config>
+	<parameters>
+		<control>
+			<param name="lrestart_genie">.true.</param>
+			<param name="ksic_loop">24</param>
+			<param name="fname_fluxrestart"><varref>OUTROOT</varref>/<varref>ASSUMEDGOOD_NAME</varref>/main/main_fluxes_2000_01_30</param>
+			<param name="kocn_loop">24</param>
+			<param name="koverall_total">720</param>
+		</control>
+		<model name="fixedchem">
+		</model>
+		<model name="fixedicesheet">
+		</model>
+		<model name="goldstein">
+			<param name="nyear">360</param>
+			<param name="filenetin"><varref>OUTROOT</varref>/<varref>ASSUMEDGOOD_NAME</varref>/goldstein/goldstein_restart_2000_01_30.nc</param>
+			<param name="ianav">90000</param>
+			<param name="itstp">900</param>
+			<param name="iwstp">30</param>
+			<param name="npstp">90000</param>
+			<param name="yearlen">360</param>
+			<param name="tdatafile">tempann.silo.72x72x16</param>
+			<param name="sdatafile">saliann.silo.72x72x16</param>
+			<param name="world">dan_72</param>
+			<param name="ans">c</param>
+			<param name="netout">y</param>
+			<param name="netin">y</param>
+		</model>
+		<model name="igcm">
+			<param name="dt_restart_igcmlandsurf">720</param>
+			<param name="itslo">1</param>
+			<param name="LSHORT">.false.</param>
+			<param name="KOUNTR">720</param>
+			<param name="fname_restart_igcmlandsurf"><varref>OUTROOT</varref>/<varref>ASSUMEDGOOD_NAME</varref>/igcm/igcmlandsurf_restart_2000_01_30.nc</param>
+			<param name="fname_spectral"><varref>OUTROOT</varref>/<varref>ASSUMEDGOOD_NAME</varref>/igcm/igcm_rs_2000_01.nc</param>
+			<param name="ldaily">.true.</param>
+			<param name="fname_gridpt"><varref>OUTROOT</varref>/<varref>ASSUMEDGOOD_NAME</varref>/igcm/igcm_rg_2000_01.nc</param>
+			<param name="coldstart">.false.</param>
+			<param name="fname_restart_igcmoceansurf"><varref>OUTROOT</varref>/<varref>ASSUMEDGOOD_NAME</varref>/igcm/igcmoceansurf_restart_2000_01_30.nc</param>
+			<param name="itsll">1</param>
+		</model>
+		<model name="goldsteinseaice">
+			<param name="npstp">90000</param>
+			<param name="ianav">90000</param>
+			<param name="itstp">900</param>
+			<param name="iwstp">30</param>
+			<param name="nyear">360</param>
+			<param name="yearlen">360</param>
+			<param name="netin">y</param>
+			<param name="filenetin"><varref>OUTROOT</varref>/<varref>ASSUMEDGOOD_NAME</varref>/goldsteinseaice/goldsic_restart_2000_01_30.nc</param>
+			<param name="world">dan_72</param>
+			<param name="ans">c</param>
+		</model>
+		<model name="mosestriffid">
+			<param name="c_restart"><varref>OUTROOT</varref>/<varref>ASSUMEDGOOD_NAME</varref>/mosestriffid/land_rs_00000720.nc</param>
+			<param name="irest_land">24</param>
+			<param name="idiag_land">720</param>
+		</model>
+	</parameters>
+	<build>
+		<make-arg name="IGCMATMOSDP">TRUE</make-arg>
+		<make-arg name="GENIEDP">TRUE</make-arg>
+		<macro handle="GOLDSTEINNLONSOPTS" status="defined">
+			<identifier>GOLDSTEINNLONS</identifier>
+			<replacement>72</replacement>
+		</macro>
+		<macro handle="GOLDSTEINNLATSOPTS" status="defined">
+			<identifier>GOLDSTEINNLATS</identifier>
+			<replacement>72</replacement>
+		</macro>
+		<macro handle="GOLDSTEINNLEVSOPTS" status="defined">
+			<identifier>GOLDSTEINNLEVS</identifier>
+			<replacement>16</replacement>
+		</macro>
+                <make-arg name="FLAG_MOSESTRIFFID">ON</make-arg>
+	</build>
+	<testing>
+		<var name="ASSUMEDGOOD_NAME">genie_ig_go72_gs72_ml_restartmake</var>
+		<var name="TESTFILE">igcm/igcm_cl_2000_02.nc</var>
+	</testing>
+</job>

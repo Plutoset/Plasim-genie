@@ -1,0 +1,10 @@
+C
+C  Switches for long wave radiation scheme
+C
+      REAL VMRCO2,VMRCH4,VMRN2O,VMRHALO
+      LOGICAL LLBLM
+      INTEGER GAS
+      COMMON/RADLW/VMRCO2,VMRCH4,VMRN2O,VMRHALO
+     +     ,LLBLM,GAS(MXGAS)
+
+C

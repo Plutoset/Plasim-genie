@@ -1,0 +1,115 @@
+
+ 01 02           03  04  05  06 07 08                                     09       10        11
+ \/ \/           \/  \/  \/  \/ \/ \/                                     \/       \/        \/
+
+-START-OF-DATA-
+ F  NULL1        01  01  00  F  F  'dummy index'                          'n/a'     0.00       0.00
+ F  NULL2        02  02  00  F  F  'dummy index'                          'n/a'     0.00       0.00
+ t  POC          03  03  01  f  t  'particulate organic carbon (POC)'     'wt%'     0.00     100.00
+ t  POC_13C      04  03  11  F  F  'd13C of POC'                          'o/oo'   -9.99E+2    9.99E+2
+ t  POC_14C      05  03  12  F  F  'd14C of POC'                          'o/oo'   -9.99E+5    9.99E+2
+ f  PON          06  06  03  F  F  'particulate organic nitrogen (PON)'   'wt%'     0.00     100.00
+ F  PON_15N      07  06  14  F  F  'd15N of PON'                          'o/oo'   -9.99E+2    9.99E+2
+ t  POP          08  08  03  f  t  'particulate organic phosphate (POP)'  'wt%'     0.00     100.00
+ f  POCd         09  09  03  f  t  'particulate organic cadmium (POCd)'   'wt%'     0.00     100.00
+ f  POFe         10  10  03  F  F  'particulate organic iron (POFe)'      'wt%'     0.00     100.00
+ f  POM_231Pa    11  03  06  f  t  'POM scavenged 231Pa'                  'wt%'     0.00     100.00
+ f  POM_230Th    12  03  06  f  t  'POM scavenged 230Th'                  'wt%'     0.00     100.00
+ f  POM_Fe       13  03  06  f  t  'POM scavenged Fe'                     'wt%'     0.00     100.00
+ t  CaCO3        14  14  01  F  F  'calcium carbonate (CaCO3)'            'wt%'     0.00     100.00
+ t  CaCO3_13C    15  14  11  F  F  'd13C of CaCO3'                        'o/oo'   -9.99E+2    9.99E+2
+ t  CaCO3_14C    16  14  12  F  F  'd14C of CaCO3'                        'o/oo'   -9.99E+5    9.99E+2
+ F  CaCO3_18O    17  14  13  F  F  'd18O of CaCO3'                        'o/oo'   -9.99E+2    9.99E+2
+ f  CaCO3_Cd     18  18  04  F  F  'CaCO3 incorporated cadmium'           'wt%'     0.00     100.00
+ f  CaCO3_231Pa  19  14  06  f  t  'CaCO3 scavenged 231Pa'                'wt%'     0.00     100.00
+ f  CaCO3_230Th  20  14  06  f  t  'CaCO3 scavenged 230Th'                'wt%'     0.00     100.00
+ f  CaCO3_Fe  	 21  14  06  f  t  'CaCO3 scavenged Fe'                   'wt%'     0.00     100.00
+ t  det          22  22  02  f  F  'detrital (refractory) material'       'wt%'     0.00     100.00
+ f  det_231Pa    23  22  06  f  t  'detrital scavenged 231Pa'             'wt%'     0.00     100.00
+ f  det_230Th    24  22  06  f  t  'detrital scavenged 230Th'             'wt%'     0.00     100.00
+ f  det_Fe       25  22  06  F  F  'detrital scavenged Fe'                'wt%'     0.00     100.00
+ f  opal         26  26  01  F  F  'opal'                                 'wt%'     0.00     100.00
+ F  opal_30Si    27  26  16  F  F  'd30Si of opal'                        'o/oo'   -9.99E+2    9.99E+2
+ F  opal_Ge      28  28  05  F  F  'opal incorporated germanium'          'wt%'     0.00     100.00
+ f  opal_231Pa   29  26  06  f  t  'opal scavenged 231Pa'                 'wt%'     0.00     100.00
+ f  opal_230Th   30  26  06  f  t  'opal scavenged 230Th'                 'wt%'     0.00     100.00
+ f  opal_Fe   	 31  26  06  f  t  'opal scavenged Fe'                    'wt%'     0.00     100.00
+ t  ash          32  32  02  f  F  'ash'                                  'wt%'     0.00     100.00
+ t  POC_frac2    33  33  09  F  F  'n/a'                                  'n/a'     0.00       0.00
+ t  CaCO3_frac2  34  34  09  F  F  'n/a'                                  'n/a'     0.00       0.00
+ F  opal_frac2   35  35  09  F  F  'n/a'                                  'n/a'     0.00       0.00
+ t  CaCO3_age    36  14  07  F  F  'CaCO3 numerical age tracer'           'years'   0.00E+0    4.50E+9
+ F  foram_p_13C  37  14  11  F  F  'planktic foraminiferal CaCO3 d13C'    'o/oo'   -9.99E+2    9.99E+2
+ F  foram_p_14C  38  14  12  F  F  'planktic foraminiferal CaCO3 d14C'    'o/oo'   -9.99E+5    9.99E+2
+ F  foram_p_18O  39  14  13  F  F  'planktic foraminiferal CaCO3 d18O'    'o/oo'   -9.99E+2    9.99E+2
+ F  foram_b_13C  40  14  11  F  F  'benthic foraminiferal CaCO3 d13C'     'o/oo'   -9.99E+2    9.99E+2
+ F  foram_b_14C  41  14  12  F  F  'benthic foraminiferal CaCO3 d14C'     'o/oo'   -9.99E+5    9.99E+2
+ F  foram_b_18O  42  14  13  F  F  'benthic foraminiferal CaCO3 d18O'     'o/oo'   -9.99E+2    9.99E+2
+-END-OF-DATA-
+
+ /\ /\           /\  /\  /\  /\ /\ /\                                     /\       /\        /\
+ 01 02           03  04  05  06 07 08                                     09       10        11
+
+DATA FORMAT AND ORDER
+---------------------
+
+COLUMN #01: include tracer? [DATA FORMAT: 'T'/'F' ('t'/'f')]
+COLUMN #02: tracer variable name [MAXIMUM STRING LENGTH = 16 CHARACTERS]
+COLUMN #03: tracer variable identifier [DO NOT ADJUST]
+COLUMN #04: tracer variable dependencies [DO NOT ADJUST]
+COLUMN #05: tracer variable type [DO NOT ADJUST]
+COLUMN #06: include flux forcing of tracer? [DATA FORMAT: 'T'/'F' ('t'/'f')]
+COLUMN #07: scale flux forcing of tracer? [DATA FORMAT: 'T'/'F' ('t'/'f')]
+COLUMN #08: tracer variable description [MAXIMUM STRING LENGTH = 128 CHARACTERS]
+COLUMN #09: tracer UNITS [MAXIMUM STRING LENGTH = 12 CHARACTERS]
+COLUMN #10: tracer min
+COLUMN #11: tracer max
+
+INFO: TRACER ASSIGNMENT RULES
+-----------------------------
+(1) tracer IDENTIFIER = a unique integer that identifies the tracer
+(2) tracer DEPENDENCY = the ID of the 'parent' that the tracer depends on
+    for isotopic, trace metal, and particle-reactive scavenged tracers, the parent tracer is the 'bulk' carried species
+    for bulk species, the parent and dependent tracers are the same
+    NOTE: the elemental components of organic matter (P, N, etc) count as bulk tracers for the purpose of dependency
+(3) tracer TYPE;
+    '1' -> assigned to primary biogenic phases; POM (represented by POC), CaCO3, opal (all contributing to bulk composition)
+    '2' -> assigned to detrital material (contributing to bulk composition); det, ash
+    '3' -> assigned to elemental components associated with POC; P, N, Cd, Fe
+    '4' -> assigned to elemental components associated with CaCO3; Cd
+    '5' -> assigned to elemental components associated with opal; Ge
+    '6' -> assigned to particle-reactive scavenged elements; 231Pa, 230Th, Fe
+    '7' -> assigned to carbonate 'age'
+    '8' -> n/a
+    '9' -> assigned to the fractional partitioning of biogenic material (for remineralization purposes)
+'11-20' -> assigned to isotopic properties
+
+INFO: CLASSIFICATION CRITERIA #1
+--------------------------------
+(a) particulate organic matter (POM), elemental components, and particle-reactive scavenged elements:
+    sed_dep(is) == is_POC   .AND. sed_type(is) < 10
+    sed_dep(is) == is_PON   .AND. sed_type(is) < 10
+    sed_type(is) == 3
+(b) criterion for carbonate, elemental components, and particle-reactive scavenged elements
+    sed_dep(is) == is_CaCO3 .AND. sed_type(is) < 10
+    sed_type(is) == 4
+(c) criterion for opal, elemental components, and particle-reactive scavenged elements
+    sed_dep(is) == is_opal  .AND. sed_type(is) < 10
+    sed_type(is) == 5
+(d) detrital and refractory material, and particle-reactive scavenged elements
+    sed_dep(is) == is_det   .AND. sed_type(is) < 10
+    sed_type(is) == 2
+(e) 'dependent' components (isotopes and 'age')
+    ...
+
+INFO: CLASSIFICATION CRITERIA #2
+--------------------------------
+(A) particulate organic matter (ALL components)
+    sed_dep(is) == is_POC   .OR. sed_type(is) == 3
+    sed_dep(is) == is_PON
+(B) carbonate (ALL components)
+    sed_dep(is) == is_CaCO3 .OR. sed_type(is) == 4
+(C) opal (ALL components)
+    sed_dep(is) == is_opal  .OR. sed_type(is) == 5
+(D) detrital material (ALL components)
+    sed_dep(is) == is_det   .OR. sed_type(is) == 2

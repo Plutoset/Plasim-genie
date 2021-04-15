@@ -1,0 +1,7 @@
+
+*** Testing nofill mode.
+*** Create file in nofill mode, writing all values...ok.
+*** Create file with same data in fill mode, writing all values...ok.
+*** Compare values in nofill mode and fill mode files...ok.
+*** Tests successful!
+PASS tst_nofill (exit status: 0)

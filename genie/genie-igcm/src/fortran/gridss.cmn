@@ -1,0 +1,8 @@
+      real zg1,dg1,ug1,vg1,tg1,qg1,gg1,spg1,mspg1,
+     :       u_pg1,v_pg1,t_pg1,q_pg1,g_pg1
+      COMMON/GRIDSS/ZG1(IGD,JG),DG1(IGD,JG),UG1(IGD,JG),VG1(IGD,JG),
+     :              TG1(IGD,JG),QG1(IGD,JG),GG1(IGD,JG),SPG1(IGC,JG),
+     :              mspg1(igc,jg),
+     :              u_pg1(IGD,JG),v_pg1(IGD,JG),t_pg1(IGD,JG),
+     :              q_pg1(IGD,JG),g_pg1(IGD,JG)
+C

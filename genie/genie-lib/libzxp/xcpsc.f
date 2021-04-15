@@ -1,0 +1,34 @@
+C
+      subroutine XCPSC
+C
+      INTEGER IPSCSAV
+      INTEGER IPSC
+      INTEGER IPSCTMP
+      INTEGER IPV
+      INTEGER ICOLTX
+      INTEGER IPSCEXP
+      INTEGER IMASKCOL
+C
+      COMMON /XPVD01/ IPV,IPSC,IPSCTMP,ICOLTX(4),IPSCEXP,IMASKCOL
+      SAVE IPSCSAV
+      DATA IPSCSAV/0/
+C
+      CALL XCLEAR
+      ipsc=1
+      ipsctmp=0
+      RETURN
+C
+      ENTRY XPSCON
+C
+      CALL XCLEAR
+      IPSC=IPSCSAV
+      RETURN
+C
+      ENTRY XPSCOFF
+C
+      CALL XCLEAR
+      IPSCSAV=IPSC
+      IPSC=0
+C
+      return
+      end

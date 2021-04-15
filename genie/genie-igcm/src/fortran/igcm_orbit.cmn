@@ -1,0 +1,15 @@
+      real p_zecc,p_zobl,p_zw,p_zproff
+      logical exact_orbit
+      logical vary_exact_orbit
+      integer daynum
+      integer iniday
+      integer dt_vals
+      integer ichange_orbit
+      character fname_orbit_igcm*200
+      COMMON/igcm_orbit/p_zecc,
+     :      p_zobl,p_zw,p_zproff,
+     :      exact_orbit,vary_exact_orbit,
+     :      daynum,iniday,dt_vals,
+     :      ichange_orbit,
+     :      fname_orbit_igcm
+

@@ -1,0 +1,14 @@
+C
+      real ugf,vgf,zgf,dgf,tgf,tragf,tranlgf,plgf,pjgf,pmgf,
+     *       tnlgf,unlgf,vnlgf,
+     *       shblf,slblf,blcdf,blvbf
+      COMMON/GRIDPF/ UGF(IGD,JG),VGF(IGD,JG)
+     *              ,ZGF(IGD,JG),DGF(IGD,JG),TGF(IGD,JG)
+     +              ,TRAGF(IGD,NTRAC,JG)
+     +              ,TRAnlGF(IGc,NTRAC,JG)
+     *              ,PLGF(IGC,JG),PJGF(IGC,JG),PMGF(IGC,JG)
+     *              ,tnlgf(IGc,JG)
+     *              ,unlgf(IGc,JG),vnlgf(IGc,JG)
+     *              ,shblf(IGC,JG),slblf(IGC,JG)
+     *              ,blcdf(IGC,JG),blvbf(IGC,JG)
+C

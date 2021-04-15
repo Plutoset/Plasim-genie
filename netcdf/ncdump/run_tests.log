@@ -1,0 +1,26 @@
+
+*** Testing ncgen and ncdump using some test CDL files.
+*** creating tst_small.nc from ref_tst_small.cdl...
+netcdf tst_small {
+dimensions:
+	Time = UNLIMITED ; // (2 currently)
+	DateStrLen = 19 ;
+variables:
+	char Times(Time, DateStrLen) ;
+
+// global attributes:
+		:TITLE = " OUTPUT FROM WRF V2.0.3.1 MODEL" ;
+data:
+
+ Times =
+  "2005-04-11_12:00:00",
+  "2005-04-11_13:00:00" ;
+}
+*** creating tst_small.cdl from tst_small.nc...
+*** creating test0_ncdump.nc from test0.cdl...
+*** creating test1_ncdump.cdl from test0_ncdump.nc...
+*** creating test1_ncdump.nc from test1_ncdump.cdl...
+*** creating test2_ncdump.cdl from test1_ncdump.nc...
+*** checking that test1_ncdump.cdl and test2_ncdump.cdl are the same...
+*** All tests of ncgen and ncdump using test0.cdl passed!
+PASS run_tests.sh (exit status: 0)

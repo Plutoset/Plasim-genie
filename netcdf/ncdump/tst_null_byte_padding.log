@@ -1,0 +1,41 @@
+
+*** Testing compatibility with non-null-byte padded test file.
+netcdf ref_null_byte_padding_test {
+variables:
+	double raw_data_start_date ;
+		raw_data_start_date:units = "days since 1673-01-01" ;
+		raw_data_start_date:long_name = "time axis boundaries" ;
+		raw_data_start_date:calendar = "NOLEAP" ;
+		raw_data_start_date:_FillValue = 1.e+20 ;
+	int subset_end_date ;
+		subset_end_date:units = "days since 1678-01-31 00:00:00" ;
+		subset_end_date:calendar = "proleptic_gregorian" ;
+	double globe ;
+		globe:units = "(vertical integral of quantity with unspecified units)" ;
+		globe:_FillValue = NaN ;
+		globe:description = "specific humidity" ;
+	double raw_data_end_date ;
+		raw_data_end_date:units = "days since 1673-01-01" ;
+		raw_data_end_date:long_name = "time axis boundaries" ;
+		raw_data_end_date:calendar = "NOLEAP" ;
+		raw_data_end_date:_FillValue = 1.e+20 ;
+	int subset_start_date ;
+		subset_start_date:units = "days since 1678-01-01 00:00:00" ;
+		subset_start_date:calendar = "proleptic_gregorian" ;
+
+// global attributes:
+		:coordinates = "raw_data_start_date subset_end_date raw_data_end_date subset_start_date" ;
+data:
+
+ raw_data_start_date = 1825 ;
+
+ subset_end_date = 0 ;
+
+ globe = 17.1305600943611 ;
+
+ raw_data_end_date = 1856 ;
+
+ subset_start_date = 0 ;
+}
+Passed.
+PASS tst_null_byte_padding.sh (exit status: 0)

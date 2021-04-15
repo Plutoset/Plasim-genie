@@ -1,0 +1,7 @@
+c
+      integer nall,nfiles
+      parameter(nfiles=4,nall=100)
+      character dimname(nall,nfiles)*200,varname(nall,nfiles)*200
+      integer nc(nfiles),iddim(nall,nfiles),idvar(nall,nfiles)
+      common/netcdfvars/nc,iddim,idvar,dimname,varname
+c

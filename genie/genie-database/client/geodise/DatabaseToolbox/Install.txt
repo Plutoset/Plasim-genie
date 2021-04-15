@@ -1,0 +1,85 @@
+
+Copyright 2003 Geodise Project, University of Southampton
+Jasmin Wason and Zhuoan Jiao 17/7/03
+
+Geodise Database Toolbox for Matlab version 0.6 - Instructions
+
+The Geodise Database Toolbox for Matlab provides client side functions for storing, querying, retrieving and sharing data in a repository. This is the client release of the Geodise Database Toolbox which can store files on a Globus enabled server and store metadata and Matlab structures in a remote Oracle 9i database.
+
+This version of the Geodise Database Toolbox uses CoG 1.1a and is compatible with the Geodise Computational Toolbox 0.5.
+
+Requirements
+------------
+
+1) You will need a copy of the Geodise Computational Toolbox 0.5 (using Java CoG 1.1a) which is available at:
+	CVSROOT: :pserver:gep@escience-dept2.sesnet.soton.ac.uk:/home/cvs/repository
+	Module: ComputeToolbox
+
+Please follow the instructions for installing the Computational Toolbox 0.5 included in the README.txt file. These instructions include steps that are also required for the Database Toolbox, such as installing CoG 1.1a and changes to the Matlab classpath.
+
+2) Please contact JL Wason to have your certificate subject added to the authorisation database so that you can use the Database Toolbox. You can find this in your usercert.pem file, or by viewing the result string returned by calling gd_certinfo from the Computational Toolbox.
+
+3) You need to have an account on the host you will be transferring files to and from (e.g. escience-dept2.sesnet.soton.ac.uk) for the database toolkit to work. Please contact an administrator of the host (e.g. MH Eres for escience-dept2) after you have your certificates and he will add your username to the /etc/grid-security/gridmap file on that machine, and give you an account.
+
+4) The XML Toolbox for Matlab is required. You should include it in Matlab's path. Select "File", "Set path" in Matlab. Then click "Add with subfolders", and add \\comet1\Geodise\Tools\xml_toolbox directory. Save your path definitions. If you do not have access to comet1.sesnet.soton.ac.uk please go to http://www.geodise.org/Pages/xml_toolbox.htm to download the XML Toolbox for Matlab.
+
+Installation
+------------
+
+The Database Toolbox is available from a CVS repository at (where username = your username on the server):
+	CVSROOT: :pserver:username@escience-dept2.sesnet.soton.ac.uk:/home/cvs/repository
+	Module: DatabaseToolbox
+
+As an alternative to steps 5 and 6 you can copy a pre-built version from \\Comet1\Geodise\Database\Toolbox\Geodise-DB-0p6 (*not available yet*), but the CVS repository is the best place to get the latest copy of the software.
+
+5) Checkout this module to a local directory on your machine (<install_path>).
+
+6) An Apache Ant (ant.apache.org) build file is included to rebuild the java classes within the gddatabase.jar. To use run the following commands within the directory containing the file build.xml (<install_path>).
+	>>ant clean
+	>>ant
+
+   Alternatively you can just use the gddatabase.jar file that comes from the repository.
+
+7) When installing the Computational Toolbox you created or edited a classpath.txt file. Please edit or copy this file so that JAR files needed by the Database toolbox are also included. 
+
+    <install_path>\gddatabase.jar
+    <install_path>\lib\xercesImpl.jar
+    <install_path>\lib\xalan.jar
+    <install_path>\lib\xml-apis.jar
+    <install_path>\lib\mail.jar
+    <install_path>\lib\soap.jar
+    <install_path>\lib\activation.jar
+    <install_path>\lib\jug.jar
+    <install_path>\lib\jakarta-regexp-1.2.jar
+
+8) Create a new directory called .geodise in your home directory (<home_dir>), 
+
+    e.g. C:\Documents and Settings\your_username\.geodise on Windows or /home/your_username/.geodise on Linux. 
+    In Windows you may need to create this directory at the command prompt rather than in Windows Explorer.
+
+9) Copy the contents of <install_path>\.geodise into your <home_dir>\.geodise directory.
+
+10) Start Matlab from the directory containing the classpath.txt (in Windows create a new shortcut to MATLAB and set the "Start in" directory to the directory containing your classpath.txt). 
+
+Test installation
+-----------------
+
+11) Create a proxy certificate with gd_createproxy.
+
+12) CD to <install_path> and edit the db_test.m file to change the default_file (default file to archive).
+
+13) Edit the db_test.m file to change the retrieve_path (where to put the file when it has been retrieved).
+
+14) Run db_test.
+
+Configuration
+-------------
+
+The file server name and directory where your files will be stored can be configured. Just change hostname and hostdir in the fileserver section of <home_dir>/.geodise/ClientConfig.xml, e.g.
+
+   <fileserver>
+      <hostname>escience-dept2.sesnet.soton.ac.uk</hostname>
+      <hostdir>/usr/local/archive</hostdir>
+   </fileserver>
+
+The location of the database is specified in a configuration file on the web service server (portal1 in our case). Later this may also be specified in a client configuration file.

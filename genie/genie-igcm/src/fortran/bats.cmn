@@ -1,0 +1,21 @@
+C
+C     Constant arrays and variables associated with time and vertical
+C     differencing. Also counters.
+C
+      real bm1,ak,aq,g,tau,begday,delt,delt2,cv,cg,ct,cq,
+     :     pnu,pnu2,pnu21,ctra,rgg,begdoy,doy
+      integer kount,kits,kstart,ktotal,krun,itspd,
+     :        ntraco,kolour
+      INTEGER IMONTH,IYEAR,INETCOUNT,IDOY,
+     +        IMONTH_CH,KFLAG
+      COMMON/BATS/  BM1(IDE),AK(NNP),AQ(NL2),G(NL2),TAU(NL2)
+     +              ,BEGDAY
+     +              ,DELT,DELT2,CV,CG,CT,CQ,PNU,PNU2,PNU21
+     +              ,CTRA(NTRAC),RGG(NL2)
+     +              ,BEGDOY,DOY
+     +              ,KOUNT,KITS,KSTART,KTOTAL,KRUN,ITSPD
+     +              ,NTRACO,KOLOUR(NTRAC)
+     +      ,IMONTH,IYEAR,INETCOUNT,IDOY
+     +      ,IMONTH_CH,KFLAG
+
+C

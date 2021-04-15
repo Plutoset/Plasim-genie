@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job author="config2xml.py - automatic conversion of ASCII text config file">
+	<vars>
+		<var name="EXPID">genie_Aig_Ogo_Ssl_gaalbedomask</var>
+	</vars>
+	<config>
+		<model name="fixedchem"/>
+		<model name="fixedicesheet"/>
+		<model name="goldstein"/>
+		<model name="igcm"/>
+		<model name="slabseaice"/>
+	</config>
+	<parameters>
+		<control>
+			<param name="koverall_total">17280000</param>
+			<param name="dt_write">86400</param>
+		</control>
+		<model name="fixedchem">
+			<param name="co2_fix">279.0e-6</param>
+			<param name="dt_restart_fixedchem">360</param>
+		</model>
+		<model name="fixedicesheet">
+			<param name="fname_icefrac"><varref>CODEDIR</varref>/genie-igcm/data/input/limit_goldstein.nc</param>
+			<param name="fname_orog"><varref>CODEDIR</varref>/genie-igcm/data/input/limit_goldstein.nc</param>
+			<param name="fname_iland"><varref>CODEDIR</varref>/genie-igcm/data/input/limit_goldstein.nc</param>
+			<param name="albedo_icesheet">0.75</param>
+			<param name="dt_restart_fixedicesheet">360</param>
+		</model>
+		<model name="goldstein">
+			<param name="scf">2.00</param>
+			<param name="ianav">90000</param>
+			<param name="itstp">900</param>
+			<param name="iwstp">1800</param>
+			<param name="npstp">90000</param>
+			<param name="nyear">180</param>
+			<param name="yearlen">360</param>
+			<param name="albocn">0.07422161102295</param>
+			<param name="adrag">2.5</param>
+			<paramArray name="diff">
+				<param index="2">1e-5</param>
+				<param index="1">2000.</param>
+			</paramArray>
+		</model>
+		<model name="igcm">
+			<param name="dt_restart_igcmlandsurf">86400</param>
+			<param name="powercloud">1.00158727169037</param>
+			<param name="akqv">1.12771677970886</param>
+			<param name="trvds">6.</param>
+			<param name="KOUNTR">86400</param>
+			<param name="rough_ocean">3.711080644279718e-04</param>
+			<param name="tyblcnst">1.0</param>
+			<param name="shsstar">0.12936098873615</param>
+			<param name="lcr">.false.</param>
+			<param name="cloudconvbase">0.80181926488876</param>
+			<param name="rhil">0.7</param>
+			<param name="emissconsta">1.15192306041718</param>
+			<param name="dt_restart_igcmoceansurf">86400</param>
+			<param name="redshc">0.5</param>
+			<param name="fname_runoff"><varref>CODEDIR</varref>/genie-igcm/data/input/runoff_goldstein_nn_t21.nc</param>
+			<param name="trshc">6.</param>
+			<param name="segrad">0.1</param>
+			<param name="increaseu">7.33241748809814</param>
+			<param name="fluxfactor">1.32747256755829</param>
+			<param name="cloudmfact">1.0</param>
+			<param name="rhbl">0.9</param>
+			<param name="cloudlfact">1.0</param>
+			<param name="lcr_tiedtke">.true.</param>
+			<param name="supersatconv">0.01273122709244</param>
+			<param name="enhancestable">0.37312272191048</param>
+			<param name="trcnv">6.0</param>
+			<param name="zradef">3.09180402755737</param>
+			<param name="txblcnst">1.0</param>
+			<param name="albedo_fix">-0.03963369876146</param>
+			<param name="fname_vegetation"><varref>CODEDIR</varref>/genie-igcm/data/input/limit_goldstein.nc</param>
+			<param name="blvad">1.13211238384247</param>
+			<param name="cloudconvnorm">0.44094017148018</param>
+			<param name="increaset">0.66781133413315</param>
+			<param name="rhgrad">0.5</param>
+			<param name="humcloudmax">0.90848290920258</param>
+			<param name="emissconstb">1.278144073486328e+02</param>
+			<param name="entmax">0.5</param>
+			<param name="enhancelim">2.01098895072937</param>
+			<param name="supersatlarg">0.03298763558269</param>
+			<param name="blrh">1.197875442504883e+02</param>
+			<param name="increaseq">0.88879120349884</param>
+			<param name="cloudhfact">1.0</param>
+			<param name="lvar_albedo">.true.</param>
+			<param name="smf">0.8</param>
+			<param name="trvdi">24.</param>
+			<param name="humcloudmin">0.72626066207886</param>
+			<paramArray name="snolook">
+				<param index="2">0.8</param>
+			</paramArray>
+		</model>
+		<model name="slabseaice">
+			<param name="flag_fixedextent">.false.</param>
+			<param name="albedo_seaice">0.46517705917358</param>
+			<param name="dt_restart_slabseaice">14400</param>
+		</model>
+	</parameters>
+	<build>
+	</build>
+	<testing>
+	</testing>
+</job>

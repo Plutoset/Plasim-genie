@@ -1,0 +1,6 @@
+      real tropht_clim,ozone_clim,water_clim
+      common/climatologies/
+     :                     tropht_clim(mg,jgg,12),
+     :                     ozone_clim(mg,jgg,15,12),
+     :                     water_clim(mg,jgg,15,12)
+

@@ -1,0 +1,146 @@
+This is a list of things which need to be coded up in genie...
+
+Please add others as you think of them...
+When they are completed, please move them below the asterixes...
+
+The initials show who has posted the 'thing to do', so if you are
+  interested in helping out, you know who to get in touch with.
+
+
+*) Put in #ifdefs into genie.F for all modules (DJL).
+
+*) Fully implement a standard for the units and signs of all 
+     variables in genie.F, and a proper naming convention (DJL).
+
+*) Properly test all the genie combinations for different 
+     precision combinations (DJL).
+
+*) Sort out a proper and consistent time convention throughout genie,
+     with time being calculated in genie.F and then passed to modules,
+     rather than each module calculating its own time separately (DJL).
+
+*) Make the fixedseaice and fixedocean keep a track of energy and
+     water so that conservation can be tested (DJL).
+
+*) Check all the signs and magnitudes of fluxes in genie.F (DJL).
+
+*) implement a non-integer land-sea mask in genie.F (DJL).
+
+*) Make the restart writing/reading consistent accross the board in 
+     genie (DJL).
+
+*) Get rid of the annoying pre-timestep carried out at the
+     initialisation stage, and check restarts still work (DJL).
+
+*) Re-make the fixedatmos file for embm, now that goldstein uses mm as
+     its water flux units (DJL).
+
+*) Get rid of all hard-wiring of timestep info in modules (e.g. 600
+     seconds igcm land-surface) (DJL).
+
+*) Upgrade GOLDSTEIN modules to output monthly average
+     data alongside existing output (and make it netCDF this time!)
+     (AY)
+
+*) Make sure that all the netcdf reading routines fail and stop if
+     the required variable isn't found.  At present, the code just
+     continues (DJL).
+
+*) Get rid of mini-timestep hard-wiring in igcm (AY).
+
+*) investigate synchronisation of igcm and goldstein land-sea masks (AY).
+
+*) check interpolation routines for land-sea mask consistency (AY).
+
+*) rationalise genie.F so that it has more common components. (AY).
+
+*) check alignment of common blocks in igcm (DJL)
+
+*) put in a proper energy check into goldsteinseaice (DJL)
+
+*) put an energy check into the igcm atmosphere (DJL)
+
+*) experiment with different mini-timesteps for the ocean in the
+     ig-fi-fi case (DJL)
+
+*) put in a T-2m and a U/V-10m diagnostic into the igcm (DJL).
+
+*) Put output routines into genie-fixed ocean/seaice and slab
+     ocean/seaice (DJL).
+
+*) Sort out energy-checking in the slabocean when ocean fluxes 
+     are non-zero (DJL).
+
+*) Sort out restarts in the slabocean when ocean fluxes 
+     are non-zero (DJL).
+
+*) Bring together all the boundary-condition makers into a single bit
+     of code (DJL).
+
+*) Put on CVS the code used to calculate orbital coefficients (DJL).
+
+*) Comment all the .config files so it's obvious to a new user what
+     they actually do (DJL).
+
+*) Put in a logical flag for fixing the At-Pa water transport (DJL).
+
+*) Think about fixed SSTs versus air temperatures in the
+     genie_ig_fi_fi case, and also the calibration target for
+     genie_ig_sl_sl runs (DJL).
+
+*) Test the old c-goldstein surface flux module with fixedocean and
+     fixedseaice, and other combinations (DJL).
+
+*) Remove obsolete features in genie_example.job, for example the
+     land-sea mask file in the igcm (DJL).
+ 
+*) Fully comment genie_example.job so all the namelist variables are
+     explained (DJL).
+
+*) Put in the fixedatmosphere into the testing framework (DJL).
+
+*) Get rid of the re-writing of the zeroth restart file, as it means
+ that restarts can't be repeated if there is an error (DJL).
+
+*) Look at the output from genie-main; it looks odd in the _atm case,
+ land-sea mask looks corrupted (DJL).
+
+*) Why do fixedicesheet and fixedchem restarts have ioffset=120? (DJL).
+
+*) Check slabocean and slabseaice restarts (DJL).
+
+**********************************************************************
+**********************************************************************
+
+
+o) sort out restarts for ig_go_sl (i.e. synchronise goldstein and igcm
+ restarts).
+
+o) Make a gui to replace the clumsy make_jobs.pl, or improve
+     make_jobs.pl so it's easier to use.
+
+o) Check addition of latent heat into the igcm.
+
+o) Collate everyone's changes which they have to make to the cvs
+     version of genie to get it to run on their system, and incorporate 
+     them into the cvs version if possible.
+
+o) sort out the pressure-level igcm output onto sensible levels.
+
+o) put a total cloud diagnostic into the igcm.
+
+o) MSLP igcm diagnostic.
+
+o) Put a standard set of instructions onto the genie website.
+
+o) Put in a diagnostic for Atlantic-Pacific water transport.
+
+o) Make sure that there is no time-drift in the genie modules...james
+     A. has found a 1-day time lag in long goldstein-igcm runs.
+
+o) Make an LGM standard job and put it into into make_jobs.pl.
+
+o) Put boundary-condition-makers onto cvs, in genie-utilities.
+
+o) Tidy up the energy and water conservation tests so they are easier
+     to use.

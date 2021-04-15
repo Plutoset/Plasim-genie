@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job author="config2xml.py - automatic conversion of ASCII text config file">
+	<vars>
+		<var name="EXPID">7272s32l_spinup_path06</var>
+	</vars>
+	<config>
+		<model name="goldstein"/>
+		<model name="goldsteinseaice"/>
+		<model name="embm"/>
+		<model name="wind"/>
+	</config>
+	<parameters>
+		<control>
+			<param name="write_flag_atm">.false.</param>
+			<param name="ksic_loop">5</param>
+			<param name="koverall_total">4800000</param>
+			<param name="write_flag_sic">.false.</param>
+			<param name="kocn_loop">5</param>
+			<param name="dt_write">96000</param>
+			<param name="lgraphics">.false.</param>
+                        <param name="genie_timestep">32872.5</param>
+		</control>
+		<model name="goldstein">
+			<param name="ianav">960000</param>
+			<param name="itstp">16</param>
+			<param name="npstp">96000</param>
+			<param name="iwstp">960000</param>
+			<param name="world">72_j06</param>
+                        <param name="temp0">0.0</param>
+                        <param name="temp1">0.0</param>
+                        <param name="rel">0.900000</param>
+                        <param name="scf">1.531013488769531300</param>
+                        <paramArray name="diff">
+                               <param index="1">1494.438354492187480000</param>
+                               <param index="2">0.000025363247914356</param>
+                        </paramArray>
+                        <param name="adrag">2.710164785385131800</param>
+                        <param name="nyear">192</param>
+			<param name="tdatafile">WOA05_an_TS.nc</param>
+			<param name="sdatafile">WOA05_an_TS.nc</param>
+			<param name="tsinterp">.true.</param>
+			<param name="tdata_varname">t00an1</param>
+			<param name="tdata_missing">1.0e20</param>
+			<param name="tdata_scaling">1.0</param>
+			<param name="tdata_offset">0.0</param>
+			<param name="sdata_varname">s00an1</param>
+			<param name="sdata_missing">1.0e20</param>
+			<param name="sdata_scaling">1.0</param>
+			<param name="sdata_offset">0.0</param>
+			<param name="output_tsdata">.true.</param><!-- set this to .true. to enable output of interpolated data-based T and S fields used in RMS error calculation -->
+		</model>
+		<model name="goldsteinseaice">
+			<param name="npstp">96000</param>
+			<param name="itstp">16</param>
+			<param name="iwstp">960000</param>
+			<param name="world">72_j06</param>
+			<param name="ianav">960000</param>
+                        <param name="diffsic">20000.0</param>
+                        <param name="nyear">192</param>
+			<param name="impsic">.true.</param>
+		</model>
+		<model name="embm">
+			<param name="npstp">96000</param>
+			<param name="ianav">960000</param>
+			<param name="itstp">16</param>
+			<param name="iwstp">960000</param>
+			<param name="world">72_j06</param>
+                        <param name="scf">1.531013488769531300</param>
+                        <paramArray name="diffamp">
+                               <param index="1">5204945.000000000000000000</param>
+                               <param index="2">1173269.248000000000000000</param>
+                        </paramArray>
+			<param name="diffwid">1.410347938537597700</param>
+			<param name="difflin">0.0</param>
+                        <paramArray name="betaz">
+                               <param index="1">0.001037851092405617</param>
+                               <param index="2">0.164652019739151000</param>
+                        </paramArray>
+                        <paramArray name="betam">
+                               <param index="1">0.0000000E+00</param>
+                               <param index="2">0.164652019739151000</param>
+                        </paramArray>
+			<param name="scl_fwf">0.726862013339996340</param>
+                        <param name="nyear">192</param>
+                        <param name="diffa_scl">0.6</param>
+                        <param name="diffa_len">-56</param>
+			<param name="tdatafile">NCEP-DOE_Reanalysis_2_ltaa_1000mb_T_r.nc</param>
+			<param name="qdatafile">NCEP-DOE_Reanalysis_2_ltaa_1000mb_T_r.nc</param>
+			<param name="tqinterp">.true.</param>
+			<param name="tdata_varname">air</param>
+			<param name="tdata_missing">32766.0</param>
+			<param name="tdata_scaling">1.0</param>
+			<param name="tdata_offset">273.15</param>
+			<param name="qdata_varname">rhum</param>
+			<param name="qdata_missing">32766.0</param>
+			<param name="qdata_scaling">100.0</param>
+			<param name="qdata_offset">0.0</param>
+			<param name="qdata_rhum">.true.</param>
+			<param name="xu_wstress">dan_72_NCEP-DOE_Reanalysis_2_average_taux_u.dat</param>
+			<param name="xv_wstress">dan_72_NCEP-DOE_Reanalysis_2_average_taux_v.dat</param>
+			<param name="yu_wstress">dan_72_NCEP-DOE_Reanalysis_2_average_tauy_u.dat</param>
+			<param name="yv_wstress">dan_72_NCEP-DOE_Reanalysis_2_average_tauy_v.dat</param>
+			<param name="u_wspeed">uncep72.silo</param>
+			<param name="v_wspeed">vncep72.silo</param>
+			<param name="output_tqdata">.true.</param><!-- set this to .true. to enable output of interpolated data-based T and q fields used in RMS error calculation -->
+		</model>
+		<model name="wind">
+                  <param name="indir_path"><varref>RUNTIME_ROOT</varref><sep/>genie-wind<sep/>data<sep/>input</param>
+                  <param name="wind_speed_dataset_file">NCEP-DOE_Reanalysis_2_ltaa_1000mb_wind_speed.nc</param>
+                  <param name="wind_speed_dataset_zonal_var">uwnd</param>
+                  <param name="wind_speed_dataset_meridional_var">vwnd</param>
+                  <param name="wind_speed_dataset_missing">32766.0</param>
+                  <param name="wind_speed_dataset_scaling">1.0</param>
+                  <param name="wind_stress_dataset_file">NCEP-DOE_Reanalysis_2_ltaa_wind_stress.nc</param>
+                  <param name="wind_stress_dataset_zonal_var">uflx</param>
+                  <param name="wind_stress_dataset_meridional_var">vflx</param>
+                  <param name="wind_stress_dataset_missing">32766.0</param>
+                  <param name="wind_stress_dataset_scaling">-1.0</param>
+		  <param name="output_wind_forcing">.true.</param><!-- set this to .true. to enable output of interpolated data-based wind forcing fields -->
+		</model>
+	</parameters>
+	<build>
+		<make-arg name="IGCMATMOSDP">TRUE</make-arg>
+		<make-arg name="GENIEDP">TRUE</make-arg>
+		<macro handle="GENIENXOPTS" status="defined">
+			<identifier>GENIENX</identifier>
+			<replacement>72</replacement>
+		</macro>
+		<macro handle="GENIENYOPTS" status="defined">
+			<identifier>GENIENY</identifier>
+			<replacement>72</replacement>
+		</macro>
+		<macro handle="GOLDSTEINNLONSOPTS" status="defined">
+			<identifier>GOLDSTEINNLONS</identifier>
+			<replacement>72</replacement>
+		</macro>
+		<macro handle="GOLDSTEINNLATSOPTS" status="defined">
+			<identifier>GOLDSTEINNLATS</identifier>
+			<replacement>72</replacement>
+		</macro>
+		<macro handle="GOLDSTEINNLEVSOPTS" status="defined">
+			<identifier>GOLDSTEINNLEVS</identifier>
+			<replacement>32</replacement>
+		</macro>
+	</build>
+	<testing>
+	</testing>
+</job>

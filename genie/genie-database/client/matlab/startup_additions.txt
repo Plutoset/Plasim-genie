@@ -1,0 +1,3 @@
+addpath <install_path>/geodise/ComputeToolbox;
+addpath <install_path>/geodise/DatabaseToolbox;
+addpath <install_path>/geodise/xml_toolbox-2.0;

@@ -1,0 +1,4 @@
+C
+      integer icounter
+      COMMON/EXTRA/ icounter(6)
+C

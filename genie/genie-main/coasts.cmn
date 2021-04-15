@@ -1,0 +1,5 @@
+      integer idt1,idt2
+      parameter(idt1=1290,idt2=176000)
+      integer inseg
+      real cstpnt
+      common /coasts/ inseg(idt1),cstpnt(idt2,2)

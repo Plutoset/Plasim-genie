@@ -1,0 +1,5 @@
+2 10                                L/O dt ratio, Diagnostic output freq (ocean steps)
+T F T                               l_trif_on l_phen_on l_equil_on
+100 10                              trif period, phen period (ocean steps)
+0                                   Use(=1) or dont use(=0) land restart dump
+../results/cdf/rs2.land.2           Restart dump input file relative to executable location

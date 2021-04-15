@@ -1,0 +1,25 @@
+This directory contains the code for making some (six, to be exact) of
+the genie-land restart files included with the GENIE distribution.
+They can all be created by running the make file with different
+options.  i.e. there is no need to edit the fortran source.
+
+The code uses the compiled genie-land and genie-lib/nc1 libraries,
+which must be compiled at the same precision as the nc1 netCDF
+library, as I haven't accounted for precision differences yet.
+
+It also looks for the atmosphere model land/sea masks in the standard
+places relative to this directory.
+
+Note also that the code always produces a netCDF file with the same
+filename, so you'll have to rename it to avoid it being overwritten
+when you make a new restart file.
+
+Option       Values        Description
+
+ATMEND       igcm, embm,   Make for either IGCM or EMBM atmosphere resolution/grid
+             igcm-2
+DATAEND      igbp,         Uses IGBP present-day observed vegetation (inc. land-use change)
+             baresoil,     Bare soil everywhere, with PFT seeding fractions and Antarctic/Greenland ice sheets
+             potential     Uses ISLSCP2 pre-agricultural potential vegetation (Ramankutty & Foley, 1999)
+
+PPH 14/04/05

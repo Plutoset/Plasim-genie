@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job author="config2xml.py - automatic conversion of ASCII text config file">
+	<vars>
+		<var name="EXPID">genie_ig_fi_fi_gaalbedo</var>
+	</vars>
+	<config>
+		<model name="fixedchem"/>
+		<model name="fixedseaice"/>
+		<model name="fixedicesheet"/>
+		<model name="fixedocean"/>
+		<model name="igcm"/>
+	</config>
+	<parameters>
+		<control>
+			<param name="koverall_total">86400</param>
+		</control>
+		<model name="fixedchem">
+		</model>
+		<model name="fixedseaice">
+			<param name="albedo_seaice">0.46517705917358</param>
+		</model>
+		<model name="fixedicesheet">
+		</model>
+		<model name="fixedocean">
+			<param name="albedo_ocean">0.07422161102295</param>
+		</model>
+		<model name="igcm">
+			<param name="supersatlarg">0.03298763558269</param>
+			<param name="powercloud">1.00158727169037</param>
+			<param name="akqv">1.12771677970886</param>
+			<param name="pcloudmin">3.01310348510742</param>
+			<param name="rough_ocean">3.711080644279718e-04</param>
+			<param name="cloudshallow">0.26417583227158</param>
+			<param name="shsstar">0.12936098873615</param>
+			<param name="cloudconvbase">0.80181926488876</param>
+			<param name="increaseu">7.33241748809814</param>
+			<param name="increaset">0.66781133413315</param>
+			<param name="increaseq">0.88879120349884</param>
+			<param name="fluxfactor">1.32747256755829</param>
+			<param name="pcloudfact">0.09858781844378</param>
+			<param name="supersatconv">0.01273122709244</param>
+			<param name="enhancestable">0.37312272191048</param>
+			<param name="zradef">3.09180402755737</param>
+			<param name="cubmt">1.37142860889435</param>
+			<param name="blvad">1.13211238384247</param>
+			<param name="cloudconvnorm">0.44094017148018</param>
+			<param name="albedo_fix">-0.03963369876146</param>
+			<param name="humcloudmax">0.90848290920258</param>
+			<param name="emissconstb">1.278144073486328e+02</param>
+			<param name="emissconsta">1.15192306041718</param>
+			<param name="enhancelim">2.01098895072937</param>
+			<param name="blrh">1.197875442504883e+02</param>
+			<param name="cbadjt">4.91135549545288</param>
+			<param name="lvar_albedo">.true.</param>
+			<param name="humcloudmin">0.72626066207886</param>
+		</model>
+	</parameters>
+	<build>
+	</build>
+	<testing>
+	</testing>
+</job>

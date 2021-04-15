@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE> gd_jobkill (Matlab Functions) </TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.0  (Win32)">
+	<META NAME="CREATED" CONTENT="20031003;16082415">
+	<META NAME="CHANGED" CONTENT="20031006;11144705">
+	<META NAME="FORMATTER" CONTENT="Arachnophilia 5.2">
+	<!-- Created on 02-Oct-2003 11:39:22 -->
+	<!-- Top navigation bar -->
+	<STYLE>
+	<!--
+		@page { size: 21cm 29.7cm }
+		TD P { color: #000000; font-family: "arial" }
+		P { color: #000000; font-family: "arial" }
+		A:link { color: #0000ff }
+		A:visited { color: #800080 }
+		ul {list-style-type: none}
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" TEXT="#000000" LINK="#0000ff" VLINK="#800080" BGCOLOR="#ffffff" DIR="LTR">
+<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0 BGCOLOR="#99ccff" STYLE="page-break-before: always">
+	<TR>
+		<TD>
+			<P><B>MATLAB Function Reference</B> 
+			</P>
+		</TD>
+		<TD>
+			<P ALIGN=RIGHT><A HREF="gd_getfile.html"><IMG SRC="b_prev.gif" NAME="Graphic1" ALIGN=BOTTOM WIDTH=17 HEIGHT=17 BORDER=0></A>
+			&nbsp;&nbsp;&nbsp; 
+			<A HREF="gd_jobpoll.html"><IMG SRC="b_next.gif" NAME="Graphic2" ALIGN=BOTTOM WIDTH=17 HEIGHT=17 BORDER=0></A>
+						</P>
+		</TD>
+	</TR>
+</TABLE>
+<P><FONT COLOR="#000099"><!-- Function name and short description --><FONT SIZE=6>gd_jobkill
+</FONT></FONT>
+</P>
+<P>Kills a Globus GRAM specified by job handle</P>
+<P><FONT COLOR="#000099"><!-- Function syntax --><FONT SIZE=4><B>Syntax</B>
+</FONT></FONT>
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm"><CODE>gd_jobkill(JOBHANDLE) </CODE>
+	</P>
+	<P STYLE="margin-bottom: 0cm"></P>
+</UL>
+<P><!-- Function description --><FONT SIZE=4><FONT COLOR="#000099"><B>Description</B>
+</FONT></FONT><BR><BR><CODE><CODE><CODE>gd_jobkill(JOBHANDLE)</CODE></CODE></CODE>
+Kills the Globus job specified by the Globus job handle.</P>
+<P><!-- Remarks --><FONT SIZE=4><FONT COLOR="#000099"><B>Remarks</B>
+</FONT></FONT><BR><BR>A valid proxy certificate for the correct user
+credentials is required to kill a GRAM job.</P>
+<P><!-- Examples --><FONT SIZE=4><FONT COLOR="#000099"><B>Examples</B>
+</FONT></FONT><BR><BR>This example terminates a Globus job using the
+job handle returned by <CODE><A HREF="gd_jobsubmit.html">gd_jobsubmit</A><CODE>.</CODE></CODE></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm"><CODE><CODE>gd_jobkill('https://escience-dept2.sesnet.soton.ac.uk:33342/10288/1029768382/')
+	</CODE></CODE>
+	</P>
+	<P STYLE="margin-bottom: 0cm"></P>
+</UL>
+<P><!-- See also --><CODE><FONT SIZE=4><FONT COLOR="#000099"><B>See
+also</B> </FONT></FONT><BR><BR><CODE><A HREF="gd_createproxy.html">gd_createproxy</A>,
+<A HREF="gd_jobsubmit.html">gd_jobsubmit</A>, <A HREF="gd_jobstatus.html">gd_jobstatus</A></CODE>
+</CODE>
+</P>
+<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0 BGCOLOR="#99ccff">
+	<TR>
+		<TD WIDTH=20>
+			<P ALIGN=LEFT><!-- Bottom navigation bar --><A HREF="gd_getfile.html"><IMG SRC="b_prev.gif" NAME="Graphic3" ALIGN=BOTTOM WIDTH=17 HEIGHT=17 BORDER=0></A>
+						</P>
+		</TD>
+		<TD>
+			<P ALIGN=LEFT>gd_getfile</P>
+		</TD>
+		<TD>
+			<P>&nbsp; 
+			</P>
+		</TD>
+		<TD>
+			<P ALIGN=RIGHT>gd_jobpoll</P>
+		</TD>
+		<TD WIDTH=20>
+			<P ALIGN=RIGHT><A HREF="gd_jobpoll.html"><IMG SRC="b_next.gif" NAME="Graphic4" ALIGN=BOTTOM WIDTH=17 HEIGHT=17 BORDER=0></A>
+						</P>
+		</TD>
+	</TR>
+</TABLE>
+<P><BR><BR>
+</P>
+</BODY>
+</HTML>

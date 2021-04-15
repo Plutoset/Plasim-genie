@@ -1,0 +1,5 @@
+
+*** Testing nofill mode.
+*** Create file in nofill mode, writing all values..., trying sizehint of 1750000 ...ok.
+*** Tests successful!
+PASS tst_nofill2 (exit status: 0)

@@ -1,0 +1,6 @@
+C
+C     Restoration fields and timescale
+C
+      real zres,dres,tres,spres,damp
+      COMMON/RESTOR/ZRES(IGN),DRES(IGN),TRES(IGN),SPRES(IGM),DAMP
+C

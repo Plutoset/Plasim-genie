@@ -1,0 +1,9 @@
+
+      real weight_atm(ilon1_atm,ilat1_atm),
+     &     weight_ocn(ilon1_ocn,ilat1_ocn),
+     &     weight_sic(ilon1_sic,ilat1_sic)
+
+      common/weights/weight_atm,
+     &               weight_ocn,
+     &               weight_sic
+

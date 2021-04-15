@@ -1,0 +1,17 @@
+<datagroup_metadata>
+	<datagroup>
+		<ID>dg_a66e57b3-44d5-4af1-ba68-eae4bb467fc3</ID>
+		<datagroupname>Second test datagroup</datagroupname>
+		<archiveDate>2003-07-29 16:17:29</archiveDate>
+		<userID>andrew</userID>
+		<files>
+			<fileID>0000_psi_1_49973972-284b-40af-aa25-50dfa3614228</fileID>
+		</files>
+		<varmeta>
+			<varmetaID>var_a44f8279-05cf-4084-b3c7-16e7fc027af6</varmetaID>
+		</varmeta>
+	</datagroup>
+	<standard type="struct" idx="1" size="1 1" fields="comment">
+		<comment type="char" idx="1" size="1 40">This is a comment about a test datagroup</comment>
+	</standard>
+</datagroup_metadata>

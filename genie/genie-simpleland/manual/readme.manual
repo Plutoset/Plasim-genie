@@ -1,0 +1,19 @@
+This directory contains all the files needed to edit or add
+to the ENTS manual. This includes the figures (.eps files),
+and the LaTeX file (land_manual.tex). There are also compiled
+versions of the manual in postscript (.ps) and portable document
+format (.pdf).
+
+I've also included one of the papers cited in the manual as a
+.pdf and .ps as this is hard to find. This paper (RevTeX_radland) is
+about the approximation in simple land 'solving for the equilibrium 
+solution to the land temperature'.
+
+Mark Williamson 23/02/2005
+
+UPDATE: I've now removed the *.ps and *.pdf files as they were rather 
+large and took a long time to download from CVS. I've replaced this
+with a Makefile that makes the *.pdf and *.ps files from the *.tex file.
+To make the land_manual all you need do is type 'make' at the command line.
+
+05/05/05

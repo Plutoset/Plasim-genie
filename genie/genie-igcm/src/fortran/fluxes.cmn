@@ -1,0 +1,4 @@
+      real slbl,shbl,snowd,temp2m,landevap
+      COMMON/FLUXES/ SLBL(IGC),SHBL(IGC),SNOWD(IGC),TEMP2M(IGC),
+     :     LANDEVAP(IGC)
+C

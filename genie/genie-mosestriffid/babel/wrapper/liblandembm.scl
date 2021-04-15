@@ -1,0 +1,6 @@
+<?xml version="1.0" ?> 
+<scl>
+  <library uri="/homes/sp1003/applications/genie-babel-complete/genie-land/babel/wrapper/liblandembm.so" scope="global" resolution="lazy" > 
+      <class name="land.landembm" desc="java" />
+  </library>
+</scl>

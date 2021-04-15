@@ -1,0 +1,2 @@
+      REAL albedo_seaice
+      COMMON/fixedseaice_com/albedo_seaice

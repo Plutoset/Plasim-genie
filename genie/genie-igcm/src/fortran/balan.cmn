@@ -1,0 +1,9 @@
+C
+C     Constants and arrays needed for balancing
+C
+      real bfilt,rgt0,rg,tmean,ep1,ep2,srgt0
+      integer kbal,mftbal
+      COMMON/BALAN/BFILT(NL),RGT0(NL),RG(NL2),TMEAN(NL)
+     +            ,EP1(IGA),EP2(IGA),KBAL,MFTBAL,SRGT0,LTBAL
+      LOGICAL LTBAL
+C

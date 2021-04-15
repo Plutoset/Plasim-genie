@@ -1,0 +1,28 @@
+      SUBROUTINE XCPNDN(X,Y)
+C
+      REAL XCHPEN
+      REAL X
+      REAL YCHPEN
+      REAL Y
+      REAL X1
+      REAL Y1
+      REAL XCHP
+      REAL YCHP
+      REAL XCHMO
+      REAL YCHMO
+      REAL XCHPO
+      REAL YCHPO
+C
+      COMMON /XCHP21/ XCHPEN, YCHPEN ,XCHMO,YCHMO,XCHPO,YCHPO
+      XCHPEN=X
+      YCHPEN=Y
+      X1=X
+      Y1=Y
+      CALL XCTRAN( X1,Y1)
+      CALL PPENDN( X1,Y1)
+      RETURN
+      ENTRY XQCPEN( XCHP, YCHP )
+      XCHP=XCHPEN
+      YCHP=YCHPEN
+      RETURN
+      END

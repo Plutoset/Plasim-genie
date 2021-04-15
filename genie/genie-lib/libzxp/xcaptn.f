@@ -1,0 +1,49 @@
+      SUBROUTINE XCAPTN(TITLES,NUM,CH, LC )
+C PLOT CAPTIONS ALONG THE BORDER
+      INTEGER NUM
+      REAL XL
+      REAL XR
+      REAL YB
+      REAL YT
+      REAL XRG
+      REAL YRG
+      REAL ANG0
+      REAL SIZ0
+      REAL SIZ
+      REAL HX
+      REAL HY
+      REAL XANG
+      REAL YANG
+      INTEGER LC
+      REAL YCP
+      INTEGER K
+C
+      CHARACTER TITLES(NUM)*50, CH*100
+      CALL XQMAP(XL,XR,YB,YT)
+      CALL XQRANG( XRG, YRG )
+      CALL XQCHOR( ANG0 )
+      CALL XQCHMG( SIZ0 )
+      SIZ=0.05*MIN( XRG, YRG)
+      HX=SIZ*(XR-XL)/XRG
+      HY=SIZ*(YT-YB)/YRG
+      CALL XCHMAG( SIZ )
+      IF( NUM.GE.1) THEN
+      CALL XQOBAG( XANG, YANG )
+      CALL XCHORI( 90.0 +YANG-XANG )
+      CALL XCHARC( XL- 2.5*HX,  0.5*(YT+YB), TITLES(1)(1:10) )
+      CALL XCHORI(0.0)
+      CALL XCHARC( 0.5*(XR+XL),  YB-2*HY , TITLES(1)(11:20))
+      ENDIF
+      IF( NUM.GE.2) THEN
+      CALL XCHARL(XL,YB-4*HY,TITLES(2)(1:20)//'  '//ch(1:lc))
+      ENDIF
+      YCP=YB-4.5*HY
+      DO 10 K=3,NUM
+      YCP=YCP-HY
+      CALL XCHARL(XL,YCP,TITLES(K))
+ 10   CONTINUE
+      CALL XCHORI( ANG0 )
+      CALL XCHMAG( SIZ0 )
+      PRINT*, TITLES(2)(1:20) ,' is to be plotted..'
+      RETURN
+      END

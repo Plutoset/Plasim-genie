@@ -1,0 +1,12 @@
+      SUBROUTINE XBOX(X1,X2,Y1,Y2)
+      REAL X1
+      REAL Y1
+      REAL X2
+      REAL Y2
+      CALL XPENUP( X1,Y1)
+      CALL XPENDN ( X2,Y1)
+      CALL XPENDN ( X2,Y2)
+      CALL XPENDN ( X1,Y2)
+      CALL XPENDN ( X1,Y1)
+      RETURN
+      END

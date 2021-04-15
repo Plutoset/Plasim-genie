@@ -1,0 +1,57 @@
+** TO EXTRACT THE EMAIL ADDRESSES FROM THIS FILE, RUN:
+** grep '<.*@.*>' ag_info.txt
+
+
+
+
+Contacts (including phone number accessible during meeting):
+
+
+Bristol: 
+Dan Lunt <d.j.lunt@bristol.ac.uk> 
+tel: 0117 3317439, 07966 901305 
+                                              
+UEA:
+Ashley Sampson <Ashley.Sampson@uea.ac.uk> 
+Sudipta Goswami <s.goswami@uea.ac.uk>
+Tim Lenton <T.Lenton@uea.ac.uk>
+tel: 07916120340
+
+Soton e-science:
+Trevor Cooper-Chadwick <trevor.cooper-chadwick@soton.ac.uk>
+Andrew Price <A.R.Price@soton.ac.uk>
+Access Grid <accessgrid@ses.soton.ac.uk>
+tel:
+
+Soton oceanography:
+Simon Rutherford <szr@soc.soton.ac.uk>
+tel: 0238 0596082
+
+Edinburgh:
+Access Grid <accessgrid@nesc.ac.uk>
+David Cameron <dcam@ceh.ac.uk>
+tel: 0131 6509829
+
+London:
+Access Grid <lesc-ag@imperial.ac.uk>
+Access Grid2 <lesc-ag@doc.ic.ac.uk>
+Oliver Jevons <omj@doc.ic.ac.uk>
+Sofia Panagiotidi <sp1003@doc.ic.ac.uk>
+tel: 020 75948230, 07906 641645, 07867 540942
+
+Switzerland:
+Neil Edwards <edwards@climate.unibe.ch>
+Stefan Zoller <zoller@climate.unibe.ch>
+tel: 00 41 31 631 4871
+
+Japan:
+James Annan <jdannan@jamstec.go.jp>
+Julia Hargreaves <jules@jamstec.go.jp>
+tel:
+
+Manchester:
+Graham Riley <graham.riley@manchester.ac.uk>
+Rupert <rupert.ford@manchester.ac.uk>
+Paul Kuchar <Paul.Kuchar@manchester.ac.uk>
+tel:
+

@@ -1,0 +1,5 @@
+      real difusestrength
+      logical coldstart
+      logical lcalc_blayer_vals
+      COMMON/igcm_nlevs/difusestrength,coldstart,
+     :    lcalc_blayer_vals

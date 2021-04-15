@@ -1,0 +1,149 @@
+*
+* var.cmn common block containing variables update 15/2/2       
+* EMBM variables added 29/8/2 
+* v2 seasonality variables nyear, maxnyr added 3/6/3
+*
+      implicit none
+      integer maxi,maxj,maxk,maxl,mpxi,mpxj,isles,mpi,maxnyr
+      parameter ( maxi = 36 , maxj =  36, maxk =  8 , maxl = 2)
+      parameter (maxnyr=220)
+c     parameter ( maxi = 72 , maxj =  72, maxk =  8 , maxl = 2)
+c for streamfunction equation
+      parameter ( mpxi = maxi , mpxj = maxj+1 )
+c for islands
+      parameter ( isles = 1, mpi = 2*(maxi+maxj))
+      integer imax,jmax,kmax,lmax,ntot,intot,k1(0:maxi+1,0:maxj+1)
+     1 ,ku(2,maxi,maxj),mk(maxi+1,maxj),nyear
+      common /invars/imax,jmax,kmax,lmax,ntot,intot,k1,ku,mk,nyear
+      integer ips(maxj),ipf(maxj),ias(maxj),iaf(maxj),jsf
+      common /lego/ips,ipf,ias,iaf,jsf
+      integer lpisl(mpi,isles), ipisl(mpi,isles), jpisl(mpi,isles)
+     1 ,npi(isles)
+c     integer lpisl(mpi,isles+1), ipisl(mpi,isles+1), jpisl(mpi,isles+1)
+c    1 ,npi(isles+1)
+      common /islands/lpisl,ipisl,jpisl,npi
+
+      real dt(maxk),dphi,dphi2,ds,ds2,dz(maxk),u(3,0:maxi,0:maxj,maxk)
+     1 ,ts(maxl,0:maxi+1,0:maxj+1,0:maxk+1),t,s(0:maxj),c(0:maxj)
+     2 ,dzu(2,maxk)
+     2 ,tau(2,maxi,maxj),drag(2,maxi+1,maxj),dztau(2,maxi,maxj)
+     3 ,diff(2),ec(4)
+     4 ,cn,ratm(mpxi*mpxj,mpxi+1),ub(2,0:maxi+1,0:maxj)
+     5 ,rho(0:maxi+1,0:maxj+1,0:maxk)
+     6 ,ts1(maxl,0:maxi+1,0:maxj+1,0:maxk+1),sv(0:maxj)
+      real
+     6 cv(0:maxj),dza(maxk),dztav(2,maxi,maxj),gb(mpxi*mpxj)
+     7 ,gap(mpxi*mpxj,2*mpxi+3),ez0
+     8 ,cost(maxi,maxj),rh(3,0:maxi+1,0:maxj+1),gbold(mpxi*mpxj)
+     9 ,sda1,sdomg,dzz,tau0(maxi,maxj),dztav0(maxi,maxj)
+     1 ,tau1(maxi,maxj),dztav1(maxi,maxj),tsa0(maxj),t0,daysperyear
+      real psi(0:maxi,0:maxj)
+      common /vars/dt,dphi,dphi2,ds,ds2,dz,u
+     1 ,ts,t,s,c,dzu
+     2 ,tau,drag,dztau
+     3 ,diff,ec
+     4 ,cn,ratm,ub
+     5 ,rho,ts1,sv,cv
+     6 ,dza,dztav,gb
+     7 ,gap,ez0
+     8 ,cost,rh,gbold
+     9 ,sda1,sdomg,dzz,tau0,dztav0
+     1 ,tau1,dztav1,tsa0,t0,daysperyear
+      common /holes/psi
+      real rel,u1(3,0:maxi,0:maxj,maxk)
+      common /relax/rel,u1
+c reciprocal and other variables to speed up fortran
+      real rc(0:maxj),rcv(0:maxj),rdphi,rds,cv2(0:maxj),rc2(0:maxj)
+     1 ,rtv(maxi,maxj),rtv3(maxi,maxj),rdz(maxk),rdza(maxk)
+      common /recips/rc,rcv,rdphi,rds,cv2,rc2,rtv,rtv3,rdz,rdza
+
+c pressure integral arrays
+      real bp(maxi+1,maxj,maxk), sbp(maxi+1,maxj)
+      common /press/bp,sbp
+
+c diagnostics
+      real dmax
+      common /testvar/dmax
+      integer limps
+      common /testint/limps
+
+c  dimensional scale values
+      real usc,rsc,dsc,fsc,gsc,rh0sc,rhosc,cpsc,tsc,pi,syr
+      common /dimsc/usc,rsc,dsc,fsc,gsc,rh0sc,rhosc,cpsc,tsc,pi,syr
+
+c EMBM 
+      integer ndta
+      common /inebm/ndta
+      real cd,tq(2,maxi,maxj),tq1(2,maxi,maxj)
+     1 ,qsata(maxi,maxj),qsato(maxi,maxj)
+     2 ,varice(2,maxi,maxj),varice1(2,maxi,maxj),tice(maxi,maxj),dtatm
+     3 ,tqa(2,maxi,maxj),solfor(maxj,maxnyr),ghs,rdtdim,scf
+     4 ,relh(maxi,maxj)
+      common /ebmvar/cd,tq,tq1
+     1 ,qsata,qsato
+     2 ,varice,varice1,tice,dtatm
+     3 ,tqa,solfor,ghs,rdtdim,scf
+     4 ,relh
+c constants for embm
+      real emo,ema,solconst
+     1 ,tfreez,rfluxsc,rfluxsca
+     2 ,b00,b10,b20,b01,b11,b21,b02,b12,b22,b03,b13,b23,delf2x,co20
+     3 ,ryear,rate_co2
+      common /ebmconsts/emo,ema,solconst
+     1 ,tfreez,rfluxsc,rfluxsca
+     2 ,b00,b10,b20,b01,b11,b21,b02,b12,b22,b03,b13,b23,delf2x,co20
+     3 ,ryear,rate_co2
+c arrays for embm
+      real albcl(maxi,maxj),albedo(maxi,maxj)
+     1 ,fxsw(maxi,maxj),fxplw(maxi,maxj)
+     2 ,fx0a(maxi,maxj),fx0o(maxi,maxj)
+     3 ,fxsen(maxi,maxj),pme(maxi,maxj),pmeadj(maxi,maxj)
+     4 ,pptn(maxi,maxj),evap(maxi,maxj),usurf(maxi,maxj)
+     5 ,fxlata(maxi,maxj),fxlato(maxi,maxj)
+     6 ,fxlw(maxi,maxj)
+     7 ,diffa(2,2,maxj),betam(2),betaz(2),hatmbl(2)
+     8 ,ca(maxi,maxj),co2(maxi,maxj),runoff(0:maxi,0:maxj)
+     9 ,qb(maxi,maxj)
+       real fx0sic(maxi,maxj)
+     2 ,fx0neto(maxi,maxj),fwfxneto(maxi,maxj)
+     3 ,evapsic(maxi,maxj),tsfreez(maxi,maxj)
+     4 ,dtha(2,maxi,maxj)
+      common /ebmflux/albcl,albedo,fxsw,fxplw
+     1 ,fx0a,fx0o,fxsen,pme
+     2 ,pmeadj,pptn,evap,usurf,fxlata,fxlato
+     3 ,fxlw,diffa,betam,betaz,hatmbl,ca,co2,runoff
+     4 ,qb,fx0sic,fx0neto
+     5 ,fwfxneto,evapsic,tsfreez
+     6 ,dtha
+c arrays for runoff scheme
+      integer iroff(maxi,maxj),jroff(maxi,maxj)
+      common /runoff/ iroff,jroff
+c constants and parameters for atmosphere
+      real rhoair,rhoao,cpa
+     1 ,rho0,hlv,hls,hlf,const1,const2,const3,const4,const5,rmax
+     2 ,saln0,rpmesca,rpmesco
+     3 ,diffmod0,ppmin,ppmax
+      common /atmosconsts/rhoair,rhoao,cpa
+     1 ,rho0,hlv,hls,hlf,const1,const2,const3
+     2 ,const4,const5,rmax,saln0,rpmesca,rpmesco
+     3 ,diffmod0,ppmin,ppmax
+c prescribed/diagnosed atmospheric transports and velocities
+      real uatm(2,maxi,maxj)
+      common /transps/uatm
+c constants and parameters for sea ice
+      real rsictscsf,rhoice,rho0sea,consic,diffsic
+     1 ,tsic,hmin,rhoio,rhooi,rrholf,rhmin
+      common /sicconsts/ rsictscsf,rhoice,rho0sea
+     1 ,consic,diffsic,tsic,hmin,rhoio,rhooi,rrholf,rhmin
+c adjustable freshwater forcing parameters
+      integer nsteps_extra0
+      common /fwf_int/ nsteps_extra0
+      real extra0,range0,extra1a,extra1b,extra1c
+      common /fwf_real/ extra0,range0,extra1a,extra1b,extra1c
+
+c v2 seasonal diagnostics
+      real tsavg(maxl,maxi,maxj,maxk),uavg(3,maxi,maxj,maxk)
+      real tqavg(2,maxi,maxj),haavg(2,maxi,maxj),ticeavg(maxi,maxj)
+      real relhavg(maxi,maxj)
+      common /oscavg/tsavg,uavg,tqavg,haavg,ticeavg
+     1 ,relhavg

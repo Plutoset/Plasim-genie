@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<componentBehaviour
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.iceni.ic.ac.uk/xmlSchema/bdl"
+  xsi:schemaLocation="http://www.iceni.ic.ac.uk/xmlSchema/bdl
+		    http://www.lesc.ic.ac.uk/iceni/xml/runtime/BDL.xsd">
+
+  <componentName>EnsembleCreatorComponent</componentName>
+  <componentPackage>org.icenigrid.genie.components</componentPackage>
+  <behaviourName>PushDataPushControl</behaviourName>
+
+  <portBehaviour>
+    <portName>jobNumbersIn</portName>
+    <controlFlow>in</controlFlow>
+  </portBehaviour>
+
+  <portBehaviour>
+    <portName>parametersIn</portName>
+    <controlFlow>in</controlFlow>
+  </portBehaviour>
+
+  <portBehaviour>
+    <portName>JDMLout</portName>
+    <controlFlow>out</controlFlow>
+  </portBehaviour>
+
+</componentBehaviour>

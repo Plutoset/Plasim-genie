@@ -1,0 +1,43 @@
+      SUBROUTINE EIM(SVIN,SVOUT,NLS,CMPA,IGL)
+      IMPLICIT NONE
+C     
+C     PERFORMS D/DLONGITUDE ON HALF TRANSFORMS
+C     
+      INTEGER NLS,IGL
+      COMPLEX SVIN(IGL*NLS),SVOUT(IGL*NLS)
+      COMPLEX CMPA(*)
+C     
+      INTEGER I,II,L
+C     
+      DO L=1,NLS
+         II=(L-1)*IGL
+         DO I=1,IGL
+            II=II+1
+            SVOUT(II)=CMPA(I)*SVIN(II)
+         END DO
+      END DO
+C
+      RETURN
+      END
+C
+      SUBROUTINE EIM8(SVIN,SVOUT,NLS,CMPA,IGL)
+      IMPLICIT NONE
+C     
+C     PERFORMS D/DLONGITUDE ON HALF TRANSFORMS
+C     
+      INTEGER NLS,IGL
+      COMPLEX*16 SVIN(IGL*NLS),SVOUT(IGL*NLS)
+      COMPLEX*16 CMPA(*)
+C     
+      INTEGER I,II,L
+C     
+      DO L=1,NLS
+         II=(L-1)*IGL
+         DO I=1,IGL
+            II=II+1
+            SVOUT(II)=CMPA(I)*SVIN(II)
+         END DO
+      END DO
+C
+      RETURN
+      END

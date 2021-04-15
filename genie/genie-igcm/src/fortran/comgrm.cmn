@@ -1,0 +1,3 @@
+      real dudlsg,dvdlsg,dtdlsg
+      COMMON/COMGRM/DUDLSG(IGC,NL),DVDLSG(IGC,NL),DTDLSG(IGC,NL)
+C

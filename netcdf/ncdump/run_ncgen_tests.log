@@ -1,0 +1,9 @@
+*** Testing ncgen.
+*** creating classic file c0_run_ncgen_tests.nc from c0.cdl...
+*** generating tst_c0_run_ncgen_tests.nc ***
+*** comparing tst_c0_run_ncgen_tests.nc against /netcdf/ncgen/c0.cdl *** 
+*** creating 64-bit offset file c0_64_run_ncgen_tests.nc from c0.cdl...
+*** generating tst_c0_run_ncgen_tests.nc ***
+*** comparing tst_c0_run_ncgen_tests.nc against /netcdf/ncgen/c0.cdl *** 
+*** Test successful!
+PASS run_ncgen_tests.sh (exit status: 0)

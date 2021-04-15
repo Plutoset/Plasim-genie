@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job author="config2xml.py - automatic conversion of ASCII text config file">
+	<vars>
+		<var name="EXPID">genie_ig_fi_fi_tunable</var>
+	</vars>
+	<config>
+		<model name="fixedchem"/>
+		<model name="fixedseaice"/>
+		<model name="fixedicesheet"/>
+		<model name="fixedocean"/>
+		<model name="igcm"/>
+	</config>
+	<parameters>
+		<control>
+			<param name="koverall_total">86400</param>
+		</control>
+		<model name="fixedchem">
+		</model>
+		<model name="fixedseaice">
+			<param name="albedo_seaice">0.6</param>
+		</model>
+		<model name="fixedicesheet">
+			<param name="albedo_icesheet">0.75</param>
+		</model>
+		<model name="fixedocean">
+			<param name="albedo_ocean">0.05</param>
+		</model>
+		<model name="igcm">
+			<param name="supersatlarg">0.01</param>
+			<param name="powercloud">2.0</param>
+			<param name="akqv">1.0</param>
+			<param name="pcloudmin">0.15</param>
+			<param name="rough_ocean">0.001</param>
+			<param name="cloudshallow">0.35</param>
+			<param name="shsstar">0.3</param>
+			<param name="cloudconvbase">1.0</param>
+			<param name="increaseu">5.0</param>
+			<param name="increaset">1.0</param>
+			<param name="increaseq">1.0</param>
+			<param name="fluxfactor">2.5</param>
+			<param name="pcloudfact">0.125</param>
+			<param name="txblcnst">1.0</param>
+			<param name="supersatconv">0.01</param>
+			<param name="enhancestable">0.2</param>
+			<param name="zradef">5.0</param>
+			<param name="cubmt">3.0</param>
+			<param name="tyblcnst">1.0</param>
+			<param name="blvad">3.0</param>
+			<param name="cloudconvnorm">0.25</param>
+			<param name="albedo_fix">0.05</param>
+			<param name="humcloudmax">1.0</param>
+			<param name="emissconstb">100.0</param>
+			<param name="emissconsta">1.08942549</param>
+			<param name="enhancelim">4.0</param>
+			<param name="blrh">100.0</param>
+			<param name="cbadjt">3.0</param>
+			<param name="humcloudmin">0.8</param>
+			<paramArray name="snolook">
+				<param index="2">0.8</param>
+			</paramArray>
+		</model>
+	</parameters>
+	<build>
+	</build>
+	<testing>
+	</testing>
+</job>

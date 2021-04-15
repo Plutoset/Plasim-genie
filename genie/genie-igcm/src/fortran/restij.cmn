@@ -1,0 +1,9 @@
+C
+C     Restoration temperature field and constants which determine it,
+C     also contains timescales
+C
+      real dtns,dtep,dttrp,fac,ddamp,tfrc,yrlen,trs,alr,ztrop,tgr
+      COMMON/RESTIJ/TTRES(IGB)
+     + ,DTNS,DTEP,DTTRP,FAC(NL),DDAMP(NL),TFRC(NL),YRLEN,TRS(NL)
+     +  ,ALR,ZTROP,TGR
+      COMPLEX TTRES

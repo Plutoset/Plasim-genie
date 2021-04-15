@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job author="config2xml.py - automatic conversion of ASCII text config file">
+	<vars>
+		<var name="EXPID">genie_ig_fi_fi_glim</var>
+		<var name="GLIMMER_MASTER_CONFIG"><varref>RUNTIME_ROOT</varref>/genie-main/configs/genie_ig_fi_fi_glim_test.glimmer.config</var>
+	</vars>
+	<config>
+		<model name="fixedchem"/>
+		<model name="glimmer"/>
+		<model name="fixedseaice"/>
+		<model name="fixedicesheet"/>
+		<model name="fixedocean"/>
+		<model name="igcm"/>
+	</config>
+	<parameters>
+		<control>
+			<param name="koverall_total">35000</param>
+			<param name="kicesheet_loop">1</param>
+		</control>
+		<model name="fixedchem">
+		</model>
+		<model name="fixedseaice">
+		</model>
+		<model name="fixedocean">
+		</model>
+		<model name="igcm">
+			<param name="LOROG">.false.</param>
+		</model>
+	</parameters>
+	<build>
+               <make-arg name="FLAG_GLIMMER">ON</make-arg>
+	</build>
+	<testing>
+		<var name="TESTFILE">icesheet/genie_ig_fi_fi_glim.1a.nc</var>
+	</testing>
+</job>

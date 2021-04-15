@@ -1,0 +1,8 @@
+      real zradef,
+     :      supersatlarg,supersatconv,
+     :      cloudconvnorm,cloudconvbase,
+     :      emissconsta,emissconstb
+      COMMON/igcm_radn/zradef,
+     :      supersatlarg,supersatconv,
+     :      cloudconvnorm,cloudconvbase,
+     :      emissconsta,emissconstb

@@ -1,0 +1,6 @@
+      REAL albedo_ocean
+      logical flag_checkenergy_slabocean
+      logical flag_checkwater_slabocean
+      COMMON/slabocean_com/albedo_ocean,
+     :     flag_checkenergy_slabocean,
+     :     flag_checkwater_slabocean

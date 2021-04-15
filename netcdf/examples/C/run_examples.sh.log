@@ -1,0 +1,12 @@
+*** Running examples.
+*** running simple_xy examples...
+*** SUCCESS writing example file simple_xy.nc!
+*** SUCCESS reading example file simple_xy.nc!
+*** running sfc_pres_temp examples...
+*** SUCCESS writing example file sfc_pres_temp.nc!
+*** SUCCESS reading example file sfc_pres_temp.nc!
+*** running pres_temp_4D examples...
+*** SUCCESS writing example file pres_temp_4D.nc!
+*** SUCCESS reading example file pres_temp_4D.nc!
+*** Examples successful!
+PASS run_examples.sh (exit status: 0)

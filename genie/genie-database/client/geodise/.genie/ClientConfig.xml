@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<clientconfig>
+        <!-- Host data files will be stored on -->
+	<fileserver>
+		<hostname>pacifica.iridis.soton.ac.uk</hostname>
+                <hostdir>/home/genie/</hostdir>
+        </fileserver>
+        <!-- Web services client code will call -->
+        <webservices>
+            <metadataWS>http://portal.e-science.soton.ac.uk/GENIEDBWS/services/MetadataService</metadataWS>
+            <vardataWS>http://portal.e-science.soton.ac.uk/GENIEDBWS/services/VarDataService</vardataWS>
+            <authorisationWS>http://portal.e-science.soton.ac.uk/GENIEDBWS/services/AuthorisationRPCService</authorisationWS>
+            <locationWS>http://portal.e-science.soton.ac.uk/GENIEDBWS/services/LocationRPCService</locationWS>
+            <queryoracleWS>http://portal.e-science.soton.ac.uk/GENIEDBWS/services/QueryOracleService</queryoracleWS>
+    </webservices>
+    <datasource_aliases>
+	<file>file</file>
+	<datagroup>group</datagroup>
+	<varmeta>varmeta</varmeta>
+	<vardata>var</vardata>
+    </datasource_aliases>
+    <output_xmlroot>
+	<file_root>file_metadata</file_root>
+	<datagroup_root>dg_metadata</datagroup_root>
+	<varmeta_root>var_metadata</varmeta_root>
+	<vardata_root>var_data</vardata_root>
+	<custom>metadata</custom>
+    </output_xmlroot>
+</clientconfig>
+

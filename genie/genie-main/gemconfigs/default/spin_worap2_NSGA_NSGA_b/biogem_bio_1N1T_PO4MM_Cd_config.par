@@ -1,0 +1,49 @@
+! *******************************************************************************************************************
+! biogem_bio_1N1T_PO4MM_Cd_config.par
+! INPUT PARAMETER FILE
+! *******************************************************************************************************************
+
+-START-OF-DATA-
+------------------- BIOLOGICAL NEW PRODUCTION -----------------------------------------------------------------------
+1.9582242E-06       base surface ocean PO4-removal rate (mol kg-1 yr-1)                             [1.9118463E-06]
+2.1989611E-07       PO4 half-sat value (mol kg-1)                                                   [2.1250565E-07]
+------------------- ORGANIC MATTER EXPORT RATIOS --------------------------------------------------------------------
+16.0                N/P organic matter Redfield ratio                                               [16.0]
+106.0               C/P organic matter Redfield ratio                                               [117.0]
+-170.0              O2/P organic matter pseudo-Redfield ratio                                       [-170.0]
+-1.00               ALK/N alkalinty correction factor                                               [-1.00]
+0.66                fraction of export production in the form of DOC (rather than POC)              [0.66]
+------------------- INORGANIC MATTER EXPORT RATIOS ------------------------------------------------------------------
+0.044372            CaCO3/POC: base export ratio                                                    [0.024990]
+0.8053406           CaCO3/POC: power for saturation-dependent modifier of base ratio                [1.195151]
+------------------- REMINERALIZATION --------------------------------------------------------------------------------
+0.5                 DOC lifetime (yrs)                                                              [0.5]
+125.0               prescribed particle sinking rate (m d-1)                                        [0.5]
+T                   fixed-profile POM remineralization (t/f T/F)?                                   [t]
+6.4591110E-02       initial fraction of POM present as type #2                                      [6.4030938E-02]
+550.5195            e-folding (remineralization) depth of POM fraction #1 (m)                       [565.1103]
+1000000.0           e-folding (transformation) depth of POM fraction #2 (m)                         [1000000.0]
+T                   fixed-profile CaCO3 remineralization (t/f T/F)?                                 [t]
+0.4678083           initial fraction of CaCO3 present as type #2                                    [0.4790068]
+1083.486            e-folding (remineralization) depth of CaCO3 fraction #1 (m)                     [1060.830]
+1000000.0           e-folding (transformation) depth of CaCO3 fraction #2 (m)                       [1000000.0]
+------------------- IRON CYCLING ------------------------------------------------------------------------------------
+------------------- SILICIC ACID CYCLING ----------------------------------------------------------------------------
+------------------- NITROGEN CYCLING --------------------------------------------------------------------------------
+------------------- TRACE METALS ------------------------------------------------------------------------------------
+0.0E-6              fixed cellular C:Cd (Cd/C) ratio (in the absence of an alternative model)       [5.0E-6]
+10.0                Elderfield and Rickaby [2000] [Cd/P]POM/[Cd/P]SW partition coefficient (alpha)  [2.0]
+t                   Apply prescribed field of [Cd/P]POM/[Cd/P]SW partition coefficient?             [t]
+-END-OF-DATA-
+
+/\                  /\                                                                              /\
+VALUE               BORING WORDY DESCRIPTION                                                        DEFAULT VALUE
+
+NOTES
+-----
+>> brackets [] contain the default values as per the calibration of Ridgwell and Hargreaves [submitted],
+   (i.e., calibration against 3-D ocean PO4 and ALK distributions, and 2-D core-top wt% CaCO3
+   assuming; initial ocean DIC (2.257E-03 mol kg-1) and ALK (2.348E-03 mol kg-1) [Key et al., 2004]
+>> Redfield et al. [1963] ratio linking P:N:C:O2 is 1:16:106
+   (the alternative is Anderson and Sarmiento [1994]; 1:16:117)
+   P:O2 of 1:-170 is from Anderson and Sarmiento [1994] (it is 1:-138 according to Redfield et al. [1963])

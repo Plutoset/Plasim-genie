@@ -1,0 +1,13 @@
+GENIE Data Management Client
+
+Andrew Price 02/12/03
+Copyright 2003 GENIE Project
+
+The GENIE data management system is a repository for files and associated metadata generated
+by the GENIE framework. Data files produced by GENIE are archived to Grid enabled fileservers
+and metadata about those files are stored in a database. Web services have been deployed that
+provide an interface to the database. This client system enables an authenticated user to
+query the database from a remote location and retrieve files of interest.
+
+This product includes software developed by and/or derived from the Geodise project
+(http://www.geodise.org/).

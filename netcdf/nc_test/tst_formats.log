@@ -1,0 +1,7 @@
+
+*** Testing netcdf format functions.
+*** testing nc_inq_format() and nc_inq_format_extended() with format 1...ok.
+*** testing nc_inq_format() and nc_inq_format_extended() with format 2...ok.
+*** testing nc_inq_format() and nc_inq_format_extended() with format 5...ok.
+*** Tests successful!
+PASS tst_formats (exit status: 0)

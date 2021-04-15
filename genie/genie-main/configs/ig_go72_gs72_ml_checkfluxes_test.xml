@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job author="config2xml.py - automatic conversion of ASCII text config file">
+	<vars>
+		<var name="EXPID">genie_ig_go72_gs72_ml_checkfluxes</var>
+	</vars>
+	<config>
+		<model name="fixedchem"/>
+		<model name="fixedicesheet"/>
+		<model name="goldstein"/>
+		<model name="igcm"/>
+		<model name="goldsteinseaice"/>
+		<model name="mosestriffid"/>
+	</config>
+	<parameters>
+		<control>
+			<param name="ksic_loop">24</param>
+			<param name="koverall_total">720</param>
+			<param name="kocn_loop">24</param>
+			<param name="flag_checkfluxes_surf">.true.</param>
+			<param name="flag_checkfluxes_ocn">.true.</param>
+		</control>
+		<model name="fixedchem">
+		</model>
+		<model name="fixedicesheet">
+		</model>
+		<model name="goldstein">
+			<param name="nyear">360</param>
+			<param name="temp1">-2</param>
+			<param name="temp0">-2</param>
+			<param name="ianav">90000</param>
+			<param name="itstp">900</param>
+			<param name="iwstp">30</param>
+			<param name="npstp">90000</param>
+			<param name="yearlen">360</param>
+			<param name="conserv_per">1</param>
+			<param name="tdatafile">tempann.silo.72x72x16</param>
+			<param name="sdatafile">saliann.silo.72x72x16</param>
+			<param name="world">dan_72</param>
+		</model>
+		<model name="igcm">
+			<param name="dt_restart_igcmlandsurf">720</param>
+			<param name="itslo">1</param>
+			<param name="KOUNTR">720</param>
+			<param name="lcheckwater">.true.</param>
+			<param name="ldaily">.true.</param>
+			<param name="flag_checkwater_land">.true.</param>
+			<param name="itsll">1</param>
+		</model>
+		<model name="goldsteinseaice">
+			<param name="npstp">90000</param>
+			<param name="ianav">90000</param>
+			<param name="itstp">900</param>
+			<param name="iwstp">30</param>
+			<param name="nyear">360</param>
+			<param name="yearlen">360</param>
+			<param name="world">dan_72</param>
+			<param name="conserv_per">1</param>
+		</model>
+		<model name="mosestriffid">
+			<param name="c_restart"><varref>CODEDIR</varref>/genie-mosestriffid/data/input/land_rs_igcm_t21_potential.nc</param>
+			<param name="irest_land">24</param>
+			<param name="iacc_land">720</param>
+			<param name="idiag_land">720</param>
+		</model>
+	</parameters>
+	<build>
+		<make-arg name="IGCMATMOSDP">TRUE</make-arg>
+		<make-arg name="GENIEDP">TRUE</make-arg>
+		<macro handle="GOLDSTEINNLONSOPTS" status="defined">
+			<identifier>GOLDSTEINNLONS</identifier>
+			<replacement>72</replacement>
+		</macro>
+		<macro handle="GOLDSTEINNLATSOPTS" status="defined">
+			<identifier>GOLDSTEINNLATS</identifier>
+			<replacement>72</replacement>
+		</macro>
+		<macro handle="GOLDSTEINNLEVSOPTS" status="defined">
+			<identifier>GOLDSTEINNLEVS</identifier>
+			<replacement>16</replacement>
+		</macro>
+                <!--Special for tests-->
+                <make-arg name="FLAG_MOSESTRIFFID">ON</make-arg>
+	</build>
+	<testing>
+		<var name="CHECKFLUXES">"TRUE"</var>
+		<var name="TESTFILE">main/check_fluxes.txt</var>
+	</testing>
+</job>

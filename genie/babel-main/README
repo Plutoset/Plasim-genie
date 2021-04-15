@@ -1,0 +1,218 @@
+$Id: README 3054 2006-11-27 19:30:26Z sp1003 $
+
+===========================================================
+===========================================================
+             == THE GENIE WRAPPED COMPONENTS ==
+   INSTRUCTIONS FOR OBTAINING, COMPILING, AND RUNNING 
+
+===========================================================
+===========================================================
+
+
+===========================================================
+Contents:
+
+ - Prerequisites
+ - Setup Before Build
+ - Compiling
+ - Running the Default Model
+ - Running Different Configurations
+ - Common Problems
+
+Please feel free to edit/add to this file to make it 
+easier to understand and use.
+
+If the 'Common problems' section doesn't help, then questions
+are best addressed to: 
+ - Sofia Panagiotidi <sp1003@doc.ic.ac.uk>
+
+It is assumed that you are running under linux/unix.
+Windows installation has not been implemented yet and Babel
+is not known to operate under windows.
+
+===========================================================
+
+
+===========================================================
+Prerequisites
+===========================================================
+
+The following assumes a local compiled and installed version 
+of GENIE code-base (as well as all its prequisites: Fortran 
+compiler, C compiler, Python, NetCDF library and Perl for the 
+automatic documentation).
+
+Instructions for installing GENIE are available once the 
+code is downloaded.
+
+-Java environment JAVA_HOME needs to be set to the correct 
+path.
+
+-Babel correctly configured and installed (all its 
+prerequisites too) together with the same Fortran 90, the 
+C++ compiler used for GENIE and the java environment.
+
+This can be downloaded from:
+http://www.llnl.gov/casc/components/software.html
+
+Documentation and information on Babel Interoperability
+tool can be found here:
+http://www.llnl.gov/casc/components/babel.html
+
+===========================================================
+Setup Before Build
+===========================================================
+
+Before proceeding to building, once more you must make sure
+that the GENIE code has been successfully compiled, and this
+requires the 'genie-main/makefile.arc' to have been correctly 
+setup.
+
+There is, in principal, only one file which you will have 
+to edit in order to compile the model: babel-main/makefile.arc
+
+In makefile.arc:
+  1) Edit LINKER to the linking command which you desire to be
+     used to create the shared glue libraries. This should be
+     the C compiler used in order to build Babel.
+
+Set up your system environment appropriately for command line
+compilation: 
+
+- Make sure you have the bin directory of the Fortran compiler
+  included in your PATH.
+- Set the BABEL_HOME to the path where Babel is installed.
+- Set JAVA_HOME to the path of the Java environment that Babel 
+  has been configured together with and which will be used to 
+  invoke the wrapper classes.
+
+===========================================================
+Building All the Java Wrappers
+===========================================================
+
+To build the Embm, Goldstein Ocean, Seaice and Land Wrappers, 
+cd to the babel-main directory and invoke GNU make: 
+   
+   'make' or 'gmake' 
+
+The Makefile script should be executed and enter each module
+folder and create the glue code by the use of babel tool.
+
+When the script successfully terminates, the wrappers will
+have been successfully built. In every module folder, in the
+'babel/wrapper' directory there should now be a directory
+containing a java interface and a java class representing
+and exposing the same module as the native Fortran one.
+
+For example, after building the wrappers, the interface for 
+Goldstein should be the 
+'genie-goldstein/babel/wrapper/ocean/goldstein_interface.class'
+and the wrapper class for Goldstein should be the
+'genie-goldstein/babel/wrapper/ocean/goldstein.class'.
+
+===========================================================
+Building an Individual the Java Wrapper
+===========================================================
+
+In order to build one or more wrappers individually, cd to
+the babel directory inside the module folder and invoke GNU 
+make:
+
+   'make' or 'gmake' 
+
+The Makefile script should be executed and create the glue 
+code by the use of babel tool.
+
+When the script successfully terminates, the wrapper will
+have been successfully built. Inside the 'babel/wrapper' 
+directory there should now be a directory containing a java 
+interface and a java class representing and exposing the same 
+module as the native Fortran one.
+
+For example, go to the genie-goldstein/babel directory and
+do 'make'. When the script finishes the wrapper interface 
+for Goldstein ocean should be the 
+'genie-goldstein/babel/wrapper/ocean/goldstein_interface.class'
+and the wrapper class for Goldstein should be the
+'genie-goldstein/babel/wrapper/ocean/goldstein.class'.
+
+
+===========================================================
+Running the eb_go_gs experiment
+===========================================================
+
+The 'Client.java' file inside the directory 
+babel-main/SimpleJavaClient represents the genie.F client
+configured to run with the confing/genie_eb_go_gs.config
+experimental setup. The parameters are hardcoded inside the
+Client.java file.
+
+In order to run the experiment eb_go_gs with the wrapped
+modules, you need to set the following:
+
+- Set LD_LIBRARY_PATH so as to contain the Fortran compiler's 
+  library directory 'lib' (e.g. /opt/intel/fc/9.0/lib/)
+
+- Make sure that the *.scl file in each babel/wrapper
+folder contains the correct absolute path or url to the 
+shared wrapper library produced during the building phase.
+  
+Finally, go tho the babel-main/SimpleJavaClient directory
+and type:
+
+   'make' and 'make run'
+
+and the Java client representing the eb_go_gs experiment 
+will be compiled and executed with the default settings.
+
+
+===========================================================
+Some Common Problems - Troubleshooting
+===========================================================
+
+*** Problem 1) Although the make scripts have finished building
+and exited without error, the eb_go_gs (Client.java) does
+not run and says:
+
+Exception in thread "main" java.lang.UnsatisfiedLinkError: 
+Could not find native class "...."; check SIDL_DLL_PATH
+        at gov.llnl.sidl.BaseClass._registerNatives(Native Method)
+        at gov.llnl.sidl.BaseArray.<clinit>(BaseArray.java:44)
+        at ....
+make: *** [run] Error 1
+
+- First, do make sure that the *.scl file in each babel/wrapper
+folder contains the correct absolute path or url to the 
+shared wrapper library produced during the building phase.
+
+- In principle, this error means that the implementation 
+or/and the wrapper shared libraries have not been properly
+and fully linked and that there is something undefined in 
+one of the two. One option to track the nature of the error 
+is the following: 
+  Remove the "-shared" from the F90LINK variable in the 
+makefile.arc and go to the babel/impl folder of the module 
+to which the error refers. When executing the GNU 'make' 
+in it, the only error occuring should be mentionning the 
+undefined reference to `MAIN__'. In case of more errors,
+locate the libraries/locations where they are installed and 
+add them to the F90LINK variable.
+  If the above did not work, do the same with the LINKER
+variable in the makafile.arc and execute the GNU 'make'
+in the babel/wrapper folder respectively. In case of more 
+than the the undefined reference to main error, find the 
+appropriate libraries and add them to the LINKER variable.
+
+- Sometimes it really helps to execute make cleanall, and
+re-follow the build and run procedure.
+
+===========================================================
+Hints
+===========================================================
+
+Whenever you recompile GENIE or a specific module(s) it is 
+neccessary to re-built the wrapper for this module(s), i.e. 
+rerun the GNU 'make' for it. This is, because whenever a 
+module gets (re)built, the shared library containing its 
+code which gets created possibly needs to be re-linked with 
+the wrapper.

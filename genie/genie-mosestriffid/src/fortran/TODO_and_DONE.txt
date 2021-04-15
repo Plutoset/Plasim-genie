@@ -1,0 +1,45 @@
+* Surface temperature over land-ice is too high (thermal conductivity?)
+* Perfect restarts
+* Coupling of GENIE-land with EMBM through generic atmos-land interface
+* Land/ice-sheet coupling
+     ** Updating ice tile fractions and water/carbon mass
+     ** "Nudger" for GBM runoff and lying snow
+* Fix problem of sum of tile fractions > 1 on some grid boxes
+* Profile the land scheme in GENIE to see where there might be bottlenecks
+* Sort out the diagnostics file so that you don't have to remake the
+  defaults files every time you add new diagnostics
+* Why is NT and SH conductance so low in boreal summer?
+
+[DONE] Provide offline runoff routines and premade ancillaries
+[DONE] Provide offline vegetation routines and premade ancillaries
+[DONE] Separate online and offline runoff code
+[DONE] Complete runoff mask generation code to work at any resolution
+[DONE] Complete vegetation fields generation code to work at any resolution
+[DONE] Added water/carbon/energy accounting code
+[DONE] Make all subroutines use values from phys_const.f90
+[DONE] Recalibration of stomatal model to give proper mean g_c response from mean climate forcing
+[DONE] Make TRIFFID/PHENOL timestep a function of GENIE steps rather than
+       an integer number of days in a 360 day year
+[DONE] Finish runoff in water accounting
+[DONE by DJL] Regridding of routed runoff from atmos to ocean grid using interp_ocn_atm().
+[DONE] High desert surface temperatures with IGCM/GENIE-land don't seem to be a problem now.
+[DONE] Switch on snow - snow melting and accumulation working now.
+[DONE] Revised albedo calculations to allow land to be forced by GBM net
+       surface solar radiation, which is disagregated to tile net
+       surface solar radiation for flux calculations and still
+       conserves energy.
+[DONE] What is qsurf to IGCM exactly?  Dan isn't too sure what it
+       means physically either, so I've just set it equal to qsat at
+       surface temperature, i.e. equivalent to no soil moisture stress
+       in igcm-land.
+[DONE] Give fusion heat to atmos when precipitation falls as snow to
+       prevent energy leak
+[DONE] At initialisation now calculates land steps per year from new
+       namelist variable dayinyear_land and dt_land for use in
+       calculating daylength correction
+[DONE] Calculate daylength at initialisation rather than at runtime
+       (assuming the orbital parameters won't change during the run)
+[DONE] Correct poor carbon conservation.  This was a misunderstanding
+       with the way TRIFFID uses the accumulated carbon fluxes.  See
+       genie-land/doc/trif_addendum.txt (and eventually
+       genie_land_v01.ps) for more info.

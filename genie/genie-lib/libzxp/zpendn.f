@@ -1,0 +1,49 @@
+C
+      SUBROUTINE ZPENDN(XA,YA)
+C
+      INTEGER ISPSAVE
+      REAL XA
+      REAL YA
+      INTEGER LABON
+      REAL XJ
+      INTEGER IJOIN
+      REAL YJ
+      REAL PIH
+      REAL ZSTEP
+      REAL ZLEN
+      REAL ZCHAR
+      INTEGER NLABEL
+      INTEGER IHTLAB
+C
+      INTEGER MLIM
+      PARAMETER (MLIM=8000)
+      COMMON/ZEXTRA/ISPSAVE,IJOIN,XJ(MLIM),YJ(MLIM)
+C
+C
+C
+      COMMON/ZLABL/PIH,ZSTEP,ZLEN,ZCHAR,NLABEL,LABON,IHTLAB
+C
+C
+C
+      IF (ISPSAVE.NE.0) THEN
+         write(ispsave,*)' 1 ',XA,YA
+      END IF
+C
+      IF(LABON.EQ.0)THEN
+      CALL XLPNDN(XA,YA)
+      ELSE
+      IF(XA.NE.XJ(IJOIN).OR.YA.NE.YJ(IJOIN)) THEN
+        IJOIN=IJOIN+1
+        XJ(IJOIN)=XA
+        YJ(IJOIN)=YA
+      ENDIF
+      IF(IJOIN.EQ.MLIM)THEN
+        CALL ZDRAWC(XJ,YJ,IJOIN)
+        XJ(1)=XJ(IJOIN)
+        YJ(1)=YJ(IJOIN)
+        IJOIN=1
+      ENDIF
+      ENDIF
+C
+      RETURN
+      END

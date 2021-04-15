@@ -1,0 +1,16 @@
+c     This common block contains the necessary variables
+c       to carry out flux adjustment.
+
+      real water_transport(3)
+      real water_mask(mg,jgg)
+      real water_totarea(6)
+      character fname_fluxadjust*200
+      logical lfluxadjust_water
+
+      common/flux_adjust/
+     :                   water_transport,
+     :                   water_mask,
+     :                   water_totarea,
+     :                   fname_fluxadjust,
+     :                   lfluxadjust_water
+

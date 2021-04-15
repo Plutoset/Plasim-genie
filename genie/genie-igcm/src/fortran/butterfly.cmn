@@ -1,0 +1,3 @@
+      real butterfly_u
+      logical lbutterfly
+      COMMON/butterfly/butterfly_u,lbutterfly

@@ -1,0 +1,27 @@
+
+      SUBROUTINE XCOL(LINE,LINE1,LNCOL,ICHR,ICHAR1)
+C
+C    Change to new color
+C
+      INTEGER ICHR
+      INTEGER I
+      INTEGER ICHAR1
+      INTEGER ILEN
+C
+      CHARACTER LINE*(*),LINE1*18,LNCOL*5,LINE2*(*)
+      LINE=LINE1
+      ICHR=18
+      DO 10 I=1,1
+      LINE(ICHR+1:ICHR+5)=LNCOL
+      ICHR=ICHR+5
+10    CONTINUE
+      ICHAR1=ICHR
+      RETURN
+C
+      ENTRY IFILZERO(LINE2)
+      ILEN=LEN(LINE2)
+      DO I=1,ILEN-1
+         IF (LINE2(I:I+1).EQ.' .') LINE2(I:I+1)='0.'
+      END DO
+      RETURN
+      END

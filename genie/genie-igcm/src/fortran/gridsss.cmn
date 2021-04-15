@@ -1,0 +1,6 @@
+c
+      common/gridsss/assbl1(igc,jg),ashbl1(igc,jg),aslbl1(igc,jg),
+     :               arrcr1(igc,jg),arrlr1(igc,jg),
+     :               arflux1(igc,8,jg),
+     :               acld1(igc,4,jg),assblx1(igc,jg),assbly1(igc,jg)
+C

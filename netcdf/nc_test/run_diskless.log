@@ -1,0 +1,37 @@
+
+*** Testing in-memory (diskless) files with and without persistence
+**** Test diskless netCDF classic file without persistence
+
+*** Testing the diskless API.
+*** testing diskless file with scalar vars...ok.
+ok.
+*** testing creation of simple diskless file...ok.
+*** testing diskless file with scalar vars and type conversion...ok.
+*** Tests successful!
+PASS: diskless netCDF classic file without persistence
+
+**** Test diskless netCDF classic file with persistence
+
+*** Testing the diskless API.
+*** testing diskless file with scalar vars...ok.
+*** testing diskless open of previously created file...ok.
+*** testing creation of simple diskless file...ok.
+*** testing diskless file with scalar vars and type conversion...ok.
+*** Tests successful!
+**** tst_diskless.nc created
+PASS: diskless netCDF classic file with persistence
+
+**** Testing nc_open in-memory (diskless) files
+
+**** Create and modify file without using diskless
+
+*** Testing diskless file: create/modify in-file tst_diskless3.nc
+*** testing diskless file with two growing record variables, with attributes added...ok.
+*** Tests successful!
+
+**** Create and modify file using diskless
+
+*** Testing diskless file: create/modify in-memory tst_diskless3.nc
+*** testing diskless file with two growing record variables, with attributes added...ok.
+*** Tests successful!
+PASS run_diskless.sh (exit status: 0)

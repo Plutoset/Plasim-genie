@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+	<HEAD>
+		<TITLE>gd_getfile (Matlab Functions) </TITLE>
+		<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+		<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.0  (Win32)">
+		<META NAME="CREATED" CONTENT="20031003;16082415">
+		<META NAME="CHANGED" CONTENT="20031006;10460667">
+		<META NAME="FORMATTER" CONTENT="Arachnophilia 5.2">
+		<!-- Created on 02-Oct-2003 11:39:22 -->
+		<!-- Top navigation bar -->
+		<STYLE> <!-- @page { size: 21cm 29.7cm }
+	TD P { color: #000000; font-family: "arial" }
+	P { color: #000000; font-family: "arial" }
+	A:link { color: #0000ff }
+	A:visited { color: #800080 }
+	ul {list-style-type: none}
+	--></STYLE>
+	</HEAD>
+	<BODY LANG="en-US" TEXT="#000000" LINK="#0000ff" VLINK="#800080" BGCOLOR="#ffffff" DIR="ltr">
+		<TABLE WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0" BGCOLOR="#99ccff" STYLE="PAGE-BREAK-BEFORE: always">
+			<TR>
+				<TD>
+					<P><B>MATLAB Function Reference</B>
+					</P>
+				</TD>
+				<TD>
+					<P ALIGN="right"><A HREF="gd_destroyproxy.html"><IMG SRC="b_prev.gif" NAME="Graphic1" ALIGN="bottom" WIDTH="17" HEIGHT="17" BORDER="0"></A>
+						&nbsp;&nbsp;&nbsp; <A HREF="gd_jobkill.html"><IMG SRC="b_next.gif" NAME="Graphic2" ALIGN="bottom" WIDTH="17" HEIGHT="17" BORDER="0"></A>
+					</P>
+				</TD>
+			</TR>
+		</TABLE>
+		<P><FONT COLOR="#000099"><!-- Function name and short description --><FONT SIZE="6">gd_getfile
+				</FONT></FONT>
+		</P>
+		<P>Retrieves a remote file using GridFTP</P>
+		<P><FONT COLOR="#000099"><!-- Function syntax --><FONT SIZE="4"><B>Syntax</B> </FONT></FONT>
+		</P>
+		<UL>
+			<LI>
+				<P STYLE="MARGIN-BOTTOM: 0cm"><CODE>gd_getfile(HOST,REMOTEFILE,LOCALFILE) </CODE>
+				</P>
+			<LI>
+				<P STYLE="MARGIN-BOTTOM: 0cm"><CODE><CODE>gd_getfile(...,'ASCII')</CODE></CODE></P>
+			<LI>
+				<P><CODE>gd_getfile(...,'binary')</CODE></P>
+			</LI>
+		</UL>
+		<P><!-- Function description --><FONT SIZE="4"><FONT COLOR="#000099"><B>Description</B> </FONT>
+			</FONT>
+			<BR>
+			<BR>
+			<CODE><CODE>g<CODE>d_getfile(HOST,REMOTEFILE,LOCALFILE)</CODE></CODE></CODE> transfers 
+			the remote ASCII file REMOTEFILE from the machine HOST. The file is saved to 
+			the path and file specified by the string LOCALFILE.
+			<BR>
+			<BR>
+			<CODE>gd_getfile(...,'ASCII')</CODE> as above except the flag sets the file 
+			transfer type to ASCII, this is the default setting.
+		</P>
+		<P>gd_getfile(...,'binary') sets the file transfer type to binary. Use this for the 
+			transfer of executables to remote machines.</P>
+		<P><!-- Remarks --><FONT SIZE="4"><FONT COLOR="#000099"><B>Remarks</B> </FONT></FONT>
+			<BR>
+			<BR>
+			Note that a valid proxy certificate is required to use GridFTP. Suitable 
+			credentials will be required to transfer files from a remote server.</P>
+		<P><!-- Examples --><FONT SIZE="4"><FONT COLOR="#000099"><B>Examples</B> </FONT></FONT>
+			<BR>
+			<BR>
+			<CODE>gd_getfile('pablo','data2.gif','C:\data1.gif','binary')</CODE></P>
+		<P>copies the file data2.gif from the users home directory on a the remote host 
+			pablo to the local file C:\data1.gif on the remote host pablo. The file is 
+			transfered as a binary file type.
+		</P>
+		<P><CODE>gd_getfile('pablo','tmp/data2.gif','C:\data1.gif','binary')</CODE></P>
+		<P>as above except the file is copied from the subdirectory to the users home 
+			directory; 'tmp'.
+		</P>
+		<P><CODE>gd_getfile('pablo','/tmp/data2.gif','C:\data1.gif','binary')</CODE></P>
+		<P>as above except the file is copied from the subdirectory to the root directory; 
+			'tmp'.</P>
+		<P><!-- See also --><FONT SIZE="4"><FONT COLOR="#000099"><B>See also</B> </FONT></FONT>
+			<BR>
+			<BR>
+			<CODE><A href="gd_putfile.html">gd_putfile</A>, <A href="gd_createproxy.html">gd_createproxy</A></CODE>
+		</P>
+		<TABLE WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0" BGCOLOR="#99ccff">
+			<TR>
+				<TD WIDTH="20">
+					<P ALIGN="left"><!-- Bottom navigation bar --><A HREF="gd_destroyproxy.html"><IMG SRC="b_prev.gif" NAME="Graphic3" ALIGN="bottom" WIDTH="17" HEIGHT="17" BORDER="0"></A>
+					</P>
+				</TD>
+				<TD>
+					<P ALIGN="left">gd_destroyproxy
+					</P>
+				</TD>
+				<TD>
+					<P>
+					</P>
+				</TD>
+				<TD>
+					<P ALIGN="right">gd_jobkill
+					</P>
+				</TD>
+				<TD WIDTH="20">
+					<P ALIGN="right"><A HREF="gd_jobkill.html"><IMG SRC="b_next.gif" NAME="Graphic4" ALIGN="bottom" WIDTH="17" HEIGHT="17" BORDER="0"></A>
+					</P>
+				</TD>
+			</TR>
+		</TABLE>
+		<P><BR>
+			<BR>
+		</P>
+	</BODY>
+</HTML>

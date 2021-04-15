@@ -1,0 +1,2 @@
+      logical lvar_albedo
+      COMMON/varalb/lvar_albedo

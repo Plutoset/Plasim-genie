@@ -1,0 +1,17 @@
+      FUNCTION XLTRNX(X)
+C Perform linear transformation in x-direction
+C
+      REAL XLTRNX
+      REAL X
+      REAL XMREF
+      REAL XFACTR
+      REAL XMPREF
+      REAL YFACTR
+      REAL YMREF
+      REAL YMPREF
+C
+      COMMON /XFTR06/ XFACTR,YFACTR
+      COMMON /XMRF08/ XMREF,YMREF,XMPREF,YMPREF
+      XLTRNX=(X-XMREF)*XFACTR+XMPREF
+      RETURN
+      END

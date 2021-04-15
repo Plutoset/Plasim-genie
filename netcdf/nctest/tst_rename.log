@@ -1,0 +1,6 @@
+
+*** Testing v3/v4 API versions of some v2 tests.
+*** testing simple dim rename...ok.
+*** testing dim rename from nctest...ok.
+*** Tests successful!
+PASS tst_rename (exit status: 0)

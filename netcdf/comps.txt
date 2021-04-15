@@ -1,0 +1,1 @@
+CPPFLAGS= CC=icc CFLAGS=-O3 -xHost -ip -no-prec-div -static-intel -no-multibyte-chars LDFLAGS= LIBS=

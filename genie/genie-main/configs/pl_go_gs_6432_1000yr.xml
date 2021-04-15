@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job author="config2xml.py - automatic conversion of ASCII text config file">
+	<vars>
+		<var name="EXPID">pl_go_gs_6432_1000yr</var>
+	</vars>
+	<config>
+		<model name="goldstein"/>
+		<model name="goldsteinseaice"/>
+		<model name="plasim"/>
+	</config>
+	<parameters>
+		<control>
+			<param name="write_flag_atm">.false.</param>
+			<param name="ksic_loop">32</param>
+			<param name="koverall_total">11520000</param>
+			<param name="write_flag_sic">.false.</param>
+			<param name="kocn_loop">32</param>
+			<param name="dt_write">360</param>
+			<param name="lgraphics">.false.</param>
+		</control>
+		<model name="goldstein">
+			<param name="igrid">2</param>
+			<param name="iwstp">36000</param>
+			<param name="ianav">3600</param>
+			<param name="itstp">360</param>
+			<param name="npstp">360</param>
+			<param name="nyear">360</param>
+			<param name="yearlen">360</param>
+			<param name="tdatafile">igcmv3_tempann.silo</param>
+			<param name="sdatafile">igcmv3_saliann.silo</param>
+			<param name="world">igcmv3</param>
+			<param name="temp1">-5.</param>
+			<param name="temp0">-5.</param>
+		</model>
+		<model name="goldsteinseaice">
+			<param name="igrid">2</param>
+			<param name="nyear">360</param>
+			<param name="npstp">360</param>
+			<param name="ianav">3600</param>
+			<param name="itstp">360</param>
+			<param name="iwstp">36000</param>
+			<param name="world">igcmv3</param>
+			<param name="scale_oheat">0.630694867</param>
+		</model>
+		<model name="plasim">
+			<param name="nafter">115200</param>
+			<param name="tswr1">0.08642548</param>
+			<param name="tswr2">0.043689073</param>
+			<param name="acllwr">0.130161083</param>
+			<param name="scale_apm">0.508496193</param>
+		</model>
+	</parameters>
+	<build>
+		<macro handle="GENIENXOPTS" status="defined">
+			<identifier>GENIENX</identifier>
+			<replacement>64</replacement>
+		</macro>
+		<macro handle="GENIENYOPTS" status="defined">
+			<identifier>GENIENY</identifier>
+			<replacement>32</replacement>
+		</macro>
+		<macro handle="GOLDSTEINNLONSOPTS" status="defined">
+			<identifier>GOLDSTEINNLONS</identifier>
+			<replacement>64</replacement>
+		</macro>
+		<macro handle="GOLDSTEINNLATSOPTS" status="defined">
+			<identifier>GOLDSTEINNLATS</identifier>
+			<replacement>32</replacement>
+		</macro>
+		<macro handle="GOLDSTEINNLEVSOPTS" status="defined">
+			<identifier>GOLDSTEINNLEVS</identifier>
+			<replacement>8</replacement>
+		</macro>
+	</build>
+	<testing>
+		<var name="TESTFILE">goldstein/gold_spn_av_0000000002_00.nc</var>
+	</testing>
+</job>

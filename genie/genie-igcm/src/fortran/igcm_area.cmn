@@ -1,0 +1,2 @@
+      real weight_atm(mg,jgg),runoff_index(mg,jgg,2)
+      COMMON/igcm_area/weight_atm,runoff_index

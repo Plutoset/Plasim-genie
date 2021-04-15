@@ -1,0 +1,27 @@
+<file_metadata>
+	<file>
+		<ID>0000_psi_1_49973972-284b-40af-aa25-50dfa3614228</ID>
+		<localName>0000.psi.1</localName>
+		<byteSize>23458</byteSize>
+		<format>psi.1</format>
+		<createDate>2003-06-12 15:00:26</createDate>
+		<archiveDate>2003-07-29 16:17:34</archiveDate>
+		<userID>andrew</userID>
+		<comment>Comment about file</comment>
+		<datagroups>
+			<datagroupID>dg_a66e57b3-44d5-4af1-ba68-eae4bb467fc3</datagroupID>
+			<datagroupID>dg_dfa74346-05af-4826-bd6e-3ee308114564</datagroupID>
+		</datagroups>
+	</file>
+	<usertext type="char" idx="1" size="1 19">some test text data</usertext>
+	<usernumber type="double" idx="1" size="1 1">43 </usernumber>
+	<usercell type="cell" idx="1" size="1 3">
+		<item type="char" idx="1" size="1 4">text</item>
+		<item type="double" idx="2">5 </item>
+		<item type="char" idx="3" size="1 9">more text</item>
+	</usercell>
+	<userstruct type="struct" idx="1" size="1 1" fields="a b">
+		<a type="double" idx="1" size="1 1">0.03 </a>
+		<b type="double" idx="1" size="1 2">0.9 1.4 </b>
+	</userstruct>
+</file_metadata>

@@ -1,0 +1,4 @@
+
+*** Testing char _Fillvalue bug fix.
+*** All char _Fillvalue  bug test for netCDF-4 format passed!
+PASS tst_charfill.sh (exit status: 0)

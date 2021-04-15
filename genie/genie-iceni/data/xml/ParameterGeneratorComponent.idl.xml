@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<componentImplementation
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.iceni.ic.ac.uk/xmlSchema/idl"
+  xmlns:basic="http://www.iceni.ic.ac.uk/xmlSchema/basic"
+  xsi:schemaLocation="http://www.iceni.ic.ac.uk/xmlSchema/idl
+		      http://www.lesc.ic.ac.uk/iceni/xml/runtime/IDL.xsd">
+
+  <componentName>ParameterGeneratorComponent</componentName>
+  <componentPackage>org.icenigrid.genie.components</componentPackage>
+  <behaviourName>PushDataPushControl</behaviourName>
+  <implementationName>Default</implementationName>
+  <description>GENIE Parameter Generator</description>
+
+  <portImplementation>
+    <portName>jobNumbersOut</portName>
+    <dataStruct>java.lang.String</dataStruct>
+  </portImplementation>
+
+  <portImplementation>
+    <portName>parametersOut</portName>
+    <dataStruct>java.lang.String</dataStruct>
+  </portImplementation>
+
+  <portImplementation>
+    <portName>metadataOut</portName>
+    <dataStruct>java.lang.String</dataStruct>
+  </portImplementation>
+
+  <classpath>
+    <basic:module>iceni-component-runtime</basic:module>
+    <basic:module>iceni-runtime</basic:module>
+    <basic:module>iceni-xml</basic:module>
+    <basic:module>genie-iceni</basic:module>
+  </classpath>
+
+</componentImplementation>

@@ -1,0 +1,29 @@
+C***********************************************************************
+C*                                                                     *
+C*                         P A R R A Y                                 *
+C*                                                                     *
+C***********************************************************************
+C-----------------------------------------------------------------------
+C In this part of the code the user can set the dimensions of arrays
+C used for the calculations, by setting the values in the paramter
+C statements
+
+#ifndef GENIEMXLEV
+#define GENIEMXLEV 7
+#endif
+
+C-----------------------------------------------------------------------
+
+      INTEGER MXGAS,MXLEV,MXBAND,MXCL
+
+      PARAMETER(MXGAS=8)     ! Maximum number of gases
+
+      PARAMETER(MXLEV=GENIEMXLEV)   ! Maximum number of levels in the
+                             ! atmosphere (not including the surface)
+
+      PARAMETER(MXBAND=9)    ! Maximum number of spectral bands (not
+                             ! including the whole spectrum, 0-3000cm-1)
+
+      PARAMETER(MXCL=3)      ! Maximum number of cloud types
+
+C-----------------------------------------------------------------------

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job author="config2xml.py - automatic conversion of ASCII text config file">
+	<vars>
+		<var name="EXPID">genie_fi_go_igcm</var>
+	</vars>
+	<config>
+		<model name="fixedchem"/>
+		<model name="fixedicesheet"/>
+		<model name="goldstein"/>
+		<model name="fixedatmos"/>
+	</config>
+	<parameters>
+		<control>
+			<param name="lgraphics">.false.</param>
+			<param name="koverall_total">86400</param>
+			<param name="write_flag_atm">.false.</param>
+			<param name="write_flag_sic">.false.</param>
+			<param name="dt_write">720</param>
+		</control>
+		<model name="fixedchem">
+		</model>
+		<model name="fixedicesheet">
+		</model>
+		<model name="goldstein">
+			<param name="filenetin"><varref>OUTDIR</varref>/genie_ig_go_sl_makefixed/goldstein/goldstein_restart_2002_01_30.nc</param>
+			<param name="ans">c</param>
+			<param name="ianav">90000</param>
+			<param name="itstp">9000</param>
+			<param name="iwstp">15</param>
+			<param name="npstp">90000</param>
+			<param name="nyear">180</param>
+			<param name="yearlen">360</param>
+			<param name="netin">y</param>
+		</model>
+		<model name="fixedatmos">
+			<param name="output_time">720</param>
+			<param name="conductflux_flag">.true.</param>
+			<param name="grid_type">2</param>
+			<param name="landmask_flag">.false.</param>
+			<param name="timestep">3600</param>
+			<param name="waterflux_flag">.true.</param>
+			<param name="dt_restart_fixedatmos">720</param>
+			<param name="runoff_flag">.true.</param>
+			<param name="fname_climate">/export/dryas/array-02/ggdjl/genie_output/genie_ig_go_sl_makefixed/main/genie_climate.nc</param>
+		</model>
+	</parameters>
+	<build>
+	</build>
+	<testing>
+	</testing>
+</job>

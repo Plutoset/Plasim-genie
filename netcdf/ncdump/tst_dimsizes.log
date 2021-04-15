@@ -1,0 +1,26 @@
+*** Test Maximum dimension sizes X mode
+
+*** Generate: tst_dimsize_classic.nc tst_dimsize_64offset.nc tst_dimsize_64data.nc
+
+*** Testing Max Dimension Sizes
+
+|size_t|=8
+
+*** Writing Max Dimension Size (2147483644) For NC_CLASSIC
+
+*** Reading Max Dimension Size For NC_CLASSIC
+
+*** Writing Max Dimension Size (4294967292) For NC_64BIT_OFFSET
+
+*** Reading Max Dimension Size For NC_64BIT_OFFSET
+
+*** Writing Max Dimension Size (18446744073709551612) For NC_64BIT_DATA
+
+*** Reading Max Dimension Size For NC_64BIT_DATA
+ok.
+*** Tests successful!
+*** Verify that ncdump can read dimsizes
+*** PASS: ncdump tst_dimsize_classic.nc
+*** PASS: ncdump tst_dimsize_64offset.nc
+*** PASS: ncdump tst_dimsize_64data.nc
+PASS tst_dimsizes.sh (exit status: 0)

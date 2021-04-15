@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job author="config2xml.py - automatic conversion of ASCII text config file">
+	<vars>
+		<var name="EXPID">GMD_subjective_3K_spinon</var>
+	</vars>
+	<config>
+		<model name="goldstein"/>
+		<model name="goldsteinseaice"/>
+		<model name="plasim"/>
+	</config>
+	<parameters>
+		<control>
+			<param name="write_flag_atm">.false.</param>
+			<param name="ksic_loop">16</param>
+			<param name="koverall_total">115200</param>
+			<param name="write_flag_sic">.false.</param>
+			<param name="kocn_loop">16</param>
+			<param name="dt_write">720</param>
+			<param name="lgraphics">.false.</param>
+		</control>
+		<model name="goldstein">
+		        <param name="ans">c</param>
+		        <param name="rstdir_name">../../genie/genie-plasim/data/input/GMD_restart/GOLD</param>
+		        <param name="lin">spn.0</param>
+			<param name="igrid">2</param>
+			<param name="iwstp">720</param>
+			<param name="ianav">720</param>
+			<param name="itstp">720</param>
+			<param name="npstp">720</param>
+			<param name="nyear">720</param>
+			<param name="yearlen">360</param>
+			<param name="world">pl32_1</param>
+			<param name="tdatafile">pl32_tempann.silo</param>
+			<param name="sdatafile">pl32_saliann.silo</param>
+			<param name="temp1">-5.0</param>
+			<param name="temp0">-5.0</param>
+			<paramArray name="diff">
+			   <param index="1">1936.9958</param>
+			   <param index="2">0.000158338</param>
+			</paramArray>
+			<param name="adrag">2.0686631</param>
+			<param name="scf">3.788316</param>
+			<param name="ediffpow1">0.8200495</param>
+			<param name="ieos">1</param>
+			<param name="iediff">1</param>
+		</model>
+		<model name="goldsteinseaice">
+		        <param name="ans">c</param>
+		        <param name="rstdir_name">../../genie/genie-plasim/data/input/GMD_restart/GOLDICE</param>
+		        <param name="lin">spn.0</param>
+			<param name="igrid">2</param>
+			<param name="nyear">720</param>
+			<param name="npstp">720</param>
+			<param name="ianav">720</param>
+			<param name="itstp">720</param>
+			<param name="iwstp">720</param>
+			<param name="world">pl32_1</param>
+			<param name="diffsic">15000.</param>
+			<param name="scf">3.788316</param>
+		</model>
+		<model name="plasim">
+		        <param name="rstdir_name">../../genie/genie-plasim/data/input/GMD_restart/PLASIM</param>
+			<param name="nafter">11520</param>
+			<param name="scale_apm">0.6664018</param>
+			<param name="qthresh">0.1</param>
+			<param name="acllwr">0.2</param>
+			<param name="co2">280.</param>
+			<param name="albseamax">0.4</param>
+		</model>
+	</parameters>
+	<build>
+		<make-arg name="IGCMATMOSDP">TRUE</make-arg>
+		<make-arg name="GENIEDP">TRUE</make-arg>
+		<macro handle="GENIENXOPTS" status="defined">
+			<identifier>GENIENX</identifier>
+			<replacement>64</replacement>
+		</macro>
+		<macro handle="GENIENYOPTS" status="defined">
+			<identifier>GENIENY</identifier>
+			<replacement>32</replacement>
+		</macro>
+		<macro handle="GOLDSTEINNLONSOPTS" status="defined">
+			<identifier>GOLDSTEINNLONS</identifier>
+			<replacement>64</replacement>
+		</macro>
+		<macro handle="GOLDSTEINNLATSOPTS" status="defined">
+			<identifier>GOLDSTEINNLATS</identifier>
+			<replacement>32</replacement>
+		</macro>
+		<macro handle="GOLDSTEINNLEVSOPTS" status="defined">
+			<identifier>GOLDSTEINNLEVS</identifier>
+			<replacement>32</replacement>
+		</macro>
+	</build>
+	<testing>
+		<var name="TESTFILE">goldstein/gold_spn_av_0000000002_00.nc</var>
+	</testing>
+</job>

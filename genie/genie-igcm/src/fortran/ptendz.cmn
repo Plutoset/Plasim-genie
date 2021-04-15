@@ -1,0 +1,14 @@
+      real utvdz,vtvdz,ttvdz,qtvdz,ttcrz,qtcrz,ttlrz,qtlrz,ttrdz,
+     :     ctcrz,ctlrz,utblz,vtblz,ttblz,qtblz,autvdz,avtvdz,attvdz,
+     :     aqtvdz,attcrz,aqtcrz,attlrz,
+     :     aqtlrz,attrdz,actcrz,actlrz,autblz,avtblz,attblz,aqtblz
+
+      COMMON/PTENDZ/UTVDZ(IGG),VTVDZ(IGG),TTVDZ(IGG),QTVDZ(IGG)
+     :              ,TTCRZ(IGG),QTCRZ(IGG),TTLRZ(IGG),QTLRZ(IGG)
+     :              ,TTRDZ(IGG),CTCRZ(IGG),CTLRZ(IGG)
+     :              ,UTBLZ(JGG),VTBLZ(JGG),TTBLZ(JGG),QTBLZ(JGG)
+     :              ,AUTVDZ(IGG),AVTVDZ(IGG),ATTVDZ(IGG),AQTVDZ(IGG)
+     :              ,ATTCRZ(IGG),AQTCRZ(IGG),ATTLRZ(IGG),AQTLRZ(IGG)
+     :              ,ATTRDZ(IGG),ACTCRZ(IGG),ACTLRZ(IGG)
+     :              ,AUTBLZ(JGG),AVTBLZ(JGG),ATTBLZ(JGG),AQTBLZ(JGG)
+C

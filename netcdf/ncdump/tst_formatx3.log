@@ -1,0 +1,9 @@
+
+*** Testing extended file format output.
+Test extended format output for a netcdf-3 file
+classic mode=00000000
+Test extended format output for a 64-bit offset netcdf-3 file
+64-bit offset mode=00000200
+Test extended format output for a 64-bit CDF-5 classic file
+64-bit data mode=00000020
+PASS tst_formatx3.sh (exit status: 0)

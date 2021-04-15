@@ -1,0 +1,22 @@
+C--
+C--:  /CNVCON/: Convection constants (initial. in INPHYS)
+C--:   PSMIN  = minimum (norm.) sfc. pressure for the occurrence of convection
+C--:   TRCNV  = time of relaxation (in hours) towards reference state
+C--:   RHBL   = relative hum. threshold in the boundary layer
+C--:   RHIL   = rel. hum. threshold in intermed. layers for secondary mass flux	
+C--:   ENTMAX = max. entrainment as a fraction of cloud-base mass flux									
+C--:   SMF    = ratio between secondary and primary mass flux at cloud-base 
+      REAL PSMIN,TRCNV,RHBL,RHIL,ENTMAX,SMF
+      COMMON /CNVCON/ PSMIN, TRCNV, RHBL, RHIL, ENTMAX, SMF
+
+C--
+C--:  /VDICON/: Constants for vertical diffusion and shallow convection
+C--:            (initial. in INPHYS)
+C--:   TRSHC  = relaxation time (in hours) for shallow convection
+C--:   TRVDI  = relaxation time (in hours) for moisture diffusion
+C--:   TRVDS  = relaxation time (in hours) for super-adiab. conditions
+C--:   REDSHC = reduction factor of shallow conv. in areas of deep conv.
+C--:   RHGRAD = maximum gradient of relative humidity (d_RH/d_sigma)
+C--:   SEGRAD = minimum gradient of dry static energy (d_DSE/d_phi)
+      REAL TRSHC,TRVDI,TRVDS,REDSHC,RHGRAD,SEGRAD
+      COMMON /VDICON/ TRSHC, TRVDI, TRVDS, REDSHC, RHGRAD, SEGRAD

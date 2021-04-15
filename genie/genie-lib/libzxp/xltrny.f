@@ -1,0 +1,17 @@
+      FUNCTION XLTRNY(Y)
+C Perform linear transformation in y-direction
+C
+      REAL XLTRNY
+      REAL Y
+      REAL YMREF
+      REAL YFACTR
+      REAL YMPREF
+      REAL XFACTR
+      REAL XMREF
+      REAL XMPREF
+C
+      COMMON /XFTR06/ XFACTR,YFACTR
+      COMMON /XMRF08/ XMREF,YMREF,XMPREF,YMPREF
+      XLTRNY=(Y-YMREF)*YFACTR+YMPREF
+      RETURN
+      END
