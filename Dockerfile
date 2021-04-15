@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-SHELL ["/bin/bash","-c"]
+SHELL ["/bin/bash","-ic"]
 
 RUN apt update \
     && apt install -y wget gnupg make g++ bc m4 xsltproc
@@ -16,7 +16,12 @@ RUN wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCT
 RUN echo 'source /opt/intel/oneapi/setvars.sh intel64' | tee ~/.bashrc \
     && source ~/.bashrc
 
-ENV CC=icc CXX=icpc CFLAGS="-O3 -xHost -ip -no-prec-div -static-intel -no-multibyte-chars" CXXFLAGS="-O3 -xHost -ip -no-prec-div -static-intel -no-multibyte-chars" F77=ifort FC=ifort F90=ifort FFLAGS="-O3 -xHost -ip -no-prec-div -static-intel" CPP="icc -E" CXXCPP="icpc -E"
+ENV CC=icc CXX=icpc \
+    CFLAGS="-O3 -xHost -ip -no-prec-div -static-intel -no-multibyte-chars" \
+    CXXFLAGS="-O3 -xHost -ip -no-prec-div -static-intel -no-multibyte-chars" \
+    F77=ifort FC=ifort F90=ifort \
+    FFLAGS="-O3 -xHost -ip -no-prec-div -static-intel" \
+    CPP="icc -E" CXXCPP="icpc -E"
 
 COPY ./netcdf /netcdf/
 
@@ -42,6 +47,9 @@ RUN cd /netcdf-fortran/ \
     && make install \
     && ldconfig
 
-COPY ./genie /Plasim_genie/genie/
+COPY ./genie /genie/
 
-WORKDIR /Plasim_genie/genie/genie-main/
+RUN mkdir /genie_output/ \
+    && tar xvf /genie/genie-sedgem/data/input/lookup_opal_5.dat.tar.gz -C /genie/genie-sedgem/data/input/
+
+WORKDIR /genie/genie-main/
