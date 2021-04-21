@@ -26,25 +26,25 @@ ENV CC=icc CXX=icpc \
 COPY ./netcdf /netcdf/
 
 RUN cd /netcdf/ \
-    && ./configure --disable-netcdf-4 --disable-dap \
-    && make check \
-    && make install \
+    && sudo ./configure --disable-netcdf-4 --disable-dap \
+    && sudo make check \
+    && sudo make install \
     && ldconfig
 
 COPY ./netcdf-cxx /netcdf-cxx/
 
 RUN cd /netcdf-cxx/ \
-    && ./configure \
-    && make check \
-    && make install \
+    && sudo ./configure \
+    && sudo make check \
+    && sudo make install \
     && ldconfig
 
 COPY ./netcdf-fortran /netcdf-fortran/
 
 RUN cd /netcdf-fortran/ \
-    && ./configure \
-    && make check \
-    && make install \
+    && sudo ./configure \
+    && sudo make check \
+    && sudo make install \
     && ldconfig
 
 COPY ./genie /genie/
